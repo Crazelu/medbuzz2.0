@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class FitnessSchedulesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).backgroundColor
       
     );
   }
