@@ -1,3 +1,4 @@
+import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
 import 'package:MedBuzz/ui/views/splash_screen.dart';
 
@@ -12,21 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-       
-       
-      ),
+      title: 'MedBuzz',
+      theme: appThemeLight,
 
       home: SplashScreen(),
-
-      //The commented code below: main.dart goes to splashscreen directly and Splashscreen moves to MyHomPage
-
-      // initialRoute: '/' ,
-     // routes: {
-       // '/': (BuildContext context) => MyHomePage(),
-         
-      // },
     );
   }
 }
