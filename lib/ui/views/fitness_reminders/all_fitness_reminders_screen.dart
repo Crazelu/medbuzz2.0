@@ -209,8 +209,11 @@ class FitnessCard extends StatelessWidget {
             width: width,
             height: height * .22,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Config.xMargin(context, 8)),
-                color: Colors.red),
+              image: DecorationImage(
+                image: AssetImage('images/sprint.png'),
+                fit: BoxFit.contain
+              ),
+                borderRadius: BorderRadius.circular(Config.xMargin(context, 8)),),
           ),
           SizedBox(height: Config.yMargin(context, 2)),
           Text('Exercise type',
