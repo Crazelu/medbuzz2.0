@@ -1,5 +1,7 @@
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,11 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MedBuzz',
       theme: appThemeLight,
-      initialRoute: '/' ,
-      routes: {
-        '/': (BuildContext context) => HomeScreen(),
-         
-      },
+
+      home: SplashScreen(),
     );
   }
 }
