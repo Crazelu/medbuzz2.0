@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:MedBuzz/ui/views/Home.dart';
 import 'package:flutter/material.dart';
-import 'Home.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class StartState extends State<SplashScreen> {
 
   route() {
     Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => MyHomePage()
+        builder: (context) => HomeScreen()
     )
     );
   }
