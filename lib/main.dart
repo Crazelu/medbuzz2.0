@@ -1,4 +1,6 @@
 import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,11 +17,16 @@ class MyApp extends StatelessWidget {
        
        
       ),
-      initialRoute: '/' ,
-      routes: {
-        '/': (BuildContext context) => MyHomePage(),
+
+      home: SplashScreen(),
+
+      //The commented code below: main.dart goes to splashscreen directly and Splashscreen moves to MyHomPage
+
+      // initialRoute: '/' ,
+     // routes: {
+       // '/': (BuildContext context) => MyHomePage(),
          
-      },
+      // },
     );
   }
 }
