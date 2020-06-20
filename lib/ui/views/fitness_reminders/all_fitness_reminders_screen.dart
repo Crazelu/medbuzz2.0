@@ -89,22 +89,24 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
                       //ListView to display all dates with entries in the DB
                       Container(
                         height: height * .2,
+                        //To be replaced with a ListView.builder for CustomDateButtons with date range from DB
                         child: ListView(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
-                            CustomDateButton(date: DateTime.now().add(Duration(days:10))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:10))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:10))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:10))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:10))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:10))),
+                            //Some example (pronounced igzampl, yunno?)
+                            CustomDateButton(date: DateTime.now().add(Duration(days:1))),
+                            CustomDateButton(date: DateTime.now().add(Duration(days:2))),
+                            CustomDateButton(date: DateTime.now().add(Duration(days:3))),
+                            CustomDateButton(date: DateTime.now().add(Duration(days:4))),
+                            CustomDateButton(date: DateTime.now().add(Duration(days:5))),
+                            CustomDateButton(date: DateTime.now().add(Duration(days:6))),
                             CustomDateButton(date: DateTime.now()),
                             CustomDateButton(date: DateTime.now().add(Duration(days:10))),
                           ],
                         ),
                       ),
-                      //Text widget to display current date
+                      //Text widget to display current date in MONTH Year format
                       Text(
                         'JUN 2020',
                         style: TextStyle(
@@ -118,7 +120,8 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
                       SizedBox(
                         height: Config.yMargin(context, 5)
                       ),
-                FitnessCard(),
+                      //Here the already saved reminders will be loaded dynamically
+                  FitnessCard(),
                       FitnessCard(),
                       FitnessCard(),
                       FitnessCard(),
@@ -151,7 +154,6 @@ class CustomDateButton extends StatelessWidget {
             
             ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -200,6 +202,7 @@ class FitnessCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
          children: [
            Divider(
+             thickness: 0.7,
              color: Theme.of(context).primaryColorDark.withOpacity(.4),
              indent: Config.xMargin(context, 2.5),
              endIndent: Config.xMargin(context, 2.5)

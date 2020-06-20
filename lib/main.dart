@@ -1,6 +1,10 @@
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
+import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/views/splash_screen.dart';
+import 'package:MedBuzz/ui/views/home_page.dart';
+import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,15 +17,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers: providers,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        home: SplashScreen(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => SplashScreen(),
+          'home': (context) => HomeScreen(),
+          'profile': (context) => ProfilePage(),
+          'homepage': (context) => HomePage(),
+          WaterScheduleScreen.routeName: (context) => WaterScheduleScreen(),
+        },
       ),
     );
   }
 }
-
