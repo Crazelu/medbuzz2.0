@@ -1,6 +1,9 @@
+import 'dart:js';
+
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/onboarding.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/views/splash_screen.dart';
 import 'package:MedBuzz/ui/views/home_page.dart';
@@ -28,7 +31,11 @@ class MyApp extends StatelessWidget {
           '/': (context) => SplashScreen(),
           'home': (context) => HomeScreen(),
           'profile': (context) => ProfilePage(),
+
+          'onboarding' : (context) => Onboard(),
+
           'homepage': (context) => HomePage(),
+
           WaterScheduleScreen.routeName: (context) => WaterScheduleScreen(),
         },
       ),
