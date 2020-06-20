@@ -1,4 +1,6 @@
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -78,28 +80,28 @@ class _ProfilePageState extends State<ProfilePage> {
                   ListTile(
                     title: Text('Profile Information'),
                     trailing: IconButton(
-                      icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                      icon: Icon(Icons.arrow_forward_ios),
                       onPressed: null,
                     ),
                   ),
                   ListTile(
                     title: Text('Payment Details'),
                     trailing: IconButton(
-                      icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                      icon: Icon(Icons.arrow_forward_ios),
                       onPressed: null,
                     ),
                   ),
                   ListTile(
                     title: Text('Subscription Plan'),
                     trailing: IconButton(
-                      icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                      icon: Icon(Icons.arrow_forward_ios),
                       onPressed: null,
                     ),
                   ),
                   ListTile(
                     title: Text('Reminder History'),
                     trailing: IconButton(
-                      icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                      icon: Icon(Icons.arrow_forward_ios),
                       onPressed: null,
                     ),
                   ),
@@ -123,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ListTile(
                     title: Text('Settings'),
                     trailing: IconButton(
-                      icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                      icon: Icon(Icons.arrow_forward_ios),
                       onPressed: null,
                     ),
                   ),
@@ -167,3 +169,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+
+
+
