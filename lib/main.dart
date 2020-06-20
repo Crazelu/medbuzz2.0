@@ -1,5 +1,6 @@
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/onboarding.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,9 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MedBuzz',
       theme: appThemeLight,
-      initialRoute: '/' ,
+      initialRoute: 'onboard' ,
       routes: {
         '/': (BuildContext context) => HomeScreen(),
+        'onboard' : (BuildContext context) => Onboard(),
          
       },
     );
