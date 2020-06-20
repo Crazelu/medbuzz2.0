@@ -7,7 +7,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class WaterScheduleScreen extends StatelessWidget {
   //values of water measures - stored as int in case of any need to calculate
-  static const routeName = '/schedule-water-reminder';
+  static const routeName = 'schedule-water-reminder';
   final ItemScrollController _scrollController = ItemScrollController();
   WaterScheduleScreen();
 
