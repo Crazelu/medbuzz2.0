@@ -1,5 +1,7 @@
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
+import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/views/splash_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -17,9 +19,15 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: providers,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        home: SplashScreen(),
+        initialRoute: '/',
+        routes: {
+          '/' : (context) => SplashScreen(),
+          'home': (context) => HomeScreen(),
+          'profile': (context) => ProfilePage() 
+        },
       ),
     );
   }
