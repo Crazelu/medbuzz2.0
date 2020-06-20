@@ -5,7 +5,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).backgroundColor
-      
     );
   }
 }
