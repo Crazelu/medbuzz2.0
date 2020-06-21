@@ -17,7 +17,7 @@ class Indicator extends StatelessWidget {
               border: Border.all(color: appThemeLight.primaryColor),
               color: positionIndex == currentIndex
                   ? appThemeLight.primaryColor
-                  : appThemeLight.primaryColorLight,
+                  : appThemeLight.hintColor,
               borderRadius: BorderRadius.circular(100)),
         );
 

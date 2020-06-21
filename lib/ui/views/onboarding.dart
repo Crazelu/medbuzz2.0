@@ -38,7 +38,9 @@ class _OnboardState extends State<Onboard> {
             Container(
               padding: const EdgeInsetsDirectional.only(top: 30),
               child: FlatButton(
-                onPressed: () {}, //navigate to the sign up page
+                onPressed: () {
+                  
+                }, //navigate to the sign up page
                 child: Text(
                   "Skip",
                   style: TextStyle(color: appThemeLight.primaryColorDark),

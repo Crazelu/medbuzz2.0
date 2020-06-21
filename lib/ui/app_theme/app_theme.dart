@@ -7,4 +7,6 @@ ThemeData appThemeLight = ThemeData(
   primaryColorDark: Colors.black,
   backgroundColor: Color(0xffFAFAFA),
   buttonColor: Color(0xffF2994A),
+  hintColor: Color(0xff777777),
+
 );
