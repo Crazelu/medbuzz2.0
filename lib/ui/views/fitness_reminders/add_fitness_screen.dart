@@ -171,48 +171,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
 
 
                    ),
-//                   Container(
-//
-//
-//                     child: ListView.builder(
-//                       scrollDirection: Axis.horizontal,
-//                       itemCount: activityType.length,
-//                       itemBuilder: (_, index) => Row(
-//                         children: <Widget>[
-//                           InkWell(
-//                             onTap: (){
-//                               setState(() {
-//                                 _selectedActivity = index;
-//                               });
-//
-//                             },
-//                             child: Container(
-//                               height: 170,
-//                            //  height: Config.yMargin(context,30.5),
-//                               width: Config.xMargin(context, 30),
-//                               decoration: BoxDecoration(
-//                                   color: index == _selectedActivity
-//                                       ? Colors.white
-//                                       : Theme.of(context).primaryColorLight,
-//                                   borderRadius: BorderRadius.circular(
-//                                       Config.xMargin(context, 4))
-//                               ),
-//                               child: FlatButton(
-//                                 //hoverColor: Colors.blue,
-//                                 child: (
-//
-//                                 Image.asset('images/cycle.png')
-//                                 ),
-//
-//
-//                               ),
-//                             ),
-//                           ),
-//                           SizedBox(width: Config.xMargin(context, 1.1))
-//                         ],
-//                       ),
-//                     ),
-//                   ),
+
                    SizedBox(height: Config.yMargin(context, 4.5)),
 
                   Column(
