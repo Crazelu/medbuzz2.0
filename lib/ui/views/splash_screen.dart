@@ -1,5 +1,6 @@
 import 'dart:async';
 //import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/home_page.dart';
 import 'package:MedBuzz/ui/views/onboarding.dart';
 import 'package:flutter/material.dart';
 
