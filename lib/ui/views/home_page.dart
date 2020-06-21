@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/app_theme/app_theme.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,9 +16,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+
         backgroundColor:  color =  Color(0xffE5E5E5),
         body: SafeArea(
           child: ListView(
+            physics: ScrollPhysics(),
               children: [
                 Column(
                   children: [
@@ -34,7 +39,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 4.0,),
+                                height: Config.yMargin(context, 2),
+                              ),
                               Text('Juliana',
                                 style: TextStyle(
                                   fontSize: 24,
@@ -46,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                           IconButton(
                             icon: Icon (Icons.notifications_none),
                             iconSize: 30.0,
-                            color: Colors.black,
+                            color: Theme.of(context).primaryColorDark,
                             onPressed: () {},
                           ),
                         ],
@@ -55,8 +61,8 @@ class _HomePageState extends State<HomePage> {
 
                     Container(
                       margin: EdgeInsets.all(20.0),
-                      height: 120.0,
-                      width: 350.0,
+                      height: Config.yMargin(context, 23),
+                      width: Config.xMargin(context, 100),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         boxShadow: [
@@ -88,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 8.0,
+                                      height: Config.yMargin(context, 2),
                                     ),
                                     Row(
                                       children: [
@@ -96,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18.0,
-                                            color: Colors.black,
+                                            color: Theme.of(context).primaryColorDark,
                                           ),
                                         ),
                                         Text(' of 3500ml',
@@ -116,17 +122,17 @@ class _HomePageState extends State<HomePage> {
                             child: Stack(
                               children: [
                                 Container(
-                                  height: 10.0,
+                                  height: Config.yMargin(context, 2.5),
                                   decoration: BoxDecoration(
                                       color: color =  Color(0xffEEEEEE),
                                       borderRadius: BorderRadius.circular(15.0)
                                   ),
                                 ),
                                 Container(
-                                  height: 10.0,
-                                  width: 100.0,
+                                  height: Config.yMargin(context, 2.5),
+                                  width: Config.xMargin(context, 25),
                                   decoration: BoxDecoration(
-                                      color: color =  Color(0xff617ADC),
+                                      color: Theme.of(context).primaryColor,
                                       borderRadius: BorderRadius.circular(15.0)
                                   ),
                                 ),
@@ -142,150 +148,154 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                       children: [
-                        Container(
-                          margin: EdgeInsets.all(24.0),
-                          height: 120.0,
-                          width: 150.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade100,
-                                spreadRadius: 3,
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(24.0),
+                            height: Config.yMargin(context, 20),
+                            width: Config.xMargin(context, 100),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.shade100,
+                                  spreadRadius: 3,
 
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Meal',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14.0,
-                                  ),
                                 ),
-                                SizedBox(
-                                  height: 8.0,
-                                ),
-                                Text('3500',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.0,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 4.0,
-                                ),
-
-                                Text('calories today',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 12.0,
-                                ),
-                                Stack(
-                                  children: [
-                                    Container(
-                                      height: 7.0,
-                                      decoration: BoxDecoration(
-                                          color: color =  Color(0xffEEEEEE),
-                                          borderRadius: BorderRadius.circular(15.0)
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 7.0,
-                                      width: 50.0,
-                                      decoration: BoxDecoration(
-                                          color: color =  Color(0xffF2994A),
-                                          borderRadius: BorderRadius.circular(15.0)
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
                               ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Meal',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Config.yMargin(context, 1.5),
+                                  ),
+                                  Text('3500',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18.0,
+                                      color: Theme.of(context).primaryColorDark,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Config.yMargin(context, 1),
+                                  ),
+
+                                  Text('calories today',
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Config.yMargin(context, 2),
+                                  ),
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: Config.yMargin(context, 1),
+                                        decoration: BoxDecoration(
+                                            color: color =  Color(0xffEEEEEE),
+                                            borderRadius: BorderRadius.circular(15.0)
+                                        ),
+                                      ),
+                                      Container(
+                                        height: Config.yMargin(context, 1),
+                                        width: Config.xMargin(context, 14),
+                                        decoration: BoxDecoration(
+                                            color: Theme.of(context).buttonColor,
+                                            borderRadius: BorderRadius.circular(15.0)
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              ),
                             ),
                           ),
                         ),
 
 
-                        Container(
-                          margin: EdgeInsets.all(24.0),
-                          height: 120.0,
-                          width: 150.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade100,
-                                spreadRadius: 3,
-                                //blurRadius: 2,
-                                //offset: Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child:  Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Steps',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14.0,
-                                  ),
+                        Expanded(
+                          child: Container(  
+                            margin: EdgeInsets.all(24.0),
+                            height: Config.yMargin(context, 20),
+                            width: Config.xMargin(context, 100),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.shade100,
+                                  spreadRadius: 3,
+                                  //blurRadius: 2,
+                                  //offset: Offset(0, 3), // changes position of shadow
                                 ),
-                                SizedBox(
-                                  height: 8.0,
-                                ),
-                                Text('7500',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.0,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 4.0,
-                                ),
-
-                                Text('steps today',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 12.0,
-                                ),
-                                Stack(
-                                  children: [
-                                    Container(
-                                      height: 7.0,
-                                      decoration: BoxDecoration(
-                                          color: color =  Color(0xffEEEEEE),
-                                          borderRadius: BorderRadius.circular(15.0)
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 7.0,
-                                      width: 50.0,
-                                      decoration: BoxDecoration(
-                                          color: color =  Color(0xff76DBC9),
-                                          borderRadius: BorderRadius.circular(15.0)
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
                               ],
+                            ),
+                            child:  Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Steps',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Config.yMargin(context, 1.5),
+                                  ),
+                                  Text('7500',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18.0,
+                                      color: Theme.of(context).primaryColorDark,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Config.yMargin(context, 1),
+                                  ),
+
+                                  Text('steps today',
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Config.yMargin(context, 2),
+                                  ),
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: Config.yMargin(context, 1),
+                                        decoration: BoxDecoration(
+                                            color: color =  Color(0xffEEEEEE),
+                                            borderRadius: BorderRadius.circular(15.0)
+                                        ),
+                                      ),
+                                      Container(
+                                        height: Config.yMargin(context, 1),
+                                        width: Config.xMargin(context, 14),
+                                        decoration: BoxDecoration(
+                                            color: color =  Color(0xff76DBC9),
+                                            borderRadius: BorderRadius.circular(15.0)
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -321,7 +331,7 @@ class _HomePageState extends State<HomePage> {
 
                       margin: EdgeInsets.all(24.0),
 
-                      height: 150.0,
+                      height: Config.yMargin(context, 25),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         boxShadow: [
@@ -349,7 +359,7 @@ class _HomePageState extends State<HomePage> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 14.0,),
+                                  SizedBox(height: Config.yMargin(context, 2),),
                                   Text('1 shots once daily',
                                     style: TextStyle(
                                       fontSize: 16,
@@ -365,11 +375,11 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           SizedBox(
-                            height: 20.0,
-                            width: 270.0,
+                            height: Config.yMargin(context, 1),
+                            width: Config.xMargin(context, 75),
                             child:
                             Divider(
-                              color: Colors.black,
+                              color: Theme.of(context).primaryColorDark,
                             ),
                           ),
                           Row(
@@ -435,7 +445,7 @@ class _HomePageState extends State<HomePage> {
 
                     Container(
                       margin: EdgeInsets.all(24.0),
-                      height: 127.0,
+                      height: Config.yMargin(context, 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         boxShadow: [
@@ -476,12 +486,12 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(
-                              width: 25.5,
+                              width: Config.xMargin(context, 9),
                             ),
                             Container(
                               color: Colors.black45,
-                              height: 50,
-                              width: 1,
+                              height: Config.yMargin(context, 13),
+                              width: Config.xMargin(context, 0.3),
 
                               child: VerticalDivider(
                                 indent: 25.0,
@@ -489,7 +499,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(
-                              width: 18.5,
+                              width: Config.xMargin(context, 11),
                             ),
 
                             Column(
@@ -508,7 +518,7 @@ class _HomePageState extends State<HomePage> {
 
                                           ),
                                           SizedBox(
-                                            height: 6.0,
+                                            height: Config.yMargin(context, 1),
                                           ),
                                           Text('6.00 PM',
                                             style: TextStyle(
@@ -519,14 +529,14 @@ class _HomePageState extends State<HomePage> {
                                         ],
                                       ),
                                       SizedBox(
-                                        width: 57.0,
+                                        width: Config.xMargin(context, 15),
                                       ),
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text('Appointment for'),
                                           SizedBox(
-                                            height: 8.0,
+                                            height: Config.yMargin(context, 1),
                                           ),
                                           Text('Dance Class',
                                             style: TextStyle(
@@ -538,18 +548,18 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 20.0,
-                                    width: 270.0,
+                                    height: Config.yMargin(context, 5),
+                                    width: Config.xMargin(context, 70),
                                     child:
                                     Divider(
-                                      color: Colors.black,
+                                      color: Theme.of(context).primaryColorDark,
                                       //indent: 50.0,
                                       endIndent: 60.0,
                                     ),
                                   ),
                                   Container(
-                                    width: 188.0,
-                                    height: 38.0,
+                                    width: Config.xMargin(context, 50),
+                                    height: Config.yMargin(context, 5),
                                     child: Text('Make sure to make lots of friends',
 
                                     ),
@@ -575,38 +585,38 @@ class _HomePageState extends State<HomePage> {
         ),
 
         floatingActionButton: Container(
-          height: 80.0,
-          width: 80.0,
+          height: Config.yMargin(context, 10),
+          width: Config.xMargin(context, 20),
           child: FittedBox(
             child: FloatingActionButton(onPressed: () {},
               child: Icon(Icons.add),
-              backgroundColor: color =  Color(0xff617ADC),
+              backgroundColor: Theme.of(context).primaryColor,
             ),
 
           ),
         ),
         bottomNavigationBar: BubbledNavigationBar(
           defaultBubbleColor: Colors.white,
-          backgroundColor: color =  Color(0xffFAFAFA) ,
+          backgroundColor: Theme.of(context).backgroundColor ,
           onTap: (index) {
             // handle tap to various page
           },
           items: <BubbledNavigationBarItem>[
             BubbledNavigationBarItem(
-              icon:       Icon(CupertinoIcons.home, size: 30, color: Colors.black),
+              icon:       Icon(CupertinoIcons.home, size: 30, color: Theme.of(context).primaryColorDark),
               activeIcon: Icon(CupertinoIcons.home, size: 30, color: Colors.blueAccent),
-              title: Text('Home', style: TextStyle(color: Colors.black, fontSize: 12),),
+              title: Text('Home', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 12),),
             ),
             BubbledNavigationBarItem(
-              icon:       Icon(CupertinoIcons.bell, size: 30, color: Colors.black),
+              icon:       Icon(CupertinoIcons.bell, size: 30, color: Theme.of(context).primaryColorDark),
               activeIcon: Icon(CupertinoIcons.bell, size: 30, color: Colors.blueAccent),
-              title: Text('Reminders', style: TextStyle(color: Colors.black, fontSize: 12),),
+              title: Text('Reminders', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 12),),
             ),
 
             BubbledNavigationBarItem(
-              icon:       Icon(CupertinoIcons.profile_circled, size: 30, color: Colors.black),
+              icon:       Icon(CupertinoIcons.profile_circled, size: 30, color: Theme.of(context).primaryColorDark),
               activeIcon: Icon(CupertinoIcons.profile_circled, size: 30, color: Colors.blueAccent),
-              title: Text('Profile', style: TextStyle(color: Colors.black, fontSize: 12),),
+              title: Text('Profile', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 12),),
             ),
           ],
         ),
