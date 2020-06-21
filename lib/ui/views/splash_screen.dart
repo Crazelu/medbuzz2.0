@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/fitness_reminders/add_fitness_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class StartState extends State<SplashScreen> {
 
   route() {
     Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => HomeScreen()
+        builder: (context) => add_fitness(),
     )
     );
   }
