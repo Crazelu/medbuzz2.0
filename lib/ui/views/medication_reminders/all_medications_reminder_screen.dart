@@ -1,14 +1,16 @@
 import 'package:MedBuzz/ui/size_config/config.dart';
-import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FitnessSchedulesScreen extends StatefulWidget {
+import 'all_medications_reminder_model.dart';
+
+
+class MedicationScreen extends StatefulWidget {
   @override
-  _FitnessSchedulesScreenState createState() => _FitnessSchedulesScreenState();
+  _MedicationScreenState createState() => _MedicationScreenState();
 }
 
-class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
+class _MedicationScreenState extends State<MedicationScreen> {
   @override
   void initState() {
     super.initState();
@@ -16,9 +18,9 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
     //This makes the FAB disappear as you scroll down
     controller.addListener(() {
       if (controller.offset < 120) {
-        Provider.of<FitnessSchedulesModel>(context).updateVisibility(true);
+        Provider.of<MedicationsSchedulesModel>(context).updateVisibility(true);
       } else {
-        Provider.of<FitnessSchedulesModel>(context).updateVisibility(false);
+        Provider.of<MedicationsSchedulesModel>(context).updateVisibility(false);
       }
     });
   }
@@ -27,7 +29,7 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
   ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<FitnessSchedulesModel>(context);
+    var model = Provider.of<MedicationsSchedulesModel>(context);
     //MediaQueries for responsiveness
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -57,7 +59,7 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
         elevation: 1,
         backgroundColor: Theme.of(context).backgroundColor,
         title: Text(
-          'Fitness',
+          'My Medications',
           style: Theme.of(context)
               .textTheme
               .headline6
@@ -142,7 +144,7 @@ class CustomDateButton extends StatelessWidget {
   CustomDateButton({this.date});
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<FitnessSchedulesModel>(context, listen: false);
+    var model = Provider.of<MedicationsSchedulesModel>(context, listen: false);
     return Container(
       margin: EdgeInsets.only(right: Config.xMargin(context, 3)),
       width: Config.xMargin(context, 15.5),
@@ -205,6 +207,7 @@ class FitnessCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text("8:00 AM", style: TextStyle(fontWeight: FontWeight.bold, fontSize: Config.textSize(context, 6)),),
               Divider(
                   thickness: 0.7,
                   color: Theme.of(context).primaryColorDark.withOpacity(.4),
@@ -212,28 +215,74 @@ class FitnessCard extends StatelessWidget {
                   endIndent: Config.xMargin(context, 2.5)),
               SizedBox(height: Config.yMargin(context, .5)),
               Container(
+                padding: EdgeInsets.all(10),
                 width: width,
                 height: height * .22,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('images/sprint.png'),
-                      fit: BoxFit.contain),
+                  color:Theme.of(context).primaryColor,
                   borderRadius:
                       BorderRadius.circular(Config.xMargin(context, 8)),
                 ),
+                child: Stack(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0, right: 10, left: 20),
+                      child: Row(
+                        
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Image.asset("images/syringe.png", color:Theme.of(context).primaryColorLight, width: 40, height: 40,),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text("Chloroquine Injection", style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColorLight, fontWeight: FontWeight.bold),),
+                              Text("1 shots once daily", style:TextStyle( color: Theme.of(context).primaryColorLight),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      child: Divider(
+                        height: 200,
+                          thickness: 1,
+                          color: Theme.of(context).primaryColorLight,
+                          indent: Config.xMargin(context, 2.5),
+                          endIndent: Config.xMargin(context, 2.5)),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 5,
+                      left: 5,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          FlatButton(onPressed: null, child: Text("View", style:TextStyle( color: Theme.of(context).primaryColorLight, fontWeight: FontWeight.bold),)),
+                          FlatButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.cancel,
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                              label: Text("Skip",
+                                  style: TextStyle(color: Theme.of(context).primaryColorLight))),
+                          FlatButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.check,
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                              label: Text("Done",
+                                  style: TextStyle(color: Theme.of(context).primaryColorLight)))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-              SizedBox(height: Config.yMargin(context, 2)),
-              Text('Exercise type',
-                  style: TextStyle(
-                      fontSize: Config.textSize(context, 6),
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).primaryColor)),
-              SizedBox(height: Config.yMargin(context, 1.5)),
-              Text('Time frame',
-                  style: TextStyle(
-                      fontSize: Config.textSize(context, 4.5),
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context).primaryColorDark)),
+              
             ]),
       ),
     );
