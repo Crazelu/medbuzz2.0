@@ -7,4 +7,6 @@ import 'package:provider/provider.dart';
 final providers = <SingleChildCloneableWidget>[
   ChangeNotifierProvider(create: (_) => FitnessSchedulesModel()),
   ChangeNotifierProvider(create: (_) => AddMedication()),
+  ChangeNotifierProvider(create: (_) => FitnessSchedulesModel())
+
 ];
