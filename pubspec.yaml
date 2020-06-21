@@ -33,6 +33,7 @@ dependencies:
     table_calendar: ^2.2.3
     intl:
     date_util:
+    google_fonts: ^1.1.0
 
 dev_dependencies:
     flutter_test:
