@@ -41,7 +41,7 @@ class Signup extends StatelessWidget {
             
             Divider(
               height: screenSize.height * 0.03,
-              color: Color(0xff617ADC),
+              color: appThemeLight.primaryColor,
               thickness: Config.yMargin(context, 0.64),
               endIndent: screenSize.width * 0.25,
               ),
@@ -109,7 +109,7 @@ class Signup extends StatelessWidget {
               padding: EdgeInsets.all(Config.xMargin(context, 3.55)),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)), 
-                color: Color(0xff617ADC),
+                color: appThemeLight.primaryColor,
                 ),
               alignment: Alignment.center,
               margin: EdgeInsets.only(top: Config.yMargin(context, 3.09) , left: Config.xMargin(context, 5.33), right: Config.xMargin(context, 6) ), //24,24,27
@@ -124,9 +124,9 @@ class Signup extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: screenSize.height * 0.025,),
+            SizedBox(height: screenSize.height * 0.02,),
             Padding(
-              padding: EdgeInsets.only(bottom: screenSize.height * 0.05),
+              padding: EdgeInsets.only(bottom: screenSize.height * 0.07),
                           child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -137,15 +137,21 @@ class Signup extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: Config.yMargin(context, 2.06), //16
                 ),),
-                Text(
-                  'Login',
-                  style: TextStyle(
-                  fontFamily: 'Segoe-Bold',
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff617ADC),
-                  fontSize: Config.yMargin(context, 2.06), //16
-                ),)
-              ],),
+                GestureDetector(
+                  child: Text(
+                      'Login',
+                      style: TextStyle(
+                      fontFamily: 'Segoe-Bold',
+                      fontWeight: FontWeight.bold,
+                      color: appThemeLight.primaryColor,
+                      fontSize: Config.yMargin(context, 2.06), //16
+                    ),),
+                  onTap: (){
+                    Navigator.pushNamed(context, 'login');
+                  },
+                  )     
+                ],
+              ),
             )
 
             //4.5, 7.76
@@ -155,6 +161,5 @@ class Signup extends StatelessWidget {
     );
   }
 }
-
 
 
