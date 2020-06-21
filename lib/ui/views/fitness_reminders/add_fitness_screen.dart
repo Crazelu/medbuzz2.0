@@ -45,7 +45,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
   }
 
   Navigation navigation = Navigation();
-  final List activityType = ['Cycle', 'Sprint', 'Swimming'];
+  final List activityType = ['images/cycle.png', 'images/sprint.png', 'images/swim.png'];
   final List<String> fitnessTime = ['Daily', 'Every 2 days', 'Every 3 days', 'Every 4 days'];
 //Instantiating a SizeConfig object to handle responsiveness
  String _selectedFreq= "Daily";
@@ -55,7 +55,8 @@ class __fitnesssDescriptionState extends State<add_fitness> {
   TextEditingController nameController = TextEditingController();
   FocusNode focusNode = FocusNode();
   int index;
-  int _selectedActivity =0;
+ // int _selectedActivity =0;
+  int selectedFitnessType =0;
   int minDaily=60;
   TimeOfDay activityTime = TimeOfDay.now();
 
@@ -114,29 +115,36 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                          fontWeight: FontWeight.w600,
                          fontSize: Config.xMargin(context, 5)),
                    ),
-                   TextFormField(
-                     focusNode: focusNode,
-                     controller: nameController,
-                     cursorColor: Theme.of(context).primaryColorDark,
-                     style: TextStyle(
-                         color: Theme.of(context).primaryColorDark,
-                         fontSize: Config.xMargin(context, 5.5)),
-                     decoration: InputDecoration(
-                       hintText: 'Running',
-                       hintStyle: TextStyle(
-                           fontSize: Config.xMargin(context, 5),
-                           color: Theme.of(context).hintColor),
-                       border: OutlineInputBorder(
-                           borderSide: BorderSide(
-                               color: Theme.of(context).primaryColorDark)),
-                       focusedBorder: OutlineInputBorder(
-                           borderSide: BorderSide(
-                               color: Theme.of(context).primaryColorDark)),
-                       enabledBorder: OutlineInputBorder(
-                           borderSide: BorderSide(
-                               color: Theme.of(context).primaryColorLight)),
+                   Container(
+                     width: double.infinity,
+                     decoration: ShapeDecoration(
+                       shape: RoundedRectangleBorder(
+                         side: BorderSide(width: 1.0, style: BorderStyle.solid),
+                         borderRadius: BorderRadius.all((Radius.circular(5.0))),
+                       ),
                      ),
+
+                   child:  TextFormField(
+                       focusNode: focusNode,
+                       controller: nameController,
+                       cursorColor: Theme.of(context).primaryColorDark,
+                       style: TextStyle(
+                           color: Theme.of(context).primaryColorDark,
+                           fontSize: Config.xMargin(context, 5.5)),
+                       decoration: InputDecoration(
+                         hintText: 'Running',
+                         hintStyle: TextStyle(
+                             fontSize: Config.xMargin(context, 5),
+                             color: Theme.of(context).hintColor),
+                         focusedBorder: OutlineInputBorder(
+                             borderSide: BorderSide(
+                                 color: Theme.of(context).primaryColorDark)),
+//
+                       ),
+                     ),
+
                    ),
+
                    SizedBox(height: Config.yMargin(context, 5)),
                    Container(
                      height: Config.yMargin(context, 12),
@@ -149,14 +157,31 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                           FlatButton(
                              onPressed: (){
                                setState(() {
-                                 _selectedActivity = index;
+                                 selectedFitnessType = index;
                                });
 
                              },
                              child: Container(
-                               child: (
 
-                                   Image.asset('images/cycle.png')
+                               child: Stack (
+                                   children:<Widget>[
+                                     Image.asset('${activityType[index]}'
+
+                                     ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50),
+                                        child: Checkbox(
+                                          value: index == selectedFitnessType,
+                                          //value: ,
+                                          checkColor: Theme.of(context).backgroundColor,
+
+
+                                        ),
+                                      ),
+                                   ]
+
+
+
                                ),
 
                                // height: 170,
@@ -186,31 +211,44 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                       ),
                       SizedBox(height: Config.xMargin(context, 4.5)),
 
-                      Row(
-                        //crossAxisAlignment: CrossAxisAlignment.,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
+//                      Row(
+//                        //crossAxisAlignment: CrossAxisAlignment.,
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: <Widget>[
                         //  Expanded(
-                             DropdownButton<String>(
+                      Container(
+                        width: double.infinity,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 1.0, style: BorderStyle.solid),
+                            borderRadius: BorderRadius.all((Radius.circular(5.0))),
+                          ),
+                        ),
+                         child: Center(
+                           child: DropdownButton<String>(
 
-                                  underline: Text(''),
-                                  items: fitnessTime.map((String time) {
-                                    return DropdownMenuItem<String>(
-                                        value: time, child: Text(time));
-                                  }).toList(),
-                                  value: _selectedFreq,
+                                underline: Text(''),
+                                items: fitnessTime.map((String time) {
+                                  return DropdownMenuItem<String>(
+                                      value: time, child: Text(time));
+                                }).toList(),
+                                value: _selectedFreq,
 
-                                  onChanged: (newFreq) {
-                                    setState(() {
-                                      _selectedFreq = newFreq;
-                                    });
-                                  }
-                              )
+                                onChanged: (newFreq) {
+                                  setState(() {
+                                    _selectedFreq = newFreq;
+                                  });
+                                }
+                            ),
+                         )
+
+                      ),
+
                          // ),
 
-                        ]
-                        ,
-                      )
+                  //      ]
+                   //    ,
+                   //   )
 
 
                     ],
@@ -238,8 +276,8 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                              SizedBox(width: Config.xMargin(context, 1.5)),
                              InkWell(
                                focusColor: Theme.of(context).primaryColorLight,
-                               splashColor: Colors.greenAccent,
-                               onTap: () => selectTime(context),
+                               splashColor: Colors.blue,
+
                                child: Text(
                                  localizations.formatTimeOfDay(activityTime),
                                  style: TextStyle(fontSize: Config.xMargin(context, 4.2)),
@@ -332,8 +370,9 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                          children: <Widget>[
                            Text(
                              'End  -  ${localizations.formatShortDate(
-                                 startDate)}',
+                                endDate)}',
                              style: TextStyle(
+                           //    fontStyle: FontStyle.,
                                  fontSize: Config.xMargin(context, 5)),
                            ),
                            SizedBox(width: Config.xMargin(context, 3)),
@@ -346,7 +385,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                                color: Theme.of(context).backgroundColor,
                              ),),
                              onPressed: () {
-                               selectStartDate(context);
+                               selectEndDate(context);
 
                              },
 
@@ -444,7 +483,10 @@ class __fitnesssDescriptionState extends State<add_fitness> {
       showSnackBar(context, text: "Cannot set reminder in the past");
     } else {
       if (selectedTime != null && selectedTime != activityTime) {
-       activityTime = selectedTime;
+        setState(() {
+          activityTime = selectedTime;
+        });
+
       }
     }
   }
@@ -473,7 +515,29 @@ class __fitnesssDescriptionState extends State<add_fitness> {
       showSnackBar(context, text: "Cannot set reminder in the past");
     } else {
       if (selectedDate != null && selectedDate != startDate) {
-       startDate = selectedDate;
+        setState(() {
+          startDate = selectedDate;
+        });
+
+           print('$startDate');
+      }
+    }
+  }
+  Future<Null> selectEndDate(BuildContext context) async {
+    final DateTime selectedDate = await showDatePicker(
+        context: context,
+        initialDate: endDate,
+        firstDate: DateTime(endDate.year),
+        lastDate: DateTime(endDate.year + 1));
+    if (selectedDate.difference(endDate).inDays < 0) {
+      showSnackBar(context, text: "Cannot set reminder in the past");
+    } else {
+      if (selectedDate != null && selectedDate != endDate) {
+        setState(() {
+          endDate= selectedDate;
+        });
+
+        print('$startDate');
       }
     }
   }
