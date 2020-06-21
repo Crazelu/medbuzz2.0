@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 
 void main() => runApp(MaterialApp(
   home: Signup(),
@@ -13,16 +14,16 @@ class Signup extends StatelessWidget {
     //get Safe area padding
     EdgeInsets safe = MediaQuery.of(context).viewPadding;
 
-    print("value = ");
-    print( Config.xMargin(context, 1) );
-    print( Config.yMargin(context, 1) );
+    // print("value = ");
+    // print( Config.xMargin(context, 1) );
+    // print( Config.yMargin(context, 1) );
     //yMargin constant  = 7.76
     //xMargin constant = 4.5
 
 
     return SafeArea(
         child: Scaffold(
-        backgroundColor: Color(0xffE5E5E5),
+        backgroundColor: appThemeLight.backgroundColor,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
