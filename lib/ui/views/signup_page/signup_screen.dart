@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:MedBuzz/ui/size_config/config.dart';
 
 void main() => runApp(MaterialApp(
   home: Signup(),
@@ -12,6 +13,13 @@ class Signup extends StatelessWidget {
     //get Safe area padding
     EdgeInsets safe = MediaQuery.of(context).viewPadding;
 
+    print("value = ");
+    print( Config.xMargin(context, 1) );
+    print( Config.yMargin(context, 1) );
+    //yMargin constant  = 7.76
+    //xMargin constant = 4.5
+
+
     return SafeArea(
         child: Scaffold(
         backgroundColor: Color(0xffE5E5E5),
@@ -19,13 +27,13 @@ class Signup extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            SizedBox(height: screenSize.height * 0.03,),
+            SizedBox(height: screenSize.height * 0.04,),
             Padding(
-              padding: const EdgeInsets.only(left: 24.0),
+              padding: EdgeInsets.only(left: Config.xMargin(context, 5.3) ),
               child: Text('Create An \nAccount',
                 style: TextStyle(
                   fontFamily: 'Segoe-Bold',
-                  fontSize: 32.0,
+                  fontSize: Config.yMargin(context, 4.12),
                 )
               ),
             ),
@@ -33,50 +41,49 @@ class Signup extends StatelessWidget {
             Divider(
               height: screenSize.height * 0.03,
               color: Color(0xff617ADC),
-              thickness: 5.0,
+              thickness: Config.yMargin(context, 0.64),
               endIndent: screenSize.width * 0.25,
               ),
             Padding(
-              padding: const EdgeInsets.only(left: 24.0, top: 10.0),
+              padding: EdgeInsets.only(left: Config.xMargin(context, 5.3), top: Config.yMargin(context, 1.28)),
               child: Text(
                 'Name',
                 style: TextStyle(
                   fontFamily: 'Segoe-Bold',
                   fontWeight: FontWeight.w400,
-                  fontSize: 18.0,
+                  fontSize: Config.yMargin(context, 2.31)
                 ),
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 27.0),
+                padding: EdgeInsets.only(left: Config.xMargin(context, 5.3), right: Config.xMargin(context, 6) ),
                 child: TextField(
                 decoration: InputDecoration(
                 hintText: 'Jay'
                 ),
               ),
             ),
-                      Padding(
-              padding: const EdgeInsets.only(left: 24.0, top: 10.0),
+            Padding(
+              padding: EdgeInsets.only(left: Config.xMargin(context, 5.3), top: Config.yMargin(context, 1.28)),
               child: Text(
                 'Email',
                 style: TextStyle(
                   fontFamily: 'Segoe-Bold',
                   fontWeight: FontWeight.w400,
-                  fontSize: 18.0,
+                  fontSize: Config.yMargin(context, 2.31)
                 ),
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 27.0),
+                padding: EdgeInsets.only(left: Config.xMargin(context, 5.3), right: Config.xMargin(context, 6) ),
                 child: TextField(
                 decoration: InputDecoration(
-                
                 hintText: 'abc@example.com'
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 24.0, top: 10.0),
+              padding: EdgeInsets.only(left: Config.xMargin(context, 5.3), top: Config.yMargin(context, 1.28)),
               child: Text(
                 'Password',
                 style: TextStyle(
@@ -87,29 +94,29 @@ class Signup extends StatelessWidget {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 27.0),
+                padding: EdgeInsets.only(left: Config.xMargin(context, 5.3), right: Config.xMargin(context, 6) ),
                 child: TextField(
                   obscureText: true,
-                decoration: InputDecoration(
-                hintText: '••••••••'
+                  decoration: InputDecoration(
+                  hintText: '••••••••'
                 ),
               ),
             ),
 
             Container(
 
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(Config.xMargin(context, 3.55)),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)), 
                 color: Color(0xff617ADC),
                 ),
               alignment: Alignment.center,
-              margin: EdgeInsets.only(top: 24, left: 24, right: 27),
+              margin: EdgeInsets.only(top: Config.yMargin(context, 3.09) , left: Config.xMargin(context, 5.33), right: Config.xMargin(context, 6) ), //24,24,27
               child: Text(
                 'Sign Up',
                 style: TextStyle(
                   fontFamily: 'Segoe-Bold',
-                  fontSize: 16.0,
+                  fontSize: Config.yMargin(context, 2.06),
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -127,7 +134,7 @@ class Signup extends StatelessWidget {
                   style: TextStyle(
                   fontFamily: 'Segoe-Bold',
                   fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
+                  fontSize: Config.yMargin(context, 2.06), //16
                 ),),
                 Text(
                   'Login',
@@ -135,15 +142,18 @@ class Signup extends StatelessWidget {
                   fontFamily: 'Segoe-Bold',
                   fontWeight: FontWeight.bold,
                   color: Color(0xff617ADC),
-                  fontSize: 16.0,
+                  fontSize: Config.yMargin(context, 2.06), //16
                 ),)
               ],),
             )
 
+            //4.5, 7.76
           ],
         )
       ),
     );
   }
 }
+
+
 
