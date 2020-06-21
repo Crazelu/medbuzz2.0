@@ -39,7 +39,7 @@ class _OnboardState extends State<Onboard> {
               padding: const EdgeInsetsDirectional.only(top: 30),
               child: FlatButton(
                 onPressed: () {
-                  
+                  Navigator.pushReplacementNamed(context, 'signup');
                 }, //navigate to the sign up page
                 child: Text(
                   "Skip",
@@ -110,18 +110,19 @@ class _OnboardState extends State<Onboard> {
                   direction: Axis.horizontal,
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-               //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       height: Config.yMargin(context, 6),
                       width: Config.xMargin(context, 27),
                       decoration: BoxDecoration(
                           color: appThemeLight.primaryColor,
-                          border:
-                              Border.all(color: appThemeLight.primaryColor),
+                          border: Border.all(color: appThemeLight.primaryColor),
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(context, 'signup');
+                          },
                           child: Text(
                             "Sign Up",
                             style: TextStyle(
@@ -136,14 +137,17 @@ class _OnboardState extends State<Onboard> {
                       width: Config.xMargin(context, 27),
                       decoration: BoxDecoration(
                           color: appThemeLight.primaryColorLight,
-                          border:
-                              Border.all(color: appThemeLight.primaryColor),
+                          border: Border.all(color: appThemeLight.primaryColor),
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(context, 'login');
+                          },
                           child: Text(
                             "Login",
-                            style: TextStyle(color: appThemeLight.primaryColor),
+                            style: TextStyle(
+                              color: appThemeLight.primaryColor,
+                            ),
                           )),
                     ),
                   ],
@@ -198,10 +202,10 @@ class FirstScreen extends StatelessWidget {
                       child: Text(description,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Theme.of(context).primaryColorDark,
-                            fontSize: Config.textSize(context, 3),
-                            fontWeight: FontWeight.w500
-                          )),
+                              fontFamily: 'Segoe-Bold',
+                              color: Theme.of(context).primaryColorDark,
+                              fontSize: Config.textSize(context, 3.7),
+                              fontWeight: FontWeight.w500)),
                     ),
                   ),
                 ],
