@@ -145,44 +145,46 @@ class CustomDateButton extends StatelessWidget {
     var model = Provider.of<FitnessSchedulesModel>(context, listen: false);
     return Container(
       margin: EdgeInsets.only(right: Config.xMargin(context, 3)),
-      width: Config.xMargin(context, 15.5),
+      width: Config.xMargin(context, 15),
       child: FlatButton(
         onPressed: () => model.changeDay(date),
 
-        //functionality for finding out if today equals the date passed in the constructor
+        //functionality for finding out if selected date (defaults to present day) equals the date passed in the constructor
         //I'm using this to determine the color of the container
         color: model.getButtonColor(context, date),
         padding: EdgeInsets.only(right: Config.xMargin(context, 3)),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Config.xMargin(context, 10)),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            //Day in integer goes here
-            Text(
-              '${date.day}',
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 8),
-                  fontWeight: FontWeight.bold,
-                  color: model.getTextColor(context, date)),
-            ),
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              //Day in integer goes here
+              Text(
+                '${date.day}',
+                style: TextStyle(
+                    fontSize: Config.textSize(context, 8),
+                    fontWeight: FontWeight.bold,
+                    color: model.getTextColor(context, date)),
+              ),
 
-            SizedBox(
-              height: Config.yMargin(context, 4),
-            ),
+              SizedBox(
+                height: Config.yMargin(context, 3),
+              ),
 
-            //Day in shortened words goes here
-            //functionality fot this can be extracted and moved to the view model
-            Text(
-              model.getWeekday(date),
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 4.8),
-                  fontWeight: FontWeight.w600,
-                  color: model.getTextColor(context, date)),
-            )
-          ],
+              //Day in shortened words goes here
+              Text(
+                model.getWeekday(date),
+                style: TextStyle(
+                    fontSize: Config.textSize(context, 4.8),
+                    fontWeight: FontWeight.w600,
+                    color: model.getTextColor(context, date)),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -223,10 +225,11 @@ class FitnessCard extends StatelessWidget {
                 ),
               ),
               SizedBox(height: Config.yMargin(context, 2)),
-              Text('Exercise type',
+              //Type of fitness exercise goes here
+              Text('Running',
                   style: TextStyle(
                       fontSize: Config.textSize(context, 6),
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                       color: Theme.of(context).primaryColor)),
               SizedBox(height: Config.yMargin(context, 1.5)),
               Text('Time frame',
