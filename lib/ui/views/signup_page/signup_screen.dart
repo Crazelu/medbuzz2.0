@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 
-void main() => runApp(MaterialApp(
-  home: Signup(),
-));
 
 class Signup extends StatelessWidget {
   @override
