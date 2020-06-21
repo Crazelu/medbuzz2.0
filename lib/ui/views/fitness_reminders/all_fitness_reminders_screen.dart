@@ -155,13 +155,13 @@ class CustomDateButton extends StatelessWidget {
             ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             //Day in integer goes here
             Text(
               '${date.day}',
               style: TextStyle(
-                  fontSize: Config.textSize(context, 10),
+                  fontSize: Config.textSize(context, 8),
                   fontWeight: FontWeight.bold,
                   color: model.getTextColor(context, date)),
             ),
