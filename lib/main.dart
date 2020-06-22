@@ -10,6 +10,8 @@ import 'package:MedBuzz/ui/views/home_page.dart';
 import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
 import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
+import 'package:MedBuzz/ui/views/drug_description/drug_description.dart';
+import 'package:MedBuzz/ui/views/health_tips/health_tips_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +46,8 @@ class MyApp extends StatelessWidget {
           'ScheduleAppointmentScreen': (context) => ScheduleAppointmentScreen(),
           WaterScheduleScreen.routeName: (context) => WaterScheduleScreen(),
           'waterScheduleView': (context) => WaterScheduleViewScreen(),
+          'drugDescription': (context) => DrugDescription(),
+          'tips': (context) => HealthTips(),
         },
       ),
     );
