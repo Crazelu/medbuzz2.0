@@ -107,7 +107,7 @@ class Signup extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(Config.xMargin(context, 3.55)),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.all(Radius.circular(Config.xMargin(context, 1.28))),
                   color: Theme.of(context).primaryColor,
                 ),
                 alignment: Alignment.center,
