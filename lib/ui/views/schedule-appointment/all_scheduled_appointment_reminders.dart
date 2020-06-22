@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'dart:ui';
+import 'package:MedBuzz/ui/size_config/config.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class ScheduleAppointmentsPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: ScheduledAppointmentsPage(),
-    );
+  _ScheduledAppointmentsPageState createState() {
+    return new _ScheduledAppointmentsPageState();
   }
 }
 
-class ScheduledAppointmentsPage extends StatelessWidget {
+class _ScheduledAppointmentsPageState extends State {
   String month = 'July';
   int dateno = 12;
   String day = 'Thurs';
