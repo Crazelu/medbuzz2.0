@@ -18,7 +18,7 @@ class Signup extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-          backgroundColor: appThemeLight.backgroundColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,7 +37,7 @@ class Signup extends StatelessWidget {
 
               Divider(
                 height: screenSize.height * 0.03,
-                color: appThemeLight.primaryColor,
+                color: Theme.of(context).primaryColor,
                 thickness: Config.yMargin(context, 0.64),
                 endIndent: screenSize.width * 0.25,
               ),
@@ -107,8 +107,8 @@ class Signup extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(Config.xMargin(context, 3.55)),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: appThemeLight.primaryColor,
+                  borderRadius: BorderRadius.all(Radius.circular(Config.yMargin(context, 1.28))),
+                  color: Theme.of(context).primaryColor,
                 ),
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(
@@ -148,7 +148,7 @@ class Signup extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: 'Segoe-Bold',
                           fontWeight: FontWeight.bold,
-                          color: appThemeLight.primaryColor,
+                          color: Theme.of(context).primaryColor,
                           fontSize: Config.yMargin(context, 2.06), //16
                         ),
                       ),
