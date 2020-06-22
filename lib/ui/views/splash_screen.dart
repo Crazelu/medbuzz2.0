@@ -28,7 +28,8 @@ class StartState extends State<SplashScreen> {
 
   route() {
     Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => HomeScreen(),
+       builder: (context) => HomeScreen(),
+
     )
     );
   }

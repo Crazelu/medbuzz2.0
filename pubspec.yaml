@@ -50,7 +50,14 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - images/
+  fonts:
+     - family: Segoe
+       fonts:
+          - asset: fonts/Segoe.ttf
 
+     - family: Segoe-Bold
+       fonts:
+          - asset: fonts/Segoe-Bold.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -3,15 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/core/models/fitness_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
-
 import '../../../core/models/fitness_reminder.dart';
-import '';
 import '../../navigation/app_navigation/app_transition.dart';
 import '../../size_config/config.dart';
-import '../../size_config/config.dart';
-import '../../size_config/config.dart';
 import 'all_fitness_reminders_screen.dart';
-import 'all_fitness_reminders_screen.dart';
+
 
 class FitnessDescriptionScreen extends StatelessWidget {
   final FitnessModel;
@@ -112,6 +108,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                    Text(
                      'Name of fitness',
                      style: TextStyle(
+                          fontFamily: 'Segoe',
                          fontWeight: FontWeight.w600,
                          fontSize: Config.xMargin(context, 5)),
                    ),
@@ -206,7 +203,8 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                         'Reminder Frequency',
                         style: TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Segoe-Bold',
+                          //  fontWeight: FontWeight.w600,
                             fontSize: Config.xMargin(context, 5.5)),
                       ),
                       SizedBox(height: Config.xMargin(context, 4.5)),
@@ -257,6 +255,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                    Text(
                      'Set time For Fitness Activity',
                      style: TextStyle(
+                         fontFamily: 'Segoe-Bold',
                          color: Colors.black,
                          fontWeight: FontWeight.w600,
                          fontSize: Config.xMargin(context, 5.0)),
@@ -293,6 +292,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                                  Config.xMargin(context, 4.0))),
                          color: Colors.blue,
                          child: Text('Edit' , style: TextStyle(
+                           fontFamily: 'Segoe',
                            color: Theme.of(context).backgroundColor,
                          ),),
                          onPressed: (){
@@ -331,6 +331,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
 
                    SizedBox(height: Config.xMargin(context, 4.5)),
                    Text('Duration', style: TextStyle(
+                     fontFamily: 'Segoe-Bold',
                        color: Colors.black,
                        fontWeight: FontWeight.w600,
                        fontSize: Config.xMargin(context, 5.0)),),
@@ -353,6 +354,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                                      Config.xMargin(context, 4.0))),
                              color: Colors.blue,
                              child:  Text('Edit' , style: TextStyle(
+                               fontFamily: 'Segoe',
                                color: Theme.of(context).backgroundColor,
                              ),),
                                onPressed: () {
@@ -372,7 +374,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                              'End  -  ${localizations.formatShortDate(
                                 endDate)}',
                              style: TextStyle(
-                           //    fontStyle: FontStyle.,
+                                 fontFamily: 'Segoe',
                                  fontSize: Config.xMargin(context, 5)),
                            ),
                            SizedBox(width: Config.xMargin(context, 3)),
@@ -428,6 +430,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                            },
                            child: Text(
                            'Save',style: TextStyle(
+                             fontFamily: 'Segoe',
                              color: Theme.of(context).backgroundColor,
                            ),
                            ),
@@ -453,25 +456,7 @@ class __fitnesssDescriptionState extends State<add_fitness> {
       ),
     );
   }
-  _fitnessTimeRem(MaterialLocalizations localizations) {
-    return Row(
-      children: <Widget>[
-        Icon(
-          Icons.access_time,
-        ),
-        SizedBox(width: Config.xMargin(context, 1.5)),
-        InkWell(
-          focusColor: Theme.of(context).primaryColorLight,
-          splashColor: Colors.greenAccent,
-          onTap: () => selectTime(context),
-          child: Text(
-            localizations.formatTimeOfDay(activityTime),
-            style: TextStyle(fontSize: Config.xMargin(context, 4.2)),
-          ),
-        ),
-      ],
-    );
-  }
+
   Future<Null> selectTime(BuildContext context) async {
     TimeOfDay currentTime = TimeOfDay.now();
     final TimeOfDay selectedTime = await showTimePicker(
