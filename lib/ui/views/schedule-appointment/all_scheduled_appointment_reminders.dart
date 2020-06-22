@@ -281,28 +281,3 @@ Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
     },
   );
 }
-//class MyHomePage extends StatefulWidget {
-//  MyHomePage({Key key, key}) : super(key: key);
-
-//  @override
-//  _MyHomePageState createState() => _MyHomePageState();
-//}
-
-//class MyHomePage extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      appBar: AppBar(
-//        title: Text(''),
-//      ),
-//      body: Center(
-//        child: Column(
-//          mainAxisAlignment: MainAxisAlignment.center,
-//          children: <Widget>[
-////              style: Theme.of(context).textTheme.headline4,
-//          ],
-//        ),
-//      ),
-//    );
-//  }
-//}
