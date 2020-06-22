@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders_model.dart';
 
-class ScheduleAppointmentsPage extends StatefulWidget {
+class ScheduledAppointmentsPage extends StatefulWidget {
   @override
   _ScheduledAppointmentsPageState createState() {
     return new _ScheduledAppointmentsPageState();
@@ -185,15 +186,24 @@ class _ScheduledAppointmentsPageState extends State {
                           )
                         ],
                       ),
-                      trailing: IconButton(
-                        icon: Icon(
-                          Icons.more_vert,
-                          size: 15.0,
-                        ),
-                        onPressed: () => {
-                          // _asyncConfirmDialog(context),
-                        },
-                      ),
+                      trailing: PopupMenuButton(
+                          icon: Icon(
+                            Icons.more_vert,
+                            size: 15.0,
+                            color: Colors.grey,
+                          ),
+                          itemBuilder: (BuildContext context) {
+                            return menuitems.map((MenuItem menuitem) {
+                              return PopupMenuItem(
+                                child: ListTile(
+                                  title: Text(menuitem.menuValue),
+                                  onTap: () => {
+                                    _asyncConfirmDialog(context),
+                                  },
+                                ),
+                              );
+                            }).toList();
+                          }),
                     ),
                   ),
                 );
