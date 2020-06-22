@@ -241,7 +241,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       'Add Medication',
       style: Theme.of(context)
           .textTheme
-          .title //REMOVED THE 6
+          .headline6 //REMOVED THE 6
           .copyWith(
             color: Theme.of(context).primaryColorDark,
           ),
@@ -253,7 +253,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       'Edit Medication',
       style: Theme.of(context)
           .textTheme
-          .title //REMOVED THE 6
+          .headline6 //REMOVED THE 6
           .copyWith(
             color: Theme.of(context).primaryColorDark,
           ),

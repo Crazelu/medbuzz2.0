@@ -29,6 +29,7 @@ class StartState extends State<SplashScreen> {
   route() {
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => Onboard()));
+
   }
 
   initScreen(BuildContext context) {
