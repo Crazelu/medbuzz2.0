@@ -69,7 +69,7 @@ class DrugDescription extends StatelessWidget {
                 ),
               margin: EdgeInsets.only(left: Config.xMargin(context, 5.5), right: Config.xMargin(context, 5.8), top: Config.yMargin(context, 2.2)), //26, 16
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0), //24, 16
+                padding: EdgeInsets.symmetric(horizontal: Config.xMargin(context, 5.33), vertical: Config.yMargin(context, 2.31)), //24, 16
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -88,7 +88,7 @@ class DrugDescription extends StatelessWidget {
                 ),
               margin: EdgeInsets.only(left: Config.xMargin(context, 5.5), right: Config.xMargin(context, 5.8), top: Config.yMargin(context, 2.2)), //26, 16
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0), //24, 16
+                padding: EdgeInsets.symmetric(horizontal: Config.xMargin(context, 5.33), vertical: Config.yMargin(context, 2.31)), //24, 16
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -107,7 +107,7 @@ class DrugDescription extends StatelessWidget {
                 ),
               margin: EdgeInsets.only(left: Config.xMargin(context, 5.5), right: Config.xMargin(context, 5.8), top: Config.yMargin(context, 2.2)), //26, 16
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0), //24, 16
+                padding: EdgeInsets.symmetric(horizontal: Config.xMargin(context, 5.33), vertical: Config.yMargin(context, 2.31)), //24, 16
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -126,7 +126,7 @@ class DrugDescription extends StatelessWidget {
                 ),
               margin: EdgeInsets.only(left: Config.xMargin(context, 5.5), right: Config.xMargin(context, 5.8), top: Config.yMargin(context, 2.2)), //26, 16
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0), //24, 16
+                padding: EdgeInsets.symmetric(horizontal: Config.xMargin(context, 5.33), vertical: Config.yMargin(context, 2.31)), //24, 16
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -145,7 +145,7 @@ class DrugDescription extends StatelessWidget {
                 ),
               margin: EdgeInsets.only(left: Config.xMargin(context, 5.5), right: Config.xMargin(context, 5.8), top: Config.yMargin(context, 2.2)), //26, 16
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0), //24, 16
+                padding: EdgeInsets.symmetric(horizontal: Config.xMargin(context, 5.33), vertical: Config.yMargin(context, 2.31)), //24, 16
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
