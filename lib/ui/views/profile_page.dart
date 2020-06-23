@@ -113,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                     title: Text('App Notification'),
                     trailing: Switch(
-                        activeColor: Colors.blueAccent[700],
+                        activeColor: ThemeData().primaryColor,
                         activeTrackColor: Colors.blueAccent,
                         onChanged: (value) {
                           setState(() {
