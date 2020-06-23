@@ -2,32 +2,27 @@ import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-class FitnessSchedulesScreen extends StatefulWidget {
-  @override
-  _FitnessSchedulesScreenState createState() => _FitnessSchedulesScreenState();
-}
 
-class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
+
+class FitnessSchedulesScreen extends StatelessWidget {
+ 
+ final ScrollController controller = ScrollController();
+ final ItemScrollController itemScrollController = ItemScrollController();
   @override
-  void initState() { 
-    super.initState();
+  Widget build(BuildContext context) {
+
     //Some sweet magic to animate FAB
     //This makes the FAB disappear as you scroll down
     controller.addListener(() {
-     
-      if(controller.offset < 120){
+      if (controller.offset < 120) {
         Provider.of<FitnessSchedulesModel>(context).updateVisibility(true);
-      }
-      else{
+      } else {
         Provider.of<FitnessSchedulesModel>(context).updateVisibility(false);
       }
     });
-  }
-  bool isVisible= true;
-  ScrollController controller = ScrollController();
-  @override
-  Widget build(BuildContext context) {
+
     var model = Provider.of<FitnessSchedulesModel>(context);
     //MediaQueries for responsiveness
     double height = MediaQuery.of(context).size.height;
@@ -35,22 +30,21 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       floatingActionButton: AnimatedOpacity(
-        duration: Duration(milliseconds:500),
-        opacity: model.isVisible ? 1:0,
+        duration: Duration(milliseconds: 800),
+        opacity: model.isVisible ? 1 : 0,
         child: AnimatedContainer(
-          duration: Duration(milliseconds:500),
-          child: Visibility(
-            visible: model.isVisible,
-            child: FloatingActionButton(
-              child: Icon(Icons.add,
-              color: Theme.of(context).primaryColorLight,
-              size: Config.xMargin(context, 10),),
+          duration: Duration(milliseconds: 800),
+          height: model.isVisible ? Config.yMargin(context, 10): 0,
+          child: FloatingActionButton(
+              child: Icon(
+                Icons.add,
+                color: Theme.of(context).primaryColorLight,
+                size: Config.xMargin(context, 9),
+              ),
               backgroundColor: Theme.of(context).buttonColor,
               splashColor: Theme.of(context).buttonColor.withOpacity(.9),
               //Navigate to fitness reminder creation screen
-              onPressed: (){}
-              ),
-          ),
+              onPressed: () {}),
         ),
       ),
       appBar: AppBar(
@@ -58,10 +52,11 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
         backgroundColor: Theme.of(context).backgroundColor,
         title: Text(
           'Fitness',
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              .copyWith(color: Theme.of(context).primaryColorDark),
+          style: TextStyle(color: Theme.of(context).primaryColorDark)
+          // Theme.of(context)
+          //     .textTheme
+          //     .headline6
+          //     .copyWith(color: Theme.of(context).primaryColorDark),
         ),
         leading: IconButton(
             icon: Icon(Icons.keyboard_backspace,
@@ -74,9 +69,8 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
         controller: controller,
         physics: BouncingScrollPhysics(),
         child: Container(
-            margin: EdgeInsets.fromLTRB(Config.xMargin(context, 3),
-                Config.yMargin(context, 2), Config.xMargin(context, 3), 0),
-            
+            margin: EdgeInsets.symmetric(horizontal:Config.xMargin(context, 3),
+                vertical:Config.yMargin(context, 2)),
             child: Column(
               children: <Widget>[
                 Container(
@@ -95,14 +89,21 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
                             //Some example (pronounced igzampl, yunno?)
-                            CustomDateButton(date: DateTime.now().add(Duration(days:1))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:2))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:3))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:4))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:5))),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:6))),
+                            CustomDateButton(
+                                date: DateTime.now().add(Duration(days: 1))),
+                            CustomDateButton(
+                                date: DateTime.now().add(Duration(days: 2))),
+                            CustomDateButton(
+                                date: DateTime.now().add(Duration(days: 3))),
+                            CustomDateButton(
+                                date: DateTime.now().add(Duration(days: 4))),
+                            CustomDateButton(
+                                date: DateTime.now().add(Duration(days: 5))),
+                            CustomDateButton(
+                                date: DateTime.now().add(Duration(days: 6))),
                             CustomDateButton(date: DateTime.now()),
-                            CustomDateButton(date: DateTime.now().add(Duration(days:10))),
+                            CustomDateButton(
+                                date: DateTime.now().add(Duration(days: 10))),
                           ],
                         ),
                       ),
@@ -116,15 +117,22 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
                     ],
                   ),
                 ),
-                
-                      SizedBox(
-                        height: Config.yMargin(context, 5)
-                      ),
-                      //Here the already saved reminders will be loaded dynamically
-                  FitnessCard(),
-                      FitnessCard(),
-                      FitnessCard(),
-                      FitnessCard(),
+
+                SizedBox(height: Config.yMargin(context, 5)),
+                //Here the already saved reminders will be loaded dynamically
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                          '08:00',
+                          style: TextStyle(
+                              letterSpacing: 1.5,
+                              fontSize: Config.textSize(context, 6)),
+                        ),
+                ),
+                FitnessCard(),
+                FitnessCard(),
+                FitnessCard(),
+                FitnessCard(),
               ],
             )),
       ),
@@ -140,46 +148,46 @@ class CustomDateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var model = Provider.of<FitnessSchedulesModel>(context, listen: false);
     return Container(
-      margin: EdgeInsets.only(right:Config.xMargin(context, 3)),
-      width: Config.xMargin(context, 15.5),
+      margin: EdgeInsets.only(right: Config.xMargin(context, 3)),
+      width: Config.xMargin(context, 19),
+      alignment: Alignment.center,
       child: FlatButton(
-        onPressed: ()=>model.changeDay(date),
+        onPressed: () => model.changeDay(date),
 
-        //functionality for finding out if today equals the date passed in the constructor
-            //I'm using this to determine the color of the container
+        //functionality for finding out if selected date (defaults to present day) equals the date passed in the constructor
+        //I'm using this to determine the color of the container
         color: model.getButtonColor(context, date),
-        padding: EdgeInsets.only(right: Config.xMargin(context, 3)),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Config.xMargin(context, 10)),
-            
-            ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            //Day in integer goes here
-            Text(
-              '${date.day}',
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 10),
-                  fontWeight: FontWeight.bold,
-                  color: model.getTextColor(context, date)),
-            ),
+          borderRadius: BorderRadius.circular(Config.xMargin(context, 11)),
+        ),
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              //Day in integer goes here
+              Text(
+                '${date.day}',
+                style: TextStyle(
+                    fontSize: Config.textSize(context, 8),
+                    fontWeight: FontWeight.w600,
+                    color: model.getTextColor(context, date)),
+              ),
 
-            SizedBox(
-              height: Config.yMargin(context, 4),
-            ),
+              SizedBox(
+                height: Config.yMargin(context, 3),
+              ),
 
-            //Day in shortened words goes here
-            //functionality fot this can be extracted and moved to the view model
-            Text(
-              model.getWeekday(date),
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 4.8),
-                  fontWeight: FontWeight.w600,
-                  color: model.getTextColor(context, date)),
-            )
-          ],
+              //Day in shortened words goes here
+              Text(
+                model.getWeekday(date),
+                style: TextStyle(
+                    fontSize: Config.textSize(context, 4.8),
+                    fontWeight: FontWeight.w500,
+                    color: model.getTextColor(context, date)),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -195,43 +203,44 @@ class FitnessCard extends StatelessWidget {
       width: width,
       height: height * .35,
       child: InkWell(
-         //Navigate to screen with single reminder i.e the on user clicked on
-      onTap: (){},
-      splashColor: Colors.transparent,
-        child: Column(mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-         children: [
-           Divider(
-             thickness: 0.7,
-             color: Theme.of(context).primaryColorDark.withOpacity(.4),
-             indent: Config.xMargin(context, 2.5),
-             endIndent: Config.xMargin(context, 2.5)
-           ),
-           SizedBox(height:Config.yMargin(context, .5)),
-          Container(
-            width: width,
-            height: height * .22,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('images/sprint.png'),
-                fit: BoxFit.contain
+        //Navigate to screen with single reminder i.e the on user clicked on
+        onTap: () {},
+        splashColor: Colors.transparent,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Divider(
+                  thickness: 0.7,
+                  color: Theme.of(context).primaryColorDark.withOpacity(.4),
+                  indent: Config.xMargin(context, 0.5),
+                  endIndent: Config.xMargin(context, 2.5)),
+              SizedBox(height: Config.yMargin(context, .5)),
+              Container(
+                width: width,
+                height: height * .22,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('images/sprint.png'),
+                      fit: BoxFit.contain),
+                  borderRadius:
+                      BorderRadius.circular(Config.xMargin(context, 8)),
+                ),
               ),
-                borderRadius: BorderRadius.circular(Config.xMargin(context, 8)),),
-          ),
-          SizedBox(height: Config.yMargin(context, 2)),
-          Text('Exercise type',
-              style: TextStyle(
-                fontSize: Config.textSize(context, 6),
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).primaryColor)),
-          SizedBox(height: Config.yMargin(context, 1.5)),
-          Text('Time frame',
-              style: TextStyle(
-                fontSize: Config.textSize(context, 4.5),
-                fontWeight: FontWeight.w400,
-                  color: Theme.of(context).primaryColorDark)),
-
-        ]),
+              SizedBox(height: Config.yMargin(context, 2)),
+              //Type of fitness exercise goes here
+              Text('Running',
+                  style: TextStyle(
+                      fontSize: Config.textSize(context, 6),
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).primaryColor)),
+              SizedBox(height: Config.yMargin(context, 1)),
+              Text('30 minutes daily',
+                  style: TextStyle(
+                      fontSize: Config.textSize(context, 4.5),
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).primaryColorDark)),
+            ]),
       ),
     );
   }

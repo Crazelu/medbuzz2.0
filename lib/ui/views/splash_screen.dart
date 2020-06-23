@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:MedBuzz/ui/views/Home.dart';
+//import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/onboarding.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,7 +14,6 @@ class StartState extends State<SplashScreen> {
     return initScreen(context);
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -26,14 +26,12 @@ class StartState extends State<SplashScreen> {
   }
 
   route() {
-    Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => HomeScreen()
-    )
-    );
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => Onboard()));
+
   }
 
   initScreen(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
