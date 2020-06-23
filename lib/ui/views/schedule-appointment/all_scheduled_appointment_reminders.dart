@@ -210,8 +210,6 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                   child: ListTile(
                                     contentPadding: EdgeInsets.symmetric(
                                         vertical: 0.0, horizontal: 0.0),
-                                    focusColor:
-                                        Color.fromARGB(255, 245, 244, 244),
                                     title: Column(
                                       children: [
                                         Container(
