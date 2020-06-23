@@ -31,29 +31,30 @@ class _OnboardState extends State<Onboard> {
     print(Config.yMargin(context, 1));
     print(Config.xMargin(context, 1));
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: appThemeLight.backgroundColor,
-          actions: <Widget>[
-            Container(
-              padding: const EdgeInsetsDirectional.only(top: 30),
-              child: FlatButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'signup');
-                }, //navigate to the sign up page
-                child: Text(
-                  "Skip",
-                  style: TextStyle(color: appThemeLight.primaryColorDark),
-                ),
-                color: Colors.transparent,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: appThemeLight.backgroundColor,
+        actions: <Widget>[
+          Container(
+            padding: const EdgeInsetsDirectional.only(top: 30),
+            child: FlatButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'signup');
+              }, //navigate to the sign up page
+              child: Text(
+                "Skip",
+                style: TextStyle(color: appThemeLight.primaryColorDark),
               ),
+              color: Colors.transparent,
             ),
-          ],
-        ),
-        body: Container(
-          height: height,
-          width: width,
-          child: Stack(children: <Widget>[
+          ),
+        ],
+      ),
+      body: Container(
+        height: height,
+        width: width,
+        child: Stack(
+          children: <Widget>[
             PageView(
               onPageChanged: onChangedFunction,
               controller: _controller,
@@ -120,14 +121,15 @@ class _OnboardState extends State<Onboard> {
                           border: Border.all(color: appThemeLight.primaryColor),
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, 'signup');
-                          },
-                          child: Text(
-                            "Sign Up",
-                            style: TextStyle(
-                                color: appThemeLight.primaryColorLight),
-                          )),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, 'signup');
+                        },
+                        child: Text(
+                          "Sign Up",
+                          style:
+                              TextStyle(color: appThemeLight.primaryColorLight),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       width: Config.xMargin(context, 17),
@@ -140,22 +142,25 @@ class _OnboardState extends State<Onboard> {
                           border: Border.all(color: appThemeLight.primaryColor),
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, 'login');
-                          },
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                              color: appThemeLight.primaryColor,
-                            ),
-                          )),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, 'login');
+                        },
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            color: appThemeLight.primaryColor,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 
   onChangedFunction(int index) {
@@ -180,36 +185,38 @@ class FirstScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: appThemeLight.primaryColorLight,
       body: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: Config.xMargin(context, 6),
-              vertical: Config.yMargin(context, 5)),
-          child: Container(
-              height: height,
-              width: width,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: height * .45,
-                    width: width,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(image), fit: BoxFit.contain)),
-                  ),
-                  SizedBox(height: Config.yMargin(context, 3.4)),
-                  Container(
-                    child: ForwardAnimation(
-                      milliseconds: 500,
-                      child: Text(description,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'Segoe-Bold',
-                              color: Theme.of(context).primaryColorDark,
-                              fontSize: Config.textSize(context, 3.7),
-                              fontWeight: FontWeight.w500)),
-                    ),
-                  ),
-                ],
-              ))),
+        padding: EdgeInsets.symmetric(
+            horizontal: Config.xMargin(context, 6),
+            vertical: Config.yMargin(context, 5)),
+        child: Container(
+          height: height,
+          width: width,
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: height * .45,
+                width: width,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(image), fit: BoxFit.contain)),
+              ),
+              SizedBox(height: Config.yMargin(context, 3.4)),
+              Container(
+                child: ForwardAnimation(
+                  milliseconds: 500,
+                  child: Text(description,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Segoe-Bold',
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 3.7),
+                          fontWeight: FontWeight.w500)),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
