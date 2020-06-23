@@ -17,18 +17,19 @@ class WaterScheduleViewScreen extends StatelessWidget {
           height: 90,
           width: 90,
           child: FloatingActionButton(
-              elevation: 0,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WaterScheduleScreen()));
-              },
-              backgroundColor: Theme.of(context).primaryColor,
-              child: Icon(
-                Icons.add,
-                size: 47,
-              )),
+            elevation: 0,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WaterScheduleScreen()));
+            },
+            backgroundColor: Theme.of(context).primaryColor,
+            child: Icon(
+              Icons.add,
+              size: 47,
+            ),
+          ),
         ),
       ),
       body: WaterScheduleView(),

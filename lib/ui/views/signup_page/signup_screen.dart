@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
-import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 
 class Signup extends StatelessWidget {
   @override
@@ -8,7 +7,7 @@ class Signup extends StatelessWidget {
     //get Screen size
     Size screenSize = MediaQuery.of(context).size;
     //get Safe area padding
-    EdgeInsets safe = MediaQuery.of(context).viewPadding;
+    // EdgeInsets safe = MediaQuery.of(context).viewPadding;
 
     // print("value = ");
     // print( Config.xMargin(context, 1) );
