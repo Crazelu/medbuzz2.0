@@ -1,3 +1,4 @@
+import 'package:MedBuzz/ui/views/add_medication/add_medication_model.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_model.dart';
 import 'package:MedBuzz/ui/views/diet_reminders/diet_reminders_model.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +7,8 @@ import 'package:provider/provider.dart';
 
 final providers = <SingleChildCloneableWidget>[
   ChangeNotifierProvider(create: (_) => FitnessSchedulesModel()),
-  ChangeNotifierProvider(create: (_) => DietReminderModel())
+  ChangeNotifierProvider(create: (_) => DietReminderModel()),
+  ChangeNotifierProvider(create: (_) => AddMedication())
 ];
 
 //final dietProviders = <SingleChildCloneableWidget>[
