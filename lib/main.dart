@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: 'ScheduledAppointmentsPage',
+        initialRoute: '/',
         routes: {
           '/': (context) => SplashScreen(),
           'home': (context) => HomeScreen(),
