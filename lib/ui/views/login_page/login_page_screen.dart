@@ -155,20 +155,16 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: Config.yMargin(context, 2.7),
                     ),
-                    Container(
-                      height: height * .065,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Theme.of(context).primaryColor,
-                        child: Center(
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomePage(),
-                                  ));
-                            },
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, 'homepage');
+                      },
+                      child: Container(
+                        height: height * .065,
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Theme.of(context).primaryColor,
+                          child: Center(
                             child: Text(
                               'Login',
                               style: TextStyle(
