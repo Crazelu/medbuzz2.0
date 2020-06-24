@@ -5,7 +5,7 @@ import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'dart:ui';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders_model.dart';
-import 'package:table_calendar/table_calendar.dart';
+// import 'package:table_calendar/table_calendar.dart';
 
 class ScheduledAppointmentsPage extends StatefulWidget {
   @override
@@ -25,23 +25,24 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
     return DefaultTabController(
       length: 2,
       child: new Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Color.fromARGB(255, 229, 229, 229),
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 250, 250, 250),
           title: Container(
-            margin: EdgeInsets.only(top: 25.0),
-            child: new Text(
-              'My Appointments',
-              style: TextStyle(
-                color: Color.fromARGB(255, 51, 51, 51),
-                fontFamily: 'Segoe UI',
-                fontSize: Config.textSize(context, 18.0),
-                fontWeight: FontWeight.w600,
+            child: Container(
+              padding: EdgeInsets.all(0.0),
+              child: new Text(
+                'My Appointments',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 51, 51, 51),
+                  fontFamily: 'Segoe',
+                  fontSize: Config.textSize(context, 3.8),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
           leading: Container(
-            margin: EdgeInsets.only(top: 20.0),
             child: IconButton(
               icon: Icon(
                 Icons.arrow_back,
@@ -58,17 +59,19 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
             indicatorColor: Color.fromARGB(255, 97, 122, 220),
             labelColor: Color.fromARGB(255, 70, 70, 70),
             unselectedLabelColor: Color.fromARGB(255, 70, 70, 70),
-            indicatorWeight: 1.0,
+            indicatorWeight: 2.0,
             tabs: [
               Tab(
                 child: Text(
                   'Upcoming',
+                  textScaleFactor: 0.8,
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
               Tab(
                 child: Text(
                   'Past',
+                  textScaleFactor: 0.8,
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
@@ -86,7 +89,6 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                 // final item = items[index];
 
                 return Container(
-                  height: Config.yMargin(context, 150),
                   child: Card(
                     margin: EdgeInsets.symmetric(
                       vertical: 20.0,
@@ -99,24 +101,25 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                           Text(
                             '$month',
                             style: TextStyle(
-                              fontFamily: 'Segoe UI',
+                              fontFamily: 'Segoe',
                               color: Colors.grey.shade600,
-                              fontSize: Config.textSize(context, 9),
+                              fontSize: Config.textSize(context, 0.9),
                             ),
                           ),
                           Text(
                             '$dateno',
                             style: TextStyle(
-                              fontSize: Config.textSize(context, 28.0),
+                              fontFamily: 'Segoe',
+                              fontSize: Config.textSize(context, 2.0),
                               color: Color.fromARGB(255, 45, 191, 195),
                             ),
                           ),
                           Text(
                             '$day',
                             style: TextStyle(
-                              fontFamily: 'Segoe UI',
+                              fontFamily: 'Segoe',
                               color: Colors.grey.shade600,
-                              fontSize: Config.yMargin(context, 9),
+                              fontSize: Config.textSize(context, 0.9),
                             ),
                           ),
                         ],
@@ -125,33 +128,33 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                            height: Config.yMargin(context, 8.0),
+                            height: Config.yMargin(context, 1.0),
                           ),
                           Row(
                             children: <Widget>[
                               Text(
                                 'Timing',
                                 style: TextStyle(
-                                  fontFamily: 'Segoe UI',
+                                  fontFamily: 'Segoe',
                                   color: Colors.grey.shade600,
-                                  fontSize: Config.textSize(context, 12.0),
+                                  fontSize: Config.textSize(context, 2.0),
                                 ),
                               ),
                               SizedBox(
-                                width: Config.xMargin(context, 57.0),
+                                width: Config.xMargin(context, 3.0),
                               ),
                               Text(
                                 'Appointment For',
                                 style: TextStyle(
-                                  fontFamily: 'Segoe UI',
+                                  fontFamily: 'Segoe',
                                   color: Colors.grey.shade600,
-                                  fontSize: Config.textSize(context, 12),
+                                  fontSize: Config.textSize(context, 2.0),
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: Config.yMargin(context, 8.0),
+                            height: Config.yMargin(context, 1.0),
                           ),
                           Container(
                             child: Row(
@@ -161,25 +164,25 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                   style: TextStyle(
                                     fontFamily: 'Segoe UI',
                                     color: Color.fromARGB(255, 51, 51, 51),
-                                    fontSize: Config.textSize(context, 14.0),
+                                    fontSize: Config.textSize(context, 2.0),
                                   ),
                                 ),
                                 SizedBox(
-                                  width: Config.xMargin(context, 45.0),
+                                  width: Config.xMargin(context, 2.0),
                                 ),
                                 Text(
                                   'Dance Class',
                                   style: TextStyle(
                                     fontFamily: 'Segoe UI',
                                     color: Color.fromARGB(255, 51, 51, 51),
-                                    fontSize: Config.textSize(context, 14),
+                                    fontSize: Config.textSize(context, 2.0),
                                   ),
                                 ),
                               ],
                             ),
                           ),
                           SizedBox(
-                            height: Config.yMargin(context, 14.0),
+                            height: Config.yMargin(context, 1.0),
                             child: Center(
                               child: Divider(
                                 thickness: 1.0,
@@ -187,18 +190,23 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                               ),
                             ),
                           ),
-                          Text(
-                            reminderMessage,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 51, 51, 51)),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              reminderMessage,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 51, 51, 51),
+                                fontSize: Config.textSize(context, 2.0),
+                              ),
+                            ),
                           ),
                         ],
                       ),
                       trailing: PopupMenuButton(
                           icon: Icon(
                             Icons.more_vert,
-                            size: Config.yMargin(context, 12.0),
+                            size: Config.yMargin(context, 2.0),
                             color: Colors.grey,
                           ),
                           itemBuilder: (BuildContext context) {
@@ -216,9 +224,10 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                           child: Text(
                                             menuitem.menuValue,
                                             textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .button,
+                                            style: TextStyle(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 245, 244, 244),
+                                            ),
                                           ),
                                         ),
                                         Container(),
@@ -251,7 +260,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
 //                final item = items[index];
 
                 return Container(
-                  height: Config.yMargin(context, 150.0),
+                  height: Config.yMargin(context, 3.8),
                   child: Card(
                     margin: EdgeInsets.symmetric(
                       vertical: 20.0,
@@ -286,7 +295,7 @@ Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
         title: Text(
           'One appointment will be deleted.',
           style: TextStyle(
-            color: Theme.of(context).primaryColorDark,
+            color: Colors.black,
           ),
         ),
         actions: <Widget>[
@@ -299,10 +308,10 @@ Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
                 color: Colors.grey,
               ),
             ),
-            color: Theme.of(context).backgroundColor,
+            color: Color.fromARGB(255, 229, 229, 229),
             onPressed: () {
               // go back to scheduled appointments page
-              Navigator.of(context).pop(ScheduledAppointmentsPage);
+              Navigator.of(context).pop(ConfirmAction.Cancel);
             },
           ),
           FlatButton(
@@ -314,7 +323,7 @@ Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
                 color: Colors.red,
               ),
             ),
-            color: Theme.of(context).backgroundColor,
+            color: Color.fromARGB(255, 229, 229, 229),
             onPressed: () {
               // delete action
               Navigator.of(context).pop(ConfirmAction.Delete);
