@@ -12,7 +12,7 @@ class RouteNames {
   static const String fitnessSchedulesScreen = 'fitnessSchedulesScreen';
   static const String scheduleAppointmentScreen = 'scheduleAppointmentScreen';
   static const String scheduledAppointmentsPage = 'scheduledAppointmentsPage';
-  static const String waterScheduleScreen = 'schedule-water-reminder';
+  static const String scheduleWaterReminderScreen = 'schedule-water-reminder';
   static const String waterScheduleView = 'waterScheduleView';
   static const String confirmOrSnoozeReminderScreen =
       'confirmOrSnoozeReminderScreen';

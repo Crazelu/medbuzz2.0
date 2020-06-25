@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
               ScheduleAppointmentScreen(),
           RouteNames.scheduledAppointmentsPage: (context) =>
               ScheduledAppointmentsPage(),
-          RouteNames.waterScheduleScreen: (context) => WaterScheduleScreen(),
+          RouteNames.scheduleWaterReminderScreen: (context) => ScheduleWaterReminderScreen(),
           RouteNames.waterScheduleView: (context) => WaterScheduleViewScreen(),
           RouteNames.confirmOrSnoozeReminderScreen: (context) =>
               ConfirmOrSnoozeScreen(),
