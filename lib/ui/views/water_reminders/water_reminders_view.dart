@@ -17,18 +17,19 @@ class WaterScheduleViewScreen extends StatelessWidget {
           height: 90,
           width: 90,
           child: FloatingActionButton(
-              elevation: 0,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WaterScheduleScreen()));
-              },
-              backgroundColor: Theme.of(context).primaryColor,
-              child: Icon(
-                Icons.add,
-                size: 47,
-              )),
+            elevation: 0,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WaterScheduleScreen()));
+            },
+            backgroundColor: Theme.of(context).primaryColor,
+            child: Icon(
+              Icons.add,
+              size: 47,
+            ),
+          ),
         ),
       ),
       body: WaterScheduleView(),
@@ -112,7 +113,7 @@ class _WaterScheduleViewState extends State<WaterScheduleView> {
                 child: Stack(
                   children: <Widget>[
                     SizedBox(
-                      height: height * 0.35,
+                      height: height * 0.37,
                       width: width * 0.7,
                       child: CircularProgressIndicator(
                           backgroundColor: Color(0xffE5E5E5),
@@ -194,7 +195,7 @@ class _WaterScheduleViewState extends State<WaterScheduleView> {
     double height = MediaQuery.of(context).size.height;
     return Container(
       margin: EdgeInsets.only(bottom: Config.yMargin(context, 2)),
-      height: _isHidden ? height * 0.15 : height * 0.2,
+      height: _isHidden ? height * 0.15 : height * 0.25,
       child: GestureDetector(
         onTap: () {
           setState(() {
@@ -264,11 +265,13 @@ class _WaterScheduleViewState extends State<WaterScheduleView> {
                         )
                       ],
                     ),
-                    Container(
-                        margin: EdgeInsets.only(
-                            left: Config.xMargin(context, 3.5),
-                            bottom: Config.yMargin(context, 2.5)),
-                        child: Text(formattedTime))
+                    Expanded(
+                      child: Container(
+                          margin: EdgeInsets.only(
+                              left: Config.xMargin(context, 3.5),
+                              bottom: Config.yMargin(context, 2.5)),
+                          child: Text(formattedTime)),
+                    )
                   ],
                 ),
                 SizedBox(
