@@ -6,6 +6,7 @@ class RouteNames {
   //Confusing naming 'home' actually is for a screen about Playstore ratings
   static const String home = 'home';
   static const String login = 'login';
+  static const String forgotPassword = 'forgotPassword';
   static const String profile = 'profile';
   static const String onboarding = 'onboarding';
   static const String signup = 'signup';
