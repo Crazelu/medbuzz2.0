@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/ui/views/home_page.dart';
 import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -157,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, 'homepage');
+                        Navigator.pushReplacementNamed(context, RouteNames.homePage);
                       },
                       child: Container(
                         height: height * .065,

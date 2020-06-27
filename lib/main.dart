@@ -2,6 +2,7 @@ import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/onboarding.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: RouteNames.splashScreen,
+        initialRoute: RouteNames.allRemindersScreen,
         routes: {
           RouteNames.splashScreen: (context) => SplashScreen(),
           RouteNames.home: (context) => HomeScreen(),
@@ -43,13 +44,15 @@ class MyApp extends StatelessWidget {
           RouteNames.onboarding: (context) => Onboard(),
           RouteNames.homePage: (context) => HomePage(),
           RouteNames.signup: (context) => Signup(),
+          RouteNames.allRemindersScreen: (context) => AllRemindersScreen(),
           RouteNames.fitnessSchedulesScreen: (context) =>
               FitnessSchedulesScreen(),
           RouteNames.scheduleAppointmentScreen: (context) =>
               ScheduleAppointmentScreen(),
           RouteNames.scheduledAppointmentsPage: (context) =>
               ScheduledAppointmentsPage(),
-          RouteNames.waterScheduleScreen: (context) => WaterScheduleScreen(),
+          RouteNames.scheduleWaterReminderScreen: (context) =>
+              ScheduleWaterReminderScreen(),
           RouteNames.waterScheduleView: (context) => WaterScheduleViewScreen(),
           RouteNames.confirmOrSnoozeReminderScreen: (context) =>
               ConfirmOrSnoozeScreen(),
