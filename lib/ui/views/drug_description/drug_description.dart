@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 
 class DrugDescription extends StatelessWidget {
-  Color boldTextColor = Color(0xff333333);
+  final Color boldTextColor = Color(0xff333333);
   //yMargin constant: 7.76
   //xMargin constant: 4.5
   @override

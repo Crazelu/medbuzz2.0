@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/ui/views/home_page.dart';
 import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -155,20 +156,16 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: Config.yMargin(context, 2.7),
                     ),
-                    Container(
-                      height: height * .065,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Theme.of(context).primaryColor,
-                        child: Center(
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomePage(),
-                                  ));
-                            },
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, RouteNames.homePage);
+                      },
+                      child: Container(
+                        height: height * .065,
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Theme.of(context).primaryColor,
+                          child: Center(
                             child: Text(
                               'Login',
                               style: TextStyle(

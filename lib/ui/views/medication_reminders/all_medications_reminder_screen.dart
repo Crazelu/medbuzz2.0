@@ -1,4 +1,5 @@
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,7 +54,12 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 backgroundColor: Theme.of(context).buttonColor,
                 splashColor: Theme.of(context).buttonColor.withOpacity(.9),
                 //Navigate to fitness reminder creation screen
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddMedicationScreen()));
+                }),
           ),
         ),
       ),
@@ -253,81 +259,85 @@ class FitnessCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: ExpansionTile(
-                    title: Text(
-                      "Chloroquine Injection",
-                      style: TextStyle(
-                          fontSize: Config.textSize(context, 5),
-                          fontWeight: FontWeight.bold,
-                          color: model.isExpanded
-                              ? Theme.of(context).primaryColorLight
-                              : Theme.of(context).primaryColorDark),
-                    ),
-                    leading: Image.asset(
-                      "images/injection.png",
-                      color: Theme.of(context).primaryColorLight,
-                      width: 50,
-                      height: 50,
-                    ),
-                    subtitle: Text("1 shots once daily",
+                      title: Text(
+                        "Chloroquine Injection",
                         style: TextStyle(
                             fontSize: Config.textSize(context, 5),
+                            fontWeight: FontWeight.bold,
                             color: model.isExpanded
                                 ? Theme.of(context).primaryColorLight
-                                : Theme.of(context).primaryColorDark)),
-                    backgroundColor: model.isExpanded
-                        ? Theme.of(context).hintColor
-                        : Theme.of(context).primaryColor,
-                    children: <Widget>[
-                      Divider(
-                          thickness: 1,
-                          color: Theme.of(context).primaryColorLight,
-                          indent: Config.xMargin(context, 2.0),
-                          endIndent: Config.xMargin(context, 2.0)),
-                      Padding(
-                        padding: EdgeInsets.all(3),
-                        child: Row(
-                          children: <Widget>[
-                            FlatButton(
-                              onPressed: () {},
-                              child: Text(
-                                "View",
-                                style: TextStyle(
-                                    fontSize: Config.textSize(context, 5),
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                            ),
-                            FlatButton.icon(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.cancel,
-                                color: Theme.of(context).primaryColorLight,
-                              ),
-                              label: Text(
-                                "Skip",
-                                style: TextStyle(
-                                    fontSize: Config.textSize(context, 5),
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                            ),
-                            FlatButton.icon(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.check,
-                                color: Theme.of(context).primaryColorLight,
-                              ),
-                              label: Text(
-                                "Done",
-                                style: TextStyle(
-                                  fontSize: Config.textSize(context, 5),
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                            ),
-                          ],
-                        ),
+                                : Theme.of(context).primaryColorDark),
                       ),
-                    ],
-                    onExpansionChanged: (changed){ model.expandTile(changed); }
-                  ),
+                      leading: Image.asset(
+                        "images/injection.png",
+                        color: Theme.of(context).primaryColorLight,
+                        width: 50,
+                        height: 50,
+                      ),
+                      subtitle: Text("1 shots once daily",
+                          style: TextStyle(
+                              fontSize: Config.textSize(context, 5),
+                              color: model.isExpanded
+                                  ? Theme.of(context).primaryColorLight
+                                  : Theme.of(context).primaryColorDark)),
+                      backgroundColor: model.isExpanded
+                          ? Theme.of(context).hintColor
+                          : Theme.of(context).primaryColor,
+                      children: <Widget>[
+                        Divider(
+                            thickness: 1,
+                            color: Theme.of(context).primaryColorLight,
+                            indent: Config.xMargin(context, 2.0),
+                            endIndent: Config.xMargin(context, 2.0)),
+                        Padding(
+                          padding: EdgeInsets.all(3),
+                          child: Row(
+                            children: <Widget>[
+                              FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "View",
+                                  style: TextStyle(
+                                      fontSize: Config.textSize(context, 5),
+                                      color:
+                                          Theme.of(context).primaryColorLight),
+                                ),
+                              ),
+                              FlatButton.icon(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.cancel,
+                                  color: Theme.of(context).primaryColorLight,
+                                ),
+                                label: Text(
+                                  "Skip",
+                                  style: TextStyle(
+                                      fontSize: Config.textSize(context, 5),
+                                      color:
+                                          Theme.of(context).primaryColorLight),
+                                ),
+                              ),
+                              FlatButton.icon(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.check,
+                                  color: Theme.of(context).primaryColorLight,
+                                ),
+                                label: Text(
+                                  "Done",
+                                  style: TextStyle(
+                                      fontSize: Config.textSize(context, 5),
+                                      color:
+                                          Theme.of(context).primaryColorLight),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                      onExpansionChanged: (changed) {
+                        model.expandTile(changed);
+                      }),
                 ),
               ),
             ]),
