@@ -1,4 +1,6 @@
+import 'package:MedBuzz/ui/navigation/app_navigation/app_transition.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -111,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                     title: Text('App Notification'),
                     trailing: Switch(
-                        activeColor: Colors.blueAccent[700],
+                        activeColor: ThemeData().primaryColor,
                         activeTrackColor: Colors.blueAccent,
                         onChanged: (value) {
                           setState(() {
@@ -139,7 +141,9 @@ class _ProfilePageState extends State<ProfilePage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 90.0, vertical: 10),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigation().pushToAndReplace(context, LoginPage());
+                },
                 child: Container(
                   height: Config.yMargin(context, 12),
                   width: Config.xMargin(context, 30),
