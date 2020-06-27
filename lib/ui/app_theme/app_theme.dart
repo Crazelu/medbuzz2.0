@@ -8,6 +8,7 @@ ThemeData appThemeLight = ThemeData(
   backgroundColor: Color(0xffFAFAFA),
   buttonColor: Color(0xffF2994A),
   hintColor: Color(0xff777777),
+  highlightColor: Color(0xff2DBFC3),
   textTheme: TextTheme(
     headline1: TextStyle().copyWith(fontFamily: 'Segoe'),
     headline2: TextStyle().copyWith(fontFamily: 'Segoe'),

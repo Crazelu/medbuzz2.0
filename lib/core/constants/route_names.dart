@@ -10,9 +10,10 @@ class RouteNames {
   static const String onboarding = 'onboarding';
   static const String signup = 'signup';
   static const String fitnessSchedulesScreen = 'fitnessSchedulesScreen';
+  static const String allRemindersScreen = 'allRemindersScreen';
   static const String scheduleAppointmentScreen = 'scheduleAppointmentScreen';
   static const String scheduledAppointmentsPage = 'scheduledAppointmentsPage';
-  static const String waterScheduleScreen = 'schedule-water-reminder';
+  static const String scheduleWaterReminderScreen = 'schedule-water-reminder';
   static const String waterScheduleView = 'waterScheduleView';
   static const String confirmOrSnoozeReminderScreen =
       'confirmOrSnoozeReminderScreen';
