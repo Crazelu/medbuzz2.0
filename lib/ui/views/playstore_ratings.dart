@@ -1,4 +1,3 @@
-import 'package:MedBuzz/ui/navigation/app_navigation/app_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 

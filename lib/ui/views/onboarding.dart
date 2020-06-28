@@ -33,7 +33,7 @@ class _OnboardState extends State<Onboard> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: appThemeLight.backgroundColor,
+        backgroundColor: appThemeLight.primaryColorLight,
         actions: <Widget>[
           Container(
             padding: const EdgeInsetsDirectional.only(top: 30),
@@ -43,7 +43,10 @@ class _OnboardState extends State<Onboard> {
               }, //navigate to the sign up page
               child: Text(
                 "Skip",
-                style: TextStyle(color: appThemeLight.primaryColorDark),
+                style: TextStyle(
+                  color: appThemeLight.primaryColorDark,
+                  fontSize: Config.textSize(context, 4.5),
+                ),
               ),
               color: Colors.transparent,
             ),
@@ -114,7 +117,7 @@ class _OnboardState extends State<Onboard> {
                   //     crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      height: Config.yMargin(context, 6),
+                      height: Config.yMargin(context, 6.2),
                       width: Config.xMargin(context, 27),
                       decoration: BoxDecoration(
                           color: appThemeLight.primaryColor,
@@ -126,8 +129,10 @@ class _OnboardState extends State<Onboard> {
                         },
                         child: Text(
                           "Sign Up",
-                          style:
-                              TextStyle(color: appThemeLight.primaryColorLight),
+                          style: TextStyle(
+                              fontSize: Config.textSize(context, 3.6),
+                              fontWeight: FontWeight.bold,
+                              color: appThemeLight.primaryColorLight),
                         ),
                       ),
                     ),
@@ -135,7 +140,7 @@ class _OnboardState extends State<Onboard> {
                       width: Config.xMargin(context, 17),
                     ),
                     Container(
-                      height: Config.yMargin(context, 6),
+                      height: Config.yMargin(context, 6.2),
                       width: Config.xMargin(context, 27),
                       decoration: BoxDecoration(
                           color: appThemeLight.primaryColorLight,
@@ -148,6 +153,8 @@ class _OnboardState extends State<Onboard> {
                         child: Text(
                           "Login",
                           style: TextStyle(
+                            fontSize: Config.textSize(context, 3.6),
+                            fontWeight: FontWeight.bold,
                             color: appThemeLight.primaryColor,
                           ),
                         ),
@@ -209,7 +216,7 @@ class FirstScreen extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: 'Segoe-Bold',
                           color: Theme.of(context).primaryColorDark,
-                          fontSize: Config.textSize(context, 3.7),
+                          fontSize: Config.textSize(context, 4.0),
                           fontWeight: FontWeight.w500)),
                 ),
               ),
