@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 
-class ResetPasswordScreen2 extends StatelessWidget {
+class ForgotPasswordMail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(Config.xMargin(context, 1));
