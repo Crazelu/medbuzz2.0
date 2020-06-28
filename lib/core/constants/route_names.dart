@@ -18,4 +18,5 @@ class RouteNames {
   static const String waterScheduleView = 'waterScheduleView';
   static const String confirmOrSnoozeReminderScreen =
       'confirmOrSnoozeReminderScreen';
+  static const String resetPasswordScreen2 = 'resetPasswordScreen2';
 }

@@ -6,6 +6,7 @@ import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/forgot_password.dart';
 import 'package:MedBuzz/ui/views/onboarding.dart';
+import 'package:MedBuzz/ui/views/password_recovery/reset_password_screen_2.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
           RouteNames.waterScheduleView: (context) => WaterScheduleViewScreen(),
           RouteNames.confirmOrSnoozeReminderScreen: (context) =>
               ConfirmOrSnoozeScreen(),
+          RouteNames.resetPasswordScreen2: (context) => ResetPasswordScreen2()
         },
       ),
     );
