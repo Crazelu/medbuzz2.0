@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-class WaterScheduleScreen extends StatelessWidget {
+class ScheduleWaterReminderScreen extends StatelessWidget {
   //values of water measures - stored as int in case of any need to calculate
   static const routeName = 'schedule-water-reminder';
   final ItemScrollController _scrollController = ItemScrollController();
-  WaterScheduleScreen();
+  ScheduleWaterReminderScreen();
 
   @override
   Widget build(BuildContext context) {
     var waterReminder =
-        Provider.of<WaterReminderViewModel>(context, listen: true);
+        Provider.of<ScheduleWaterReminderViewModel>(context, listen: true);
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
