@@ -36,7 +36,7 @@ class _WaterCardState extends State<WaterCard> {
                       horizontal: Config.xMargin(context, 3),
                       vertical: Config.yMargin(context, 1)),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColorLight,
+                    color: isSelected ?Theme.of(context).primaryColor : Theme.of(context).primaryColorLight,
                     borderRadius: BorderRadius.circular(
                         Config.xMargin(context, 5)),
                     boxShadow: [
@@ -64,7 +64,7 @@ class _WaterCardState extends State<WaterCard> {
                               Text(
                                 'Drink 250ml of water',
                                 style: TextStyle(
-                                    color: Theme.of(context)
+                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
                                         .primaryColorDark,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -72,7 +72,7 @@ class _WaterCardState extends State<WaterCard> {
                               Text(
                                 'Upcoming',
                                 style: TextStyle(
-                                    color: Theme.of(context)
+                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
                                         .primaryColorDark),
                               ),
                             ],
@@ -103,7 +103,7 @@ class _WaterCardState extends State<WaterCard> {
                                 'View',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Theme.of(context)
+                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
                                         .primaryColorDark),
                               ),
                             ),
@@ -112,7 +112,7 @@ class _WaterCardState extends State<WaterCard> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.close,
-                                    color: Theme.of(context)
+                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
                                         .primaryColorDark,
                                     size:
                                     Config.textSize(context, 3),
@@ -125,7 +125,7 @@ class _WaterCardState extends State<WaterCard> {
                                     'Skip',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
+                                        color: isSelected ? Theme.of(context).primaryColorLight : Theme.of(context)
                                             .primaryColorDark),
                                   )
                                 ],
@@ -138,7 +138,7 @@ class _WaterCardState extends State<WaterCard> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.done,
-                                    color: Theme.of(context)
+                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
                                         .primaryColorDark,
                                     size:
                                     Config.textSize(context, 3),
@@ -151,7 +151,7 @@ class _WaterCardState extends State<WaterCard> {
                                     'Done',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
+                                        color: isSelected ? Theme.of(context).primaryColorLight : Theme.of(context)
                                             .primaryColorDark),
                                   )
                                 ],
