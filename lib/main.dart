@@ -4,7 +4,9 @@ import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
+import 'package:MedBuzz/ui/views/forgot_password.dart';
 import 'package:MedBuzz/ui/views/onboarding.dart';
+import 'package:MedBuzz/ui/views/password_recovery/reset_password_screen_2.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze.dart';
@@ -19,6 +21,7 @@ import 'package:MedBuzz/ui/views/reset_password_screen/final_reset_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'core/constants/route_names.dart';
 import 'ui/views/signup_page/signup_screen.dart';
 import 'ui/views/water_reminders/water_reminders_view.dart';
 
@@ -41,6 +44,7 @@ class MyApp extends StatelessWidget {
           RouteNames.splashScreen: (context) => SplashScreen(),
           RouteNames.home: (context) => HomeScreen(),
           RouteNames.login: (context) => LoginPage(),
+          RouteNames.forgotPassword: (context) => ForgotPassword(),
           RouteNames.profile: (context) => ProfilePage(),
           RouteNames.onboarding: (context) => Onboard(),
           RouteNames.homePage: (context) => HomePage(),
@@ -58,6 +62,7 @@ class MyApp extends StatelessWidget {
           RouteNames.confirmOrSnoozeReminderScreen: (context) =>
               ConfirmOrSnoozeScreen(),
           RouteNames.finalResetScreen: (context) => FinalResetScreen(),
+          RouteNames.resetPasswordScreen2: (context) => ResetPasswordScreen2()
         },
       ),
     );
