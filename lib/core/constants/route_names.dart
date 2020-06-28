@@ -10,6 +10,7 @@ class RouteNames {
   static const String profile = 'profile';
   static const String onboarding = 'onboarding';
   static const String signup = 'signup';
+  static const String drugDescription = 'drugDescription';
   static const String fitnessSchedulesScreen = 'fitnessSchedulesScreen';
   static const String allRemindersScreen = 'allRemindersScreen';
   static const String scheduleAppointmentScreen = 'scheduleAppointmentScreen';

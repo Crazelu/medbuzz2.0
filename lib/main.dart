@@ -3,6 +3,7 @@ import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
+import 'package:MedBuzz/ui/views/drug_description/drug_description.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/forgot_password.dart';
 import 'package:MedBuzz/ui/views/onboarding.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: RouteNames.splashScreen,
+        initialRoute: RouteNames.allRemindersScreen,
         routes: {
           RouteNames.splashScreen: (context) => SplashScreen(),
           RouteNames.home: (context) => HomeScreen(),
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           RouteNames.homePage: (context) => HomePage(),
           RouteNames.signup: (context) => Signup(),
           RouteNames.allRemindersScreen: (context) => AllRemindersScreen(),
+          RouteNames.drugDescription: (context) => DrugDescription(),
           RouteNames.fitnessSchedulesScreen: (context) =>
               FitnessSchedulesScreen(),
           RouteNames.scheduleAppointmentScreen: (context) =>
