@@ -32,6 +32,7 @@ class RouteNames {
   static const String confirmOrSnoozeReminderScreen =
       'confirmOrSnoozeReminderScreen';
 
+//Brought routes here to  clean things up in the main.dart file
   static Map<String, Widget Function(BuildContext)> routes = {
     RouteNames.splashScreen: (context) => SplashScreen(),
     RouteNames.home: (context) => HomeScreen(),
