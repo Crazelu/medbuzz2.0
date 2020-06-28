@@ -36,6 +36,7 @@ dependencies:
   date_util:
   google_fonts: ^1.1.0
   rate_my_app: ^0.6.1+6
+  flutter_local_notifications: ^1.4.4+1
 
 dev_dependencies:
     flutter_test:
@@ -55,13 +56,13 @@ flutter:
   assets:
      - images/.
   fonts:
-     - family: Segoe
-       fonts:
+    - family: Segoe
+      fonts:
+          - asset: fonts/Segoe-Bold.ttf
+    - family: Segoe
+      fonts:
           - asset: fonts/Segoe.ttf
 
-     - family: Segoe UI
-       fonts:
-          - asset: fonts/Segoe-Bold.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

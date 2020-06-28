@@ -22,7 +22,7 @@ class WaterScheduleViewScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => WaterScheduleScreen()));
+                      builder: (context) => ScheduleWaterReminderScreen()));
             },
             backgroundColor: Theme.of(context).primaryColor,
             child: Icon(
