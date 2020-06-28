@@ -1,3 +1,18 @@
+import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
+import 'package:MedBuzz/ui/views/home_page.dart';
+import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
+import 'package:MedBuzz/ui/views/onboarding.dart';
+import 'package:MedBuzz/ui/views/profile_page.dart';
+import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders.dart';
+import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
+import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
+import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze.dart';
+import 'package:MedBuzz/ui/views/splash_screen.dart';
+import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_screen.dart';
+import 'package:MedBuzz/ui/views/water_reminders/water_reminders_view.dart';
+import 'package:flutter/material.dart';
+
 class RouteNames {
   ///Custom class that holds all the named routes as constants for easy reference
 
@@ -16,4 +31,23 @@ class RouteNames {
   static const String waterScheduleView = 'waterScheduleView';
   static const String confirmOrSnoozeReminderScreen =
       'confirmOrSnoozeReminderScreen';
+
+  static Map<String, Widget Function(BuildContext)> routes = {
+    RouteNames.splashScreen: (context) => SplashScreen(),
+    RouteNames.home: (context) => HomeScreen(),
+    RouteNames.login: (context) => LoginPage(),
+    RouteNames.profile: (context) => ProfilePage(),
+    RouteNames.onboarding: (context) => Onboard(),
+    RouteNames.homePage: (context) => HomePage(),
+    RouteNames.signup: (context) => Signup(),
+    RouteNames.fitnessSchedulesScreen: (context) => FitnessSchedulesScreen(),
+    RouteNames.scheduleAppointmentScreen: (context) =>
+        ScheduleAppointmentScreen(),
+    RouteNames.scheduledAppointmentsPage: (context) =>
+        ScheduledAppointmentsPage(),
+    RouteNames.waterScheduleScreen: (context) => WaterScheduleScreen(),
+    RouteNames.waterScheduleView: (context) => WaterScheduleViewScreen(),
+    RouteNames.confirmOrSnoozeReminderScreen: (context) =>
+        ConfirmOrSnoozeScreen(),
+  };
 }
