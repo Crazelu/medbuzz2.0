@@ -1,10 +1,14 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
+import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
+import 'package:MedBuzz/ui/views/forgot_password.dart';
 import 'package:MedBuzz/ui/views/onboarding.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
+import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze.dart';
 import 'package:MedBuzz/ui/views/splash_screen.dart';
 import 'package:MedBuzz/ui/views/home_page.dart';
 import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
@@ -15,6 +19,7 @@ import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'core/constants/route_names.dart';
 import 'ui/views/signup_page/signup_screen.dart';
 import 'ui/views/water_reminders/water_reminders_view.dart';
 
@@ -32,20 +37,28 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: '/',
+        initialRoute: RouteNames.splashScreen,
         routes: {
-          '/': (context) => SplashScreen(),
-          'home': (context) => HomeScreen(),
-          'login': (context) => LoginPage(),
-          'profile': (context) => ProfilePage(),
-          'onboarding': (context) => Onboard(),
-          'homepage': (context) => HomePage(),
-          'signup': (context) => Signup(),
-          'FitnessSchedulesScreen': (context) => FitnessSchedulesScreen(),
-          'ScheduleAppointmentScreen': (context) => ScheduleAppointmentScreen(),
-          'ScheduledAppointmentsPage': (context) => ScheduledAppointmentsPage(),
-          WaterScheduleScreen.routeName: (context) => WaterScheduleScreen(),
-          'waterScheduleView': (context) => WaterScheduleViewScreen(),
+          RouteNames.splashScreen: (context) => SplashScreen(),
+          RouteNames.home: (context) => HomeScreen(),
+          RouteNames.login: (context) => LoginPage(),
+          RouteNames.forgotPassword: (context) => ForgotPassword(),
+          RouteNames.profile: (context) => ProfilePage(),
+          RouteNames.onboarding: (context) => Onboard(),
+          RouteNames.homePage: (context) => HomePage(),
+          RouteNames.signup: (context) => Signup(),
+          RouteNames.allRemindersScreen: (context) => AllRemindersScreen(),
+          RouteNames.fitnessSchedulesScreen: (context) =>
+              FitnessSchedulesScreen(),
+          RouteNames.scheduleAppointmentScreen: (context) =>
+              ScheduleAppointmentScreen(),
+          RouteNames.scheduledAppointmentsPage: (context) =>
+              ScheduledAppointmentsPage(),
+          RouteNames.scheduleWaterReminderScreen: (context) =>
+              ScheduleWaterReminderScreen(),
+          RouteNames.waterScheduleView: (context) => WaterScheduleViewScreen(),
+          RouteNames.confirmOrSnoozeReminderScreen: (context) =>
+              ConfirmOrSnoozeScreen(),
         },
       ),
     );
