@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 
-class FinalResetScreen extends StatelessWidget {
+class ForgotPasswordReset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
