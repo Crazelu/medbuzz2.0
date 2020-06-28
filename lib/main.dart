@@ -14,6 +14,7 @@ import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
 import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders.dart';
+import 'package:MedBuzz/ui/views/reset_password_screen/final_reset_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: RouteNames.allRemindersScreen,
+        initialRoute: RouteNames.finalResetScreen,
         routes: {
           RouteNames.splashScreen: (context) => SplashScreen(),
           RouteNames.home: (context) => HomeScreen(),
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
           RouteNames.waterScheduleView: (context) => WaterScheduleViewScreen(),
           RouteNames.confirmOrSnoozeReminderScreen: (context) =>
               ConfirmOrSnoozeScreen(),
+          RouteNames.finalResetScreen: (context) => FinalResetScreen(),
         },
       ),
     );
