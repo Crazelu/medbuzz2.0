@@ -24,7 +24,7 @@ class Signup extends StatelessWidget {
               //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 SizedBox(
-                  height: Config.yMargin(context, 16), //130px
+                  height: Config.yMargin(context, 12), //130px
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: Config.xMargin(context, 5.3)),
