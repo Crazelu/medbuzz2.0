@@ -38,6 +38,7 @@ dependencies:
   rate_my_app: ^0.6.1+6
   hive: ^1.4.1+1
   path_provider: ^1.6.5
+  flutter_local_notifications: ^1.4.4+1
 
 dev_dependencies:
     flutter_test:

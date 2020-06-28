@@ -1,5 +1,6 @@
+import 'dart:ui';
+
 import 'package:MedBuzz/core/constants/route_names.dart';
-import 'package:MedBuzz/ui/views/home_page.dart';
 import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,67 +18,50 @@ class _LoginPageState extends State<LoginPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.fromLTRB(Config.xMargin(context, 4.5),
-                          Config.yMargin(context, 25), 0, 0),
-                      child: Text(
-                        'Welcome',
-                        style: TextStyle(
-                            fontSize: Config.textSize(context, 7.8),
-                            fontWeight: FontWeight.w500),
-                      ),
+                padding: EdgeInsets.fromLTRB(Config.xMargin(context, 7),
+                    Config.yMargin(context, 25), 0, 0),
+                child: Text(
+                  'Welcome',
+                  style: TextStyle(
+                      fontSize: Config.textSize(context, 7.8),
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              SizedBox(
+                height: Config.yMargin(context, 0.2),
+              ),
+              Container(
+                padding:
+                    EdgeInsets.fromLTRB(Config.xMargin(context, 7), 0, 0, 0),
+                child: Text(
+                  'Back',
+                  style: TextStyle(
+                      fontSize: Config.textSize(context, 7.8),
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              SizedBox(
+                height: Config.yMargin(context, 1.2),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, Config.yMargin(context, 2),
+                    Config.xMargin(context, 40), 0),
+                child: Container(
+                  height: height * .006,
+                  width: width,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.horizontal(
+                      right: Radius.circular(Config.xMargin(context, 5)),
                     ),
-                    Container(
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.fromLTRB(
-                                Config.xMargin(context, 4.5),
-                                Config.yMargin(context, 29.4),
-                                0,
-                                0),
-                            child: Text(
-                              'Back',
-                              style: TextStyle(
-                                  fontSize: Config.textSize(context, 7.8),
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                              padding: EdgeInsets.fromLTRB(
-                                  0,
-                                  Config.yMargin(context, 35.6),
-                                  Config.xMargin(context, 40),
-                                  0),
-                              child: Container(
-                                height: height * .006,
-                                width: width,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColor,
-                                  borderRadius: BorderRadius.horizontal(
-                                    right: Radius.circular(
-                                        Config.xMargin(context, 5)),
-                                  ),
-                                ),
-                              ))
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -136,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: true,
                     ),
                     SizedBox(
-                      height: Config.yMargin(context, 2),
+                      height: Config.yMargin(context, 1),
                     ),
                     Container(
                       alignment: Alignment(1.0, 0.0),
@@ -144,11 +128,16 @@ class _LoginPageState extends State<LoginPage> {
                         top: Config.yMargin(context, 2.3),
                       ),
                       child: InkWell(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(
+                              context, RouteNames.forgotPasswordSubmit);
+                        },
                         child: Text(
                           'Forgot Password?',
                           style: TextStyle(
+                            fontSize: Config.textSize(context, 4),
                             color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -158,7 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, RouteNames.homePage);
+                        Navigator.pushReplacementNamed(
+                            context, RouteNames.homePage);
                       },
                       child: Container(
                         height: height * .065,
@@ -187,9 +177,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Center(
                             child: Text(
-                              'No account?',
+                              'Don\'t have an account?',
                               style: TextStyle(
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                                 fontSize: Config.textSize(context, 3.9),
                               ),
                             ),
@@ -206,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                               ' Sign Up',
                               style: TextStyle(
                                 fontSize: Config.textSize(context, 3.9),
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                                 color: Theme.of(context).primaryColor,
                               ),
                             ),
