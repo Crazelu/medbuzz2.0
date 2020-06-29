@@ -9,6 +9,7 @@ import 'package:MedBuzz/ui/views/onboarding.dart';
 import 'package:MedBuzz/ui/views/password_recovery/forgot_password_mail.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
+import 'package:MedBuzz/ui/views/single_diet_screen/single_diet_screen.dart';
 import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze.dart';
 import 'package:MedBuzz/ui/views/splash_screen.dart';
 import 'package:MedBuzz/ui/views/home_page.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: RouteNames.splashScreen,
+        initialRoute: RouteNames.singleDietScreen,
         routes: {
           RouteNames.splashScreen: (context) => SplashScreen(),
           RouteNames.home: (context) => HomeScreen(),
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
               ConfirmOrSnoozeScreen(),
           RouteNames.forgotPasswordReset: (context) => ForgotPasswordReset(),
           RouteNames.forgotPasswordMail: (context) => ForgotPasswordMail(),
+          RouteNames.singleDietScreen: (context) => SingleDiet(),
         },
       ),
     );
