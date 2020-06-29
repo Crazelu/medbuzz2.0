@@ -1,6 +1,7 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
+<<<<<<< HEAD
 import 'package:MedBuzz/ui/views/Home.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
@@ -19,12 +20,10 @@ import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders.dart';
 import 'package:MedBuzz/ui/views/password_recovery/forgot_password_reset.dart';
 
+=======
+>>>>>>> c264dd08ba2d29b9f9f4e758b65d5e7db613119b
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'core/constants/route_names.dart';
-import 'ui/views/signup_page/signup_screen.dart';
-import 'ui/views/water_reminders/water_reminders_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,6 +40,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
+<<<<<<< HEAD
         initialRoute: RouteNames.singleDietScreen,
         routes: {
           RouteNames.splashScreen: (context) => SplashScreen(),
@@ -68,6 +68,12 @@ class MyApp extends StatelessWidget {
           RouteNames.singleDietScreen: (context) => SingleDiet(),
         },
 
+=======
+        initialRoute: RouteNames.splashScreen,
+        //Crazelu moved the routes to RouteNames class to clean things up here
+        //head over there if you need to add your named routes
+        routes: RouteNames.routes,
+>>>>>>> c264dd08ba2d29b9f9f4e758b65d5e7db613119b
       ),
     );
   }
