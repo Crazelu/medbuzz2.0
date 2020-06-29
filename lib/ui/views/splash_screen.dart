@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
+//import 'package:MedBuzz/ui/views/Home.dart';
 import 'package:MedBuzz/ui/views/onboarding.dart';
 import 'package:flutter/material.dart';
 
@@ -27,17 +27,13 @@ class StartState extends State<SplashScreen> {
 
   route() {
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ForwardAnimation(
-            child: Onboard(),
-          ),
-        ));
+        context, MaterialPageRoute(builder: (context) => Onboard()));
+
   }
 
   initScreen(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorLight,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

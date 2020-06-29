@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:MedBuzz/core/constants/route_names.dart';
-import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
 import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: InkWell(
                         onTap: () {
                           Navigator.pushReplacementNamed(
-                              context, RouteNames.forgotPasswordSubmit);
+                              context, RouteNames.forgotPassword);
                         },
                         child: Text(
                           'Forgot Password?',
@@ -187,12 +186,10 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => BackwardAnimation(
-                                      child: Signup(),
-                                    ),
+                                    builder: (context) => Signup(),
                                   ));
                             },
                             child: Text(
