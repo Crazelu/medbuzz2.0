@@ -402,45 +402,6 @@ class _HomePageState extends State<HomePage> {
                               'images/injection.png',
                             ),
                           ),
-<<<<<<< HEAD
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                FlatButton(
-                                    onPressed: () {},
-                                    child: Text('View',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Segoe',
-                                      ),
-                                    )
-                                ),
-                                FlatButton.icon(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.close),
-                                    label: Text('Skip',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Segoe',
-                                      ),
-                                    )
-                                ),
-                                FlatButton.icon(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.check),
-                                    label: Text('Done',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Segoe',
-                                      ),)
-                                ),
-                              ],
-                            ),
-=======
                           Column(
                             children: [
                               Text(
@@ -462,7 +423,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ],
->>>>>>> upstream/dev
                           ),
                           Padding(
                             padding:
