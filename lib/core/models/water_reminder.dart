@@ -1,6 +1,7 @@
 class WaterReminder {
+  int id;
   int ml;
   DateTime dateTime;
 
-  WaterReminder({this.ml, this.dateTime});
+  WaterReminder({this.id, this.ml, this.dateTime});
 }
