@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
 import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -186,10 +187,12 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Signup(),
+                                    builder: (context) => BackwardAnimation(
+                                      child: Signup(),
+                                    ),
                                   ));
                             },
                             child: Text(
