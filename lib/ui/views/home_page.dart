@@ -1,3 +1,8 @@
+import 'package:MedBuzz/ui/navigation/app_navigation/app_transition.dart';
+import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
+import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
+import 'package:MedBuzz/ui/views/fitness_reminders/add_fitness_screen.dart';
+import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -708,10 +713,21 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Appointment',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                    fontSize: Config.textSize(context, 3.9),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForwardAnimation(
+                        child: ScheduleAppointmentScreen(),
+                      ),
+                    ));
+              },
             ),
             SpeedDialChild(
               backgroundColor: Colors.white,
@@ -721,10 +737,21 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Medication',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                    fontSize: Config.textSize(context, 3.9),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForwardAnimation(
+                        child: AddMedicationScreen(),
+                      ),
+                    ));
+              },
             ),
             SpeedDialChild(
               backgroundColor: Colors.white,
@@ -734,10 +761,21 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Fitness',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                    fontSize: Config.textSize(context, 3.9),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForwardAnimation(
+                        child: FitnessDescriptionScreen(),
+                      ),
+                    ));
+              },
             ),
             SpeedDialChild(
               backgroundColor: Colors.white,
@@ -747,7 +785,10 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Water',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                    fontSize: Config.textSize(context, 3.9),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               onTap: () {},
@@ -760,7 +801,10 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Diet',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                    fontSize: Config.textSize(context, 3.9),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               onTap: () {},
