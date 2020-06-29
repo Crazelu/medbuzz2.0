@@ -425,41 +425,43 @@ class _HomePageState extends State<HomePage> {
                               indent: 5.0,
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              FlatButton(
-                                  onPressed: () {},
-                                  child: Text('View',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Segoe',
-                                    ),
-                                  )
-                              ),
-                              FlatButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.close),
-                                  label: Text('Skip',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Segoe',
-                                    ),
-                                  )
-                              ),
-                              FlatButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.check),
-                                  label: Text('Done',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Segoe',
-                                    ),)
-                              ),
-                            ],
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                FlatButton(
+                                    onPressed: () {},
+                                    child: Text('View',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Segoe',
+                                      ),
+                                    )
+                                ),
+                                FlatButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.close),
+                                    label: Text('Skip',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Segoe',
+                                      ),
+                                    )
+                                ),
+                                FlatButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.check),
+                                    label: Text('Done',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Segoe',
+                                      ),)
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
