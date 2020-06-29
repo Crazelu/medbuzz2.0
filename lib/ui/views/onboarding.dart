@@ -1,6 +1,8 @@
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
+import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:MedBuzz/ui/widget/dot_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -125,7 +127,13 @@ class _OnboardState extends State<Onboard> {
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, 'signup');
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ForwardAnimation(
+                                  child: Signup(),
+                                ),
+                              ));
                         },
                         child: Text(
                           "Sign Up",
@@ -148,7 +156,13 @@ class _OnboardState extends State<Onboard> {
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, 'login');
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ForwardAnimation(
+                                  child: LoginPage(),
+                                ),
+                              ));
                         },
                         child: Text(
                           "Login",

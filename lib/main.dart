@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: RouteNames.signup,
+        initialRoute: RouteNames.splashScreen,
         routes: {
           RouteNames.splashScreen: (context) => SplashScreen(),
           RouteNames.home: (context) => HomeScreen(),
