@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../size_config/config.dart';
-import '../../size_config/config.dart';
 
 class ScheduleAppointmentScreen extends StatefulWidget {
+  ScheduleAppointmentScreen({this.payload});
+
+  final String payload;
   @override
   _ScheduleAppointmentScreenState createState() =>
       _ScheduleAppointmentScreenState();
@@ -50,14 +52,19 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
 //    double height = MediaQuery.of(context).size.height;
 
     print(Config.xMargin(context, 1));
+    print(Config.yMargin(context, 1));
+    print(Config.textSize(context, 1));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
         leading: IconButton(
-            color: Theme.of(context).primaryColorDark,
-            icon: Icon(Icons.keyboard_backspace),
-            // This function navigates to the previous screen
-            onPressed: () {}),
+          color: Theme.of(context).primaryColorDark,
+          icon: Icon(Icons.keyboard_backspace),
+          // This function navigates to the previous screen
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text(
           'Add your appointments',
           style: TextStyle(
@@ -279,8 +286,11 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                   color: Theme.of(context).primaryColor,
                   child: Text(
                     'Save',
-                    style:
-                        TextStyle(color: Theme.of(context).primaryColorLight),
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColorLight,
+                      fontFamily: 'Segoe UI',
+                      fontSize: Config.textSize(context, 4.13),
+                    ),
                   ),
                   // When this button is pressed, it saves the appointment to the DB
                   onPressed: () {},
@@ -305,8 +315,8 @@ class Timer extends StatelessWidget {
             Text(
               '09',
               style: TextStyle(
-                fontSize: Config.textSize(context, 6.07),
-              ),
+                  fontSize: Config.textSize(context, 6.07),
+                  fontFamily: 'Segoe UI'),
             ),
             Container(
               height: Config.yMargin(context, 0.3),
@@ -346,10 +356,12 @@ class Timer extends StatelessWidget {
               width: Config.xMargin(context, 9.24),
               child: Text('h'),
               decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(0.0),
-                      topRight: Radius.circular(0.0))),
+                color: Theme.of(context).primaryColor,
+//                borderRadius: BorderRadius.only(
+//                  topLeft: Radius.circular(0.0),
+//                  topRight: Radius.circular(0.0),
+//                ),
+              ),
             ),
           ],
         ),
@@ -379,10 +391,12 @@ class Timer extends StatelessWidget {
               width: Config.xMargin(context, 9.24),
               child: Text('h'),
               decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(0.0),
-                      topRight: Radius.circular(0.0))),
+                color: Theme.of(context).primaryColor,
+//                borderRadius: BorderRadius.only(
+//                  topLeft: Radius.circular(0.0),
+//                  topRight: Radius.circular(0.0),
+//                ),
+              ),
             ),
           ],
         ),
@@ -424,10 +438,12 @@ class DateAndDay extends StatelessWidget {
               width: Config.xMargin(context, 9.24),
               child: Text('h'),
               decoration: BoxDecoration(
-                  color: colour,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(0.0),
-                      topRight: Radius.circular(0.0))),
+                color: colour,
+//                borderRadius: BorderRadius.only(
+//                  topLeft: Radius.circular(0.0),
+//                  topRight: Radius.circular(0.0),
+//                ),
+              ),
             ),
           ],
         ),

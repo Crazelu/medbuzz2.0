@@ -24,19 +24,18 @@ class Signup extends StatelessWidget {
               //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 SizedBox(
-                  height: Config.yMargin(context, 16), //130px
+                  height: Config.yMargin(context, 12), //130px
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: Config.xMargin(context, 5.3)),
                   child: Text('Create An \nAccount',
                       style: TextStyle(
-                        fontFamily: 'Segoe-Bold',
                         fontSize: Config.yMargin(context, 4.12),
                       )),
                 ),
 
                 Divider(
-                  height: Config.yMargin(context, 8.25),  //60
+                  height: Config.yMargin(context, 8.25), //60
                   color: Theme.of(context).primaryColor,
                   thickness: Config.yMargin(context, 0.64),
                   endIndent: screenSize.width * 0.25,
@@ -48,9 +47,9 @@ class Signup extends StatelessWidget {
                   child: Text(
                     'Name',
                     style: TextStyle(
-                        fontFamily: 'Segoe-Bold',
-                        fontWeight: FontWeight.w400,
-                        fontSize: Config.yMargin(context, 2.31)),
+                      fontWeight: FontWeight.w400,
+                      fontSize: Config.textSize(context, 4.9),
+                    ),
                   ),
                 ),
                 Padding(
@@ -58,12 +57,18 @@ class Signup extends StatelessWidget {
                       left: Config.xMargin(context, 5.3),
                       right: Config.xMargin(context, 6)),
                   child: TextField(
-                    decoration: InputDecoration(hintText: 'Jay'),
+                    decoration: InputDecoration(
+                      hintText: 'Jay',
+                      hintStyle: TextStyle(
+                        fontSize: Config.textSize(context, 4.4),
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: Config.yMargin(context, 3.5),
-                ),  
+                ),
                 Padding(
                   padding: EdgeInsets.only(
                       left: Config.xMargin(context, 5.3),
@@ -71,9 +76,9 @@ class Signup extends StatelessWidget {
                   child: Text(
                     'Email',
                     style: TextStyle(
-                        fontFamily: 'Segoe-Bold',
-                        fontWeight: FontWeight.w400,
-                        fontSize: Config.yMargin(context, 2.31)),
+                      fontWeight: FontWeight.w400,
+                      fontSize: Config.textSize(context, 4.9),
+                    ),
                   ),
                 ),
                 Padding(
@@ -81,12 +86,18 @@ class Signup extends StatelessWidget {
                       left: Config.xMargin(context, 5.3),
                       right: Config.xMargin(context, 6)),
                   child: TextField(
-                    decoration: InputDecoration(hintText: 'abc@example.com'),
+                    decoration: InputDecoration(
+                      hintText: 'abc@example.com',
+                      hintStyle: TextStyle(
+                        fontSize: Config.textSize(context, 4.4),
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: Config.yMargin(context, 3.5),
-                ),  
+                ),
                 Padding(
                   padding: EdgeInsets.only(
                       left: Config.xMargin(context, 5.3),
@@ -94,9 +105,8 @@ class Signup extends StatelessWidget {
                   child: Text(
                     'Password',
                     style: TextStyle(
-                      fontFamily: 'Segoe-Bold',
                       fontWeight: FontWeight.w400,
-                      fontSize: 18.0,
+                      fontSize: Config.textSize(context, 4.9),
                     ),
                   ),
                 ),
@@ -106,7 +116,13 @@ class Signup extends StatelessWidget {
                       right: Config.xMargin(context, 6)),
                   child: TextField(
                     obscureText: true,
-                    decoration: InputDecoration(hintText: '••••••••'),
+                    decoration: InputDecoration(
+                      hintText: '••••••••',
+                      hintStyle: TextStyle(
+                        fontSize: Config.textSize(context, 4.4),
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
                   ),
                 ),
 
@@ -116,7 +132,8 @@ class Signup extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(Config.xMargin(context, 3.55)),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(Config.yMargin(context, 1.28))),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(Config.yMargin(context, 1.28))),
                     color: Theme.of(context).primaryColor,
                   ),
                   alignment: Alignment.center,
@@ -126,10 +143,9 @@ class Signup extends StatelessWidget {
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
-                      fontFamily: 'Segoe-Bold',
-                      fontSize: Config.yMargin(context, 2.06),
+                      color: Theme.of(context).primaryColorLight,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      fontSize: Config.textSize(context, 3.9),
                     ),
                   ),
                 ),
@@ -145,19 +161,17 @@ class Signup extends StatelessWidget {
                       Text(
                         'Have an account? ',
                         style: TextStyle(
-                          fontFamily: 'Segoe-Bold',
                           fontWeight: FontWeight.bold,
-                          fontSize: Config.yMargin(context, 2.06), //16
+                          fontSize: Config.textSize(context, 3.9), //16
                         ),
                       ),
                       GestureDetector(
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            fontFamily: 'Segoe-Bold',
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).primaryColor,
-                            fontSize: Config.yMargin(context, 2.06), //16
+                            fontSize: Config.textSize(context, 3.9), //16
                           ),
                         ),
                         onTap: () {
