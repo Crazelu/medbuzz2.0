@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 ThemeData appThemeLight = ThemeData(
-
     appBarTheme: AppBarTheme(
       textTheme: TextTheme(),
       color: Color(0xfff4f4f4),
@@ -27,4 +26,3 @@ ThemeData appThemeLight = ThemeData(
       caption: TextStyle().copyWith(fontFamily: 'Segoe'),
       button: TextStyle().copyWith(fontFamily: 'Segoe'),
     ));
-
