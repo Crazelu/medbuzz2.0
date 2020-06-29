@@ -9,6 +9,7 @@
 .history
 .svn/
 pubspec.lock
+android/app/key.jks
 
 # IntelliJ related
 *.iml
