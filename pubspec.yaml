@@ -39,11 +39,9 @@ dependencies:
   hive: ^1.4.1+1
   path_provider: ^1.6.5
   flutter_local_notifications: ^1.4.4+1
-<<<<<<< HEAD
   rflutter_alert: ^1.0.3
-=======
   flutter_speed_dial: ^1.2.1
->>>>>>> upstream/dev
+
 
 dev_dependencies:
   flutter_test:

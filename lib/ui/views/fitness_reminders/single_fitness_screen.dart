@@ -32,7 +32,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
             children: [
               Container(
               width: Config.xMargin(context, 100),
-                height: Config.yMargin(context, 24),
+                height: Config.yMargin(context, 20),
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('images/run.png'),
@@ -72,10 +72,9 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                               context: context,
                               builder: (BuildContext context) {
                                 return Dialog(
-
                                   child: Container(
-                                    height: Config.yMargin(context, 23),
-                                    width: 120,
+                                    height: Config.yMargin(context, 15),
+                                    width: Config.xMargin(context, 150.0),
                                     //width: Config.xMargin(context, 50),
                                     child: Padding(
                                       padding:  EdgeInsets.all(8.0),
@@ -84,19 +83,19 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Padding(
-                                            padding:  EdgeInsets.only(left: 5.0, bottom: 17.0),
+                                            padding:  EdgeInsets.only(left: 23.0, bottom: 17.0),
                                             child: Text(
                                               'Are you sure you want to delete this?',
                                               style: TextStyle(
-                                                fontSize: 15.0,
+                                                fontSize: 16.0,
                                               ),
                                             ),
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                                             children: [
                                               Container(
-                                                height: Config.yMargin(context, 8.0),
+                                                height: Config.yMargin(context, 6.0),
                                                 width: Config.xMargin(context, 30.0),
                                                 child: RaisedButton(
                                                   onPressed: () {
@@ -119,7 +118,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                                                 ),
                                               ),
                                               Container(
-                                                height: Config.yMargin(context, 8.0),
+                                                height: Config.yMargin(context, 6.0),
                                                 width: Config.xMargin(context, 30.0),
                                                 child: RaisedButton(
                                                   onPressed: () {
@@ -177,7 +176,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                       ),
                     ),
 
-                    SizedBox(height: Config.yMargin(context, 10.0)),
+                    SizedBox(height: Config.yMargin(context, 7.0)),
 
                     Text(
                       'Frequency',
@@ -216,7 +215,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                       ],
                     ),
 
-                    SizedBox(height: Config.yMargin(context, 10.0)),
+                    SizedBox(height: Config.yMargin(context, 7.0)),
 
                     Text(
                       'Program',
@@ -239,34 +238,35 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                       ),
                     ),
 
-                    SizedBox(height: Config.yMargin(context, 5.0)),
+                    SizedBox(height: Config.yMargin(context, 6.0)),
 
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 19.0, top: 10.0),
-                      child: Center(
-                          child: Container(
-                            height: Config.yMargin(context, 9.0),
-                            width: MediaQuery.of(context).size.width,
-                            child: FlatButton(
-                              //function to navigate back to fitness screen after editing details goes here
-                              onPressed: () {},
-                              child: Text(
-                                'Edit',style: TextStyle(
-                                fontFamily: 'Segoe',
-                                fontSize: 16.0,
-                                color: Theme.of(context).primaryColorLight,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              ),
-                              color: Theme.of(context).primaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      Config.xMargin(context, 4.0))),
-                            ),
-                          )),
-                    ),
+
                   ],
                 ),
+              ),
+              Padding(
+                padding:  EdgeInsets.only( left: 24.0, right: 24.0),
+                child: Center(
+                    child: Container(
+                      height: Config.yMargin(context, 7.0),
+                      width: MediaQuery.of(context).size.width,
+                      child: FlatButton(
+                        //function to navigate back to fitness screen after editing details goes here
+                        onPressed: () {},
+                        child: Text(
+                          'Edit',style: TextStyle(
+                          fontFamily: 'Segoe',
+                          fontSize: 16.0,
+                          color: Theme.of(context).primaryColorLight,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        ),
+                        color: Theme.of(context).primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                Config.xMargin(context, 4.0))),
+                      ),
+                    )),
               ),
             ]
           ),
