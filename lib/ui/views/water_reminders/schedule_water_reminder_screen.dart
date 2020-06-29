@@ -1,6 +1,6 @@
-import 'package:MedBuzz/core/widgets/time_wheel.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_model.dart';
+import 'package:MedBuzz/ui/widget/time_wheel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
