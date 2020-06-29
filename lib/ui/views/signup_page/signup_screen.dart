@@ -1,5 +1,3 @@
-import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
-import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 
@@ -177,12 +175,7 @@ class Signup extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ForwardAnimation(
-                                        child: LoginPage(),
-                                      )));
+                          Navigator.pushNamed(context, 'login');
                         },
                       )
                     ],
