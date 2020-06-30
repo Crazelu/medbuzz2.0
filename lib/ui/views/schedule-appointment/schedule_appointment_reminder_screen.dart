@@ -6,6 +6,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../size_config/config.dart';
 
 class ScheduleAppointmentScreen extends StatefulWidget {
+  final String payload;
+  ScheduleAppointmentScreen({this.payload});
   @override
   _ScheduleAppointmentScreenState createState() =>
       _ScheduleAppointmentScreenState();
