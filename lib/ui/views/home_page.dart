@@ -4,6 +4,7 @@ import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isPressed = false;
   Color color;
   @override
   Widget build(BuildContext context) {
@@ -682,55 +684,136 @@ class _HomePageState extends State<HomePage> {
             ),
           ]),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Add your onPressed code here!
-          },
-          child: Icon(Icons.add),
+        floatingActionButton: SpeedDial(
           backgroundColor: Theme.of(context).primaryColor,
-        ),
-        bottomNavigationBar: BubbledNavigationBar(
-          defaultBubbleColor: Colors.white,
-          backgroundColor: Theme.of(context).backgroundColor,
-          onTap: (index) {
-            // handle tap to various page
+          onOpen: () {
+            setState(() {
+              isPressed = true;
+            });
           },
-          items: <BubbledNavigationBarItem>[
-            BubbledNavigationBarItem(
-              icon: Icon(CupertinoIcons.home,
-                  size: 30, color: Theme.of(context).primaryColorDark),
-              activeIcon:
-                  Icon(CupertinoIcons.home, size: 30, color: Colors.blueAccent),
-              title: Text(
-                'Home',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColorDark, fontSize: 12),
+          onClose: () {
+            setState(() {
+              isPressed = false;
+            });
+          },
+          child: Icon(isPressed == true ? Icons.close : Icons.add),
+          overlayColor: Colors.black,
+          overlayOpacity: 0.7,
+          children: [
+            SpeedDialChild(
+              child: Image(image: AssetImage('images/calender.png')),
+              backgroundColor: Colors.white,
+              labelWidget: Container(
+                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
+                child: Text(
+                  'Appointment',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
               ),
+              onTap: () {},
             ),
-            BubbledNavigationBarItem(
-              icon: Icon(CupertinoIcons.bell,
-                  size: 30, color: Theme.of(context).primaryColorDark),
-              activeIcon:
-                  Icon(CupertinoIcons.bell, size: 30, color: Colors.blueAccent),
-              title: Text(
-                'Reminders',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColorDark, fontSize: 12),
+            SpeedDialChild(
+              backgroundColor: Colors.white,
+              child: Image(image: AssetImage('images/drugoutline.png')),
+              labelWidget: Container(
+                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
+                child: Text(
+                  'Medication',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
               ),
+              onTap: () {},
             ),
-            BubbledNavigationBarItem(
-              icon: Icon(CupertinoIcons.profile_circled,
-                  size: 30, color: Theme.of(context).primaryColorDark),
-              activeIcon: Icon(CupertinoIcons.profile_circled,
-                  size: 30, color: Colors.blueAccent),
-              title: Text(
-                'Profile',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColorDark, fontSize: 12),
+            SpeedDialChild(
+              backgroundColor: Colors.white,
+              child: Image(image: AssetImage('images/dumbell.png')),
+              labelWidget: Container(
+                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
+                child: Text(
+                  'Fitness',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
               ),
+              onTap: () {},
+            ),
+            SpeedDialChild(
+              backgroundColor: Colors.white,
+              child: Image(image: AssetImage('images/dropoutline.png')),
+              labelWidget: Container(
+                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
+                child: Text(
+                  'Water',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              onTap: () {},
+            ),
+            SpeedDialChild(
+              backgroundColor: Colors.white,
+              child: Image(image: AssetImage('images/foood.png')),
+              labelWidget: Container(
+                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
+                child: Text(
+                  'Diet',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              onTap: () {},
             ),
           ],
         ),
+        bottomNavigationBar: isPressed == true
+            ? null
+            : BubbledNavigationBar(
+                defaultBubbleColor: Colors.white,
+                backgroundColor: Theme.of(context).backgroundColor,
+                onTap: (index) {
+                  // handle tap to various page
+                },
+                items: <BubbledNavigationBarItem>[
+                  BubbledNavigationBarItem(
+                    icon: Icon(CupertinoIcons.home,
+                        size: 30, color: Theme.of(context).primaryColorDark),
+                    activeIcon: Icon(CupertinoIcons.home,
+                        size: 30, color: Colors.blueAccent),
+                    title: Text(
+                      'Home',
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: 12),
+                    ),
+                  ),
+                  BubbledNavigationBarItem(
+                    icon: Icon(CupertinoIcons.bell,
+                        size: 30, color: Theme.of(context).primaryColorDark),
+                    activeIcon: Icon(CupertinoIcons.bell,
+                        size: 30, color: Colors.blueAccent),
+                    title: Text(
+                      'Reminders',
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: 12),
+                    ),
+                  ),
+                  BubbledNavigationBarItem(
+                    icon: Icon(CupertinoIcons.profile_circled,
+                        size: 30, color: Theme.of(context).primaryColorDark),
+                    activeIcon: Icon(CupertinoIcons.profile_circled,
+                        size: 30, color: Colors.blueAccent),
+                    title: Text(
+                      'Profile',
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
