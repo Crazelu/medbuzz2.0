@@ -11,6 +11,7 @@ import 'package:MedBuzz/ui/views/password_recovery/forgot_password_submit.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
+import 'package:MedBuzz/ui/views/schedule-appointment/view_appointment_screen.dart';
 import 'package:MedBuzz/ui/views/signup_page/signup_screen.dart';
 import 'package:MedBuzz/ui/views/single_diet_screen/single_diet_screen.dart';
 import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze.dart';
@@ -43,7 +44,7 @@ class RouteNames {
   static const String forgotPasswordReset = 'forgotPasswordReset';
   static const String forgotPasswordMail = 'forgotPasswordMail';
   static const String singleDietScreen = 'singleDietScreen';
-
+  static const String viewAppointmentScreen = 'viewAppointmentScreen';
 
 //Brought routes here to  clean things up in the main.dart file
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -70,5 +71,6 @@ class RouteNames {
     RouteNames.forgotPasswordReset: (context) => ForgotPasswordReset(),
     RouteNames.forgotPasswordMail: (context) => ForgotPasswordMail(),
     RouteNames.singleDietScreen: (context) => SingleDiet(),
+    RouteNames.viewAppointmentScreen: (context) => ViewAppointment(),
   };
 }
