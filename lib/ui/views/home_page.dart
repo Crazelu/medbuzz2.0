@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   children: [
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Config.xMargin(context, 7.3), vertical: Config.xMargin(context, 9.6)),
+                      padding:  EdgeInsets.symmetric(horizontal: 30.0, vertical: 40.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text('Good Morning,',
                                 style: TextStyle(
-                                  fontSize: Config.textSize(context, 4.5),
+                                  fontSize: 18,
                                   color: color = Color(0xff333333),
                                   fontFamily: 'Segoe',
                                 ),
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Text('Juliana',
                                 style: TextStyle(
-                                  fontSize: Config.textSize(context, 5.8),
+                                  fontSize: 24,
                                   fontWeight: FontWeight.w600,
                                   color: color = Color(0xff333333),
                                   fontFamily: 'Segoe',
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           IconButton(
-                            padding: EdgeInsets.only(bottom: Config.yMargin(context, 3.28)),
+                            padding: EdgeInsets.only(bottom: 30.0),
                             icon: Icon (Icons.notifications_none),
                             iconSize: 30.0,
                             color: Theme.of(context).primaryColorDark,
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding:  EdgeInsets.only(left: Config.xMargin(context, 6), right: Config.xMargin(context, 6), top: Config.yMargin(context, 1), bottom: Config.yMargin(context, 1.9)),
+                            padding:  EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0, bottom: 17.0),
                             child: Row(
                               children: [
                                 Image.asset('images/waterdrop.png'),
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                                     Text('Water tracker',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: Config.textSize(context, 3.4),
+                                        fontSize: 14.0,
                                         color: color = Color(0xff777777),
                                         fontFamily: 'Segoe',
                                       ),
@@ -111,14 +111,14 @@ class _HomePageState extends State<HomePage> {
                                         Text('250ml',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: Config.textSize(context, 4.5),
+                                            fontSize: 18.0,
                                             color: color = Color(0xff333333),
                                             fontFamily: 'Segoe',
                                           ),
                                         ),
                                         Text(' of 3500ml',
                                           style: TextStyle(
-                                            fontSize: Config.textSize(context, 3.4),
+                                            fontSize: 14.0,
                                             color: color = Color(0xff333333),
                                             fontFamily: 'Segoe',
                                           ),
@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                                   Text('Meal',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: Config.textSize(context, 3.4),
+                                      fontSize: 14.0,
                                       color: color = Color(0xff777777),
                                       fontFamily: 'Segoe',
                                     ),
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                                   Text('3500',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: Config.textSize(context, 4.5),
+                                      fontSize: 18.0,
                                       color: Theme.of(context).primaryColorDark,
                                       fontFamily: 'Segoe',
                                     ),
@@ -208,8 +208,7 @@ class _HomePageState extends State<HomePage> {
 
                                   Text('calories today',
                                     style: TextStyle(
-
-                                      fontSize: Config.textSize(context, 2.9),
+                                      fontSize: 12.0,
                                       color: color = Color(0xff777777),
                                       fontFamily: 'Segoe',
                                     ),
@@ -272,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                                   Text('Steps',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: Config.textSize(context, 3.4),
+                                      fontSize: 14.0,
                                       color: color = Color(0xff777777),
                                       fontFamily: 'Segoe',
                                     ),
@@ -283,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                                   Text('7500',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: Config.textSize(context, 4.5),
+                                      fontSize: 18.0,
                                       color: Theme.of(context).primaryColorDark,
                                       fontFamily: 'Segoe',
                                     ),
@@ -294,7 +293,7 @@ class _HomePageState extends State<HomePage> {
 
                                   Text('steps today',
                                     style: TextStyle(
-                                      fontSize: Config.textSize(context, 2.9),
+                                      fontSize: 12.0,
                                       color: color = Color(0xff777777),
                                       fontFamily: 'Segoe',
                                     ),
@@ -339,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text('Daily medications',
                             style: TextStyle(
-                              fontSize: Config.textSize(context, 4.5),
+                              fontSize: 18.0,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'Segoe',
                             ),
@@ -347,7 +346,7 @@ class _HomePageState extends State<HomePage> {
                           FlatButton(onPressed: () {},
                             child: Text('See all',
                               style: TextStyle(
-                                fontSize: Config.textSize(context, 3.4),
+                                fontSize: 14.0,
                                 fontWeight: FontWeight.w600,
                                 color: color= Color(0xff2D7DD2),
                                 fontFamily: 'Segoe',
@@ -388,7 +387,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text('Promethazine',
                                     style: TextStyle(
-                                      fontSize: Config.textSize(context, 3.9),
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Segoe',
                                     ),
@@ -396,7 +395,7 @@ class _HomePageState extends State<HomePage> {
                                   SizedBox(height: Config.yMargin(context, 2),),
                                   Text('1 shots once daily',
                                     style: TextStyle(
-                                      fontSize: Config.textSize(context, 3.9),
+                                      fontSize: 16,
                                       fontFamily: 'Segoe',
                                     ),
                                   ),
@@ -408,7 +407,7 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Text('12pm',
                                       style: TextStyle(
-                                        fontSize: Config.textSize(context, 3.9),
+                                        fontSize: 16,
                                         fontFamily: 'Segoe',
                                       ),
                                     )
@@ -433,7 +432,7 @@ class _HomePageState extends State<HomePage> {
                                   onPressed: () {},
                                   child: Text('View',
                                     style: TextStyle(
-                                      fontSize: Config.textSize(context, 3.9),
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Segoe',
                                     ),
@@ -444,7 +443,7 @@ class _HomePageState extends State<HomePage> {
                                   icon: Icon(Icons.close),
                                   label: Text('Skip',
                                     style: TextStyle(
-                                      fontSize: Config.textSize(context, 3.9),
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Segoe',
                                     ),
@@ -455,7 +454,7 @@ class _HomePageState extends State<HomePage> {
                                   icon: Icon(Icons.check),
                                   label: Text('Done',
                                     style: TextStyle(
-                                      fontSize: Config.textSize(context, 3.9),
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Segoe',
                                     ),)
@@ -473,7 +472,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text('Upcoming appointments',
                             style: TextStyle(
-                              fontSize: Config.textSize(context, 4.5),
+                              fontSize: 18.0,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'Segoe',
                             ),
@@ -481,7 +480,7 @@ class _HomePageState extends State<HomePage> {
                           FlatButton(onPressed: () {},
                             child: Text('See all',
                               style: TextStyle(
-                                fontSize: Config.textSize(context, 3.4),
+                                fontSize: 14.0,
                                 fontWeight: FontWeight.w600,
                                 color: color= Color(0xff2D7DD2),
                                 fontFamily: 'Segoe',
@@ -519,15 +518,14 @@ class _HomePageState extends State<HomePage> {
                                 Text('July',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-
-                                    fontSize: Config.textSize(context, 2.2),
+                                    fontSize: 9.0,
                                     color: color = Color(0xff777777),
                                     fontFamily: 'Segoe',
                                   ),
                                 ),
                                 Text('12',
                                   style: TextStyle(
-                                    fontSize: Config.textSize(context, 6.8),
+                                    fontSize: 28.0,
                                     color: color = Color(0xff2DBFC3),
                                     fontFamily: 'Segoe',
                                   ),
@@ -535,7 +533,7 @@ class _HomePageState extends State<HomePage> {
                                 Text('Thurs',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: Config.textSize(context, 2.2),
+                                    fontSize: 9.0,
                                     color: color = Color(0xff777777),
                                     fontFamily: 'Segoe',
                                   ),
@@ -572,7 +570,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Text('Timing',
                                             style: TextStyle(
-                                              fontSize: Config.textSize(context, 2.9),
+                                              fontSize: 12.0,
                                               color: color = Color(0xff777777),
                                               fontFamily: 'Segoe',
                                             ),
@@ -584,7 +582,7 @@ class _HomePageState extends State<HomePage> {
                                           Text('6.00 PM',
                                             style: TextStyle(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: Config.textSize(context, 3.4),
+                                              fontSize: 14.0,
                                               fontFamily: 'Segoe',
                                             ),
                                           ),
@@ -598,7 +596,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Text('Appointment for',
                                           style: TextStyle(
-                                            fontSize: Config.textSize(context, 2.9),
+                                            fontSize: 12.0,
                                             color: color = Color(0xff777777),
                                             fontFamily: 'Segoe',
                                           ),
@@ -609,7 +607,7 @@ class _HomePageState extends State<HomePage> {
                                           Text('Dance Class',
                                             style: TextStyle(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: Config.textSize(context, 3.4),
+                                              fontSize: 14.0,
                                               fontFamily: 'Segoe',
                                             ),
                                           ),
@@ -632,7 +630,7 @@ class _HomePageState extends State<HomePage> {
                                     height: Config.yMargin(context, 6),
                                     child: Text('Make sure to make lots of friends',
                                       style: TextStyle(
-                                        fontSize: Config.textSize(context, 3.4),
+                                        fontSize: 14.0,
                                         fontFamily: 'Segoe',
                                       ),
                                     ),
@@ -677,18 +675,18 @@ class _HomePageState extends State<HomePage> {
             BubbledNavigationBarItem(
               icon:       Icon(CupertinoIcons.home, size: 30, color: Theme.of(context).primaryColorDark),
               activeIcon: Icon(CupertinoIcons.home, size: 30, color: Colors.blueAccent),
-              title: Text('Home', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: Config.textSize(context, 2.9)),),
+              title: Text('Home', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 12),),
             ),
             BubbledNavigationBarItem(
               icon:       Icon(CupertinoIcons.bell, size: 30, color: Theme.of(context).primaryColorDark),
               activeIcon: Icon(CupertinoIcons.bell, size: 30, color: Colors.blueAccent),
-              title: Text('Reminders', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: Config.textSize(context, 2.9)),),
+              title: Text('Reminders', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 12),),
             ),
 
             BubbledNavigationBarItem(
               icon:       Icon(CupertinoIcons.profile_circled, size: 30, color: Theme.of(context).primaryColorDark),
               activeIcon: Icon(CupertinoIcons.profile_circled, size: 30, color: Colors.blueAccent),
-              title: Text('Profile', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: Config.textSize(context, 2.9)),),
+              title: Text('Profile', style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 12),),
             ),
           ],
         ),

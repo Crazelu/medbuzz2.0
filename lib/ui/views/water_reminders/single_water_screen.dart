@@ -1,16 +1,18 @@
-import 'package:MedBuzz/ui/app_theme/app_theme.dart';
-import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/fitness_reminders/delete_successful.dart';
 import 'package:flutter/material.dart';
+import 'package:MedBuzz/ui/size_config/config.dart';
 
-class MedicationView extends StatelessWidget {
+class SingleWater extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        elevation: 0.1,
-        backgroundColor: appThemeLight.primaryColorLight,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back), onPressed: Navigator.of(context).pop),
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop()),
+        elevation: 2.0,
+        backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: ListView(children: [
         Container(
@@ -137,7 +139,7 @@ class MedicationView extends StatelessWidget {
                     Container(
                       width: Config.xMargin(context, 44),
                       child: Text(
-                        'Chloroquine Injection',
+                        'Drink 250ml of Water',
                         style: TextStyle(
                           color: Color(0xff333333),
                           fontSize: Config.textSize(context, 7),
@@ -148,7 +150,7 @@ class MedicationView extends StatelessWidget {
                     Container(
                       padding:
                           EdgeInsets.only(right: Config.xMargin(context, 5)),
-                      child: Image.asset('"images/injection.png"'),
+                      child: Image.asset('images/waterdrop.png'),
                     ),
                   ],
                 ),
@@ -174,7 +176,7 @@ class MedicationView extends StatelessWidget {
                         padding:
                             EdgeInsets.only(top: Config.yMargin(context, 1.0)),
                         child: Text(
-                          'Take a shot at st.charles hospital daily and remember to eat before leaving the house',
+                          'A quick run from home to the estate junction and back home',
                           style: TextStyle(
                             color: Color(0xff333333),
                             fontSize: Config.textSize(context, 4),
@@ -194,45 +196,22 @@ class MedicationView extends StatelessWidget {
                       Padding(
                         padding:
                             EdgeInsets.only(top: Config.yMargin(context, 1)),
-                        child: Column(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Once Daily',
-                                  style: TextStyle(
-                                    fontSize: Config.textSize(context, 4),
-                                  ),
-                                ),
-                                Text(
-                                  '8:00AM',
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: Config.textSize(context, 4),
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              'Once Daily',
+                              style: TextStyle(
+                                fontSize: Config.textSize(context, 4),
+                              ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Once Daily',
-                                  style: TextStyle(
-                                    fontSize: Config.textSize(context, 4),
-                                  ),
-                                ),
-                                Text(
-                                  '8:00AM',
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: Config.textSize(context, 4),
-                                  ),
-                                )
-                              ],
-                            ),
+                            Text(
+                              '8:00AM',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: Config.textSize(context, 4),
+                              ),
+                            )
                           ],
                         ),
                       ),

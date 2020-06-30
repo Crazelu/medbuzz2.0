@@ -6,9 +6,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../size_config/config.dart';
 
 class ScheduleAppointmentScreen extends StatefulWidget {
-  ScheduleAppointmentScreen({this.payload});
-
   final String payload;
+  ScheduleAppointmentScreen({this.payload});
   @override
   _ScheduleAppointmentScreenState createState() =>
       _ScheduleAppointmentScreenState();
@@ -115,7 +114,8 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 35),
-                height: Config.yMargin(context, 9),
+                // height helps to stop overflowing of this widget into divider
+                height: Config.yMargin(context, 10),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
@@ -174,10 +174,8 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                 width: Config.xMargin(context, 9.24),
                 child: Text('h'),
                 decoration: BoxDecoration(
-                    color: Color(0xFFEEEEEE),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0.0),
-                        topRight: Radius.circular(0.0))),
+                  color: Color(0xFFEEEEEE),
+                ),
               ),
               SizedBox(
                 height: Config.xMargin(context, 2.43),
@@ -357,10 +355,6 @@ class Timer extends StatelessWidget {
               child: Text('h'),
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-//                borderRadius: BorderRadius.only(
-//                  topLeft: Radius.circular(0.0),
-//                  topRight: Radius.circular(0.0),
-//                ),
               ),
             ),
           ],

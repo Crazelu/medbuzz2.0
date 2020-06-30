@@ -12,7 +12,8 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
   Color color;
   @override
   Widget build(BuildContext context) {
-    // fontSize: Config.textSize(context, 5),
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -47,7 +48,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                   children: [
                     Text('Running',
                       style: TextStyle(
-                        fontSize: Config.textSize(context, 5.8),
+                        fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Segoe',
                       ),
@@ -59,7 +60,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                       ) ,
                       label: Text('Delete',
                         style: TextStyle(
-                         fontSize: Config.textSize(context, 3.9),
+                          fontSize: 16.0,
                           fontWeight: FontWeight.w600,
                           fontFamily: 'Segoe',
                           color: color= Color(0xffEB5757),
@@ -86,7 +87,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                                             child: Text(
                                               'Are you sure you want to delete this?',
                                               style: TextStyle(
-                                                fontSize: Config.textSize(context, 3.9),
+                                                fontSize: 16.0,
                                               ),
                                             ),
                                           ),
@@ -107,7 +108,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                                                     "Yes",
                                                     style: TextStyle(color: Colors.white,
                                                       fontWeight: FontWeight.bold,
-                                                      fontSize: Config.textSize(context, 3.9),
+                                                      fontSize: 16.0,
                                                     ),
                                                   ),
                                                   color:  Color(0xFF219653),
@@ -127,7 +128,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                                                     "No",
                                                     style: TextStyle(color: Colors.white,
                                                       fontWeight: FontWeight.bold,
-                                                      fontSize: Config.textSize(context, 3.9),
+                                                      fontSize: 16.0,
                                                     ),
                                                   ),
                                                   color:  Color(0xFFEB5757),
@@ -161,7 +162,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                           fontFamily: 'Segoe',
                         color: Theme.of(context).primaryColorDark,
                           fontWeight: FontWeight.bold,
-                        fontSize: Config.textSize(context, 3.9),
+                          fontSize: 16.0,
                     ),
                     ),
                     SizedBox(height: Config.yMargin(context, 2.0)),
@@ -171,7 +172,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                         fontFamily: 'Segoe',
                         color: Theme.of(context).primaryColorDark,
                         fontWeight: FontWeight.normal,
-                        fontSize: Config.textSize(context, 3.9),
+                        fontSize: 16.0,
                       ),
                     ),
 
@@ -183,7 +184,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                         fontFamily: 'Segoe',
                         color: Theme.of(context).primaryColorDark,
                         fontWeight: FontWeight.bold,
-                        fontSize: Config.textSize(context, 3.9),
+                        fontSize: 16.0,
                       ),
                     ),
 
@@ -198,7 +199,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                             fontFamily: 'Segoe',
                             color: Theme.of(context).primaryColorDark,
                             fontWeight: FontWeight.normal,
-                            fontSize: Config.textSize(context, 3.9),
+                            fontSize: 16.0,
                           ),
                         ),
 
@@ -208,7 +209,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                             fontFamily: 'Segoe',
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.normal,
-                            fontSize: Config.textSize(context, 3.9),
+                            fontSize: 16.0,
                           ),
                         ),
                       ],
@@ -222,7 +223,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                         fontFamily: 'Segoe',
                         color: Theme.of(context).primaryColorDark,
                         fontWeight: FontWeight.bold,
-                        fontSize: Config.textSize(context, 3.9),
+                        fontSize: 16.0,
                       ),
                     ),
 
@@ -233,7 +234,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                         fontFamily: 'Segoe',
                         color: Theme.of(context).primaryColorDark,
                         fontWeight: FontWeight.normal,
-                        fontSize: Config.textSize(context, 3.9),
+                        fontSize: 16.0,
                       ),
                     ),
 
@@ -255,7 +256,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                         child: Text(
                           'Edit',style: TextStyle(
                           fontFamily: 'Segoe',
-                          fontSize: Config.textSize(context, 3.9),
+                          fontSize: 16.0,
                           color: Theme.of(context).primaryColorLight,
                           fontWeight: FontWeight.bold,
                         ),

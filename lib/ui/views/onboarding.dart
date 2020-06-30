@@ -33,7 +33,7 @@ class _OnboardState extends State<Onboard> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: appThemeLight.backgroundColor,
+        backgroundColor: appThemeLight.primaryColorLight,
         actions: <Widget>[
           Container(
             padding: const EdgeInsetsDirectional.only(top: 30),
