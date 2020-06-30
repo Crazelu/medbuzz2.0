@@ -1,12 +1,9 @@
-import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
-import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
-import 'package:MedBuzz/ui/views/fitness_reminders/add_fitness_screen.dart';
-import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
-import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_screen.dart';
+import 'package:MedBuzz/ui/views/water_reminders/single_water_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,9 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Color color;
   bool isPressed = false;
-
+  Color color;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -706,130 +702,75 @@ class _HomePageState extends State<HomePage> {
           children: [
             SpeedDialChild(
               child: Image(image: AssetImage('images/calender.png')),
-              backgroundColor: Theme.of(context).primaryColorLight,
+              backgroundColor: Colors.white,
               labelWidget: Container(
                 margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
                 child: Text(
                   'Appointment',
                   style: TextStyle(
-                    fontSize: Config.textSize(context, 3.9),
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColorLight,
-                  ),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ForwardAnimation(
-                        child: ScheduleAppointmentScreen(),
-                      ),
-                    ));
-              },
+              onTap: () {},
             ),
             SpeedDialChild(
-              backgroundColor: Theme.of(context).primaryColorLight,
+              backgroundColor: Colors.white,
               child: Image(image: AssetImage('images/drugoutline.png')),
               labelWidget: Container(
                 margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
                 child: Text(
                   'Medication',
                   style: TextStyle(
-                    fontSize: Config.textSize(context, 3.9),
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColorLight,
-                  ),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ForwardAnimation(
-                        child: AddMedicationScreen(),
-                      ),
-                    ));
-              },
+              onTap: () {},
             ),
             SpeedDialChild(
-              backgroundColor: Theme.of(context).primaryColorLight,
+              backgroundColor: Colors.white,
               child: Image(image: AssetImage('images/dumbell.png')),
               labelWidget: Container(
                 margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
                 child: Text(
                   'Fitness',
                   style: TextStyle(
-                    fontSize: Config.textSize(context, 3.9),
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColorLight,
-                  ),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ForwardAnimation(
-                        child: FitnessDescriptionScreen(),
-                      ),
-                    ));
-              },
+              onTap: () {},
             ),
             SpeedDialChild(
-              backgroundColor: Theme.of(context).primaryColorLight,
+              backgroundColor: Colors.white,
               child: Image(image: AssetImage('images/dropoutline.png')),
               labelWidget: Container(
                 margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
                 child: Text(
                   'Water',
                   style: TextStyle(
-                    fontSize: Config.textSize(context, 3.9),
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColorLight,
-                  ),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ForwardAnimation(
-                        child: ScheduleWaterReminderScreen(),
-                      ),
-                    ));
-              },
+              onTap: () {},
             ),
             SpeedDialChild(
-              backgroundColor: Theme.of(context).primaryColorLight,
+              backgroundColor: Colors.white,
               child: Image(image: AssetImage('images/foood.png')),
               labelWidget: Container(
                 margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
                 child: Text(
                   'Diet',
                   style: TextStyle(
-                    fontSize: Config.textSize(context, 3.9),
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColorLight,
-                  ),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ForwardAnimation(
-                        child: ScheduleWaterReminderScreen(),
-                      ),
-                    ));
-              },
+              onTap: () {},
             ),
           ],
         ),
         bottomNavigationBar: isPressed == true
             ? null
             : BubbledNavigationBar(
-                defaultBubbleColor: Theme.of(context).primaryColorLight,
+                defaultBubbleColor: Colors.white,
                 backgroundColor: Theme.of(context).backgroundColor,
                 onTap: (index) {
                   // handle tap to various page
@@ -839,7 +780,7 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(CupertinoIcons.home,
                         size: 30, color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.home,
-                        size: 30, color: Theme.of(context).primaryColor),
+                        size: 30, color: Colors.blueAccent),
                     title: Text(
                       'Home',
                       style: TextStyle(
@@ -851,7 +792,7 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(CupertinoIcons.bell,
                         size: 30, color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.bell,
-                        size: 30, color: Theme.of(context).primaryColor),
+                        size: 30, color: Colors.blueAccent),
                     title: Text(
                       'Reminders',
                       style: TextStyle(
@@ -863,7 +804,7 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(CupertinoIcons.profile_circled,
                         size: 30, color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.profile_circled,
-                        size: 30, color: Theme.of(context).primaryColor),
+                        size: 30, color: Colors.blueAccent),
                     title: Text(
                       'Profile',
                       style: TextStyle(
