@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
