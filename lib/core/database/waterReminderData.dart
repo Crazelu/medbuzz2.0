@@ -34,7 +34,7 @@ class WaterReminderData extends ChangeNotifier {
   void deleteWaterReminder(key) async {
     var box = await Hive.openBox<WaterReminder>(_boxName);
 
-    _waterReminders = box.values.toList();
+    await box.delete(key);
 
     notifyListeners();
   }
@@ -44,9 +44,9 @@ class WaterReminderData extends ChangeNotifier {
 
     await box.put(waterReminderKey, waterReminder);
 
-    _waterReminders = box.values.toList();
+    // _waterReminders = box.values.toList();
 
-    _activeWaterReminder = box.get(waterReminderKey);
+    // _activeWaterReminder = box.get(waterReminderKey);
 
     notifyListeners();
   }
