@@ -35,7 +35,8 @@ class SingleWater extends StatelessWidget {
                                 width: Config.xMargin(context, 150.0),
                                 //width: Config.xMargin(context, 50),
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(
+                                      Config.xMargin(context, 3.0)),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -43,11 +44,13 @@ class SingleWater extends StatelessWidget {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            left: 23.0, bottom: 17.0),
+                                            left: Config.yMargin(context, 2),
+                                            bottom: Config.yMargin(context, 1)),
                                         child: Text(
                                           'Are you sure you want to delete this?',
                                           style: TextStyle(
-                                            fontSize: 16.0,
+                                            fontSize:
+                                                Config.textSize(context, 4.5),
                                           ),
                                         ),
                                       ),
@@ -63,13 +66,15 @@ class SingleWater extends StatelessWidget {
                                             child: RaisedButton(
                                               onPressed: () {
                                                 //Navigate to the Water reminder screen and delete from db
+                                                Navigator.pop(context);
                                               },
                                               child: Text(
                                                 "Yes",
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0,
+                                                  fontSize: Config.textSize(
+                                                      context, 5),
                                                 ),
                                               ),
                                               color: Color(0xFF219653),
@@ -94,7 +99,8 @@ class SingleWater extends StatelessWidget {
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 16.0,
+                                                  fontSize: Config.textSize(
+                                                      context, 5),
                                                 ),
                                               ),
                                               color: Color(0xFFEB5757),
