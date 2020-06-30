@@ -41,4 +41,5 @@ class AppointmentAdapter extends TypeAdapter<Appointment> {
   @override
 
   int get typeId => 0;
+
 }
