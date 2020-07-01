@@ -1,8 +1,6 @@
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:flutter/material.dart';
 
-import '../home_page.dart';
-
 class DeleteSuccess extends StatelessWidget {
   Color color;
   @override
@@ -10,13 +8,12 @@ class DeleteSuccess extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 1,
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: color = Color(0xffFAFAFA),
           leading: IconButton(
               icon: Icon(Icons.keyboard_backspace,
                   color: Theme.of(context).primaryColorDark),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
+                //Function to navigate to Fitness screen page here.
               }),
         ),
         body: Center(
@@ -31,16 +28,16 @@ class DeleteSuccess extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Successfully Deleted',
+                    'Successfully deleted',
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: Config.textSize(context, 3.9),
                       fontFamily: 'Segoe',
                     ),
                   ),
                   Text(
-                    '"Running"',
+                    ' "Running"',
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: Config.textSize(context, 3.9),
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Segoe',
                     ),
