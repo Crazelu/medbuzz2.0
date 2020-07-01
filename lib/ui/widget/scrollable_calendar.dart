@@ -38,18 +38,24 @@ class ScrollableCalendar extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     //Logic to prevent user from clicking on past date
-                    if (index >= model.currentDay) {
-                      model.updateSelectedDay(index);
-                      _scrollController.scrollTo(
-                        index: index,
-                        duration: Duration(seconds: 1),
-                      );
-                    } else {
-                      _scrollController.scrollTo(
-                        index: model.currentDay - 1,
-                        duration: Duration(seconds: 1),
-                      );
-                    }
+                    //Not tester
+                    // if (index >= model.currentDay) {
+                    //   model.updateSelectedDay(index);
+                    //   _scrollController.scrollTo(
+                    //     index: index,
+                    //     duration: Duration(seconds: 1),
+                    //   );
+                    // } else {
+                    //   _scrollController.scrollTo(
+                    //     index: model.currentDay - 1,
+                    //     duration: Duration(seconds: 1),
+                    //   );
+                    // }
+                    model.updateSelectedDay(index);
+                    _scrollController.scrollTo(
+                      index: index,
+                      duration: Duration(seconds: 1),
+                    );
                   },
                   child: Container(
                     width: width * 0.2,

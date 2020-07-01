@@ -6,24 +6,10 @@ import 'package:MedBuzz/ui/widget/time_wheel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ScheduleDietReminderScreen extends StatefulWidget {
-  @override
-  _ScheduleDietReminderScreenState createState() =>
-      _ScheduleDietReminderScreenState();
-}
-
-class _ScheduleDietReminderScreenState
-    extends State<ScheduleDietReminderScreen> {
-  @override
-  void initState() {
-    super.initState();
-    //Provider.of<DietReminderModel>(context, listen: false).initCurrentMonth;
-  }
-
+class ScheduleDietReminderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var model = Provider.of<DietReminderModel>(context);
-    model.initCurrentMonth;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(

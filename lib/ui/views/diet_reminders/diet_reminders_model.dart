@@ -16,8 +16,8 @@ class DietReminderModel extends ChangeNotifier {
   bool _isVegetable = false;
   bool _isFruit = false;
   bool _isDrink = false;
-  int _month;
-  String _selectedMonth;
+  int _month = __today.month;
+  String _selectedMonth = _months[__month - 1];
   dynamic _selectedTime;
   int _selectedDay = DateTime.now().day;
   DateTime _today = DateTime.now();
@@ -216,6 +216,7 @@ class DietReminderModel extends ChangeNotifier {
     }
   }
 
+//this might be useless but...
   void _initCurrentMonth() {
     switch (DateTime.now().month) {
       case 1:
@@ -340,7 +341,7 @@ class DietReminderModel extends ChangeNotifier {
     }
   }
 
-  List<String> _months = [
+  static List<String> _months = [
     'January',
     'February',
     'March',
