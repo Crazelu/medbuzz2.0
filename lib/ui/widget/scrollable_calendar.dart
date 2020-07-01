@@ -8,6 +8,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 ///Big ups to Gideon
 ///The constructor takes a model that can be customized
 ///although the calendar could and should have it's own model
+///but that one no be today
 class ScrollableCalendar extends StatelessWidget {
   final model;
   final ItemScrollController _scrollController = ItemScrollController();
@@ -18,7 +19,7 @@ class ScrollableCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    // model.getDaysInMonth();
+
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,6 +28,7 @@ class ScrollableCalendar extends StatelessWidget {
             //without specifying this height, flutter throws an error because of the grid
             height: height * 0.095,
             child: ScrollablePositionedList.builder(
+              physics: BouncingScrollPhysics(),
               //sets default selected day to the index of Date.now() date
               initialScrollIndex: model.selectedDay - 1,
               itemScrollController: _scrollController,
@@ -38,7 +40,7 @@ class ScrollableCalendar extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     //Logic to prevent user from clicking on past date
-                    //Not tester
+                    //Not tested
                     // if (index >= model.currentDay) {
                     //   model.updateSelectedDay(index);
                     //   _scrollController.scrollTo(
