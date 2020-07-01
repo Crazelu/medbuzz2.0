@@ -86,6 +86,7 @@ class _TimeWheelState extends State<TimeWheel> {
             width: Config.xMargin(context, 0.5),
           ))),
           child: ListWheelScrollView(
+            physics: BouncingScrollPhysics(),
             controller: _hourController,
             itemExtent: Config.xMargin(context, 15),
             overAndUnderCenterOpacity: 0,
@@ -144,6 +145,7 @@ class _TimeWheelState extends State<TimeWheel> {
             width: Config.xMargin(context, 0.5),
           ))),
           child: ListWheelScrollView(
+            physics: BouncingScrollPhysics(),
             controller: _minController,
             itemExtent: Config.xMargin(context, 15),
             overAndUnderCenterOpacity: 0,
@@ -186,6 +188,7 @@ class _TimeWheelState extends State<TimeWheel> {
             width: Config.xMargin(context, 0.5),
           ))),
           child: ListWheelScrollView(
+            physics: BouncingScrollPhysics(),
             itemExtent: Config.xMargin(context, 15),
             controller: _timeController,
             // squeeze: 0.4,
