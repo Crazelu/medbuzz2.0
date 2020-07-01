@@ -10,7 +10,7 @@ ThemeData appThemeLight = ThemeData(
     highlightColor: Color.fromARGB(255, 45, 191, 195),
     accentColor: Color(0xff219653),
     primaryColorLight: Colors.white,
-    primaryColorDark: Colors.black,
+    primaryColorDark: Color(0xff333333),
     backgroundColor: Color(0xfafafafa),
     buttonColor: Color(0xffF2994A),
     hintColor: Color(0xff777777),

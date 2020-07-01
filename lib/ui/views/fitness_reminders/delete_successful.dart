@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../home_page.dart';
 
-
 class DeleteSuccess extends StatelessWidget {
   Color color;
   @override
@@ -11,19 +10,18 @@ class DeleteSuccess extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 1,
-          backgroundColor: color = Color(0xffFAFAFA),
+          backgroundColor: Theme.of(context).backgroundColor,
           leading: IconButton(
               icon: Icon(Icons.keyboard_backspace,
-                  color: Theme.of(context).primaryColorDark
-              ),
-
+                  color: Theme.of(context).primaryColorDark),
               onPressed: () {
-                //Function to navigate to Fitness screen page here.
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
               }),
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment:  MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('images/check.png'),
               SizedBox(
@@ -32,23 +30,25 @@ class DeleteSuccess extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Successfully Deleted',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontFamily: 'Segoe',
+                  Text(
+                    'Successfully Deleted',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontFamily: 'Segoe',
+                    ),
                   ),
-                  ),
-                  Text('"Running"',
+                  Text(
+                    '"Running"',
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Segoe',
-                    ),),
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
-        )
-    );
+        ));
   }
 }

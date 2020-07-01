@@ -34,17 +34,20 @@ class ViewAppointment extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: Config.xMargin(context, 5.33)),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Meet John Lucas',
+                    'Meet John \nLucas',
                     style: TextStyle(
                       color: Theme.of(context).primaryColorDark,
                       fontSize: Config.textSize(context, 5.3),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Image.asset('images/calendar.png'),
+                  Container(
+                    padding: EdgeInsets.only(right: Config.xMargin(context, 5)),
+                    child: Image.asset('images/appointment.png'),
+                  ),
                 ],
               ),
             ),
@@ -61,7 +64,7 @@ class ViewAppointment extends StatelessWidget {
                       'Description',
                       style: TextStyle(
                         color: Theme.of(context).primaryColorDark,
-                        fontSize: Config.textSize(context, 4),
+                        fontSize: Config.textSize(context, 4.5),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -134,7 +137,7 @@ class ViewAppointment extends StatelessWidget {
                     ),
                   ]),
             ),
-            SizedBox(height: Config.yMargin(context, 20)),
+            SizedBox(height: Config.yMargin(context, 18)),
 
             Padding(
               padding: EdgeInsets.only(bottom: Config.yMargin(context, 2.0)),
