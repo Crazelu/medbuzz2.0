@@ -7,6 +7,7 @@ import 'schedule_appointment_screen_model.dart';
 
 class ScheduleAppointmentScreen extends StatefulWidget {
   final String payload;
+
   ScheduleAppointmentScreen({this.payload});
   @override
   _ScheduleAppointmentScreenState createState() =>
