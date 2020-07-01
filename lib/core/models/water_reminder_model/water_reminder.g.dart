@@ -29,6 +29,7 @@ class WaterReminderAdapter extends TypeAdapter<WaterReminder> {
       ..write(obj.dateTime);
   }
 
-  @override
-  int get typeId => 4;
+   @override
+
+  int get typeId => 2;
 }

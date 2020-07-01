@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class FitnessModel {
-  String index;
   String name;
   String fitnesstype;
   String fitnessfreq;
@@ -11,8 +10,7 @@ class FitnessModel {
   DateTime endDate;
 
   FitnessModel(
-      {this.index,
-      @required this.name,
+      {@required this.name,
       @required this.fitnesstype,
       @required this.fitnessfreq,
       @required this.activityTime,
