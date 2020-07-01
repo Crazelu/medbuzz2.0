@@ -1,4 +1,3 @@
-import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:flutter/material.dart';
 
@@ -6,9 +5,10 @@ class MedicationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        elevation: 0.1,
-        backgroundColor: appThemeLight.primaryColorLight,
+        elevation: 2.0,
+        backgroundColor: Theme.of(context).backgroundColor,
         leading: IconButton(
             icon: Icon(Icons.arrow_back), onPressed: Navigator.of(context).pop),
       ),
@@ -139,8 +139,8 @@ class MedicationView extends StatelessWidget {
                       child: Text(
                         'Chloroquine Injection',
                         style: TextStyle(
-                          color: Color(0xff333333),
-                          fontSize: Config.textSize(context, 7),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 5.3),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -148,7 +148,7 @@ class MedicationView extends StatelessWidget {
                     Container(
                       padding:
                           EdgeInsets.only(right: Config.xMargin(context, 5)),
-                      child: Image.asset('"images/injection.png"'),
+                      child: Image.asset('images/injection.png'),
                     ),
                   ],
                 ),
@@ -165,8 +165,8 @@ class MedicationView extends StatelessWidget {
                       Text(
                         'Description',
                         style: TextStyle(
-                          color: Color(0xff333333),
-                          fontSize: Config.textSize(context, 5),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 4.5),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -176,7 +176,7 @@ class MedicationView extends StatelessWidget {
                         child: Text(
                           'Take a shot at st.charles hospital daily and remember to eat before leaving the house',
                           style: TextStyle(
-                            color: Color(0xff333333),
+                            color: Theme.of(context).primaryColorDark,
                             fontSize: Config.textSize(context, 4),
                           ),
                           //\n
@@ -186,8 +186,8 @@ class MedicationView extends StatelessWidget {
                       Text(
                         'Frequency',
                         style: TextStyle(
-                          color: Color(0xff333333),
-                          fontSize: Config.textSize(context, 5),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 4.5),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -209,7 +209,7 @@ class MedicationView extends StatelessWidget {
                                 Text(
                                   '8:00AM',
                                   style: TextStyle(
-                                    color: Colors.blue,
+                                    color: Theme.of(context).primaryColor,
                                     fontSize: Config.textSize(context, 4),
                                   ),
                                 ),
@@ -227,7 +227,7 @@ class MedicationView extends StatelessWidget {
                                 Text(
                                   '8:00AM',
                                   style: TextStyle(
-                                    color: Colors.blue,
+                                    color: Theme.of(context).primaryColor,
                                     fontSize: Config.textSize(context, 4),
                                   ),
                                 )
@@ -240,8 +240,8 @@ class MedicationView extends StatelessWidget {
                       Text(
                         'Length',
                         style: TextStyle(
-                          color: Color(0xff333333),
-                          fontSize: Config.textSize(context, 5),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 4.5),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -251,7 +251,7 @@ class MedicationView extends StatelessWidget {
                         child: Text(
                           '4 days left out of 30 days',
                           style: TextStyle(
-                            color: Color(0xff333333),
+                            color: Theme.of(context).primaryColorDark,
                             fontSize: Config.textSize(context, 4),
                           ),
                         ),
