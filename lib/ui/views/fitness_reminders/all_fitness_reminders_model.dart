@@ -1,13 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+class Month{
+  String month;
+  Month({this.month});
+}
+
 class FitnessSchedulesModel extends ChangeNotifier {
-  bool isVisible = true;
+  bool _isVisible = true;
   DateTime _selectedDay = DateTime.now();
+
+  bool get isVisible => _isVisible;
 
 //functionality for making the FAB appear and disappear when user scrolls
   void updateVisibility(bool visible) {
-    this.isVisible = visible;
+    this._isVisible = visible;
     notifyListeners();
   }
 
