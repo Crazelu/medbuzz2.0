@@ -36,9 +36,11 @@ class _WaterCardState extends State<WaterCard> {
                       horizontal: Config.xMargin(context, 3),
                       vertical: Config.yMargin(context, 1)),
                   decoration: BoxDecoration(
-                    color: isSelected ?Theme.of(context).primaryColor : Theme.of(context).primaryColorLight,
-                    borderRadius: BorderRadius.circular(
-                        Config.xMargin(context, 5)),
+                    color: isSelected
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).primaryColorLight,
+                    borderRadius:
+                        BorderRadius.circular(Config.xMargin(context, 5)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.white,
@@ -58,22 +60,23 @@ class _WaterCardState extends State<WaterCard> {
                             height: widget.height * 0.1,
                           ),
                           Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
                                 'Drink 250ml of water',
                                 style: TextStyle(
-                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
-                                        .primaryColorDark,
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: widget.height * 0.005),
                               Text(
                                 'Upcoming',
                                 style: TextStyle(
-                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
-                                        .primaryColorDark),
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark),
                               ),
                             ],
                           ),
@@ -93,9 +96,8 @@ class _WaterCardState extends State<WaterCard> {
                       ),
                       Visibility(
                         visible: isSelected,
-                                              child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             FlatButton(
                               onPressed: () {},
@@ -103,8 +105,9 @@ class _WaterCardState extends State<WaterCard> {
                                 'View',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
-                                        .primaryColorDark),
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark),
                               ),
                             ),
                             FlatButton(
@@ -112,21 +115,23 @@ class _WaterCardState extends State<WaterCard> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.close,
-                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
-                                        .primaryColorDark,
-                                    size:
-                                    Config.textSize(context, 3),
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark,
+                                    size: Config.textSize(context, 3),
                                   ),
                                   SizedBox(
-                                    width:
-                                    Config.xMargin(context, 2),
+                                    width: Config.xMargin(context, 2),
                                   ),
                                   Text(
                                     'Skip',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: isSelected ? Theme.of(context).primaryColorLight : Theme.of(context)
-                                            .primaryColorDark),
+                                        color: isSelected
+                                            ? Theme.of(context)
+                                                .primaryColorLight
+                                            : Theme.of(context)
+                                                .primaryColorDark),
                                   )
                                 ],
                               ),
@@ -138,21 +143,23 @@ class _WaterCardState extends State<WaterCard> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.done,
-                                    color: isSelected? Theme.of(context).primaryColorLight :Theme.of(context)
-                                        .primaryColorDark,
-                                    size:
-                                    Config.textSize(context, 3),
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark,
+                                    size: Config.textSize(context, 3),
                                   ),
                                   SizedBox(
-                                    width:
-                                    Config.xMargin(context, 2),
+                                    width: Config.xMargin(context, 2),
                                   ),
                                   Text(
                                     'Done',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: isSelected ? Theme.of(context).primaryColorLight : Theme.of(context)
-                                            .primaryColorDark),
+                                        color: isSelected
+                                            ? Theme.of(context)
+                                                .primaryColorLight
+                                            : Theme.of(context)
+                                                .primaryColorDark),
                                   )
                                 ],
                               ),

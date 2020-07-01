@@ -1,4 +1,3 @@
-import 'package:MedBuzz/ui/views/fitness_reminders/delete_successful.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 

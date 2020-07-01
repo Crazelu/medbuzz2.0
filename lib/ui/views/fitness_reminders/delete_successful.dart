@@ -1,8 +1,6 @@
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:flutter/material.dart';
 
-import '../home_page.dart';
-
 class DeleteSuccess extends StatelessWidget {
   Color color;
   @override
