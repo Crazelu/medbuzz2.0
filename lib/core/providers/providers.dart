@@ -6,6 +6,8 @@ import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze_model.da
 import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_model.dart';
 import 'package:provider/provider.dart';
 
+import '../database/waterReminderData.dart';
+
 //Add your view models in this widget
 
 final providers = <SingleChildCloneableWidget>[
@@ -15,6 +17,7 @@ final providers = <SingleChildCloneableWidget>[
   ChangeNotifierProvider(create: (_) => AddMedication()),
   ChangeNotifierProvider(create: (_) => ScheduleWaterReminderViewModel()),
   ChangeNotifierProvider(create: (_) => AllRemindersViewModel()),
+  ChangeNotifierProvider(create: (_) => WaterReminderData()),
 ];
 
 //final dietProviders = <SingleChildCloneableWidget>[

@@ -1,11 +1,14 @@
-import 'package:MedBuzz/core/models/water_reminder_model/water_reminder.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
+import '../models/water_reminder_model/water_reminder.dart';
 
 class WaterReminderData extends ChangeNotifier {
   static const String _boxName = "waterReminderBox";
 
   List<WaterReminder> _waterReminders = [];
+
+  List<WaterReminder> get waterReminders => _waterReminders;
 
   WaterReminder _activeWaterReminder;
 
