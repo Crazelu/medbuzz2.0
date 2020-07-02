@@ -1,5 +1,4 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
-import 'package:MedBuzz/ui/views/add_medication/add_medication_model.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/add_fitness_screen.dart';

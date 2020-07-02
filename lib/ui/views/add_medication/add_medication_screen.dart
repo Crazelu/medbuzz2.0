@@ -1,6 +1,6 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
-import 'package:MedBuzz/ui/views/add_medication/add_medication_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +15,12 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   TextEditingController textEditingController = TextEditingController();
   FocusNode _focusNode = FocusNode();
   String newIndex = DateTime.now().toString();
+  String appBarTitle = 'Add Medication';
 
   @override
   Widget build(BuildContext context) {
     var medModel = Provider.of<MedicationData>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: medModel.isEditing
@@ -26,7 +28,15 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                 onPressed: () => Navigator.of(context).pop(true),
                 icon: Icon(Icons.keyboard_backspace))
             : null,
-        title: medModel.isEditing ? titleEdit() : titleAdd(),
+        title: Text(
+          appBarTitle,
+          style: Theme.of(context)
+              .textTheme
+              .headline6 //REMOVED THE 6
+              .copyWith(
+                color: Theme.of(context).primaryColorDark,
+              ),
+        ),
         backgroundColor: Theme.of(context).primaryColorLight,
         elevation: 1.0,
       ),
@@ -239,7 +249,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                   buildEndDate(),
                   SizedBox(height: Config.yMargin(context, 10)),
                   InkWell(
-                    onTap: () {
+                      onTap: () async {
 //                      MaterialLocalizations localizations =
 //                          MaterialLocalizations.of(context);
 //                      print([
@@ -253,45 +263,53 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 //                        medModel.selectedIndex,
 //                        medModel.dosage
 //                      ]);
-                      if (textEditingController.text.isNotEmpty) {
-                        medModel.addMedicationReminder(
-                            newIndex,
-                            MedicationReminder(
-                                drugName: medModel.drugName,
-                                drugType:
-                                    medModel.drugTypes[medModel.selectedIndex],
-                                dosage: medModel.dosage,
-                                firstTime: medModel.firstTime,
-                                secondTime: medModel.secondTime != null
-                                    ? medModel.secondTime
-                                    : null,
-                                thirdTime: medModel.thirdTime != null
-                                    ? medModel.thirdTime
-                                    : null,
-                                frequency: medModel.selectedFreq,
-                                startAt: medModel.startDate,
-                                endAt: medModel.endDate));
-                      }
-                    },
-                    child: Container(
-                      height: Config.yMargin(context, 10.0),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(Config.xMargin(context, 3.5))),
-                          color: Theme.of(context).primaryColor),
-                      child: Center(
-                        child: Text(
-                          'Save',
-                          style: TextStyle(
-                            fontSize: Config.textSize(context, 4.5),
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColorLight,
+                        if (textEditingController.text.isNotEmpty) {
+                          switch (appBarTitle) {
+                            case 'Add Schedule':
+                              await medModel.addMedicationReminder(
+                                newIndex,
+                                MedicationReminder(
+                                    drugName: medModel.drugName,
+                                    drugType: medModel
+                                        .drugTypes[medModel.selectedIndex],
+                                    dosage: medModel.dosage,
+                                    firstTime: medModel.firstTime,
+                                    secondTime: medModel.secondTime != null
+                                        ? medModel.secondTime
+                                        : null,
+                                    thirdTime: medModel.thirdTime != null
+                                        ? medModel.thirdTime
+                                        : null,
+                                    frequency: medModel.selectedFreq,
+                                    startAt: medModel.startDate,
+                                    endAt: medModel.endDate),
+                              );
+                              break;
+                            // work here on your editing schedule code
+//                            case 'Edit Schedule':
+                          }
+                          Navigator.popAndPushNamed(
+                              context, RouteNames.medicationView);
+                        }
+                      },
+                      child: Container(
+                        height: Config.yMargin(context, 10.0),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(Config.xMargin(context, 3.5))),
+                            color: Theme.of(context).primaryColor),
+                        child: Center(
+                          child: Text(
+                            'Save',
+                            style: TextStyle(
+                              fontSize: Config.textSize(context, 4.5),
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColorLight,
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
+                      )),
                 ],
               ),
             ),
