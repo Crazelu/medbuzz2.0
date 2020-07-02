@@ -33,6 +33,7 @@ class AllRemindersScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColorLight,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(
           vertical: Config.yMargin(context, 1),
         ),
@@ -224,6 +225,11 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
+                  Visibility(
+                      visible: waterReminderDB.waterReminders.isEmpty,
+                      child: Container(
+                        child: Text('No water reminders for this date'),
+                      )),
                   for (var waterReminder in waterReminderDB.waterReminders)
                     WaterCard(
                         height: height,
