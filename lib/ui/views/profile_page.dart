@@ -1,8 +1,11 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/ui/navigation/app_navigation/app_transition.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
 import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
+import 'package:MedBuzz/ui/widget/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 
 // TODO: In other to stop thunder from firing yolu change the routes before you push
 // TODO: Fix the orientation of this page to POTRAIT
@@ -18,6 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    // var model = Provider.of<HomeScreenModel>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,7 +33,9 @@ class _ProfilePageState extends State<ProfilePage> {
           style: TextStyle(color: Colors.black),
         ),
       ),
+      // bottomNavigationBar: bottomNavBar(context, model),
       body: ListView(
+        physics: BouncingScrollPhysics(),
         children: <Widget>[
           Padding(
             padding:
@@ -142,14 +148,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   const EdgeInsets.symmetric(horizontal: 90.0, vertical: 10),
               child: GestureDetector(
                 onTap: () {
-                  Navigation().pushToAndReplace(context, LoginPage());
+                  //Code throws error with named routes
+                  // Navigation().pushToAndReplace(context, LoginPage());
+                  //this works
+                  Navigator.of(context).pushReplacementNamed(RouteNames.login);
                 },
                 child: Container(
                   height: Config.yMargin(context, 12),
                   width: Config.xMargin(context, 30),
                   child: Row(
                     children: <Widget>[
-                      ImageIcon(AssetImage('images/logout.png'), color: Colors.red,),
+                      ImageIcon(
+                        AssetImage('images/logout.png'),
+                        color: Colors.red,
+                      ),
                       SizedBox(
                         width: 20,
                       ),
@@ -168,6 +180,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-
-

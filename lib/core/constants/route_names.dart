@@ -4,7 +4,7 @@ import 'package:MedBuzz/ui/views/diet_reminders/schedule_diet_reminder.dart';
 import 'package:MedBuzz/ui/views/drug_description/drug_description.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/single_fitness_screen.dart';
-import 'package:MedBuzz/ui/views/home_page.dart';
+import 'package:MedBuzz/ui/views/home_screen/home_page.dart';
 import 'package:MedBuzz/ui/views/login_page/login_page_screen.dart';
 import 'package:MedBuzz/ui/views/medication_reminders/medication_reminder_view.dart';
 import 'package:MedBuzz/ui/views/onboarding.dart';

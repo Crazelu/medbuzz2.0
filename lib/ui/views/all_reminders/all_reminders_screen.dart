@@ -1,5 +1,7 @@
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_view_model.dart';
+import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
+import 'package:MedBuzz/ui/widget/bottom_nav_bar.dart';
 import 'package:MedBuzz/ui/widget/medication_card.dart';
 import 'package:MedBuzz/ui/widget/water_card.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ class AllRemindersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var allReminders =
         Provider.of<AllRemindersViewModel>(context, listen: true);
+    // var model = Provider.of<HomeScreenModel>(context);
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -28,7 +31,9 @@ class AllRemindersScreen extends StatelessWidget {
         elevation: 0.5,
         backgroundColor: Theme.of(context).primaryColorLight,
       ),
+      // bottomNavigationBar: bottomNavBar(context, model),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(
           vertical: Config.yMargin(context, 1),
         ),
