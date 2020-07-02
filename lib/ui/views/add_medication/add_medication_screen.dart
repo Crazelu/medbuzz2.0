@@ -17,7 +17,11 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     var medModel = Provider.of<AddMedication>(context);
     return Scaffold(
       appBar: AppBar(
-        leading: medModel.isEditing ? Icon(Icons.keyboard_backspace) : null,
+        leading: medModel.isEditing
+            ? IconButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                icon: Icon(Icons.keyboard_backspace))
+            : null,
         title: medModel.isEditing ? titleEdit() : titleAdd(),
         backgroundColor: Theme.of(context).primaryColorLight,
         elevation: 1.0,
@@ -36,6 +40,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                 0.0,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     'Drug Name',
@@ -67,7 +72,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
               ),
               height: Config.yMargin(context, 10.0),
               child: ListView.builder(
-                padding: EdgeInsets.only(left: Config.xMargin(context, 5)),
+                padding: EdgeInsets.only(left: Config.xMargin(context, 0)),
                 scrollDirection: Axis.horizontal,
                 itemCount: medModel.drugType.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -77,7 +82,14 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
             ),
             SizedBox(height: Config.yMargin(context, 6)),
             Container(
+              padding: EdgeInsets.fromLTRB(
+                Config.xMargin(context, 5),
+                Config.xMargin(context, 0),
+                Config.xMargin(context, 5),
+                0.0,
+              ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     'Reminder Frequency',
