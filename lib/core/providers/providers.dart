@@ -1,4 +1,5 @@
 import 'package:MedBuzz/core/database/medication_data.dart';
+import 'package:MedBuzz/core/database/waterReminderData.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_view_model.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_model.dart';
 import 'package:MedBuzz/ui/views/diet_reminders/diet_reminders_model.dart';
@@ -17,6 +18,7 @@ final providers = <SingleChildCloneableWidget>[
   ChangeNotifierProvider(create: (_) => AllRemindersViewModel()),
   ChangeNotifierProvider(create: (_) => MedicationData()),
   ChangeNotifierProvider(create: (_) => HomeScreenModel()),
+  ChangeNotifierProvider(create: (_) => WaterReminderData()),
 ];
 
 //final dietProviders = <SingleChildCloneableWidget>[
