@@ -29,7 +29,7 @@ class WaterReminderData extends ChangeNotifier {
   void addWaterReminder(WaterReminder waterReminder) async {
     var box = await Hive.openBox<WaterReminder>(_boxName);
 
-    await box.add(waterReminder);
+    await box.put(waterReminder.id, waterReminder);
 
     //reinitialise water reminders after write operation
     _waterReminders = box.values.toList();

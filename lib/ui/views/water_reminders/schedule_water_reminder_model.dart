@@ -112,8 +112,9 @@ class ScheduleWaterReminderViewModel extends ChangeNotifier {
     var selectedDateTime = "${_today.year}-$monthValue-$dayValue $selectedTime";
 
     WaterReminder newReminder = WaterReminder(
-        ml: selectedMl, dateTime: DateTime.parse(selectedDateTime));
-
+        id: DateTime.now().toString(),
+        ml: _selectedMl,
+        dateTime: DateTime.parse(selectedDateTime));
     return newReminder;
   }
 
