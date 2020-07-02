@@ -19,6 +19,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   @override
   Widget build(BuildContext context) {
     var medModel = Provider.of<MedicationData>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: medModel.isEditing
