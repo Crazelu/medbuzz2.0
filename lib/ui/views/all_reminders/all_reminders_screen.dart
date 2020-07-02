@@ -29,6 +29,7 @@ class AllRemindersScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColorLight,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(
           vertical: Config.yMargin(context, 1),
         ),
