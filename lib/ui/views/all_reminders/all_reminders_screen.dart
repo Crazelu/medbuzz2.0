@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../core/database/waterReminderData.dart';
+
 class AllRemindersScreen extends StatelessWidget {
   final ItemScrollController _scrollController = ItemScrollController();
   final ItemScrollController _monthScrollController = ItemScrollController();
@@ -14,6 +16,8 @@ class AllRemindersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var allReminders =
         Provider.of<AllRemindersViewModel>(context, listen: true);
+    var waterReminderDB = Provider.of<WaterReminderData>(context, listen: true);
+    waterReminderDB.getWaterReminders();
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -221,7 +225,16 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  WaterCard(height: height, width: width),
+                  Visibility(
+                      visible: waterReminderDB.waterReminders.isEmpty,
+                      child: Container(
+                        child: Text('No water reminders for this date'),
+                      )),
+                  for (var waterReminder in waterReminderDB.waterReminders)
+                    WaterCard(
+                        height: height,
+                        width: width,
+                        waterReminder: waterReminder)
                 ],
               ),
             ),

@@ -1,11 +1,18 @@
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../../core/models/water_reminder_model/water_reminder.dart';
 
 class WaterCard extends StatefulWidget {
   final double height;
   final double width;
+  final WaterReminder waterReminder;
 
-  WaterCard({this.height, this.width});
+  WaterCard(
+      {@required this.height,
+      @required this.width,
+      @required this.waterReminder});
   @override
   _WaterCardState createState() => _WaterCardState();
 }
@@ -16,18 +23,19 @@ class _WaterCardState extends State<WaterCard> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: InkWell(
+      child: GestureDetector(
         //Navigate to screen with single reminder i.e the on user clicked on
         onTap: () {
           setState(() => isSelected = !isSelected);
         },
-        splashColor: Colors.transparent,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: widget.height * 0.02),
               Text(
-                "10:00 AM",
+                DateFormat.jm().format(widget.waterReminder.dateTime) ??
+                    "10:00 AM",
               ),
               SizedBox(height: widget.height * 0.02),
               Container(
@@ -63,7 +71,7 @@ class _WaterCardState extends State<WaterCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                'Drink 250ml of water',
+                                'Drink ${widget.waterReminder.ml ?? 150}ml of water',
                                 style: TextStyle(
                                     color: isSelected
                                         ? Theme.of(context).primaryColorLight
@@ -72,7 +80,10 @@ class _WaterCardState extends State<WaterCard> {
                               ),
                               SizedBox(height: widget.height * 0.005),
                               Text(
-                                'Upcoming',
+                                widget.waterReminder.dateTime
+                                        .isAfter(DateTime.now())
+                                    ? 'Upcoming'
+                                    : 'Past',
                                 style: TextStyle(
                                     color: isSelected
                                         ? Theme.of(context).primaryColorLight
