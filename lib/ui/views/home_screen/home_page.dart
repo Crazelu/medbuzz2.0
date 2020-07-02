@@ -1,4 +1,8 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/ui/views/add_medication/add_medication_model.dart';
+import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
+import 'package:MedBuzz/ui/views/fitness_reminders/add_fitness_screen.dart';
 import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -772,89 +776,113 @@ class _HomePageState extends State<HomePage> {
                 ProfilePage(),
               ]),
         ),
-        floatingActionButton: SpeedDial(
-          backgroundColor: Theme.of(context).primaryColor,
-          onOpen: () {
-            setState(() {
-              isPressed = true;
-            });
-          },
-          onClose: () {
-            setState(() {
-              isPressed = false;
-            });
-          },
-          child: Icon(isPressed == true ? Icons.close : Icons.add),
-          overlayColor: Colors.black,
-          overlayOpacity: 0.7,
-          children: [
-            SpeedDialChild(
-              child: Image(image: AssetImage('images/calender.png')),
-              backgroundColor: Colors.white,
-              labelWidget: Container(
-                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
-                child: Text(
-                  'Appointment',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
+        floatingActionButton: model.currentIndex != 0
+            ? Container()
+            : SpeedDial(
+                backgroundColor: Theme.of(context).primaryColor,
+                onOpen: () {
+                  setState(() {
+                    isPressed = true;
+                  });
+                },
+                onClose: () {
+                  setState(() {
+                    isPressed = false;
+                  });
+                },
+                child: Icon(isPressed == true ? Icons.close : Icons.add),
+                overlayColor: Colors.black,
+                overlayOpacity: 0.7,
+                children: [
+                  SpeedDialChild(
+                    child: Image(image: AssetImage('images/calender.png')),
+                    backgroundColor: Colors.white,
+                    labelWidget: Container(
+                      margin:
+                          EdgeInsets.only(right: Config.xMargin(context, 4)),
+                      child: Text(
+                        'Appointment',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, RouteNames.scheduleAppointmentScreen);
+                    },
+                  ),
+                  SpeedDialChild(
+                    backgroundColor: Colors.white,
+                    child: Image(image: AssetImage('images/drugoutline.png')),
+                    labelWidget: Container(
+                      margin:
+                          EdgeInsets.only(right: Config.xMargin(context, 4)),
+                      child: Text(
+                        'Medication',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddMedicationScreen()));
+                    },
+                  ),
+                  SpeedDialChild(
+                    backgroundColor: Colors.white,
+                    child: Image(image: AssetImage('images/dumbell.png')),
+                    labelWidget: Container(
+                      margin:
+                          EdgeInsets.only(right: Config.xMargin(context, 4)),
+                      child: Text(
+                        'Fitness',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, RouteNames.fitnessSchedulesScreen);
+                    },
+                  ),
+                  SpeedDialChild(
+                    backgroundColor: Colors.white,
+                    child: Image(image: AssetImage('images/dropoutline.png')),
+                    labelWidget: Container(
+                      margin:
+                          EdgeInsets.only(right: Config.xMargin(context, 4)),
+                      child: Text(
+                        'Water',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, RouteNames.scheduleWaterReminderScreen);
+                    },
+                  ),
+                  SpeedDialChild(
+                    backgroundColor: Colors.white,
+                    child: Image(image: AssetImage('images/foood.png')),
+                    labelWidget: Container(
+                      margin:
+                          EdgeInsets.only(right: Config.xMargin(context, 4)),
+                      child: Text(
+                        'Diet',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, RouteNames.scheduleDietReminderScreen);
+                    },
+                  ),
+                ],
               ),
-              onTap: () {},
-            ),
-            SpeedDialChild(
-              backgroundColor: Colors.white,
-              child: Image(image: AssetImage('images/drugoutline.png')),
-              labelWidget: Container(
-                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
-                child: Text(
-                  'Medication',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ),
-              onTap: () {},
-            ),
-            SpeedDialChild(
-              backgroundColor: Colors.white,
-              child: Image(image: AssetImage('images/dumbell.png')),
-              labelWidget: Container(
-                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
-                child: Text(
-                  'Fitness',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ),
-              onTap: () {},
-            ),
-            SpeedDialChild(
-              backgroundColor: Colors.white,
-              child: Image(image: AssetImage('images/dropoutline.png')),
-              labelWidget: Container(
-                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
-                child: Text(
-                  'Water',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ),
-              onTap: () {},
-            ),
-            SpeedDialChild(
-              backgroundColor: Colors.white,
-              child: Image(image: AssetImage('images/foood.png')),
-              labelWidget: Container(
-                margin: EdgeInsets.only(right: Config.xMargin(context, 4)),
-                child: Text(
-                  'Diet',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ),
-              onTap: () {},
-            ),
-          ],
-        ),
         //Crazelu extracted BottomNavigationBar widget to Widgets folder
         bottomNavigationBar: isPressed == true
             ? null
