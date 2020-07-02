@@ -7,8 +7,10 @@ class WaterReminderData extends ChangeNotifier {
   static const String _boxName = "waterReminderBox";
 
   List<WaterReminder> _waterReminders = [];
+  List<WaterReminder> _sortedReminders = [];
 
   List<WaterReminder> get waterReminders => _waterReminders;
+  List<WaterReminder> get sortedReminders => _sortedReminders;
 
   WaterReminder _activeWaterReminder;
 
