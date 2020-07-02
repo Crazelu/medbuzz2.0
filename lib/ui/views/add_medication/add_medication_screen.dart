@@ -1,6 +1,5 @@
 import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
-import 'package:MedBuzz/ui/views/add_medication/add_medication_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +18,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   @override
   Widget build(BuildContext context) {
     var medModel = Provider.of<MedicationData>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: medModel.isEditing
