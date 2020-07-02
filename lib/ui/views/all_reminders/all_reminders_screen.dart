@@ -41,7 +41,7 @@ class AllRemindersScreen extends StatelessWidget {
               height: height * 0.03,
               child: ScrollablePositionedList.builder(
                 //sets default selected day to the index of Date.now() date
-                initialScrollIndex: allReminders.selectedDay - 1,
+                initialScrollIndex: allReminders.selectedMonth - 1,
                 itemScrollController: _monthScrollController,
                 //dynamically sets the itemCount to the number of days in the currently selected month
                 itemCount: monthValues.length,
