@@ -78,8 +78,11 @@ class _HomePageState extends State<HomePage> {
                 SafeArea(
                   child: ListView(physics: BouncingScrollPhysics(), children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: Config.xMargin(context, 6),
+                      padding: EdgeInsets.fromLTRB(
+                        Config.xMargin(context, 6),
+                        Config.yMargin(context, 2),
+                        Config.xMargin(context, 6),
+                        Config.yMargin(context, 4),
                       ),
                       child: Column(
                         children: [
