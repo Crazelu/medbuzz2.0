@@ -1,4 +1,3 @@
-import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
@@ -56,17 +55,15 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
               ),
             ),
           ),
-          leading: Container(
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: appThemeLight.appBarTheme.iconTheme.color,
-              ),
-
-              // navigate to add appointments page
-
-              onPressed: () => {Navigator.pushNamed(context, '')},
+          leading: IconButton(
+            icon: Icon(
+              Icons.keyboard_backspace,
+              color: appThemeLight.appBarTheme.iconTheme.color,
             ),
+
+            // navigate to add appointments page
+
+            onPressed: () => {Navigator.pushNamed(context, 'homePage')},
           ),
           bottom: TabBar(
             indicatorSize: TabBarIndicatorSize.label,
