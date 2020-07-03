@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var model = Provider.of<HomeScreenModel>(context);
+
     var waterReminderDB = Provider.of<WaterReminderData>(context);
     waterReminderDB.getWaterReminders();
 
@@ -77,8 +78,11 @@ class _HomePageState extends State<HomePage> {
                 SafeArea(
                   child: ListView(physics: BouncingScrollPhysics(), children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: Config.xMargin(context, 6),
+                      padding: EdgeInsets.fromLTRB(
+                        Config.xMargin(context, 6),
+                        Config.yMargin(context, 2),
+                        Config.xMargin(context, 6),
+                        Config.yMargin(context, 4),
                       ),
                       child: Column(
                         children: [
@@ -92,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     'Good Morning,',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: Config.xMargin(context, 5),
                                       color: color = Color(0xff333333),
                                     ),
                                   ),
@@ -102,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     'Juliana',
                                     style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: Config.xMargin(context, 6.66),
                                       fontWeight: FontWeight.w600,
                                       color: color = Color(0xff333333),
                                     ),
@@ -110,9 +114,10 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                               IconButton(
-                                padding: EdgeInsets.only(bottom: 30.0),
+                                padding: EdgeInsets.only(
+                                    bottom: Config.xMargin(context, 8.33)),
                                 icon: Icon(Icons.notifications_none),
-                                iconSize: 30.0,
+                                iconSize: Config.xMargin(context, 8.33),
                                 color: Theme.of(context).primaryColorDark,
                                 onPressed: () {},
                               ),
@@ -213,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                                         '3500',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 18.0,
+                                          fontSize: Config.xMargin(context, 5),
                                           color: Theme.of(context)
                                               .primaryColorDark,
                                         ),
@@ -300,7 +305,7 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 'Daily medications',
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: Config.textSize(context, 5),
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -328,7 +333,7 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 'Upcoming appointments',
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: Config.textSize(context, 5),
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -426,7 +431,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onTap: () {
                       Navigator.pushNamed(
-                          context, RouteNames.fitnessSchedulesScreen);
+                          context, RouteNames.fitnessDescriptionScreen);
                     },
                   ),
                   SpeedDialChild(
@@ -472,48 +477,57 @@ class _HomePageState extends State<HomePage> {
                 controller: _menuPositionController,
                 initialIndex: 0,
                 defaultBubbleColor: Theme.of(context).primaryColorLight,
-                backgroundColor: Theme.of(context).backgroundColor,
+                backgroundColor: Theme.of(context).focusColor,
                 onTap: (index) {
                   model.updateCurrentIndex(index);
                   _pageController.animateToPage(index,
-                      duration: Duration(milliseconds: 500),
+                      duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOutQuad);
                 },
                 items: <BubbledNavigationBarItem>[
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.home,
-                        size: 30, color: Theme.of(context).primaryColorDark),
+                        size: Config.xMargin(context, 8.33),
+                        color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.home,
-                        size: 30, color: Colors.blueAccent),
+                        size: Config.xMargin(context, 8.33),
+                        color: Colors.blueAccent),
                     title: Text(
                       'Home',
                       style: TextStyle(
                           color: Theme.of(context).primaryColorDark,
-                          fontSize: 12),
+                          fontWeight: FontWeight.w500,
+                          fontSize: Config.textSize(context, 3.5)),
                     ),
                   ),
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.bell,
-                        size: 30, color: Theme.of(context).primaryColorDark),
+                        size: Config.xMargin(context, 8.33),
+                        color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.bell,
-                        size: 30, color: Colors.blueAccent),
+                        size: Config.xMargin(context, 8.33),
+                        color: Colors.blueAccent),
                     title: Text(
                       'Reminders',
                       style: TextStyle(
                           color: Theme.of(context).primaryColorDark,
-                          fontSize: 12),
+                          fontWeight: FontWeight.w500,
+                          fontSize: Config.textSize(context, 3.5)),
                     ),
                   ),
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.profile_circled,
-                        size: 30, color: Theme.of(context).primaryColorDark),
+                        size: Config.xMargin(context, 8.33),
+                        color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.profile_circled,
-                        size: 30, color: Colors.blueAccent),
+                        size: Config.xMargin(context, 8.33),
+                        color: Colors.blueAccent),
                     title: Text(
                       'Profile',
                       style: TextStyle(
                           color: Theme.of(context).primaryColorDark,
-                          fontSize: 12),
+                          fontWeight: FontWeight.w500,
+                          fontSize: Config.textSize(context, 3.5)),
                     ),
                   ),
                 ],

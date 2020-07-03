@@ -10,10 +10,12 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 ///although the calendar could and should have it's own model
 ///but that one no be today
 class ScrollableCalendar extends StatelessWidget {
+  final bool hideDivider;
   final model;
   final ItemScrollController _scrollController = ItemScrollController();
 
-  ScrollableCalendar({Key key, @required this.model}) : super(key: key);
+  ScrollableCalendar({Key key, @required this.model, this.hideDivider = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,9 @@ class ScrollableCalendar extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return Container(
+      height: height * 0.12,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
             //without specifying this height, flutter throws an error because of the grid
@@ -114,10 +117,12 @@ class ScrollableCalendar extends StatelessWidget {
               },
             ),
           ),
-          Divider(
-            color: Theme.of(context).hintColor.withOpacity(.3),
-            thickness: 2,
-          ),
+          hideDivider
+              ? Container()
+              : Divider(
+                  color: Theme.of(context).hintColor.withOpacity(.1),
+                  thickness: 3,
+                ),
         ],
       ),
     );

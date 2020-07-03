@@ -10,11 +10,11 @@ class Indicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: positionIndex == currentIndex
-          ? Config.xMargin(context, 4.2)
-          : Config.xMargin(context, 2.8),
+          ? Config.xMargin(context, 3.8)
+          : Config.xMargin(context, 2.4),
       height: positionIndex == currentIndex
-          ? Config.yMargin(context, 2.55)
-          : Config.yMargin(context, 1.6),
+          ? Config.yMargin(context, 1.8)
+          : Config.yMargin(context, 1.1),
       decoration: BoxDecoration(
           border: Border.all(
               color: positionIndex == currentIndex
