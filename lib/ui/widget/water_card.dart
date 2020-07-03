@@ -1,16 +1,23 @@
-import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class MedicationCard extends StatefulWidget {
+import '../../core/models/water_reminder_model/water_reminder.dart';
+
+class WaterCard extends StatefulWidget {
   final double height;
   final double width;
-  MedicationCard({this.height, this.width});
+  final WaterReminder waterReminder;
+
+  WaterCard(
+      {@required this.height,
+      @required this.width,
+      @required this.waterReminder});
   @override
-  _MedicationCardState createState() => _MedicationCardState();
+  _WaterCardState createState() => _WaterCardState();
 }
 
-class _MedicationCardState extends State<MedicationCard> {
+class _WaterCardState extends State<WaterCard> {
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -25,8 +32,10 @@ class _MedicationCardState extends State<MedicationCard> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: widget.height * 0.02),
               Text(
-                "8:00 AM",
+                DateFormat.jm().format(widget.waterReminder.dateTime) ??
+                    "10:00 AM",
               ),
               SizedBox(height: widget.height * 0.02),
               Container(
@@ -35,16 +44,14 @@ class _MedicationCardState extends State<MedicationCard> {
                       horizontal: Config.xMargin(context, 3),
                       vertical: Config.yMargin(context, 1)),
                   decoration: BoxDecoration(
-                    color: isSelected == true
+                    color: isSelected
                         ? Theme.of(context).primaryColor
                         : Theme.of(context).primaryColorLight,
                     borderRadius:
                         BorderRadius.circular(Config.xMargin(context, 5)),
                     boxShadow: [
                       BoxShadow(
-                        color: isSelected == true
-                            ? isSelected ? Theme.of(context).primaryColorLight: Theme.of(context).primaryColorDark
-                            : Colors.grey[50],
+                        color: Colors.white,
                         spreadRadius: 5,
 //blurRadius: 2,
 //offset: Offset(0, 3), // changes position of shadow
@@ -56,8 +63,7 @@ class _MedicationCardState extends State<MedicationCard> {
                       Row(
                         children: <Widget>[
                           Image.asset(
-                             "images/injection.png",
-//                            color: Theme.of(context).primaryColorLight,
+                            "images/drops.png",
                             width: widget.width * 0.2,
                             height: widget.height * 0.1,
                           ),
@@ -65,15 +71,23 @@ class _MedicationCardState extends State<MedicationCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                'Chloroquine Injection',
+                                'Drink ${widget.waterReminder.ml ?? 150}ml of water',
                                 style: TextStyle(
-                                    color: isSelected ? Theme.of(context).primaryColorLight: Theme.of(context).primaryColorDark,
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: widget.height * 0.005),
                               Text(
-                                '1 shots once daily',
-                                style: TextStyle(color: isSelected ? Theme.of(context).primaryColorLight: Theme.of(context).primaryColorDark),
+                                widget.waterReminder.dateTime
+                                        .isAfter(DateTime.now())
+                                    ? 'Upcoming'
+                                    : 'Past',
+                                style: TextStyle(
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark),
                               ),
                             ],
                           ),
@@ -83,11 +97,13 @@ class _MedicationCardState extends State<MedicationCard> {
                         height: Config.yMargin(context, 1),
                         width: double.infinity,
                       ),
-                      Divider(
-                        color: Theme.of(context).primaryColorLight,
-                        height: widget.height * 0.02,
-//indent: 50.0,
-                        endIndent: 10.0,
+                      Visibility(
+                        visible: isSelected,
+                        child: Divider(
+                          color: Theme.of(context).primaryColorDark,
+                          height: widget.height * 0.02,
+                          endIndent: 10.0,
+                        ),
                       ),
                       Visibility(
                         visible: isSelected,
@@ -95,14 +111,14 @@ class _MedicationCardState extends State<MedicationCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             FlatButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, RouteNames.drugDescription);
-                              },
+                              onPressed: () {},
                               child: Text(
                                 'View',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: isSelected ? Theme.of(context).primaryColorLight: Theme.of(context).primaryColorDark),
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark),
                               ),
                             ),
                             FlatButton(
@@ -110,7 +126,9 @@ class _MedicationCardState extends State<MedicationCard> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.close,
-                                    color: isSelected ? Theme.of(context).primaryColorLight: Theme.of(context).primaryColorDark,
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark,
                                     size: Config.textSize(context, 3),
                                   ),
                                   SizedBox(
@@ -120,7 +138,11 @@ class _MedicationCardState extends State<MedicationCard> {
                                     'Skip',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: isSelected ? Theme.of(context).primaryColorLight: Theme.of(context).primaryColorDark),
+                                        color: isSelected
+                                            ? Theme.of(context)
+                                                .primaryColorLight
+                                            : Theme.of(context)
+                                                .primaryColorDark),
                                   )
                                 ],
                               ),
@@ -132,7 +154,9 @@ class _MedicationCardState extends State<MedicationCard> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.done,
-                                    color: isSelected ? Theme.of(context).primaryColorLight: Theme.of(context).primaryColorDark,
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).primaryColorDark,
                                     size: Config.textSize(context, 3),
                                   ),
                                   SizedBox(
@@ -142,7 +166,11 @@ class _MedicationCardState extends State<MedicationCard> {
                                     'Done',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: isSelected ? Theme.of(context).primaryColorLight: Theme.of(context).primaryColorDark),
+                                        color: isSelected
+                                            ? Theme.of(context)
+                                                .primaryColorLight
+                                            : Theme.of(context)
+                                                .primaryColorDark),
                                   )
                                 ],
                               ),
