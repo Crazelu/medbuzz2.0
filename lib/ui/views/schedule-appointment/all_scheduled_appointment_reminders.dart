@@ -7,25 +7,6 @@ import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders_model.dart';
 // import 'package:table_calendar/table_calendar.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: ScheduledAppointmentsPage(),
-    );
-  }
-}
-
 class ScheduledAppointmentsPage extends StatefulWidget {
   @override
   _ScheduledAppointmentsPageState createState() {
