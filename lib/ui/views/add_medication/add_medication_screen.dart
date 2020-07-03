@@ -621,7 +621,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                 }
               },
               child: Container(
-                height: Config.yMargin(context, 10.0),
+                height: Config.yMargin(context, 8.0),
                 width: Config.xMargin(context, 26.0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
