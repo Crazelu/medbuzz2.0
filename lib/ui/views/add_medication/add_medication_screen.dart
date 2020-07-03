@@ -25,210 +25,241 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       body: Container(
         color: Theme.of(context).primaryColorLight,
         child: ListView(
-          padding: EdgeInsets.fromLTRB(
-            Config.xMargin(context, 5),
-            Config.xMargin(context, 0),
-            Config.xMargin(context, 5),
-            0.0,
-          ),
           addRepaintBoundaries: false,
           children: <Widget>[
             SizedBox(height: Config.yMargin(context, 3)),
-            Text(
-              'Drug Name',
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 5),
-                  fontWeight: FontWeight.bold),
+            Container(
+              padding: EdgeInsets.fromLTRB(
+                Config.xMargin(context, 5),
+                Config.xMargin(context, 0),
+                Config.xMargin(context, 5),
+                0.0,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Drug Name',
+                    style: TextStyle(
+                        fontSize: Config.textSize(context, 5),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: Config.yMargin(context, 1.5)),
+                  drugTextField(),
+                ],
+              ),
             ),
-            SizedBox(height: Config.yMargin(context, 1.5)),
-            drugTextField(),
+
             SizedBox(height: Config.yMargin(context, 6)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: medModel.images
-                  .asMap()
-                  .entries
-                  .map((MapEntry map) => buildImageContainer(map.key))
-                  .toList(),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: medModel.images
+            //       .asMap()
+            //       .entries
+            //       .map((MapEntry map) => buildImageContainer(map.key))
+            //       .toList(),
+            // ),
+            Container(
+              padding: EdgeInsets.fromLTRB(
+                Config.xMargin(context, 5),
+                Config.xMargin(context, 0),
+                Config.xMargin(context, 5),
+                0.0,
+              ),
+              height: Config.yMargin(context, 10.0),
+              child: ListView.builder(
+                padding: EdgeInsets.only(left: Config.xMargin(context, 5)),
+                scrollDirection: Axis.horizontal,
+                itemCount: medModel.drugType.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return buildImageContainer(index);
+                },
+              ),
             ),
             SizedBox(height: Config.yMargin(context, 6)),
-            Text(
-              'Reminder Frequency',
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 5),
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: Config.yMargin(context, 1.5)),
-            FormField<String>(
-              builder: (FormFieldState<String> state) {
-                return InputDecorator(
-                  decoration: InputDecoration(
-                    hintText: 'Once',
-                    hintStyle: TextStyle(
-                      color: Colors.black38,
-                      fontSize: Config.xMargin(context, 5),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(
-                          Config.xMargin(context, 5),
+            Container(
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Reminder Frequency',
+                    style: TextStyle(
+                        fontSize: Config.textSize(context, 5),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: Config.yMargin(context, 1.5)),
+                  FormField<String>(
+                    builder: (FormFieldState<String> state) {
+                      return InputDecorator(
+                        decoration: InputDecoration(
+                          hintText: 'Once',
+                          hintStyle: TextStyle(
+                            color: Colors.black38,
+                            fontSize: Config.xMargin(context, 5),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                Config.xMargin(context, 5),
+                              ),
+                            ),
+                          ),
+                        ),
+                        isEmpty: false,
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            icon: Icon(
+                              Icons.keyboard_arrow_down,
+                              size: Config.xMargin(context, 8),
+                            ),
+                            value: medModel.currentSelectedValue,
+                            isDense: true,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                medModel.currentSelectedValue = newValue;
+                                state.didChange(newValue);
+                              });
+                              switch (medModel.currentSelectedValue) {
+                                case 'Once':
+                                  medModel.secondTime = null;
+                                  medModel.thirdTime = null;
+                                  break;
+                                case 'Twice':
+                                  medModel.secondTime = TimeOfDay.now();
+                                  medModel.thirdTime = null;
+                                  break;
+                                case 'Thrice':
+                                  medModel.secondTime = TimeOfDay.now();
+                                  medModel.thirdTime = TimeOfDay.now();
+                                  break;
+                              }
+                            },
+                            items: medModel.frequency.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: Config.yMargin(context, 6)),
+                  Text(
+                    'Set time to take medication',
+                    style: TextStyle(
+                        fontSize: Config.textSize(context, 5),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: Config.yMargin(context, 3.0)),
+                  medModel.currentSelectedValue == 'Once'
+                      ? buildRowOnce()
+                      : medModel.currentSelectedValue == 'Twice'
+                          ? buildRowTwice()
+                          : buildRowThrice(),
+                  SizedBox(height: Config.yMargin(context, 6.0)),
+                  Text(
+                    'Dosage (per day)',
+                    style: TextStyle(
+                        fontSize: Config.textSize(context, 5),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: Config.yMargin(context, 3.0)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => medModel.incrementCounter(),
+                        child: Container(
+                          height: Config.yMargin(context, 4.5),
+                          width: Config.xMargin(context, 8.3),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Config.xMargin(context, 4)))),
+                          child: Icon(
+                            Icons.add,
+                            color: Theme.of(context).primaryColorLight,
+                            size: Config.xMargin(context, 5),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '${medModel.dosage}',
+                        style: TextStyle(
+                            fontSize: Config.textSize(context, 5),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      GestureDetector(
+                        onTap: () => medModel.decrementCounter(),
+                        child: Container(
+                          height: Config.yMargin(context, 4.5),
+                          width: Config.xMargin(context, 8.3),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Config.xMargin(context, 4)))),
+                          child: Center(
+                            child: Icon(
+                              Icons.remove,
+                              color: Theme.of(context).primaryColorLight,
+                              size: Config.xMargin(context, 5),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: Config.yMargin(context, 6.0)),
+                  Text(
+                    'Duration',
+                    style: TextStyle(
+                        fontSize: Config.textSize(context, 5),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: Config.yMargin(context, 3.0)),
+                  buildStartDate(),
+                  SizedBox(height: Config.yMargin(context, 1.5)),
+                  buildEndDate(),
+                  SizedBox(height: Config.yMargin(context, 10)),
+                  InkWell(
+                    onTap: () {
+                      MaterialLocalizations localizations =
+                          MaterialLocalizations.of(context);
+                      print([
+                        localizations.formatMediumDate(medModel.startTime),
+                        localizations.formatMediumDate(medModel.endTime),
+                        medModel.drugName,
+                        medModel.currentSelectedValue,
+                        medModel.firstTime,
+                        medModel.secondTime,
+                        medModel.thirdTime,
+                        medModel.selectedIndex,
+                        medModel.dosage
+                      ]);
+                    },
+                    child: Container(
+                      height: Config.yMargin(context, 10.0),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(Config.xMargin(context, 3.5))),
+                          color: Theme.of(context).primaryColor),
+                      child: Center(
+                        child: Text(
+                          'Save',
+                          style: TextStyle(
+                            fontSize: Config.textSize(context, 4.5),
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  isEmpty: false,
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      icon: Icon(
-                        Icons.keyboard_arrow_down,
-                        size: Config.xMargin(context, 8),
-                      ),
-                      value: medModel.currentSelectedValue,
-                      isDense: true,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          medModel.currentSelectedValue = newValue;
-                          state.didChange(newValue);
-                        });
-                        switch (medModel.currentSelectedValue) {
-                          case 'Once':
-                            medModel.secondTime = null;
-                            medModel.thirdTime = null;
-                            break;
-                          case 'Twice':
-                            medModel.secondTime = TimeOfDay.now();
-                            medModel.thirdTime = null;
-                            break;
-                          case 'Thrice':
-                            medModel.secondTime = TimeOfDay.now();
-                            medModel.thirdTime = TimeOfDay.now();
-                            break;
-                        }
-                      },
-                      items: medModel.frequency.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: Config.yMargin(context, 6)),
-            Text(
-              'Set time to take medication',
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 5),
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: Config.yMargin(context, 3.0)),
-            medModel.currentSelectedValue == 'Once'
-                ? buildRowOnce()
-                : medModel.currentSelectedValue == 'Twice'
-                    ? buildRowTwice()
-                    : buildRowThrice(),
-            SizedBox(height: Config.yMargin(context, 6.0)),
-            Text(
-              'Dosage (per day)',
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 5),
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: Config.yMargin(context, 3.0)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () => medModel.incrementCounter(),
-                  child: Container(
-                    height: Config.yMargin(context, 4.5),
-                    width: Config.xMargin(context, 8.3),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Config.xMargin(context, 4)))),
-                    child: Icon(
-                      Icons.add,
-                      color: Theme.of(context).primaryColorLight,
-                      size: Config.xMargin(context, 5),
-                    ),
-                  ),
-                ),
-                Text(
-                  '${medModel.dosage}',
-                  style: TextStyle(
-                      fontSize: Config.textSize(context, 5),
-                      fontWeight: FontWeight.bold),
-                ),
-                GestureDetector(
-                  onTap: () => medModel.decrementCounter(),
-                  child: Container(
-                    height: Config.yMargin(context, 4.5),
-                    width: Config.xMargin(context, 8.3),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Config.xMargin(context, 4)))),
-                    child: Center(
-                      child: Icon(
-                        Icons.remove,
-                        color: Theme.of(context).primaryColorLight,
-                        size: Config.xMargin(context, 5),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: Config.yMargin(context, 6.0)),
-            Text(
-              'Duration',
-              style: TextStyle(
-                  fontSize: Config.textSize(context, 5),
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: Config.yMargin(context, 3.0)),
-            buildStartDate(),
-            SizedBox(height: Config.yMargin(context, 1.5)),
-            buildEndDate(),
-            SizedBox(height: Config.yMargin(context, 10)),
-            InkWell(
-              onTap: () {
-                MaterialLocalizations localizations =
-                    MaterialLocalizations.of(context);
-                print([
-                  localizations.formatMediumDate(medModel.startTime),
-                  localizations.formatMediumDate(medModel.endTime),
-                  medModel.drugName,
-                  medModel.currentSelectedValue,
-                  medModel.firstTime,
-                  medModel.secondTime,
-                  medModel.thirdTime,
-                  medModel.selectedIndex,
-                  medModel.dosage
-                ]);
-              },
-              child: Container(
-                height: Config.yMargin(context, 10.0),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(Config.xMargin(context, 3.5))),
-                    color: Theme.of(context).primaryColor),
-                child: Center(
-                  child: Text(
-                    'Save',
-                    style: TextStyle(
-                      fontSize: Config.textSize(context, 4.5),
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColorLight,
-                    ),
-                  ),
-                ),
+                ],
               ),
             ),
+
             SizedBox(height: Config.yMargin(context, 7)),
           ],
         ),
@@ -298,6 +329,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     return GestureDetector(
       onTap: () => medModel.onSelectedDrugImage(index),
       child: Container(
+        margin: EdgeInsets.only(right: Config.xMargin(context, 3)),
         height: Config.yMargin(context, 10),
         width: Config.xMargin(context, 18),
         decoration: BoxDecoration(

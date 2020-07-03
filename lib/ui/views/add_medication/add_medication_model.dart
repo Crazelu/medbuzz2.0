@@ -7,13 +7,24 @@ class AddMedication extends ChangeNotifier {
   String currentSelectedValue = 'Once';
   bool isEditing = false;
   String drugName;
-  var drugType = ['Injection', 'Tablets', 'Drops', 'Pills'];
+  var drugType = [
+    'Injection',
+    'Tablets',
+    'Drops',
+    'Pills',
+    'Ointment',
+    'Syrup',
+    'Inhaler'
+  ];
   final List<String> frequency = ['Once', 'Twice', 'Thrice'];
   List<String> images = [
     'images/injection.png',
     'images/tablets.png',
     'images/drops.png',
-    'images/pills.png'
+    'images/pills.png',
+    'images/ointment.png',
+    'images/syrup.png',
+    'images/inhaler.png'
   ];
   TimeOfDay firstTime = TimeOfDay.now();
   TimeOfDay secondTime = TimeOfDay.now();

@@ -1,4 +1,4 @@
-import 'package:MedBuzz/core/models/water_reminder.dart';
+import 'package:MedBuzz/core/models/water_reminder_model/water_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:date_util/date_util.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ List<MonthCount> monthValues = [
   MonthCount(month: 'December'),
 ];
 
-class WaterReminderViewModel extends ChangeNotifier {
+class ScheduleWaterReminderViewModel extends ChangeNotifier {
   List<int> _mls = [150, 250, 350, 500, 750, 1000];
   DateTime _today = DateTime.now();
   int _selectedMl;
@@ -35,7 +35,7 @@ class WaterReminderViewModel extends ChangeNotifier {
   int _selectedMonth;
   dynamic _selectedTime;
 
-  WaterReminderViewModel() {
+  ScheduleWaterReminderViewModel() {
     this._selectedMl = null;
     this._selectedMonth = _today.month;
     this._selectedDay = _today.day;

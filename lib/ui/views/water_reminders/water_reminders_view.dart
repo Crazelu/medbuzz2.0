@@ -22,7 +22,7 @@ class WaterScheduleViewScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => WaterScheduleScreen()));
+                      builder: (context) => ScheduleWaterReminderScreen()));
             },
             backgroundColor: Theme.of(context).primaryColor,
             child: Icon(
@@ -38,6 +38,9 @@ class WaterScheduleViewScreen extends StatelessWidget {
 }
 
 class WaterScheduleView extends StatefulWidget {
+  WaterScheduleView({this.payload});
+
+  final String payload;
   @override
   _WaterScheduleViewState createState() => _WaterScheduleViewState();
 }
