@@ -8,7 +8,7 @@ class ViewAppointment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appointmentModeller = Provider.of<AppointmentData>(context);
-    final medicationInfo = appointmentModeller.getAppointments();
+    final appointmentInfo = appointmentModeller.getAppointments();
     //Set Widget to use Provider
     return Consumer<AppointmentData>(
       builder: (context, appointmentModel, child) {
