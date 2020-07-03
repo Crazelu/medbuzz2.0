@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -82,13 +83,13 @@ class __fitnesssDescriptionState extends State<add_fitness> {
             size: Config.xMargin(context, 8),
           ),
           onPressed: () {
-            navigation.pushFrom(context, FitnessSchedulesScreen());
+            Navigator.pushReplacementNamed(context, RouteNames.homePage);
           },
         ),
       ),
       body: WillPopScope(
         onWillPop: () {
-          navigation.pushFrom(context, FitnessSchedulesScreen());
+          Navigator.pushReplacementNamed(context, RouteNames.homePage);
           return Future.value(false);
         },
         child: Padding(

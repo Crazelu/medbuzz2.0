@@ -476,11 +476,11 @@ class _HomePageState extends State<HomePage> {
                 controller: _menuPositionController,
                 initialIndex: 0,
                 defaultBubbleColor: Theme.of(context).primaryColorLight,
-                backgroundColor: Theme.of(context).primaryColor,
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.6),
                 onTap: (index) {
                   model.updateCurrentIndex(index);
                   _pageController.animateToPage(index,
-                      duration: Duration(milliseconds: 300),
+                      duration: Duration(milliseconds: 150),
                       curve: Curves.easeInOutQuad);
                 },
                 items: <BubbledNavigationBarItem>[
