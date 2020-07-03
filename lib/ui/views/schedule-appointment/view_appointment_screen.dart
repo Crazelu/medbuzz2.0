@@ -1,3 +1,4 @@
+import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/core/database/appointmentData.dart';
@@ -27,7 +28,12 @@ class ViewAppointment extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(Config.yMargin(context, 2.6)),
                   child: FlatButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          child: DeleteDialog(),
+                        );
+                      },
                       icon: Icon(
                         Icons.delete,
                         color: Colors.red,
