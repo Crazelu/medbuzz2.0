@@ -1,4 +1,4 @@
-import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
@@ -46,7 +46,8 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
 
               // navigate to add appointments page
 
-              onPressed: () => {Navigator.pushNamed(context, '')},
+              onPressed: () =>
+                  {Navigator.pushNamed(context, RouteNames.homePage)},
             ),
           ),
           bottom: TabBar(
