@@ -25,16 +25,20 @@ class AllRemindersScreen extends StatelessWidget {
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    Color bgColor = Theme.of(context).backgroundColor;
 
     return Scaffold(
+      backgroundColor: bgColor,
       appBar: AppBar(
-        leading: BackButton(color: Theme.of(context).primaryColorDark),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        //leading: BackButton(color: Theme.of(context).primaryColorDark),
         title: Text(
           'All reminders',
           style: TextStyle(color: Theme.of(context).primaryColorDark),
         ),
-        elevation: 0.5,
-        backgroundColor: Theme.of(context).primaryColorLight,
+        elevation: 0,
+        backgroundColor: bgColor,
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),

@@ -3,6 +3,7 @@ import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/diet_reminders/schedule_diet_reminder.dart';
 import 'package:MedBuzz/ui/views/drug_description/drug_description.dart';
+import 'package:MedBuzz/ui/views/fitness_reminders/add_fitness_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/single_fitness_screen.dart';
 import 'package:MedBuzz/ui/views/home_screen/home_page.dart';
@@ -39,6 +40,7 @@ class RouteNames {
   static const String signup = 'signup';
   static const String drugDescription = 'drugDescription';
   static const String fitnessSchedulesScreen = 'fitnessSchedulesScreen';
+  static const String fitnessDescriptionScreen = 'fitnessDescriptionScreen';
   static const String allRemindersScreen = 'allRemindersScreen';
   static const String scheduleAppointmentScreen = 'scheduleAppointmentScreen';
   static const String scheduledAppointmentsPage = 'scheduledAppointmentsPage';
@@ -69,6 +71,8 @@ class RouteNames {
     RouteNames.allRemindersScreen: (context) => AllRemindersScreen(),
     RouteNames.drugDescription: (context) => DrugDescription(),
     RouteNames.fitnessSchedulesScreen: (context) => FitnessSchedulesScreen(),
+    RouteNames.fitnessDescriptionScreen: (context) =>
+        FitnessDescriptionScreen(),
     RouteNames.scheduleAppointmentScreen: (context) =>
         ScheduleAppointmentScreen(),
     RouteNames.scheduledAppointmentsPage: (context) =>

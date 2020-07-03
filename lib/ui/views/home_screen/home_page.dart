@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var model = Provider.of<HomeScreenModel>(context);
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         body: NotificationListener<ScrollNotification>(
@@ -70,7 +71,8 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 30.0, vertical: 40.0),
+                              horizontal: Config.xMargin(context, 8.33),
+                              vertical: Config.yMargin(context, 5)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -81,9 +83,8 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     'Good Morning,',
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: Config.xMargin(context, 5),
                                       color: color = Color(0xff333333),
-                                      fontFamily: 'Segoe',
                                     ),
                                   ),
                                   SizedBox(
@@ -92,18 +93,18 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     'Juliana',
                                     style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: Config.xMargin(context, 6.66),
                                       fontWeight: FontWeight.w600,
                                       color: color = Color(0xff333333),
-                                      fontFamily: 'Segoe',
                                     ),
                                   ),
                                 ],
                               ),
                               IconButton(
-                                padding: EdgeInsets.only(bottom: 30.0),
+                                padding: EdgeInsets.only(
+                                    bottom: Config.xMargin(context, 8.33)),
                                 icon: Icon(Icons.notifications_none),
-                                iconSize: 30.0,
+                                iconSize: Config.xMargin(context, 8.33),
                                 color: Theme.of(context).primaryColorDark,
                                 onPressed: () {},
                               ),
@@ -112,11 +113,14 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(
-                              bottom: 10.0, left: 24.0, right: 24.0),
+                              bottom: Config.xMargin(context, 2.77),
+                              left: Config.xMargin(context, 6.66),
+                              right: Config.xMargin(context, 6.66)),
                           height: Config.yMargin(context, 20),
                           width: Config.xMargin(context, 100),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(
+                                Config.xMargin(context, 5.55)),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.white,
@@ -132,10 +136,10 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0,
-                                    right: 25.0,
-                                    top: 10.0,
-                                    bottom: 17.0),
+                                    left: Config.xMargin(context, 6.94),
+                                    right: Config.xMargin(context, 6.94),
+                                    top: Config.yMargin(context, 1.25),
+                                    bottom: Config.yMargin(context, 2.125)),
                                 child: Row(
                                   children: [
                                     Image.asset('images/waterdrop.png'),
@@ -151,9 +155,9 @@ class _HomePageState extends State<HomePage> {
                                           'Water tracker',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 14.0,
+                                            fontSize:
+                                                Config.textSize(context, 3.88),
                                             color: color = Color(0xff777777),
-                                            fontFamily: 'Segoe',
                                           ),
                                         ),
                                         SizedBox(
@@ -165,19 +169,19 @@ class _HomePageState extends State<HomePage> {
                                               '250ml',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 18.0,
+                                                fontSize:
+                                                    Config.xMargin(context, 5),
                                                 color: color =
                                                     Color(0xff333333),
-                                                fontFamily: 'Segoe',
                                               ),
                                             ),
                                             Text(
                                               ' of 3500ml',
                                               style: TextStyle(
-                                                fontSize: 14.0,
+                                                fontSize: Config.textSize(
+                                                    context, 3.88),
                                                 color: color =
                                                     Color(0xff333333),
-                                                fontFamily: 'Segoe',
                                               ),
                                             ),
                                           ],
@@ -188,27 +192,27 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 3.0,
-                                    left: 15.0,
-                                    right: 24.0,
-                                    bottom: 17.0),
+                                padding: EdgeInsets.only(
+                                    top: Config.yMargin(context, 0.375),
+                                    left: Config.xMargin(context, 4.17),
+                                    right: Config.xMargin(context, 6.66),
+                                    bottom: Config.xMargin(context, 8.33)),
                                 child: Stack(
                                   children: [
                                     Container(
                                       height: Config.yMargin(context, 2),
                                       decoration: BoxDecoration(
                                           color: color = Color(0xffEEEEEE),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0)),
+                                          borderRadius: BorderRadius.circular(
+                                              Config.xMargin(context, 2.77))),
                                     ),
                                     Container(
                                       height: Config.yMargin(context, 2),
                                       width: Config.xMargin(context, 25),
                                       decoration: BoxDecoration(
                                           color: Theme.of(context).primaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0)),
+                                          borderRadius: BorderRadius.circular(
+                                              Config.xMargin(context, 2.77))),
                                     ),
                                   ],
                                 ),
@@ -222,14 +226,15 @@ class _HomePageState extends State<HomePage> {
                             Expanded(
                               child: Container(
                                 margin: EdgeInsets.only(
-                                    left: 24.0,
-                                    right: 27.0,
-                                    bottom: 24.0,
-                                    top: 24.0),
+                                    left: Config.xMargin(context, 6.66),
+                                    right: Config.xMargin(context, 7.5),
+                                    bottom: Config.xMargin(context, 6.66),
+                                    top: Config.xMargin(context, 6.66)),
                                 height: Config.yMargin(context, 20),
                                 width: Config.xMargin(context, 100),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(
+                                      Config.xMargin(context, 5.55)),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.white,
@@ -240,8 +245,9 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16.0, right: 15.0),
+                                  padding: EdgeInsets.only(
+                                      left: Config.xMargin(context, 4.44),
+                                      right: Config.xMargin(context, 4.17)),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -251,9 +257,9 @@ class _HomePageState extends State<HomePage> {
                                         'Meal',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 14.0,
+                                          fontSize:
+                                              Config.xMargin(context, 3.88),
                                           color: color = Color(0xff777777),
-                                          fontFamily: 'Segoe',
                                         ),
                                       ),
                                       SizedBox(
@@ -263,10 +269,9 @@ class _HomePageState extends State<HomePage> {
                                         '3500',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 18.0,
+                                          fontSize: Config.xMargin(context, 5),
                                           color: Theme.of(context)
                                               .primaryColorDark,
-                                          fontFamily: 'Segoe',
                                         ),
                                       ),
                                       SizedBox(
@@ -275,9 +280,9 @@ class _HomePageState extends State<HomePage> {
                                       Text(
                                         'calories today',
                                         style: TextStyle(
-                                          fontSize: 12.0,
+                                          fontSize:
+                                              Config.xMargin(context, 3.33),
                                           color: color = Color(0xff777777),
-                                          fontFamily: 'Segoe',
                                         ),
                                       ),
                                       SizedBox(
@@ -287,23 +292,31 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Container(
                                             padding: EdgeInsets.only(
-                                                left: 16.0,
-                                                right: 16.0,
-                                                top: 16.0,
-                                                bottom: 16.0),
+                                                left: Config.xMargin(
+                                                    context, 4.44),
+                                                right: Config.xMargin(
+                                                    context, 4.44),
+                                                top: Config.xMargin(
+                                                    context, 4.44),
+                                                bottom: Config.xMargin(
+                                                    context, 4.44)),
                                             height: Config.yMargin(context, 1),
                                             decoration: BoxDecoration(
                                                 color: color =
                                                     Color(0xffEEEEEE),
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        20.0)),
+                                                        Config.xMargin(
+                                                            context, 5.55))),
                                           ),
                                           Container(
                                             padding: EdgeInsets.only(
-                                                left: 16.0,
-                                                top: 16.0,
-                                                bottom: 16.0),
+                                                left: Config.xMargin(
+                                                    context, 4.44),
+                                                top: Config.xMargin(
+                                                    context, 4.44),
+                                                bottom: Config.xMargin(
+                                                    context, 4.44)),
                                             height: Config.yMargin(context, 1),
                                             width: Config.xMargin(context, 14),
                                             decoration: BoxDecoration(
@@ -311,7 +324,8 @@ class _HomePageState extends State<HomePage> {
                                                     .buttonColor,
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        20.0)),
+                                                        Config.xMargin(
+                                                            context, 5.55))),
                                           ),
                                         ],
                                       ),
@@ -323,14 +337,15 @@ class _HomePageState extends State<HomePage> {
                             Expanded(
                               child: Container(
                                 margin: EdgeInsets.only(
-                                    left: 20.0,
-                                    right: 24.0,
-                                    bottom: 24.0,
-                                    top: 24.0),
+                                    left: Config.xMargin(context, 5.55),
+                                    right: Config.xMargin(context, 6.66),
+                                    bottom: Config.xMargin(context, 6.66),
+                                    top: Config.xMargin(context, 6.66)),
                                 height: Config.yMargin(context, 20),
                                 width: Config.xMargin(context, 100),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(
+                                      Config.xMargin(context, 5.55)),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.white,
@@ -341,8 +356,9 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.0, right: 15.0),
+                                  padding: EdgeInsets.only(
+                                      left: Config.xMargin(context, 4.44),
+                                      right: Config.xMargin(context, 4.17)),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -352,9 +368,9 @@ class _HomePageState extends State<HomePage> {
                                         'Steps',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 14.0,
+                                          fontSize:
+                                              Config.xMargin(context, 3.88),
                                           color: color = Color(0xff777777),
-                                          fontFamily: 'Segoe',
                                         ),
                                       ),
                                       SizedBox(
@@ -364,10 +380,9 @@ class _HomePageState extends State<HomePage> {
                                         '7500',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 18.0,
+                                          fontSize: Config.xMargin(context, 5),
                                           color: Theme.of(context)
                                               .primaryColorDark,
-                                          fontFamily: 'Segoe',
                                         ),
                                       ),
                                       SizedBox(
@@ -376,9 +391,9 @@ class _HomePageState extends State<HomePage> {
                                       Text(
                                         'steps today',
                                         style: TextStyle(
-                                          fontSize: 12.0,
+                                          fontSize:
+                                              Config.xMargin(context, 3.33),
                                           color: color = Color(0xff777777),
-                                          fontFamily: 'Segoe',
                                         ),
                                       ),
                                       SizedBox(
@@ -388,23 +403,31 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Container(
                                             padding: EdgeInsets.only(
-                                                left: 16.0,
-                                                right: 16.0,
-                                                top: 16.0,
-                                                bottom: 16.0),
+                                                left: Config.xMargin(
+                                                    context, 4.44),
+                                                right: Config.xMargin(
+                                                    context, 4.44),
+                                                top: Config.xMargin(
+                                                    context, 4.44),
+                                                bottom: Config.xMargin(
+                                                    context, 4.44)),
                                             height: Config.yMargin(context, 1),
                                             decoration: BoxDecoration(
                                                 color: color =
                                                     Color(0xffEEEEEE),
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        20.0)),
+                                                        Config.xMargin(
+                                                            context, 5.55))),
                                           ),
                                           Container(
                                             padding: EdgeInsets.only(
-                                                left: 16.0,
-                                                top: 16.0,
-                                                bottom: 16.0),
+                                                left: Config.xMargin(
+                                                    context, 4.44),
+                                                top: Config.xMargin(
+                                                    context, 4.44),
+                                                bottom: Config.xMargin(
+                                                    context, 4.44)),
                                             height: Config.yMargin(context, 1),
                                             width: Config.xMargin(context, 14),
                                             decoration: BoxDecoration(
@@ -412,7 +435,8 @@ class _HomePageState extends State<HomePage> {
                                                     Color(0xff76DBC9),
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        20.0)),
+                                                        Config.xMargin(
+                                                            context, 5.55))),
                                           ),
                                         ],
                                       ),
@@ -425,7 +449,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                            left: 20.0,
+                            left: Config.textSize(context, 5.5),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -433,9 +457,8 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 'Daily medications',
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: Config.textSize(context, 5),
                                   fontWeight: FontWeight.w600,
-                                  fontFamily: 'Segoe',
                                 ),
                               ),
                               FlatButton(
@@ -443,10 +466,10 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   'See all',
                                   style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: Config.textSize(context, 4.4),
                                     fontWeight: FontWeight.w600,
-                                    color: color = Color(0xff2D7DD2),
-                                    fontFamily: 'Segoe',
+                                    color: color =
+                                        Theme.of(context).textSelectionColor,
                                   ),
                                 ),
                               ),
@@ -454,11 +477,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.all(24.0),
-                          padding: EdgeInsets.only(left: 10.0, right: 24.0),
+                          width: width,
+                          margin: EdgeInsets.all(Config.xMargin(context, 6.67)),
                           height: Config.yMargin(context, 25),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(
+                                Config.xMargin(context, 5.55)),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.white,
@@ -476,7 +500,8 @@ class _HomePageState extends State<HomePage> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 10.0),
+                                    padding: EdgeInsets.only(
+                                        right: Config.xMargin(context, 2.77)),
                                     child: Image.asset(
                                       'images/injection.png',
                                     ),
@@ -486,33 +511,34 @@ class _HomePageState extends State<HomePage> {
                                       Text(
                                         'Promethazine',
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize:
+                                              Config.textSize(context, 4.4),
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'Segoe',
                                         ),
                                       ),
                                       SizedBox(
                                         height: Config.yMargin(context, 2),
                                       ),
                                       Text(
-                                        '1 shots once daily',
+                                        '1 shot once daily',
                                         style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Segoe',
+                                          fontSize:
+                                              Config.textSize(context, 4.4),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 30.0, left: 15.0),
+                                    padding: EdgeInsets.only(
+                                        bottom: Config.xMargin(context, 8.33),
+                                        left: Config.xMargin(context, 4.17)),
                                     child: Column(
                                       children: [
                                         Text(
                                           '12pm',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: 'Segoe',
+                                            fontSize:
+                                                Config.textSize(context, 4.4),
                                           ),
                                         )
                                       ],
@@ -529,17 +555,18 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Row(
+                                mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   FlatButton(
                                       onPressed: () {},
                                       child: Text(
                                         'View',
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize:
+                                              Config.textSize(context, 4.4),
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'Segoe',
                                         ),
                                       )),
                                   FlatButton.icon(
@@ -548,9 +575,9 @@ class _HomePageState extends State<HomePage> {
                                       label: Text(
                                         'Skip',
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize:
+                                              Config.textSize(context, 4.4),
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'Segoe',
                                         ),
                                       )),
                                   FlatButton.icon(
@@ -559,9 +586,9 @@ class _HomePageState extends State<HomePage> {
                                       label: Text(
                                         'Done',
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize:
+                                              Config.textSize(context, 4.4),
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'Segoe',
                                         ),
                                       )),
                                 ],
@@ -570,16 +597,16 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(
+                              left: Config.xMargin(context, 5.5)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Upcoming appointments',
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: Config.textSize(context, 5),
                                   fontWeight: FontWeight.w600,
-                                  fontFamily: 'Segoe',
                                 ),
                               ),
                               FlatButton(
@@ -587,10 +614,10 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   'See all',
                                   style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: Config.textSize(context, 4.4),
                                     fontWeight: FontWeight.w600,
-                                    color: color = Color(0xff2D7DD2),
-                                    fontFamily: 'Segoe',
+                                    color: color =
+                                        Theme.of(context).textSelectionColor,
                                   ),
                                 ),
                               ),
@@ -598,12 +625,14 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.all(24.0),
-                          padding: EdgeInsets.all(8.0),
+                          margin: EdgeInsets.all(Config.xMargin(context, 6.66)),
+                          padding:
+                              EdgeInsets.all(Config.xMargin(context, 2.22)),
                           height: Config.yMargin(context, 20),
                           width: Config.xMargin(context, 100),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(
+                                Config.textSize(context, 5.55)),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.white,
@@ -617,7 +646,8 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(4.0),
+                                padding: EdgeInsets.all(
+                                    Config.xMargin(context, 1.11)),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -625,26 +655,24 @@ class _HomePageState extends State<HomePage> {
                                       'July',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: 9.0,
+                                        fontSize: Config.textSize(context, 2.5),
                                         color: color = Color(0xff777777),
-                                        fontFamily: 'Segoe',
                                       ),
                                     ),
                                     Text(
                                       '12',
                                       style: TextStyle(
-                                        fontSize: 28.0,
+                                        fontSize:
+                                            Config.textSize(context, 7.77),
                                         color: color = Color(0xff2DBFC3),
-                                        fontFamily: 'Segoe',
                                       ),
                                     ),
                                     Text(
                                       'Thurs',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: 9.0,
+                                        fontSize: Config.textSize(context, 2.5),
                                         color: color = Color(0xff777777),
-                                        fontFamily: 'Segoe',
                                       ),
                                     ),
                                   ],
@@ -658,8 +686,8 @@ class _HomePageState extends State<HomePage> {
                                 height: Config.yMargin(context, 8),
                                 width: Config.xMargin(context, 0.1),
                                 child: VerticalDivider(
-                                  indent: 25.0,
-                                  endIndent: 25.0,
+                                  indent: Config.xMargin(context, 6.94),
+                                  endIndent: Config.xMargin(context, 6.94),
                                 ),
                               ),
                               SizedBox(
@@ -680,10 +708,10 @@ class _HomePageState extends State<HomePage> {
                                               Text(
                                                 'Timing',
                                                 style: TextStyle(
-                                                  fontSize: 12.0,
+                                                  fontSize: Config.textSize(
+                                                      context, 3.33),
                                                   color: color =
                                                       Color(0xff777777),
-                                                  fontFamily: 'Segoe',
                                                 ),
                                               ),
                                               SizedBox(
@@ -694,8 +722,8 @@ class _HomePageState extends State<HomePage> {
                                                 '6.00 PM',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 14.0,
-                                                  fontFamily: 'Segoe',
+                                                  fontSize: Config.textSize(
+                                                      context, 3.88),
                                                 ),
                                               ),
                                             ],
@@ -710,10 +738,10 @@ class _HomePageState extends State<HomePage> {
                                               Text(
                                                 'Appointment for',
                                                 style: TextStyle(
-                                                  fontSize: 12.0,
+                                                  fontSize: Config.textSize(
+                                                      context, 3.33),
                                                   color: color =
                                                       Color(0xff777777),
-                                                  fontFamily: 'Segoe',
                                                 ),
                                               ),
                                               SizedBox(
@@ -724,8 +752,8 @@ class _HomePageState extends State<HomePage> {
                                                 'Dance Class',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 14.0,
-                                                  fontFamily: 'Segoe',
+                                                  fontSize: Config.textSize(
+                                                      context, 3.88),
                                                 ),
                                               ),
                                             ],
@@ -748,8 +776,8 @@ class _HomePageState extends State<HomePage> {
                                         child: Text(
                                           'Make sure to make lots of friends',
                                           style: TextStyle(
-                                            fontSize: 14.0,
-                                            fontFamily: 'Segoe',
+                                            fontSize:
+                                                Config.xMargin(context, 3.88),
                                           ),
                                         ),
                                       ),
@@ -760,7 +788,8 @@ class _HomePageState extends State<HomePage> {
                                   icon: Icon(Icons.more_vert),
                                   onPressed: () {},
                                   padding: EdgeInsets.only(
-                                      bottom: 100.0, left: 28.0),
+                                      bottom: Config.yMargin(context, 12.5),
+                                      left: Config.xMargin(context, 7.77)),
                                   color: Colors.grey,
                                 ),
                               ),
@@ -843,7 +872,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onTap: () {
                       Navigator.pushNamed(
-                          context, RouteNames.fitnessSchedulesScreen);
+                          context, RouteNames.fitnessDescriptionScreen);
                     },
                   ),
                   SpeedDialChild(
@@ -889,48 +918,57 @@ class _HomePageState extends State<HomePage> {
                 controller: _menuPositionController,
                 initialIndex: 0,
                 defaultBubbleColor: Theme.of(context).primaryColorLight,
-                backgroundColor: Theme.of(context).backgroundColor,
+                backgroundColor: Theme.of(context).focusColor,
                 onTap: (index) {
                   model.updateCurrentIndex(index);
                   _pageController.animateToPage(index,
-                      duration: Duration(milliseconds: 500),
+                      duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOutQuad);
                 },
                 items: <BubbledNavigationBarItem>[
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.home,
-                        size: 30, color: Theme.of(context).primaryColorDark),
+                        size: Config.xMargin(context, 8.33),
+                        color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.home,
-                        size: 30, color: Colors.blueAccent),
+                        size: Config.xMargin(context, 8.33),
+                        color: Colors.blueAccent),
                     title: Text(
                       'Home',
                       style: TextStyle(
                           color: Theme.of(context).primaryColorDark,
-                          fontSize: 12),
+                          fontWeight: FontWeight.w500,
+                          fontSize: Config.textSize(context, 3.5)),
                     ),
                   ),
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.bell,
-                        size: 30, color: Theme.of(context).primaryColorDark),
+                        size: Config.xMargin(context, 8.33),
+                        color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.bell,
-                        size: 30, color: Colors.blueAccent),
+                        size: Config.xMargin(context, 8.33),
+                        color: Colors.blueAccent),
                     title: Text(
                       'Reminders',
                       style: TextStyle(
                           color: Theme.of(context).primaryColorDark,
-                          fontSize: 12),
+                          fontWeight: FontWeight.w500,
+                          fontSize: Config.textSize(context, 3.5)),
                     ),
                   ),
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.profile_circled,
-                        size: 30, color: Theme.of(context).primaryColorDark),
+                        size: Config.xMargin(context, 8.33),
+                        color: Theme.of(context).primaryColorDark),
                     activeIcon: Icon(CupertinoIcons.profile_circled,
-                        size: 30, color: Colors.blueAccent),
+                        size: Config.xMargin(context, 8.33),
+                        color: Colors.blueAccent),
                     title: Text(
                       'Profile',
                       style: TextStyle(
                           color: Theme.of(context).primaryColorDark,
-                          fontSize: 12),
+                          fontWeight: FontWeight.w500,
+                          fontSize: Config.textSize(context, 3.5)),
                     ),
                   ),
                 ],
