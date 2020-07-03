@@ -1,3 +1,4 @@
+import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
@@ -5,25 +6,6 @@ import 'dart:ui';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders_model.dart';
 // import 'package:table_calendar/table_calendar.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: ScheduledAppointmentsPage(),
-    );
-  }
-}
 
 class ScheduledAppointmentsPage extends StatefulWidget {
   @override
@@ -55,15 +37,17 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
               ),
             ),
           ),
-          leading: IconButton(
-            icon: Icon(
-              Icons.keyboard_backspace,
-              color: appThemeLight.appBarTheme.iconTheme.color,
+          leading: Container(
+            child: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: appThemeLight.appBarTheme.iconTheme.color,
+              ),
+
+              // navigate to add appointments page
+
+              onPressed: () => {Navigator.pushNamed(context, '')},
             ),
-
-            // navigate to add appointments page
-
-            onPressed: () => {Navigator.pushNamed(context, 'homePage')},
           ),
           bottom: TabBar(
             indicatorSize: TabBarIndicatorSize.label,
