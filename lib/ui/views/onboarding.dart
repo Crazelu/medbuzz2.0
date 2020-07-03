@@ -189,7 +189,7 @@ class FirstScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: appThemeLight.primaryColorLight,
+      backgroundColor: Theme.of(context).primaryColorLight,
       body: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Config.xMargin(context, 6),

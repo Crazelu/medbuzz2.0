@@ -154,3 +154,27 @@ class _BackwardAnimationState extends State<BackwardAnimation>
     );
   }
 }
+
+class CustomSlideTransition extends PageRouteBuilder {
+  final Widget child;
+  CustomSlideTransition({this.child})
+      : super(
+            transitionDuration: Duration(seconds: 2),
+            pageBuilder: (context, animation, secondaryAnomation) => child,
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return SlideTransition(
+                position: Tween<Offset>(
+                        begin: const Offset(-1.0, 0.0), end: Offset.zero)
+                    .animate(animation),
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                          begin: Offset.zero, end: const Offset(-1.0, 0.0))
+                      .animate(secondaryAnimation),
+                  child: child,
+                ),
+              );
+            });
+}

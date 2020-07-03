@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:MedBuzz/core/constants/route_names.dart';
@@ -187,11 +186,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Signup(),
-                                  ));
+                              Navigator.pushReplacementNamed(
+                                  context, RouteNames.signup);
                             },
                             child: Text(
                               ' Sign Up',
@@ -215,4 +211,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
