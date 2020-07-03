@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -99,9 +100,17 @@ class _WaterScheduleViewState extends State<WaterScheduleView> {
     formattedTime = DateFormat.jm().format(time);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Container(
-      margin: EdgeInsets.only(top: 60),
-      child: SingleChildScrollView(
+    return Scaffold(
+      // margin: EdgeInsets.only(top: 60),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: BackButton(
+            color: Theme.of(context).primaryColorDark,
+            onPressed: () =>
+                {Navigator.of(context).popAndPushNamed(RouteNames.homePage)}),
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
         //container wrapping all the widgets
         child: Container(
           margin: EdgeInsets.only(
