@@ -3,6 +3,7 @@ import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
 import 'package:MedBuzz/ui/views/Home.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
+import 'package:MedBuzz/ui/views/diet_reminders/all_diet_reminders.dart';
 import 'package:MedBuzz/ui/views/diet_reminders/schedule_diet_reminder.dart';
 import 'package:MedBuzz/ui/views/drug_description/drug_description.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/add_fitness_screen.dart';
@@ -110,6 +111,9 @@ class RouteGenerator {
       case RouteNames.medicationScreen:
         return CustomSlideTransition(child: MedicationScreen());
         break;
+      case RouteNames.dietScheduleScreen:
+        return CustomSlideTransition(child: DietScheduleScreen());
+        break;
       default:
         return _errorRoute();
     }
@@ -118,7 +122,11 @@ class RouteGenerator {
   static Route<dynamic> _errorRoute() {
     return CustomSlideTransition(
       child: Scaffold(
-          appBar: AppBar(title: Text('Page not found')),
+          appBar: AppBar(
+              title: Text(
+            'Page not found',
+            style: TextStyle(color: Colors.red),
+          )),
           body: Center(
             child: Text(
               'Error! Page not found',
