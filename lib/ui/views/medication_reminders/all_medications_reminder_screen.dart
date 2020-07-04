@@ -56,10 +56,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 splashColor: Theme.of(context).buttonColor.withOpacity(.9),
                 //Navigate to fitness reminder creation screen
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddMedicationScreen()));
+                  Navigator.pushNamed(context, RouteNames.addMedicationScreen);
                 }),
           ),
         ),

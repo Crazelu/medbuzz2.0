@@ -26,7 +26,9 @@ import 'package:MedBuzz/ui/views/single_diet_screen/single_diet_screen.dart';
 import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze.dart';
 import 'package:MedBuzz/ui/views/splash_screen.dart';
 import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_screen.dart';
+import 'package:MedBuzz/ui/views/water_reminders/single_water_screen.dart';
 import 'package:MedBuzz/ui/views/water_reminders/water_reminders_view.dart';
+import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -113,6 +115,12 @@ class RouteGenerator {
         break;
       case RouteNames.dietScheduleScreen:
         return CustomSlideTransition(child: DietScheduleScreen());
+        break;
+      case RouteNames.singleWater:
+        return CustomSlideTransition(child: SingleWater());
+        break;
+      case RouteNames.deleteDialog:
+        return CustomSlideTransition(child: DeleteDialog());
         break;
       default:
         return _errorRoute();
