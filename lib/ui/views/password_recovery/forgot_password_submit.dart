@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
@@ -27,8 +28,10 @@ class _ForgotPasswordState extends State<ForgotPasswordSubmit> {
                 child: Text(
                   'Forgot Password',
                   style: TextStyle(
-                      fontSize: Config.textSize(context, 7.8),
-                      fontWeight: FontWeight.w500),
+                    fontSize: Config.textSize(context, 7.8),
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
                 ),
               ),
               SizedBox(
@@ -64,7 +67,7 @@ class _ForgotPasswordState extends State<ForgotPasswordSubmit> {
                       style: TextStyle(
                         fontSize: Config.textSize(context, 4.9),
                         fontWeight: FontWeight.w500,
-                        color: Color(0xff333333),
+                        color: Theme.of(context).primaryColorDark,
                       ),
                     ),
                     SizedBox(
@@ -83,11 +86,16 @@ class _ForgotPasswordState extends State<ForgotPasswordSubmit> {
                       height: Config.yMargin(context, 5),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                            context, RouteNames.forgotPasswordReset);
+                      },
                       child: Container(
                         height: height * .07,
                         child: Material(
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(Config.yMargin(context, 1.28)),
+                          ),
                           color: Theme.of(context).primaryColor,
                           child: Center(
                             child: Text(

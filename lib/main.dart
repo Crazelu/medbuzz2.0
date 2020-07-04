@@ -1,5 +1,6 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
+import 'package:MedBuzz/core/models/appointment_reminder_model/appointment_reminder.dart';
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ void main() async {
   Hive.init(directory.path);
   Hive.registerAdapter(WaterReminderAdapter());
   Hive.registerAdapter(MedicationReminderAdapter());
+  Hive.registerAdapter(AppointmentAdapter());
   runApp(MyApp());
 }
 
@@ -29,7 +31,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: RouteNames.singleWater,
+        initialRoute: RouteNames.splashScreen,
+
         //Crazelu moved the routes to RouteNames class to clean things up here
         //head over there if you need to add your named routes
         routes: RouteNames.routes,

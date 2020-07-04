@@ -157,7 +157,8 @@ class Signup extends StatelessWidget {
               padding: EdgeInsets.all(Config.xMargin(context, 3.55)),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
-                    Radius.circular(Config.yMargin(context, 1.28))),
+                  Radius.circular(Config.yMargin(context, 1.28)),
+                ),
                 color: Theme.of(context).primaryColor,
               ),
               alignment: Alignment.center,
@@ -187,12 +188,12 @@ class Signup extends StatelessWidget {
                   'Have an account? ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: Config.textSize(context, 4.2), //16
+                    fontSize: Config.textSize(context, 3.9), //16
                   ),
                 ),
-                FlatButton(
+                InkWell(
                   highlightColor: Theme.of(context).backgroundColor,
-                  onPressed: () {
+                  onTap: () {
                     Navigator.pushReplacementNamed(context, 'login');
                   },
                   child: Text(
@@ -200,7 +201,7 @@ class Signup extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
-                      fontSize: Config.textSize(context, 4.2), //16
+                      fontSize: Config.textSize(context, 3.9), //16
                     ),
                   ),
                 )

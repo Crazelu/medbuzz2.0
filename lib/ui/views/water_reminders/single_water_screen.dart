@@ -1,5 +1,6 @@
 import 'package:MedBuzz/core/models/water_reminder_model/water_reminder.dart';
 import 'package:MedBuzz/ui/notifications/water_notification_manager.dart';
+import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
@@ -48,6 +49,7 @@ class _SingleWaterState extends State<SingleWater> {
                 child: FlatButton.icon(
                     onPressed: () {
                       showDialog(
+<<<<<<< HEAD
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
@@ -150,6 +152,11 @@ class _SingleWaterState extends State<SingleWater> {
                               ),
                             );
                           });
+=======
+                        context: context,
+                        child: DeleteDialog(),
+                      );
+>>>>>>> upstream/dev
                     },
                     icon: Icon(
                       Icons.delete,
@@ -172,8 +179,8 @@ class _SingleWaterState extends State<SingleWater> {
                       child: Text(
                         'Drink 1000 ml of water',
                         style: TextStyle(
-                          color: Color(0xff333333),
-                          fontSize: Config.textSize(context, 7),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 5.3),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -198,8 +205,8 @@ class _SingleWaterState extends State<SingleWater> {
                       Text(
                         'Description',
                         style: TextStyle(
-                          color: Color(0xff333333),
-                          fontSize: Config.textSize(context, 5),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 4.5),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -209,7 +216,7 @@ class _SingleWaterState extends State<SingleWater> {
                         child: Text(
                           'A quick run from home to the estate junction and back home',
                           style: TextStyle(
-                            color: Color(0xff333333),
+                            color: Theme.of(context).primaryColorDark,
                             fontSize: Config.textSize(context, 4),
                           ),
                           //\n
@@ -219,8 +226,8 @@ class _SingleWaterState extends State<SingleWater> {
                       Text(
                         'Frequency',
                         style: TextStyle(
-                          color: Color(0xff333333),
-                          fontSize: Config.textSize(context, 5),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 4.5),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -239,8 +246,8 @@ class _SingleWaterState extends State<SingleWater> {
                             Text(
                               "10:00AM",
                               style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: Config.textSize(context, 4),
+                                color: Theme.of(context).primaryColor,
+                                fontSize: Config.textSize(context, 3.6),
                               ),
                             )
                           ],
@@ -250,8 +257,8 @@ class _SingleWaterState extends State<SingleWater> {
                       Text(
                         'Length',
                         style: TextStyle(
-                          color: Color(0xff333333),
-                          fontSize: Config.textSize(context, 5),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 4.5),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -261,7 +268,7 @@ class _SingleWaterState extends State<SingleWater> {
                         child: Text(
                           '4 days left out of 30 days',
                           style: TextStyle(
-                            color: Color(0xff333333),
+                            color: Theme.of(context).primaryColorDark,
                             fontSize: Config.textSize(context, 4),
                           ),
                         ),
@@ -288,7 +295,7 @@ class _SingleWaterState extends State<SingleWater> {
                     style: TextStyle(
                       color: Theme.of(context).primaryColorLight,
                       fontWeight: FontWeight.bold,
-                      fontSize: Config.textSize(context, 3.9),
+                      fontSize: Config.textSize(context, 4),
                     ),
                   ),
                 ),
