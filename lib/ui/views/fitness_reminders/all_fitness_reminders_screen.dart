@@ -222,7 +222,9 @@ class FitnessCard extends StatelessWidget {
       height: height * .35,
       child: InkWell(
         //Navigate to screen with single reminder i.e the on user clicked on
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, RouteNames.singleFitnessScreen);
+        },
         splashColor: Colors.transparent,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

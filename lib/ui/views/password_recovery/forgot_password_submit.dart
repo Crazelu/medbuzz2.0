@@ -89,25 +89,30 @@ class _ForgotPasswordState extends State<ForgotPasswordSubmit> {
                         height: Config.yMargin(context, 5),
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: Container(
-                          height: height * .07,
-                          child: Material(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Theme.of(context).primaryColor,
-                            child: Center(
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(
-                                  color: Theme.of(context).primaryColorLight,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: Config.textSize(context, 3.9),
-                                ),
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                            context, RouteNames.forgotPasswordReset);
+                      },
+                      child: Container(
+                        height: height * .07,
+                        child: Material(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(Config.yMargin(context, 1.28)),
+                          ),
+                          color: Theme.of(context).primaryColor,
+                          child: Center(
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontWeight: FontWeight.bold,
+                                fontSize: Config.textSize(context, 3.9),
                               ),
                             ),
                           ),
                         ),
                       ),
+                    ),
                     ],
                   ),
                 ),
