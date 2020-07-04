@@ -382,14 +382,16 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   SpeedDialChild(
                     child: Image(image: AssetImage('images/calender.png')),
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     labelWidget: Container(
                       margin:
                           EdgeInsets.only(right: Config.xMargin(context, 4)),
                       child: Text(
                         'Appointment',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColorLight,
+                        ),
                       ),
                     ),
                     onTap: () {
@@ -398,7 +400,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   SpeedDialChild(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Image(image: AssetImage('images/drugoutline.png')),
                     labelWidget: Container(
                       margin:
@@ -406,7 +408,9 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         'Medication',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColorLight,
+                        ),
                       ),
                     ),
                     onTap: () {
@@ -417,7 +421,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   SpeedDialChild(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Image(image: AssetImage('images/dumbell.png')),
                     labelWidget: Container(
                       margin:
@@ -425,7 +429,9 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         'Fitness',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColorLight,
+                        ),
                       ),
                     ),
                     onTap: () {
@@ -434,7 +440,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   SpeedDialChild(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Image(image: AssetImage('images/dropoutline.png')),
                     labelWidget: Container(
                       margin:
@@ -442,7 +448,9 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         'Water',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColorLight,
+                        ),
                       ),
                     ),
                     onTap: () {
@@ -451,7 +459,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   SpeedDialChild(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Image(image: AssetImage('images/foood.png')),
                     labelWidget: Container(
                       margin:
@@ -459,7 +467,9 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         'Diet',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColorLight,
+                        ),
                       ),
                     ),
                     onTap: () {
@@ -475,8 +485,9 @@ class _HomePageState extends State<HomePage> {
             : BubbledNavigationBar(
                 controller: _menuPositionController,
                 initialIndex: 0,
-                defaultBubbleColor: Theme.of(context).primaryColorLight,
-                backgroundColor: Theme.of(context).primaryColor,
+                defaultBubbleColor:
+                    Theme.of(context).primaryColor.withOpacity(.2),
+                backgroundColor: Theme.of(context).backgroundColor,
                 onTap: (index) {
                   model.updateCurrentIndex(index);
                   _pageController.animateToPage(index,
@@ -487,7 +498,7 @@ class _HomePageState extends State<HomePage> {
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.home,
                         size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).primaryColorDark),
+                        color: Theme.of(context).hintColor),
                     activeIcon: Icon(CupertinoIcons.home,
                         size: Config.xMargin(context, 8.33),
                         color: Theme.of(context).primaryColor),
@@ -502,7 +513,7 @@ class _HomePageState extends State<HomePage> {
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.bell,
                         size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).primaryColorDark),
+                        color: Theme.of(context).hintColor),
                     activeIcon: Icon(CupertinoIcons.bell,
                         size: Config.xMargin(context, 8.33),
                         color: Theme.of(context).primaryColor),
@@ -517,7 +528,7 @@ class _HomePageState extends State<HomePage> {
                   BubbledNavigationBarItem(
                     icon: Icon(CupertinoIcons.profile_circled,
                         size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).primaryColorDark),
+                        color: Theme.of(context).hintColor),
                     activeIcon: Icon(CupertinoIcons.profile_circled,
                         size: Config.xMargin(context, 8.33),
                         color: Theme.of(context).primaryColor),

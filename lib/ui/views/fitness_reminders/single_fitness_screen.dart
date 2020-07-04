@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
@@ -22,7 +23,9 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
             icon: Icon(Icons.keyboard_backspace,
                 color: Theme.of(context).primaryColorDark),
 //Function to navigate to previous screen
-            onPressed: () {}),
+            onPressed: () {
+              Navigator.pushNamed(context, RouteNames.fitnessSchedulesScreen);
+            }),
       ),
       body: ListView(physics: ScrollPhysics(), children: [
         Container(
