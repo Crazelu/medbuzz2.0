@@ -22,6 +22,7 @@ import 'package:MedBuzz/ui/views/single_diet_screen/single_diet_screen.dart';
 import 'package:MedBuzz/ui/views/snooze_reminder/confirmation_or_snooze.dart';
 import 'package:MedBuzz/ui/views/splash_screen.dart';
 import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_screen.dart';
+import 'package:MedBuzz/ui/views/water_reminders/single_water_screen.dart';
 import 'package:MedBuzz/ui/views/water_reminders/water_reminders_view.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +56,7 @@ class RouteNames {
   static const String medicationView = 'medicationView';
   static const String addMedicationScreen = 'addMedicationScreen';
   static const String medicationScreen = 'medicationScreen';
+  static const String singleWater = 'singleWater';
 
 //Brought routes here to  clean things up in the main.dart file
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -88,5 +90,6 @@ class RouteNames {
     RouteNames.medicationView: (context) => MedicationView(),
     RouteNames.addMedicationScreen: (context) => AddMedicationScreen(),
     RouteNames.medicationScreen: (context) => MedicationScreen(),
+    RouteNames.singleWater: (context) => SingleWater(),
   };
 }

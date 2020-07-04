@@ -3,14 +3,27 @@ import 'package:MedBuzz/ui/notifications/water_notification_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
+import 'package:MedBuzz/ui/navigation/app_navigation/app_transition.dart';
+import 'package:MedBuzz/core/models/water_reminder_model/water_reminder.dart';
 
-class SingleWater extends StatelessWidget {
-  SingleWater({this.waterReminder});
-  final WaterReminder waterReminder;
+class SingleWater extends StatefulWidget {
+  SingleWater({this.water});
 
-  final WaterNotificationManager waterNotificationManager =
+  final WaterReminder water;
+
+  @override
+  _SingleWaterState createState() => _SingleWaterState();
+}
+
+class _SingleWaterState extends State<SingleWater> {
+  WaterReminder waterReminder;
+  WaterNotificationManager waterNotificationManager =
       WaterNotificationManager();
-  final WaterReminderData waterReminderData = WaterReminderData();
+
+  Navigation navigation = Navigation();
+
+  final db = WaterReminderData();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,9 +86,18 @@ class SingleWater extends StatelessWidget {
                                                 Config.xMargin(context, 30.0),
                                             child: RaisedButton(
                                               onPressed: () async {
+                                                showSnackBar(context);
+                                                Future.delayed(Duration(
+                                                        milliseconds: 500))
+                                                    .then((value) {
+                                                  //  waterNotificationManager.removeReminder();
+
+                                                  db.deleteWaterReminder(
+                                                      widget.water.id);
+                                                });
                                                 //Navigate to the Water reminder screen and delete from db
 
-                                                Navigator.pop(context);
+                                                Navigator.of(context).pop(true);
                                               },
                                               child: Text(
                                                 "Yes",
@@ -148,7 +170,7 @@ class SingleWater extends StatelessWidget {
                     Container(
                       width: Config.xMargin(context, 44),
                       child: Text(
-                        'Drink 250ml of Water',
+                        'Drink 1000 ml of water',
                         style: TextStyle(
                           color: Color(0xff333333),
                           fontSize: Config.textSize(context, 7),
@@ -215,7 +237,7 @@ class SingleWater extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '8:00AM',
+                              "10:00AM",
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: Config.textSize(context, 4),
