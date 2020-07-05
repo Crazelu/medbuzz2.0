@@ -18,7 +18,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
   final FocusNode mealNameFocusNode = FocusNode();
   final FocusNode mealDescFocusNode = FocusNode();
 
-  ScheduleDietReminderScreen({Key key, this.isEdit = true}) : super(key: key);
+  ScheduleDietReminderScreen({Key key, this.isEdit = false}) : super(key: key);
   void unFocus() {
     if (mealNameFocusNode.hasFocus && mealDescFocusNode.hasFocus) {
       mealNameFocusNode.unfocus();
