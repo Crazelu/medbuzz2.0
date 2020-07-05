@@ -84,15 +84,13 @@ class __fitnesssDescriptionState extends State<add_fitness> {
           ),
           onPressed: () {
             navigation.pushFrom(context, FitnessSchedulesScreen());
-            Navigator.pushReplacementNamed(
-                context, RouteNames.fitnessSchedulesScreen);
+            Navigator.pushReplacementNamed(context, RouteNames.homePage);
           },
         ),
       ),
       body: WillPopScope(
         onWillPop: () {
-          Navigator.pushReplacementNamed(
-              context, RouteNames.fitnessSchedulesScreen);
+          Navigator.pushReplacementNamed(context, RouteNames.homePage);
           return Future.value(false);
         },
         child: Padding(

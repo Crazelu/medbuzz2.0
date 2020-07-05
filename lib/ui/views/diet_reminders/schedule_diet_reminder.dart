@@ -7,6 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleDietReminderScreen extends StatelessWidget {
+  //this variable will determine if this screen will be for
+  //adding or editing diet reminders
+  final bool isEdit;
+
+  final TextEditingController mealNameController = TextEditingController();
+  final TextEditingController mealDescController = TextEditingController();
+
+  // FocusNode objects for eacj textfield used to disable focus when user isn't typing
+  final FocusNode mealNameFocusNode = FocusNode();
+  final FocusNode mealDescFocusNode = FocusNode();
+
+  ScheduleDietReminderScreen({Key key, this.isEdit = true}) : super(key: key);
+  void unFocus() {
+    if (mealNameFocusNode.hasFocus && mealDescFocusNode.hasFocus) {
+      mealNameFocusNode.unfocus();
+      mealNameFocusNode.unfocus();
+    } else if (mealNameFocusNode.hasFocus) {
+      mealNameFocusNode.unfocus();
+    } else if (mealDescFocusNode.hasFocus) {
+      mealDescFocusNode.unfocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var model = Provider.of<DietReminderModel>(context);
@@ -16,163 +39,276 @@ class ScheduleDietReminderScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).backgroundColor,
         //Extracted appBar to widgets folder
         appBar: appBar(
-            context: context, title: 'Add diet', useDefaultActions: true),
-        body: Container(
-          color: Theme.of(context).backgroundColor,
-          child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Container(
-                color: Theme.of(context).backgroundColor,
-                width: width,
-                padding: EdgeInsets.fromLTRB(
-                    Config.xMargin(context, 5),
-                    Config.yMargin(context, 1),
-                    Config.xMargin(context, 5),
-                    Config.yMargin(context, 5)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        isExpanded: false, icon: Icon(Icons.expand_more),
-                        // here sets the value to the selected month and if null, it defaults to the present date month from DateTime.now()
-                        value: model.currentMonth,
-                        hint: Text('Month',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: Config.textSize(context, 4.8),
-                                color: Theme.of(context).hintColor)),
-                        items: model.months
-                            .map((month) => DropdownMenuItem(
-                                  child: Container(
-                                    child: Text(
-                                      month,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize:
-                                              Config.textSize(context, 4.8),
-                                          color: Theme.of(context).hintColor),
-                                    ),
-                                  ),
-                                  value: month,
-                                ))
-                            .toList(),
-                        onChanged: (val) => model.updateSelectedMonth(val),
-                      ),
-                    ),
-                    SizedBox(height: Config.yMargin(context, 3)),
-                    Container(
-                        height: Config.yMargin(context, 15),
-                        child: ScrollableCalendar(model: model)),
-                    SizedBox(height: Config.yMargin(context, 1.8)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('Time',
-                            style: TextStyle(
-                                fontSize: Config.textSize(context, 4.8),
-                                color: Theme.of(context).hintColor))
-                      ],
-                    ),
-                    SizedBox(height: Config.yMargin(context, 2.5)),
-                    TimeWheel(
-                      updateTimeChanged: (val) => model.updateSelectedTime(val),
-                    ),
-                    SizedBox(height: Config.yMargin(context, 5)),
-                    Container(
-                      alignment: Alignment.center,
-                      height: height * .65,
-                      child: GridView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: model.foodClass.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemBuilder: (context, index) {
-                            var foodClass = model.foodClass[index];
-                            return InkWell(
-                              //Function to update the color of selected food class
-                              onTap: () {
-                                model.updateSelectedFoodClass(foodClass.name);
-                              },
-                              child: FoodCard(
-                                isSelected:
-                                    model.isFoodClassActive(foodClass.name),
-                                foodClass: foodClass,
-                              ),
-                            );
-                          }),
-                    ),
-                    SizedBox(height: Config.yMargin(context, 5)),
-                    Container(
-                      width: width,
-                      height: Config.yMargin(context, 8),
-                      child: FlatButton(
-                          color: Theme.of(context).primaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  Config.xMargin(context, 3))),
-
-                          //Functions to save reminder to db and schedule notification goes here
-
-                          onPressed: () {},
-                          child: Text('Save',
+            context: context,
+            title: isEdit ? 'Edit your diet' : 'Add diet',
+            actions: isEdit ? [_deleteButton(context)] : null),
+        body: GestureDetector(
+          onTap: () {
+            unFocus();
+          },
+          child: Container(
+            color: Theme.of(context).backgroundColor,
+            child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Container(
+                  color: Theme.of(context).backgroundColor,
+                  width: width,
+                  padding: EdgeInsets.fromLTRB(
+                      Config.xMargin(context, 5),
+                      Config.yMargin(context, 1),
+                      Config.xMargin(context, 5),
+                      Config.yMargin(context, 5)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                          isExpanded: false, icon: Icon(Icons.expand_more),
+                          // here sets the value to the selected month and if null, it defaults to the present date month from DateTime.now()
+                          value: model.currentMonth,
+                          hint: Text('Month',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: Config.textSize(context, 6),
-                                  fontWeight: FontWeight.w600,
-                                  color: Theme.of(context).primaryColorLight))),
-                    )
-                  ],
-                ),
-              )),
+                                  fontSize: Config.textSize(context, 4.8),
+                                  color: Theme.of(context).hintColor)),
+                          items: model.months
+                              .map((month) => DropdownMenuItem(
+                                    child: Container(
+                                      child: Text(
+                                        month,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize:
+                                                Config.textSize(context, 4.8),
+                                            color: Theme.of(context).hintColor),
+                                      ),
+                                    ),
+                                    value: month,
+                                  ))
+                              .toList(),
+                          onChanged: (val) => model.updateSelectedMonth(val),
+                        ),
+                      ),
+                      SizedBox(height: Config.yMargin(context, 3)),
+                      Container(
+                          height: Config.yMargin(context, 13),
+                          child: ScrollableCalendar(model: model)),
+                      SizedBox(height: Config.yMargin(context, 1.8)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Time',
+                              style: TextStyle(
+                                  fontSize: Config.textSize(context, 4.8),
+                                  color: Theme.of(context).hintColor))
+                        ],
+                      ),
+                      SizedBox(height: Config.yMargin(context, 2.5)),
+                      TimeWheel(
+                        updateTimeChanged: (val) =>
+                            model.updateSelectedTime(val),
+                      ),
+                      SizedBox(height: Config.yMargin(context, 5)),
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            _title(context, 'Meal Name'),
+                            _verticalSpace(context),
+                            _textField(context, mealNameFocusNode, 1, null,
+                                'Fish and Chips', mealNameController),
+                            SizedBox(height: Config.yMargin(context, 3.5)),
+                            _title(context, 'Select meal category'),
+                            _verticalSpace(context),
+                            Container(
+                                height: height * .13,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    physics: BouncingScrollPhysics(),
+                                    itemCount: model.foodClass.length,
+                                    itemBuilder: (context, index) {
+                                      var foodClass = model.foodClass[index];
+                                      return InkWell(
+                                          onTap: () {
+                                            unFocus();
+                                            model.updatesSelectedFoodClasses(
+                                                foodClass.name);
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                right:
+                                                    Config.xMargin(context, 4)),
+                                            child: Column(
+                                              children: <Widget>[
+                                                CircleAvatar(
+                                                  radius: Config.xMargin(
+                                                      context, 7.88),
+                                                  backgroundColor: model
+                                                          .selectedFoodClasses
+                                                          .contains(
+                                                              foodClass.name)
+                                                      ? Theme.of(context)
+                                                          .accentColor
+                                                      : Theme.of(context)
+                                                          .buttonColor,
+                                                  child: Image.asset(
+                                                      foodClass.image,
+                                                      height: Config.yMargin(
+                                                          context, 3.5),
+                                                      width: Config.yMargin(
+                                                          context, 3.5)),
+                                                ),
+                                                _verticalSpace(context),
+                                                Text(foodClass.name,
+                                                    style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .hintColor,
+                                                        fontSize:
+                                                            Config.textSize(
+                                                                context, 3.74)))
+                                              ],
+                                            ),
+                                          ));
+                                    })),
+                            SizedBox(height: Config.yMargin(context, 3.5)),
+                            _title(context, 'Meal Description'),
+                            _verticalSpace(context),
+                            _textField(context, mealDescFocusNode, 6, 100,
+                                'Optional description...', mealDescController),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: Config.yMargin(context, 5)),
+                      Container(
+                        width: width,
+                        height: Config.yMargin(context, 8),
+                        child: FlatButton(
+                            color: Theme.of(context).primaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    Config.xMargin(context, 3))),
+
+                            //Functions to save reminder to db and schedule notification goes here
+
+                            onPressed: () {},
+                            child: Text('Save',
+                                style: TextStyle(
+                                    fontSize: Config.textSize(context, 5),
+                                    fontWeight: FontWeight.w500,
+                                    color:
+                                        Theme.of(context).primaryColorLight))),
+                      )
+                    ],
+                  ),
+                )),
+          ),
         ));
   }
+
+  Text _title(BuildContext context, String text) =>
+      Text(text, style: _titleStyle(context));
+
+  TextField _textField(BuildContext context, FocusNode focusNode, int maxLines,
+          int maxLenghth, String hint, TextEditingController controller) =>
+      TextField(
+        controller: controller,
+        maxLength: maxLenghth,
+        style: TextStyle(color: Theme.of(context).primaryColorDark),
+        maxLines: maxLines,
+        focusNode: focusNode,
+        decoration: InputDecoration(
+            hintText: hint ?? '',
+            hintStyle: TextStyle(color: Theme.of(context).hintColor),
+            enabledBorder: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(Config.xMargin(context, 3.2)),
+                borderSide: BorderSide(
+                    color: Theme.of(context).primaryColorDark,
+                    style: BorderStyle.solid)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(Config.xMargin(context, 3.2)),
+                borderSide: BorderSide(
+                    color: Theme.of(context).primaryColorDark,
+                    style: BorderStyle.solid))),
+      );
+
+  SizedBox _verticalSpace(BuildContext context) => SizedBox(
+        height: Config.yMargin(context, 2.2),
+      );
+
+  TextStyle _titleStyle(BuildContext context) => TextStyle(
+      color: Theme.of(context).primaryColorDark,
+      fontWeight: FontWeight.w600,
+      fontSize: Config.xMargin(context, 5.55));
+
+  FlatButton _deleteButton(BuildContext context) => FlatButton(
+      splashColor: Colors.redAccent,
+      color: Theme.of(context).backgroundColor,
+      onPressed: () {},
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Icon(
+            Icons.delete,
+            color: Colors.red,
+            size: Config.xMargin(context, 4.95),
+          ),
+          Text('Delete',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: Config.textSize(context, 4.95),
+              ))
+        ],
+      ));
 }
 
-///Custom FoodCard widget to keep things modular
-class FoodCard extends StatelessWidget {
-  final FoodClass foodClass;
-  final bool isSelected;
+// ///Custom FoodCard widget to keep things modular
+// class FoodCard extends StatelessWidget {
+//   final FoodClass foodClass;
+//   final bool isSelected;
 
-  const FoodCard({Key key, this.foodClass, this.isSelected}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return Padding(
-      padding: EdgeInsets.only(
-          left: Config.xMargin(context, 3),
-          right: Config.xMargin(context, 3),
-          bottom: Config.yMargin(context, 2)),
-      child: Container(
-        alignment: Alignment.center,
-        width: width * .45,
-        height: height * .3,
-        decoration: BoxDecoration(
-            color: isSelected
-                ? Theme.of(context).highlightColor.withOpacity(.5)
-                : Theme.of(context).primaryColorLight,
-            boxShadow: [
-              BoxShadow(
-                  offset: Offset(-1, 1),
-                  color: Theme.of(context).primaryColorDark.withOpacity(.3),
-                  blurRadius: 5,
-                  spreadRadius: 0)
-            ]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(foodClass.image),
-            Text(foodClass.name,
-                style: TextStyle(
-                    color: isSelected
-                        ? Theme.of(context).primaryColorDark
-                        : Theme.of(context).hintColor,
-                    fontSize: Config.textSize(context, 4.8)))
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   const FoodCard({Key key, this.foodClass, this.isSelected}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     double width = MediaQuery.of(context).size.width;
+//     double height = MediaQuery.of(context).size.height;
+//     return Padding(
+//       padding: EdgeInsets.only(
+//           left: Config.xMargin(context, 3),
+//           right: Config.xMargin(context, 3),
+//           bottom: Config.yMargin(context, 2)),
+//       child: Container(
+//         alignment: Alignment.center,
+//         width: width * .45,
+//         height: height * .3,
+//         decoration: BoxDecoration(
+//             color: isSelected
+//                 ? Theme.of(context).highlightColor.withOpacity(.5)
+//                 : Theme.of(context).primaryColorLight,
+//             boxShadow: [
+//               BoxShadow(
+//                   offset: Offset(-1, 1),
+//                   color: Theme.of(context).primaryColorDark.withOpacity(.3),
+//                   blurRadius: 5,
+//                   spreadRadius: 0)
+//             ]),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: <Widget>[
+//             Image.asset(foodClass.image),
+//             Text(foodClass.name,
+//                 style: TextStyle(
+//                     color: isSelected
+//                         ? Theme.of(context).primaryColorDark
+//                         : Theme.of(context).hintColor,
+//                     fontSize: Config.textSize(context, 4.8)))
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

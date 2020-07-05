@@ -30,7 +30,6 @@ class ScrollableCalendar extends StatelessWidget {
     return Container(
       height: height * 0.12,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
             //without specifying this height, flutter throws an error because of the grid
@@ -72,7 +71,7 @@ class ScrollableCalendar extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: useButtonColor
                           ? model.getButtonColor(context, index)
-                          : Theme.of(context).primaryColorLight,
+                          : Theme.of(context).backgroundColor,
                       borderRadius: BorderRadius.circular(height * 0.04),
                     ),
                     alignment: Alignment.center,
@@ -124,6 +123,7 @@ class ScrollableCalendar extends StatelessWidget {
               },
             ),
           ),
+          SizedBox(height: Config.yMargin(context, 1)),
           hideDivider
               ? Container()
               : Divider(
