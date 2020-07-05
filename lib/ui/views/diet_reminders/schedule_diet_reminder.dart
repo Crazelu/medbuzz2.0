@@ -63,31 +63,35 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                     children: <Widget>[
                       DropdownButtonHideUnderline(
                         child: DropdownButton(
-                          isExpanded: false, icon: Icon(Icons.expand_more),
-                          // here sets the value to the selected month and if null, it defaults to the present date month from DateTime.now()
-                          value: model.currentMonth,
-                          hint: Text('Month',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: Config.textSize(context, 4.8),
-                                  color: Theme.of(context).hintColor)),
-                          items: model.months
-                              .map((month) => DropdownMenuItem(
-                                    child: Container(
-                                      child: Text(
-                                        month,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize:
-                                                Config.textSize(context, 4.8),
-                                            color: Theme.of(context).hintColor),
+                            isExpanded: false,
+                            icon: Icon(Icons.expand_more),
+                            // here sets the value to the selected month and if null, it defaults to the present date month from DateTime.now()
+                            value: model.currentMonth,
+                            hint: Text('Month',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: Config.textSize(context, 4.8),
+                                    color: Theme.of(context).hintColor)),
+                            items: model.months
+                                .map((month) => DropdownMenuItem(
+                                      child: Container(
+                                        child: Text(
+                                          month,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize:
+                                                  Config.textSize(context, 4.8),
+                                              color:
+                                                  Theme.of(context).hintColor),
+                                        ),
                                       ),
-                                    ),
-                                    value: month,
-                                  ))
-                              .toList(),
-                          onChanged: (val) => model.updateSelectedMonth(val),
-                        ),
+                                      value: month,
+                                    ))
+                                .toList(),
+                            onChanged: (val) {
+                              model.updateSelectedMonth(val);
+                              unFocus();
+                            }),
                       ),
                       SizedBox(height: Config.yMargin(context, 3)),
                       Container(
@@ -105,8 +109,13 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                       ),
                       SizedBox(height: Config.yMargin(context, 2.5)),
                       TimeWheel(
-                        updateTimeChanged: (val) =>
-                            model.updateSelectedTime(val),
+                        updateTimeChanged: (val) {
+                          //
+                          //this unfocuses the text fields when the time wheel is being interacted with
+                          unFocus();
+                          //
+                          model.updateSelectedTime(val);
+                        },
                       ),
                       SizedBox(height: Config.yMargin(context, 5)),
                       Container(
@@ -149,15 +158,57 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                                                           .contains(
                                                               foodClass.name)
                                                       ? Theme.of(context)
-                                                          .accentColor
+                                                          .primaryColorLight
                                                       : Theme.of(context)
                                                           .buttonColor,
-                                                  child: Image.asset(
-                                                      foodClass.image,
-                                                      height: Config.yMargin(
-                                                          context, 3.5),
-                                                      width: Config.yMargin(
-                                                          context, 3.5)),
+                                                  child: Stack(
+                                                    fit: StackFit.loose,
+                                                    children: <Widget>[
+                                                      Positioned(
+                                                        top: model
+                                                                .selectedFoodClasses
+                                                                .contains(
+                                                                    foodClass
+                                                                        .name)
+                                                            ? 0
+                                                            : Config.xMargin(
+                                                                context, 3.88),
+                                                        left: model
+                                                                .selectedFoodClasses
+                                                                .contains(
+                                                                    foodClass
+                                                                        .name)
+                                                            ? 0
+                                                            : Config.xMargin(
+                                                                context, 3.88),
+                                                        child: Image.asset(
+                                                            foodClass.image,
+                                                            height:
+                                                                Config.yMargin(
+                                                                    context,
+                                                                    3.5),
+                                                            width:
+                                                                Config.yMargin(
+                                                                    context,
+                                                                    3.5)),
+                                                      ),
+                                                      model.selectedFoodClasses
+                                                              .contains(
+                                                                  foodClass
+                                                                      .name)
+                                                          ? Image.asset(
+                                                              'images/check.png',
+                                                              height: Config
+                                                                  .yMargin(
+                                                                      context,
+                                                                      3.5),
+                                                              width: Config
+                                                                  .yMargin(
+                                                                      context,
+                                                                      3.5))
+                                                          : Container(),
+                                                    ],
+                                                  ),
                                                 ),
                                                 _verticalSpace(context),
                                                 Text(foodClass.name,
