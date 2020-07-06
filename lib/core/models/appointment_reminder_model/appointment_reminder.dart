@@ -15,13 +15,10 @@ class Appointment {
   @HiveField(4)
   String appointmentNote;
 
-
-  Appointment({
-    this.appointmentMonth,
-    this.appointmentDay,
-    this.appointmentTime,
-    this.appointmentSubject,
-    this.appointmentNote
-});
-
+  Appointment(
+      {this.appointmentMonth,
+      this.appointmentDay,
+      this.appointmentTime,
+      this.appointmentSubject,
+      this.appointmentNote});
 }
