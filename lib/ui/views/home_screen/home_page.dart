@@ -1,5 +1,4 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
-import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
@@ -62,15 +61,8 @@ class _HomePageState extends State<HomePage> {
     var waterReminderDB = Provider.of<WaterReminderData>(context);
     waterReminderDB.getWaterReminders();
 
-    var medicationReminderDB = Provider.of<MedicationData>(context);
-    medicationReminderDB.getMedicationReminder();
-
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    String drugName = 'Chloroquine Injection';
-
-    print(height);
-    print(width);
 
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
@@ -332,9 +324,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                          MedicationCard(
-                            drugName: drugName,
-                          ),
+                          MedicationCard(height: height, width: width),
                           SizedBox(height: height * 0.05),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
