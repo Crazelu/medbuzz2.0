@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
 part 'diet_reminder.g.dart';
 
 @HiveType()
@@ -24,6 +25,9 @@ class DietModel {
   @HiveField(7)
   final DateTime endDate;
 
+  @HiveField(8)
+  final String id;
+
   DietModel(
       {@required this.dietName,
       @required this.time,
@@ -32,5 +36,6 @@ class DietModel {
       this.thirdDietName,
       this.secondTime,
       this.thirdTime,
-      this.endDate});
+      this.endDate,
+      this.id});
 }
