@@ -39,6 +39,5 @@ class AppointmentAdapter extends TypeAdapter<Appointment> {
   }
 
   @override
-  // TODO: implement typeId
-  int get typeId => throw UnimplementedError();
+  int get typeId => 5;
 }
