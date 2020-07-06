@@ -17,9 +17,9 @@ class MedicationReminderAdapter extends TypeAdapter<MedicationReminder> {
       drugName: fields[0] as String,
       drugType: fields[1] as String,
       frequency: fields[2] as String,
-      firstTime: fields[3] as TimeOfDay,
-      secondTime: fields[4] as TimeOfDay,
-      thirdTime: fields[5] as TimeOfDay,
+      firstTime: (fields[3] as List)?.cast<int>(),
+      secondTime: (fields[4] as List)?.cast<int>(),
+      thirdTime: (fields[5] as List)?.cast<int>(),
       dosage: fields[6] as int,
       startAt: fields[7] as DateTime,
       endAt: fields[8] as DateTime,
@@ -57,6 +57,5 @@ class MedicationReminderAdapter extends TypeAdapter<MedicationReminder> {
   }
 
   @override
-  // TODO: implement typeId
-  int get typeId => throw UnimplementedError();
+  int get typeId => 1;
 }
