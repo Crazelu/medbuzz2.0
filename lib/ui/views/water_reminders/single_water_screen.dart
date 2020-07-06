@@ -116,7 +116,7 @@ class _SingleWaterState extends State<SingleWater> {
                             padding: EdgeInsets.only(
                                 top: Config.yMargin(context, 1.0)),
                             child: Text(
-                              'A quick run from home to the estate junction and back home',
+                              'Drinking water is essential to a healthy lifestyle.',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColorDark,
                                 fontSize: Config.textSize(context, 4),
