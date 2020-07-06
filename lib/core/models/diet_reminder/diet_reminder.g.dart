@@ -15,20 +15,22 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
     };
     return DietModel(
       dietName: fields[0] as String,
-      time: fields[1] as TimeOfDay,
+      time: (fields[1] as List)?.cast<int>(),
       startDate: fields[2] as DateTime,
       secondDietName: fields[3] as String,
       thirdDietName: fields[4] as String,
-      secondTime: fields[5] as TimeOfDay,
-      thirdTime: fields[6] as TimeOfDay,
+      secondTime: (fields[5] as List)?.cast<int>(),
+      thirdTime: (fields[6] as List)?.cast<int>(),
       endDate: fields[7] as DateTime,
+      id: fields[8] as String,
+      description: fields[9] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, DietModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.dietName)
       ..writeByte(1)
@@ -44,10 +46,13 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
       ..writeByte(6)
       ..write(obj.thirdTime)
       ..writeByte(7)
-      ..write(obj.endDate);
+      ..write(obj.endDate)
+      ..writeByte(8)
+      ..write(obj.id)
+      ..writeByte(9)
+      ..write(obj.description);
   }
 
   @override
-  // TODO: implement typeId
-  int get typeId => throw UnimplementedError();
+  int get typeId => 2;
 }
