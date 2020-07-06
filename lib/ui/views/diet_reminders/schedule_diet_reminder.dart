@@ -1,3 +1,5 @@
+import 'package:MedBuzz/core/database/diet_reminderDB.dart';
+import 'package:MedBuzz/core/models/diet_reminder/diet_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/diet_reminders/diet_reminders_model.dart';
 import 'package:MedBuzz/ui/widget/appBar.dart';
@@ -32,6 +34,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var db = Provider.of<DietReminderDB>(context);
     var model = Provider.of<DietReminderModel>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -95,13 +98,12 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                       ),
                       SizedBox(height: Config.yMargin(context, 3)),
                       Container(
-                          height: Config.yMargin(context, 23),
+                          height: Config.yMargin(context, 19),
                           child: ScrollableCalendar(
                             model: model,
                             useButtonColor: true,
                             hideDivider: true,
                           )),
-                      SizedBox(height: Config.yMargin(context, 1.8)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -246,7 +248,19 @@ class ScheduleDietReminderScreen extends StatelessWidget {
 
                             //Functions to save reminder to db and schedule notification goes here
 
-                            onPressed: () {},
+                            onPressed: () {
+                              db.addDiet(DietModel(
+                                  id: DateTime.now().toString(),
+                                  dietName: mealNameController.text,
+                                  description: mealDescController.text ?? '',
+                                  startDate: model.getStartDate(),
+                                  time: [
+                                    num.parse(
+                                        model.selectedTime.substring(0, 2)),
+                                    num.parse(
+                                        model.selectedTime.substring(3, 5))
+                                  ]));
+                            },
                             child: Text('Save',
                                 style: TextStyle(
                                     fontSize: Config.textSize(context, 5),
