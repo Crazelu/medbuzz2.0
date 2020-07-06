@@ -161,7 +161,7 @@ class ViewAppointment extends StatelessWidget {
                     onTap: () {
                       appointmentModel.isEditing = true;
                       Navigator.pushNamed(
-                          context, RouteNames.viewAppointmentScreen);
+                          context, RouteNames.scheduleAppointmentScreen);
                     },
                     child: Container(
                       padding: EdgeInsets.all(Config.xMargin(context, 3.55)),
