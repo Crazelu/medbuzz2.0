@@ -48,5 +48,6 @@ class FitnessReminderAdapter extends TypeAdapter<FitnessReminder> {
   }
 
   @override
-  int get typeId => 4;
+  // TODO: implement typeId
+  int get typeId => throw UnimplementedError();
 }
