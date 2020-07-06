@@ -22,13 +22,14 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
       secondTime: fields[5] as TimeOfDay,
       thirdTime: fields[6] as TimeOfDay,
       endDate: fields[7] as DateTime,
+      id: fields[8] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, DietModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.dietName)
       ..writeByte(1)
@@ -44,10 +45,11 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
       ..writeByte(6)
       ..write(obj.thirdTime)
       ..writeByte(7)
-      ..write(obj.endDate);
+      ..write(obj.endDate)
+      ..writeByte(8)
+      ..write(obj.id);
   }
 
   @override
-  // TODO: implement typeId
   int get typeId => throw UnimplementedError();
 }
