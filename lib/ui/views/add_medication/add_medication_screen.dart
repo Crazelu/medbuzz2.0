@@ -1,12 +1,16 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
+import 'package:MedBuzz/core/notifications/drug_notification_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../size_config/config.dart';
 
 class AddMedicationScreen extends StatefulWidget {
+  final String payload;
+
+  const AddMedicationScreen({Key key, this.payload}) : super(key: key);
   @override
   _AddMedicationScreenState createState() => _AddMedicationScreenState();
 }
@@ -20,7 +24,6 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.delayed(Duration.zero, () {
       Provider.of<MedicationData>(context).getMedicationReminder();
@@ -301,37 +304,50 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 //                          medModel.dosage
 //                        ]);
                         if (textEditingController.text.isNotEmpty) {
+                          MedicationReminder med = MedicationReminder(
+                              id: DateTime.now().toString(),
+                              drugName: medModel
+                                  .updateDrugName(textEditingController.text),
+                              drugType:
+                                  medModel.drugTypes[medModel.selectedIndex],
+                              dosage: medModel.dosage,
+                              firstTime: [
+                                medModel.firstTime.hour,
+                                medModel.firstTime.minute
+                              ],
+                              secondTime: medModel.secondTime != null
+                                  ? [
+                                      medModel.secondTime.hour,
+                                      medModel.secondTime.minute
+                                    ]
+                                  : [],
+                              thirdTime: medModel.thirdTime != null
+                                  ? [
+                                      medModel.thirdTime.hour,
+                                      medModel.thirdTime.minute
+                                    ]
+                                  : [],
+                              frequency: medModel.selectedFreq,
+                              startAt: medModel.startDate,
+                              endAt: medModel.endDate);
                           switch (appBarTitle) {
                             case 'Add Medication':
-                              await medModel.addMedicationReminder(
-                                DateTime.now().toString(),
-                                MedicationReminder(
-                                    drugName: medModel.updateDrugName(
-                                        textEditingController.text),
-                                    drugType: medModel
-                                        .drugTypes[medModel.selectedIndex],
-                                    dosage: medModel.dosage,
-                                    firstTime: [
-                                      medModel.firstTime.hour,
-                                      medModel.firstTime.minute
-                                    ],
-                                    secondTime: medModel.secondTime != null
-                                        ? [
-                                            medModel.secondTime.hour,
-                                            medModel.secondTime.minute
-                                          ]
-                                        : [],
-                                    thirdTime: medModel.thirdTime != null
-                                        ? [
-                                            medModel.thirdTime.hour,
-                                            medModel.thirdTime.minute
-                                          ]
-                                        : [],
-                                    frequency: medModel.selectedFreq,
-                                    startAt: medModel.startDate,
-                                    endAt: medModel.endDate),
-                              );
+                              await medModel.addMedicationReminder(med);
                               print('This is a test');
+                              switch (medModel.selectedFreq) {
+                                case 'Once':
+                                  setNotification(med, med.firstTime);
+                                  break;
+                                case 'Twice':
+                                  setNotification(med, med.firstTime);
+                                  setNotification(med, med.secondTime);
+                                  break;
+                                case 'Thrice':
+                                  setNotification(med, med.firstTime);
+                                  setNotification(med, med.secondTime);
+                                  setNotification(med, med.thirdTime);
+                                  break;
+                              }
 
                               print([
                                 medModel.drugName,
@@ -378,6 +394,25 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
         ),
       ),
     );
+  }
+
+//Function to set notification
+  void setNotification(MedicationReminder med, List<int> time) {
+    //notification id has to be unique so using the the id provided in the model and the time supplied
+    // should work just fine
+    DateTime date = DateTime.parse(med.id);
+    int id =
+        num.parse('${date.year}${date.month}${date.day}${time[0]}${time[1]}');
+
+    DrugNotificationManager notificationManager = DrugNotificationManager();
+    notificationManager.showDrugNotificationDaily(
+        hour: time[0],
+        minute: time[1],
+        id: id,
+        //username can be replaced with the actual name of the user
+        title: "Hey (username)!",
+        body:
+            "It's time to take ${med.dosage} ${med.drugType} of ${med.drugName}");
   }
 
   Widget titleAdd() {
