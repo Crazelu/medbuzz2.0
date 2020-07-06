@@ -9,6 +9,8 @@ class DietReminderModel extends ChangeNotifier {
   static DateTime __today = DateTime.now();
   static int __month = __today.month;
 
+  List<String> _selectedFoodClasses = [];
+
   int _currentDay = DateTime.now().day;
   String _selectedFoodClass;
   bool _isProtein = false;
@@ -24,6 +26,31 @@ class DietReminderModel extends ChangeNotifier {
   int _daysInMonth = DateUtil().daysInMonth(__month, __today.year);
 
   int get currentDay => _currentDay;
+  List<String> get selectedFoodClasses => _selectedFoodClasses;
+
+  bool isActive(index) {
+    //increment index to match day index and compare
+    return index + 1 == _selectedDay;
+  }
+
+  Color getButtonColor(BuildContext context, index) {
+    return isActive(index)
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).primaryColorDark.withOpacity(0.05);
+  }
+
+  void updatesSelectedFoodClasses(String foodClass) {
+    if (_selectedFoodClasses.contains(foodClass)) {
+      this._selectedFoodClasses.remove(foodClass);
+      notifyListeners();
+      return;
+    }
+    if (!_selectedFoodClasses.contains(foodClass)) {
+      this._selectedFoodClasses.add(foodClass);
+      notifyListeners();
+      return;
+    }
+  }
 
   void getDaysInMonth() {
     this._daysInMonth = DateUtil().daysInMonth(_month, _today.year);
