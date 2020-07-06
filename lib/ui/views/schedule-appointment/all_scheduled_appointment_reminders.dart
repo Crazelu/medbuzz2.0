@@ -1,11 +1,11 @@
-import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_reminder_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'dart:ui';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders_model.dart';
-// import 'package:table_calendar/table_calendar.dart';
+import 'package:MedBuzz/core/constants/route_names.dart';
 
 class ScheduledAppointmentsPage extends StatefulWidget {
   @override
@@ -15,9 +15,6 @@ class ScheduledAppointmentsPage extends StatefulWidget {
 }
 
 class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
-  String month = 'July';
-  int dateno = 12;
-  String day = 'Thurs';
   var items = ['hi', 'hello', 'good', 'new', 'hi', 'now'];
   dynamic reminderMessage = 'Make sure to make lots of friends.';
   @override
@@ -32,8 +29,8 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
             child: Container(
               child: new Text(
                 'My Appointments',
-                style: appThemeLight.textTheme.headline6,
-                textScaleFactor: 1.2,
+                style: appThemeLight.textTheme.headline5,
+                textScaleFactor: 1.5,
               ),
             ),
           ),
@@ -62,15 +59,13 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
               Tab(
                 child: Text(
                   'Upcoming',
-                  textScaleFactor: 0.85,
-                  style: appThemeLight.textTheme.headline5,
+                  style: appThemeLight.textTheme.headline6,
                 ),
               ),
               Tab(
                 child: Text(
                   'Past',
-                  textScaleFactor: 0.85,
-                  style: appThemeLight.textTheme.headline5,
+                  style: appThemeLight.textTheme.headline6,
                 ),
               ),
             ],
@@ -91,41 +86,45 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                 itemBuilder: (context, index) {
                   // final item = items[index];
 
-                  return Container(
-                    child: Card(
-                      margin: EdgeInsets.symmetric(
-                        vertical: 20.0,
-                        horizontal: 30.0,
-                      ),
+                  return Card(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 20.0,
+                      horizontal: 30.0,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: ListTile(
                         leading: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              '$month',
+                              'July',
                               style: TextStyle(
                                 fontFamily: 'Segoe',
                                 color: appThemeLight.primaryColorDark
                                     .withOpacity(0.7),
-                                fontSize: Config.textSize(context, 2.0),
+                                fontSize: Config.textSize(context, 2.15),
                               ),
+                              textScaleFactor: 0.70,
                             ),
                             Text(
-                              '$dateno',
+                              '12',
                               style: TextStyle(
                                 fontFamily: 'Segoe',
-                                fontSize: Config.textSize(context, 6.0),
+                                fontSize: Config.textSize(context, 3.48),
                                 color: appThemeLight.highlightColor,
                               ),
+                              textScaleFactor: 0.85,
                             ),
                             Text(
-                              '$day',
+                              'Thurs',
                               style: TextStyle(
                                 fontFamily: 'Segoe',
                                 color: appThemeLight.primaryColorDark
-                                    .withOpacity(0.7),
-                                fontSize: Config.textSize(context, 2.0),
+                                    .withOpacity(0.70),
+                                fontSize: Config.textSize(context, 2.15),
                               ),
+                              textScaleFactor: 0.75,
                             ),
                           ],
                         ),
@@ -140,11 +139,11 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                     fontFamily: 'Segoe',
                                     color: appThemeLight.primaryColorDark
                                         .withOpacity(0.6),
-                                    fontSize: Config.textSize(context, 2.5),
+                                    fontSize: Config.textSize(context, 4.0),
                                   ),
                                 ),
                                 SizedBox(
-                                  width: Config.xMargin(context, 3.0),
+                                  width: Config.xMargin(context, 2.0),
                                 ),
                                 Text(
                                   'Appointment For',
@@ -152,7 +151,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                     fontFamily: 'Segoe',
                                     color: appThemeLight.primaryColorDark
                                         .withOpacity(0.6),
-                                    fontSize: Config.textSize(context, 2.5),
+                                    fontSize: Config.textSize(context, 4.0),
                                   ),
                                 ),
                               ],
@@ -169,7 +168,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                       fontFamily: 'Segoe UI',
                                       color: appThemeLight.primaryColorDark
                                           .withOpacity(0.9),
-                                      fontSize: Config.textSize(context, 2.5),
+                                      fontSize: Config.textSize(context, 4.0),
                                     ),
                                   ),
                                   SizedBox(
@@ -181,17 +180,17 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                       fontFamily: 'Segoe UI',
                                       color: appThemeLight.primaryColorDark
                                           .withOpacity(0.9),
-                                      fontSize: Config.textSize(context, 2.5),
+                                      fontSize: Config.textSize(context, 4.0),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             SizedBox(
-                              height: Config.yMargin(context, 1.0),
+                              height: Config.yMargin(context, 4.0),
                               child: Center(
                                 child: Divider(
-                                  thickness: 1.0,
+                                  thickness: 1.5,
                                   color: appThemeLight.primaryColorDark
                                       .withOpacity(0.5),
                                 ),
@@ -205,7 +204,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                 style: TextStyle(
                                   color: appThemeLight.primaryColorDark
                                       .withOpacity(0.8),
-                                  fontSize: Config.textSize(context, 2.5),
+                                  fontSize: Config.textSize(context, 3.5),
                                 ),
                               ),
                             ),
@@ -214,43 +213,30 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                         trailing: PopupMenuButton(
                             icon: Icon(
                               Icons.more_vert,
-                              size: Config.yMargin(context, 2.0),
+                              size: Config.yMargin(context, 3.0),
                               color: Colors.grey,
                             ),
                             itemBuilder: (BuildContext context) {
                               return menuitems.map((MenuItem menuitem) {
                                 return PopupMenuItem(
-                                  child: Card(
-                                    borderOnForeground: true,
-                                    color: Color.fromARGB(255, 245, 244, 244),
-                                    child: ListTile(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 0.0),
-                                      title: Column(
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              menuitem.menuValue,
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                backgroundColor: Color.fromARGB(
-                                                    255, 245, 244, 244),
-                                              ),
-                                            ),
-                                          ),
-                                          Container(),
-                                        ],
+                                  enabled: true,
+                                  child: InkWell(
+                                    child: Center(
+                                      child: Text(
+                                        menuitem.menuValue,
+                                        textAlign: TextAlign.center,
                                       ),
-                                      onTap: () => {
-                                        if (menuitem.menuValue == 'Edit')
-                                          {}
-                                        else if ((menuitem.menuValue ==
-                                            'Delete'))
-                                          {
-                                            _asyncConfirmDialog(context),
-                                          },
-                                      },
                                     ),
+                                    onTap: () => {
+                                      if (menuitem.menuValue == 'Edit')
+                                        {
+                                          // navigate to single view appointment screen with edit functionality
+                                        }
+                                      else if ((menuitem.menuValue == 'Delete'))
+                                        {
+                                          _asyncConfirmDialog(context),
+                                        },
+                                    },
                                   ),
                                 );
                               }).toList();
@@ -266,43 +252,47 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                 // Provide a builder function. This is where the magic happens.
                 // Convert each item into a widget based on the type of item it is.
                 itemBuilder: (context, index) {
-//                final item = items[index];
+                  // final item = items[index];
 
-                  return Container(
-                    child: Card(
-                      margin: EdgeInsets.symmetric(
-                        vertical: 20.0,
-                        horizontal: 30.0,
-                      ),
+                  return Card(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 20.0,
+                      horizontal: 30.0,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: ListTile(
                         leading: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              '$month',
+                              'July',
                               style: TextStyle(
                                 fontFamily: 'Segoe',
                                 color: appThemeLight.primaryColorDark
                                     .withOpacity(0.7),
-                                fontSize: Config.textSize(context, 2.0),
+                                fontSize: Config.textSize(context, 2.15),
                               ),
+                              textScaleFactor: 0.70,
                             ),
                             Text(
-                              '$dateno',
+                              '12',
                               style: TextStyle(
                                 fontFamily: 'Segoe',
-                                fontSize: Config.textSize(context, 6.0),
+                                fontSize: Config.textSize(context, 3.48),
                                 color: appThemeLight.highlightColor,
                               ),
+                              textScaleFactor: 0.85,
                             ),
                             Text(
-                              '$day',
+                              'Thurs',
                               style: TextStyle(
                                 fontFamily: 'Segoe',
                                 color: appThemeLight.primaryColorDark
-                                    .withOpacity(0.7),
-                                fontSize: Config.textSize(context, 2.0),
+                                    .withOpacity(0.70),
+                                fontSize: Config.textSize(context, 2.15),
                               ),
+                              textScaleFactor: 0.75,
                             ),
                           ],
                         ),
@@ -317,11 +307,11 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                     fontFamily: 'Segoe',
                                     color: appThemeLight.primaryColorDark
                                         .withOpacity(0.6),
-                                    fontSize: Config.textSize(context, 2.5),
+                                    fontSize: Config.textSize(context, 4.0),
                                   ),
                                 ),
                                 SizedBox(
-                                  width: Config.xMargin(context, 3.0),
+                                  width: Config.xMargin(context, 2.0),
                                 ),
                                 Text(
                                   'Appointment For',
@@ -329,7 +319,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                     fontFamily: 'Segoe',
                                     color: appThemeLight.primaryColorDark
                                         .withOpacity(0.6),
-                                    fontSize: Config.textSize(context, 2.5),
+                                    fontSize: Config.textSize(context, 4.0),
                                   ),
                                 ),
                               ],
@@ -346,7 +336,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                       fontFamily: 'Segoe UI',
                                       color: appThemeLight.primaryColorDark
                                           .withOpacity(0.9),
-                                      fontSize: Config.textSize(context, 2.5),
+                                      fontSize: Config.textSize(context, 4.0),
                                     ),
                                   ),
                                   SizedBox(
@@ -358,17 +348,17 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                       fontFamily: 'Segoe UI',
                                       color: appThemeLight.primaryColorDark
                                           .withOpacity(0.9),
-                                      fontSize: Config.textSize(context, 2.5),
+                                      fontSize: Config.textSize(context, 4.0),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             SizedBox(
-                              height: Config.yMargin(context, 1.0),
+                              height: Config.yMargin(context, 4.0),
                               child: Center(
                                 child: Divider(
-                                  thickness: 1.0,
+                                  thickness: 1.5,
                                   color: appThemeLight.primaryColorDark
                                       .withOpacity(0.5),
                                 ),
@@ -382,7 +372,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                                 style: TextStyle(
                                   color: appThemeLight.primaryColorDark
                                       .withOpacity(0.8),
-                                  fontSize: Config.textSize(context, 2.5),
+                                  fontSize: Config.textSize(context, 3.5),
                                 ),
                               ),
                             ),
@@ -391,43 +381,30 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                         trailing: PopupMenuButton(
                             icon: Icon(
                               Icons.more_vert,
-                              size: Config.yMargin(context, 2.0),
+                              size: Config.yMargin(context, 3.0),
                               color: Colors.grey,
                             ),
                             itemBuilder: (BuildContext context) {
                               return menuitems.map((MenuItem menuitem) {
                                 return PopupMenuItem(
-                                  child: Card(
-                                    borderOnForeground: true,
-                                    color: Color.fromARGB(255, 245, 244, 244),
-                                    child: ListTile(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 0.0),
-                                      title: Column(
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              menuitem.menuValue,
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                backgroundColor: Color.fromARGB(
-                                                    255, 245, 244, 244),
-                                              ),
-                                            ),
-                                          ),
-                                          Container(),
-                                        ],
+                                  enabled: true,
+                                  child: InkWell(
+                                    child: Center(
+                                      child: Text(
+                                        menuitem.menuValue,
+                                        textAlign: TextAlign.center,
                                       ),
-                                      onTap: () => {
-                                        if (menuitem.menuValue == 'Edit')
-                                          {}
-                                        else if ((menuitem.menuValue ==
-                                            'Delete'))
-                                          {
-                                            _asyncConfirmDialog(context),
-                                          },
-                                      },
                                     ),
+                                    onTap: () => {
+                                      if (menuitem.menuValue == 'Edit')
+                                        {
+                                          // navigate to single view appointment screen with edit functionality
+                                        }
+                                      else if ((menuitem.menuValue == 'Delete'))
+                                        {
+                                          _asyncConfirmDialog(context),
+                                        },
+                                    },
                                   ),
                                 );
                               }).toList();
