@@ -37,7 +37,7 @@ class FitnessNotificationManager {
         'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
   }
 
-  getPlatformChannelSpecfics(int id) async {
+  getPlatformChannelSpecfics(int id) {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         '$id', 'your channel name', 'your channel description',
         importance: Importance.Max,

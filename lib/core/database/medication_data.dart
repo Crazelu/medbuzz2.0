@@ -22,8 +22,8 @@ class MedicationData extends ChangeNotifier {
   int selectedIndex = 0;
   int dosage = 1;
   TimeOfDay firstTime = TimeOfDay.now();
-  TimeOfDay secondTime = TimeOfDay.now();
-  TimeOfDay thirdTime = TimeOfDay.now();
+  TimeOfDay secondTime;
+  TimeOfDay thirdTime;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   String drugName;
@@ -201,12 +201,11 @@ class MedicationData extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addMedicationReminder(
-      String index, MedicationReminder medication) async {
+  Future<void> addMedicationReminder(MedicationReminder medication) async {
     var medicationReminderBox =
         await Hive.openBox<MedicationReminder>(_boxName);
 
-    await medicationReminderBox.put(index, medication);
+    await medicationReminderBox.put(medication.id, medication);
 
     medicationReminder = medicationReminderBox.values.toList();
     medicationReminderBox.close();
@@ -215,7 +214,7 @@ class MedicationData extends ChangeNotifier {
   }
 
   Future<void> editSchedule({MedicationReminder medication}) async {
-    String medicationKey = medication.index;
+    String medicationKey = medication.id;
     var medicationReminderBox =
         await Hive.openBox<MedicationReminder>(_boxName);
     await medicationReminderBox.put(medicationKey, medication);
