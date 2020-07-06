@@ -1,6 +1,7 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/water_reminders/single_water_screen.dart';
 import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,11 +35,16 @@ class MedicationView extends StatelessWidget {
                     padding:
                         EdgeInsets.only(right: Config.yMargin(context, 2.6)),
                     child: FlatButton.icon(
-                        onPressed: () {
+                        onPressed: () async {
                           showDialog(
-                            context: context,
-                            child: DeleteDialog(),
-                          );
+                              context: context,
+                              child: DeleteDialog() //show Confirmation dialog
+                              );
+                          showSnackBar(context);
+                          Future.delayed(Duration(seconds: 1)).then((value) {
+                            medModeller.deleteSchedule(key);
+                            Navigator.of(context).pop(true);
+                          });
                         },
                         icon: Icon(
                           Icons.delete,
