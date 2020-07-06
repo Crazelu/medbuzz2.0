@@ -28,7 +28,7 @@ class FitnessReminderAdapter extends TypeAdapter<FitnessReminder> {
   @override
   void write(BinaryWriter writer, FitnessReminder obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.index)
       ..writeByte(1)
@@ -48,5 +48,6 @@ class FitnessReminderAdapter extends TypeAdapter<FitnessReminder> {
   }
 
   @override
-  int get typeId => 3;
+  // TODO: implement typeId
+  int get typeId => throw UnimplementedError();
 }
