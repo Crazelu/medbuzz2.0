@@ -20,8 +20,10 @@ void main() async {
   Hive.registerAdapter(WaterReminderAdapter());
   Hive.registerAdapter(MedicationReminderAdapter());
   Hive.registerAdapter(AppointmentAdapter());
+
   Hive.registerAdapter(DietModelAdapter());
   Hive.registerAdapter(FitnessReminderAdapter());
+  await Hive.openBox('onboarding');
   runApp(MyApp());
 }
 
