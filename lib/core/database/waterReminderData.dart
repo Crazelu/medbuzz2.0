@@ -6,6 +6,11 @@ import '../models/water_reminder_model/water_reminder.dart';
 class WaterReminderData extends ChangeNotifier {
   static const String _boxName = "waterReminderBox";
 
+  int ml;
+  DateTime dateTime = DateTime.now();
+
+  bool isEditing = false;
+
   List<WaterReminder> _waterReminders = [];
   List<WaterReminder> _sortedReminders = [];
 

@@ -28,6 +28,13 @@ class DietReminderModel extends ChangeNotifier {
   int get currentDay => _currentDay;
   List<String> get selectedFoodClasses => _selectedFoodClasses;
 
+  DateTime getStartDate() {
+    String month = _month.toString().length < 2 ? '0$_month' : '$_month';
+    String weekday =
+        _selectedDay.toString().length < 2 ? '0$_selectedDay' : '$_selectedDay';
+    return DateTime.parse('${__today.year}-$month-$weekday');
+  }
+
   bool isActive(index) {
     //increment index to match day index and compare
     return index + 1 == _selectedDay;
@@ -164,6 +171,8 @@ class DietReminderModel extends ChangeNotifier {
 
   void updateSelectedTime(dynamic time) {
     this._selectedTime = time;
+    print(time);
+    print(time);
   }
 
   void _getCurrentMonth() {
