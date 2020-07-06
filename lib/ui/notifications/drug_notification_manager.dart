@@ -1,10 +1,8 @@
+import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:MedBuzz/main.dart';
-import 'package:MedBuzz/ui/views/drug_description/drug_description.dart';
-
-import '../views/drug_description/drug_description.dart';
 
 class DrugNotificationManager {
   var flutterLocalNotificationsPlugin;
@@ -31,7 +29,7 @@ class DrugNotificationManager {
   }
 
   void showDrugNotificationDaily(
-      int id, String title, String body, int hour, int minute) async {
+      {int id, String title, String body, int hour, int minute}) async {
     var time = new Time(hour, minute, 0);
     await flutterLocalNotificationsPlugin.showDailyAtTime(
         id, title, body, time, getPlatformChannelSpecfics(id));
@@ -39,7 +37,7 @@ class DrugNotificationManager {
         'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
   }
 
-  getPlatformChannelSpecfics(int id) async {
+  getPlatformChannelSpecfics(int id) {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         '$id', 'your channel name', 'your channel description',
         importance: Importance.Max,
@@ -64,7 +62,7 @@ class DrugNotificationManager {
     await Navigator.push(
       MyApp.navigatorKey.currentState.context,
       MaterialPageRoute(
-          builder: (context) => DrugDescription(payload: payload)),
+          builder: (context) => AddMedicationScreen(payload: payload)),
     );
   }
 
