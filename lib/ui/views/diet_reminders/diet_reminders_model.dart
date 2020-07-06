@@ -28,6 +28,17 @@ class DietReminderModel extends ChangeNotifier {
   int get currentDay => _currentDay;
   List<String> get selectedFoodClasses => _selectedFoodClasses;
 
+  bool isActive(index) {
+    //increment index to match day index and compare
+    return index + 1 == _selectedDay;
+  }
+
+  Color getButtonColor(BuildContext context, index) {
+    return isActive(index)
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).primaryColorDark.withOpacity(0.05);
+  }
+
   void updatesSelectedFoodClasses(String foodClass) {
     if (_selectedFoodClasses.contains(foodClass)) {
       this._selectedFoodClasses.remove(foodClass);

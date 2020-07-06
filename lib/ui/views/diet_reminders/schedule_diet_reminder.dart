@@ -95,8 +95,12 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                       ),
                       SizedBox(height: Config.yMargin(context, 3)),
                       Container(
-                          height: Config.yMargin(context, 13),
-                          child: ScrollableCalendar(model: model)),
+                          height: Config.yMargin(context, 23),
+                          child: ScrollableCalendar(
+                            model: model,
+                            useButtonColor: true,
+                            hideDivider: true,
+                          )),
                       SizedBox(height: Config.yMargin(context, 1.8)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
