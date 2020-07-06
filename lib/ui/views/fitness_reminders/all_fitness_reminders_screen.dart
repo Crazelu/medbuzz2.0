@@ -1,6 +1,7 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_model.dart';
+import 'package:MedBuzz/ui/widget/scrollable_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -98,33 +99,13 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      //ListView to display all dates with entries in the DB
                       Container(
-                        height: height * .2,
-                        //To be replaced with a ListView.builder for CustomDateButtons with date range from DB
-                        child: ListView(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          children: <Widget>[
-                            //Some example (pronounced igzampl, yunno?)
-                            CustomDateButton(
-                                date: DateTime.now().add(Duration(days: 1))),
-                            CustomDateButton(
-                                date: DateTime.now().add(Duration(days: 2))),
-                            CustomDateButton(
-                                date: DateTime.now().add(Duration(days: 3))),
-                            CustomDateButton(
-                                date: DateTime.now().add(Duration(days: 4))),
-                            CustomDateButton(
-                                date: DateTime.now().add(Duration(days: 5))),
-                            CustomDateButton(
-                                date: DateTime.now().add(Duration(days: 6))),
-                            CustomDateButton(date: DateTime.now()),
-                            CustomDateButton(
-                                date: DateTime.now().add(Duration(days: 10))),
-                          ],
-                        ),
-                      ),
+                          height: Config.yMargin(context, 23),
+                          child: ScrollableCalendar(
+                            model: model,
+                            useButtonColor: true,
+                            hideDivider: true,
+                          )),
                       //Text widget to display current date in MONTH Year format
                       Text(
                         'JUN 2020',
@@ -158,59 +139,59 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
   }
 }
 
-class CustomDateButton extends StatelessWidget {
-  final DateTime date;
+// class CustomDateButton extends StatelessWidget {
+//   final DateTime date;
 
-  CustomDateButton({this.date});
-  @override
-  Widget build(BuildContext context) {
-    var model = Provider.of<FitnessSchedulesModel>(context, listen: false);
-    return Container(
-      margin: EdgeInsets.only(right: Config.xMargin(context, 3)),
-      width: Config.xMargin(context, 19),
-      alignment: Alignment.center,
-      child: FlatButton(
-        onPressed: () => model.changeDay(date),
+//   CustomDateButton({this.date});
+//   @override
+//   Widget build(BuildContext context) {
+//     var model = Provider.of<FitnessSchedulesModel>(context, listen: false);
+//     return Container(
+//       margin: EdgeInsets.only(right: Config.xMargin(context, 3)),
+//       width: Config.xMargin(context, 19),
+//       alignment: Alignment.center,
+//       child: FlatButton(
+//         onPressed: () => model.changeDay(date),
 
-        //functionality for finding out if selected date (defaults to present day) equals the date passed in the constructor
-        //I'm using this to determine the color of the container
-        color: model.getButtonColor(context, date),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Config.xMargin(context, 11)),
-        ),
-        child: Container(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              //Day in integer goes here
-              Text(
-                '${date.day}',
-                style: TextStyle(
-                    fontSize: Config.textSize(context, 8),
-                    fontWeight: FontWeight.w600,
-                    color: model.getTextColor(context, date)),
-              ),
+//         //functionality for finding out if selected date (defaults to present day) equals the date passed in the constructor
+//         //I'm using this to determine the color of the container
+//         color: model.getButtonColor(context, date),
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(Config.xMargin(context, 11)),
+//         ),
+//         child: Container(
+//           alignment: Alignment.center,
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: <Widget>[
+//               //Day in integer goes here
+//               Text(
+//                 '${date.day}',
+//                 style: TextStyle(
+//                     fontSize: Config.textSize(context, 8),
+//                     fontWeight: FontWeight.w600,
+//                     color: model.getTextColor(context, date)),
+//               ),
 
-              SizedBox(
-                height: Config.yMargin(context, 3),
-              ),
+//               SizedBox(
+//                 height: Config.yMargin(context, 3),
+//               ),
 
-              //Day in shortened words goes here
-              Text(
-                model.getWeekday(date),
-                style: TextStyle(
-                    fontSize: Config.textSize(context, 4.8),
-                    fontWeight: FontWeight.w500,
-                    color: model.getTextColor(context, date)),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//               //Day in shortened words goes here
+//               Text(
+//                 model.getWeekday(date),
+//                 style: TextStyle(
+//                     fontSize: Config.textSize(context, 4.8),
+//                     fontWeight: FontWeight.w500,
+//                     color: model.getTextColor(context, date)),
+//               )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class FitnessCard extends StatelessWidget {
   @override

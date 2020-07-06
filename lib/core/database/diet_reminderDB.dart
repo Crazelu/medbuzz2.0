@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 //Crazelu renamed this as DietReminderDB for better disctinction
-class DietReminderDB extends ChangeNotifier{
-  // Hive box name 
+class DietReminderDB extends ChangeNotifier {
+  // Hive box name
 
   static const String _boxname = "dietReminderBox";
 
-  // Making an emptylist of diets 
+  // Making an emptylist of diets
 
   List<DietModel> _diet = [];
 
@@ -19,24 +19,27 @@ class DietReminderDB extends ChangeNotifier{
 
   void getAlldiets() async {
     var box = await Hive.openBox(_boxname);
-
-    _diet = box.values.toList();
+    var all = box.values.toList();
+    for (var i in all) {
+      _diet.add(i);
+      print(i.dietName);
+    }
 
     notifyListeners();
   }
 
   // get a specific diet by it's index
 
-  DietModel getDiet(index){
+  DietModel getDiet(index) {
     return _diet[index];
   }
 
-  // add a  diet 
+  // add a  diet
 
-  void addDiet(DietModel diet)async{
+  void addDiet(DietModel diet) async {
     var box = await Hive.openBox<DietModel>(_boxname);
 
-    await box.add(diet);
+    await box.put(diet.id, diet);
 
     _diet = box.values.toList();
     box.close();
@@ -44,8 +47,8 @@ class DietReminderDB extends ChangeNotifier{
     notifyListeners();
   }
 
-  // delete a diet 
-  void deleteDiet(key) async{
+  // delete a diet
+  void deleteDiet(key) async {
     var box = await Hive.openBox<DietModel>(_boxname);
 
     _diet = box.values.toList();
@@ -55,19 +58,19 @@ class DietReminderDB extends ChangeNotifier{
     notifyListeners();
   }
 
-  // edit DIet 
+  // edit DIet
 
-  void editDiet({DietModel diet, int index})async{
+  void editDiet({DietModel diet}) async {
     var box = await Hive.openBox<DietModel>(_boxname);
 
-    box.putAt(index, diet);
+    box.put(diet.id, diet);
 
     _diet = box.values.toList();
     box.close();
     notifyListeners();
   }
 
-  int getdietcount(){
+  int getdietcount() {
     return _diet.length;
   }
 }

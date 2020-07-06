@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
+
 part 'water_reminder.g.dart';
 
 @HiveType()
