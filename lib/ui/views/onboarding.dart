@@ -4,6 +4,7 @@ import 'package:MedBuzz/ui/navigation/page_transition/page_transition.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/widget/dot_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class Onboard extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class Onboard extends StatefulWidget {
 }
 
 class _OnboardState extends State<Onboard> {
+  var box = Hive.box('onboarding');
   PageController _controller;
   int currentIndex = 0;
   @override
@@ -38,6 +40,7 @@ class _OnboardState extends State<Onboard> {
             padding: const EdgeInsetsDirectional.only(top: 30),
             child: FlatButton(
               onPressed: () {
+                box.put('status', 'true');
                 Navigator.pushReplacementNamed(context, RouteNames.signup);
               }, //navigate to the sign up page
               child: Text(
