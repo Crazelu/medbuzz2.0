@@ -1,11 +1,11 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/notifications/fitness_notification_manager.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_model.dart';
 import 'package:MedBuzz/ui/widget/scrollable_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:MedBuzz/ui/notifications/fitness_notification_manager.dart';
 
 class FitnessSchedulesScreen extends StatefulWidget {
   FitnessSchedulesScreen({this.payload});
