@@ -1,4 +1,3 @@
-import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:date_util/date_util.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +36,7 @@ class AllRemindersViewModel extends ChangeNotifier {
   int _selectedMonth;
   dynamic _selectedTime;
   List<WaterReminder> _availableWaterReminders = [];
+  List<Appointment> _allAvailableAppointments = [];
 
   List<MedicationReminder> _availableMedicationReminders = [];
   AllRemindersViewModel() {
@@ -113,6 +113,11 @@ class AllRemindersViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateAvailableAppointmentReminders(List<Appointment> appointments) {
+    _allAvailableAppointments = appointments;
+    notifyListeners();
+  }
+
   void updateSelectedDay(int dayIndex) {
     _selectedDay = dayIndex + 1;
     notifyListeners();
@@ -139,6 +144,12 @@ class AllRemindersViewModel extends ChangeNotifier {
   List<WaterReminder> get waterRemindersBasedOnDateTime {
     return _availableWaterReminders
         .where((reminder) => selectedDateTime.day == reminder.dateTime.day)
+        .toList();
+  }
+
+  List<Appointment> get appointmentsBasedOnDateTime {
+    return _allAvailableAppointments
+        .where((appointment) => selectedDateTime.day == appointment.date.day)
         .toList();
   }
 
