@@ -518,6 +518,7 @@ class _MedicationCardState extends State<MedicationCard> {
                               medModel.updateDosage(widget.values.dosage);
                               medModel.updateStartDate(widget.values.startAt);
                               medModel.updateEndDate(widget.values.endAt);
+                              medModel.updateFrequency(widget.values.frequency);
 
                               Navigator.pushNamed(
                                 context,

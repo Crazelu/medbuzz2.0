@@ -124,58 +124,23 @@ class MedicationView extends StatelessWidget {
                           ),
                           SizedBox(height: Config.yMargin(context, 10)),
                           Text(
-                            'Frequency',
+                            'Dosage',
                             style: TextStyle(
                               color: Theme.of(context).primaryColorDark,
                               fontSize: Config.textSize(context, 4.5),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: Config.yMargin(context, 1)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Once Daily',
-                                      style: TextStyle(
-                                        fontSize: Config.textSize(context, 4),
-                                      ),
-                                    ),
-                                    Text(
-                                      '8:00AM',
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: Config.textSize(context, 3.6),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Once Daily',
-                                      style: TextStyle(
-                                        fontSize: Config.textSize(context, 4),
-                                      ),
-                                    ),
-                                    Text(
-                                      '8:00AM',
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: Config.textSize(context, 3.6),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
+                          Container(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: medModel.selectedFreq == 'Once'
+                                  ? 1
+                                  : medModel.selectedFreq == 'Twice' ? 2 : 3,
+                              itemBuilder: (context, index) {
+                                return FrequencyList(
+                                    context: context, index: index);
+                              },
                             ),
                           ),
                           SizedBox(height: Config.yMargin(context, 10)),
@@ -239,6 +204,43 @@ class MedicationView extends StatelessWidget {
           ]),
         );
       },
+    );
+  }
+}
+
+class FrequencyList extends StatelessWidget {
+  final int index;
+  final BuildContext context;
+
+  FrequencyList({this.context, this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    var medModel = Provider.of<MedicationData>(context);
+    return Container(
+      // margin: EdgeInsets.all(15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '${medModel.dosage} Once Daily',
+            style: TextStyle(
+              fontSize: Config.textSize(context, 4),
+            ),
+          ),
+          Text(
+            index == 0
+                ? medModel.firstTime.toString()
+                : index == 1
+                    ? medModel.secondTime.toString()
+                    : medModel.thirdTime.toString(),
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: Config.textSize(context, 3.6),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
