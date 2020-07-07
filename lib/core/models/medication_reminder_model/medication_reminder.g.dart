@@ -24,7 +24,7 @@ class MedicationReminderAdapter extends TypeAdapter<MedicationReminder> {
       startAt: fields[7] as DateTime,
       endAt: fields[8] as DateTime,
       index: fields[9] as String,
-      id: fields[10] as int,
+      id: fields[10] as String,
     );
   }
 
@@ -57,6 +57,6 @@ class MedicationReminderAdapter extends TypeAdapter<MedicationReminder> {
   }
 
   @override
-  // TODO: implement typeId
+
   int get typeId => 4;
 }

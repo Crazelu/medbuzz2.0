@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -5,6 +7,9 @@ import 'package:MedBuzz/ui/app_theme/app_theme.dart';
 import 'dart:ui';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/schedule-appointment/all_scheduled_appointment_reminders_model.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/database/appointmentData.dart';
 // import 'package:table_calendar/table_calendar.dart';
 
 class ScheduledAppointmentsPage extends StatefulWidget {
@@ -485,7 +490,11 @@ Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
             color: appThemeLight.primaryColorDark.withOpacity(0.2),
             onPressed: () {
               // delete action
-              Navigator.of(context).pop(ConfirmAction.Delete);
+              var currentAppointment;
+              Provider.of<AppointmentData> (context, listen: false).deleteAppointment(currentAppointment.key);
+              Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName)
+              );
+              //Navigator.of(context).pop(ConfirmAction.Delete);
             },
           )
         ],
