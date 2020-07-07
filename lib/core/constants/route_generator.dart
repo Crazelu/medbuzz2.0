@@ -32,6 +32,8 @@ import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../ui/navigation/page_transition/page_transition.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -119,9 +121,9 @@ class RouteGenerator {
       case RouteNames.singleWater:
         return CustomSlideTransition(child: SingleWater());
         break;
-      case RouteNames.deleteDialog:
-        return CustomSlideTransition(child: DeleteDialog());
-        break;
+      // case RouteNames.deleteDialog:
+      //   return CustomSlideTransition(child: DeleteDialog());
+      //   break;
       default:
         return _errorRoute();
     }
