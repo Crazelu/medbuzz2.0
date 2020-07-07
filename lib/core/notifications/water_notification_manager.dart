@@ -4,6 +4,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:MedBuzz/main.dart';
 import 'package:MedBuzz/ui/views/water_reminders/water_reminders_view.dart';
 
+import '../../ui/views/water_reminders/water_reminders_view.dart';
+
 class WaterNotificationManager {
   var flutterLocalNotificationsPlugin;
 
@@ -70,7 +72,7 @@ class WaterNotificationManager {
     await Navigator.push(
       MyApp.navigatorKey.currentState.context,
       MaterialPageRoute(
-          builder: (context) => WaterScheduleView(payload: payload)),
+          builder: (context) => WaterScheduleViewScreen(payload: payload)),
     );
   }
 

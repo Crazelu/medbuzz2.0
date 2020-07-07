@@ -254,8 +254,10 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                             appointmentReminder.typeOfAppointment != null &&
                             appointmentReminder.note != null
                         ? () {
-                            if (model.selectedDay == DateTime.now().day &&
-                                model.selectedMonth == DateTime.now().month) {
+                            if (appointmentReminder.selectedDay ==
+                                    DateTime.now().day &&
+                                appointmentReminder.selectedMonth ==
+                                    DateTime.now().month) {
                               notificationManager
                                   .showAppointmentNotificationDaily(
                                 id: appointmentReminder.selectedDay,
@@ -264,13 +266,14 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                                 body: 'It is time for your '
                                     '${model.typeOfAppointment}',
                               );
+
+                              //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
+                              appointmentReminderDB.addAppointment(
+                                  appointmentReminder.createSchedule());
+                              print(appointmentReminderDB);
+                              Navigator.of(context).pushNamed(
+                                  RouteNames.scheduledAppointmentsPage);
                             }
-                            //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
-                            appointmentReminderDB.addAppointment(
-                                appointmentReminder.createSchedule());
-                            print(appointmentReminderDB);
-                            Navigator.of(context).pushNamed(
-                                RouteNames.scheduledAppointmentsPage);
                           }
                         : null,
                   ),
