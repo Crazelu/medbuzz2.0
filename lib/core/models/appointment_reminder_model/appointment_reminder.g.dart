@@ -14,30 +14,28 @@ class AppointmentAdapter extends TypeAdapter<Appointment> {
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Appointment(
-      appointmentMonth: fields[0] as DateTime,
-      appointmentDay: fields[1] as DateTime,
-      appointmentTime: fields[2] as DateTime,
-      appointmentSubject: fields[3] as String,
-      appointmentNote: fields[4] as String,
+      dateTime: fields[0] as TimeOfDay,
+      appointmentType: fields[1] as String,
+      note: fields[2] as String,
+      date: fields[3] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Appointment obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.appointmentMonth)
-      ..writeByte(1)
-      ..write(obj.appointmentDay)
-      ..writeByte(2)
-      ..write(obj.appointmentTime)
-      ..writeByte(3)
-      ..write(obj.appointmentSubject)
       ..writeByte(4)
-      ..write(obj.appointmentNote);
+      ..writeByte(0)
+      ..write(obj.dateTime)
+      ..writeByte(1)
+      ..write(obj.appointmentType)
+      ..writeByte(2)
+      ..write(obj.note)
+      ..writeByte(3)
+      ..write(obj.date);
   }
 
   @override
-  int get typeId => 1;
+  // TODO: implement typeId
+  int get typeId => 0;
 }

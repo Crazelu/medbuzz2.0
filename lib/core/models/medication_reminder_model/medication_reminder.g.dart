@@ -57,5 +57,6 @@ class MedicationReminderAdapter extends TypeAdapter<MedicationReminder> {
   }
 
   @override
+
   int get typeId => 4;
 }
