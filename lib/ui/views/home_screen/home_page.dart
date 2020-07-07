@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                                         Row(
                                           children: [
                                             Text(
-                                              '250ml',
+                                              '${waterReminderDB.currentLevel}ml',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
                                                 fontSize:
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             Text(
-                                              ' of 3500ml',
+                                              ' of ${waterReminderDB.totalLevel}ml',
                                               style: TextStyle(
                                                 fontSize: Config.textSize(
                                                     context, 3.7),
@@ -181,8 +181,8 @@ class _HomePageState extends State<HomePage> {
                                 progressBarColor:
                                     Theme.of(context).primaryColor,
                                 title: 'Water Tracker',
-                                progress: 250,
-                                total: 3500,
+                                progress: waterReminderDB.currentLevel,
+                                total: waterReminderDB.totalLevel,
                                 width: width,
                                 height: height * 0.02),
                           ),

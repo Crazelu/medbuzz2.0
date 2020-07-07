@@ -124,22 +124,25 @@ class MedicationData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateFirstTime(TimeOfDay selectedTime) {
+  TimeOfDay updateFirstTime(TimeOfDay selectedTime) {
     this.firstTime = selectedTime;
     notifyListeners();
+    return firstTime;
   }
 
-  void updateSecondTime(TimeOfDay selectedTime) {
+  TimeOfDay updateSecondTime(TimeOfDay selectedTime) {
     this.secondTime = selectedTime;
     notifyListeners();
+    return secondTime;
   }
 
-  void updateThirdTime(TimeOfDay selectedTime) {
+  TimeOfDay updateThirdTime(TimeOfDay selectedTime) {
     this.thirdTime = selectedTime;
     notifyListeners();
+    return thirdTime;
   }
 
-  void updateFrequency(String freq) {
+  String updateFrequency(String freq) {
     this.selectedFreq = freq;
     switch (freq) {
       case 'Once':
@@ -155,7 +158,15 @@ class MedicationData extends ChangeNotifier {
         this.thirdTime = TimeOfDay.now();
         break;
     }
+
     notifyListeners();
+    return selectedFreq;
+  }
+
+  String updateFreq(String freq) {
+    this.selectedFreq = freq;
+    notifyListeners();
+    return selectedFreq;
   }
 
   void updateSelectedIndex(int index) {
@@ -253,7 +264,7 @@ class MedicationData extends ChangeNotifier {
     await medicationReminderBox.put(medicationKey, medication);
 
     medicationReminder = medicationReminderBox.values.toList();
-    medicationReminderBox.close();
+    // medicationReminderBox.close();
 
     notifyListeners();
   }
