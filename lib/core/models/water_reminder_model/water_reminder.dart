@@ -15,5 +15,5 @@ class WaterReminder {
   String id;
 
   WaterReminder(
-      {@required this.ml, @required this.dateTime, @required this.id});
+      {@required this.ml, @required this.id, @required this.dateTime});
 }
