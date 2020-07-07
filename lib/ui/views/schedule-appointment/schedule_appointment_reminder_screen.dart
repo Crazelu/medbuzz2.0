@@ -254,8 +254,10 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                             appointmentReminder.typeOfAppointment != null &&
                             appointmentReminder.note != null
                         ? () {
-                            if (model.selectedDay == DateTime.now().day &&
-                                model.selectedMonth == DateTime.now().month) {
+                            if (appointmentReminder.selectedDay ==
+                                    DateTime.now().day &&
+                                appointmentReminder.selectedMonth ==
+                                    DateTime.now().month) {
                               notificationManager
                                   .showAppointmentNotificationDaily(
                                 id: appointmentReminder.selectedDay,
