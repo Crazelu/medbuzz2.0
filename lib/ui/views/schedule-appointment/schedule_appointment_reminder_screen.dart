@@ -258,10 +258,11 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                                 model.selectedMonth == DateTime.now().month) {
                               notificationManager
                                   .showAppointmentNotificationDaily(
-                               time: model.,
+                                id: appointmentReminder.selectedDay,
+                                time: model.getDateTime(),
                                 title: "Hey (username)!",
                                 body: 'It is time for your '
-                                '${model.typeOfAppointment}',
+                                    '${model.typeOfAppointment}',
                               );
                             }
                             //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
