@@ -1,5 +1,3 @@
-import 'package:MedBuzz/core/models/water_reminder_model/water_reminder.dart';
-import 'package:MedBuzz/core/notifications/water_notification_manager.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_model.dart';
 import 'package:MedBuzz/ui/widget/time_wheel.dart';
@@ -10,35 +8,14 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../core/constants/route_names.dart';
 import '../../../core/database/waterReminderData.dart';
 
-class ScheduleWaterReminderScreen extends StatefulWidget {
-  const ScheduleWaterReminderScreen({Key key, this.payload}) : super(key: key);
-
-  final String payload;
+class ScheduleWaterReminderScreen extends StatelessWidget {
   //values of water measures - stored as int in case of any need to calculate
   static const routeName = 'schedule-water-reminder';
-
-  @override
-  _ScheduleWaterReminderScreenState createState() =>
-      _ScheduleWaterReminderScreenState();
-}
-
-class _ScheduleWaterReminderScreenState
-    extends State<ScheduleWaterReminderScreen> {
   final ItemScrollController _scrollController = ItemScrollController();
-  final waterNotificationManager = WaterNotificationManager();
-
-  String newIndex = DateTime.now().toString();
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, () {
-      Provider.of<WaterReminderData>(context).getWaterReminders();
-    });
-  }
+  ScheduleWaterReminderScreen();
 
   @override
   Widget build(BuildContext context) {
-    // * var waterModel = Provider.of<WaterReminderData>(context);
     var waterReminder =
         Provider.of<ScheduleWaterReminderViewModel>(context, listen: true);
     var waterReminderDB = Provider.of<WaterReminderData>(context, listen: true);
@@ -230,33 +207,11 @@ class _ScheduleWaterReminderScreenState
                               waterReminder.selectedMonth != null &&
                               waterReminder.selectedDay != null &&
                               waterReminder.selectedTime != null
-                          ? () async {
-                              // WaterReminder water = WaterReminder(
-                              //   dateTime: waterModel.dateTime,
-                              //   ml: waterModel.ml,
-                              //   firstTime: [
-                              //     waterModel.firstTime.hour,
-                              //     waterModel.firstTime.minute
-                              //   ],
-                              //   id: DateTime.now().toString(),
-                              // );
-                              if (waterReminder.selectedDay ==
-                                      DateTime.now().day &&
-                                  waterReminder.selectedMonth ==
-                                      DateTime.now().month) {
-                                waterNotificationManager.showDietNotificationOnce(
-                                    waterReminder.selectedDay,
-                                    'Its\' s time to take some waters',
-                                    'Take ${waterReminder.selectedMl} ml of Water ',
-                                    waterReminder.getDateTime());
-                              }
+                          ? () {
                               //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
-                              await waterReminderDB.addWaterReminder(
+                              waterReminderDB.addWaterReminder(
                                   waterReminder.createSchedule());
-                              // setNotification(water, water.firstTime);
-
-                              Navigator.of(context)
-                                  .pushNamed(RouteNames.allRemindersScreen);
+                              Navigator.of(context).pop();
                             }
                           : null,
                       child: Text(
@@ -273,23 +228,4 @@ class _ScheduleWaterReminderScreenState
           ),
         ));
   }
-
-  //Function to set notification
-  // void setNotification(WaterReminder water, List<int> time) {
-  //   //notification id has to be unique so using the the id provided in the model and the time supplied
-  //   // should work just fine
-  //   DateTime date = DateTime.parse(water.id);
-  //   int id =
-  //       num.parse('${date.year}${date.month}${date.day}${time[0]}${time[1]}');
-
-  //   WaterNotificationManager notificationManager = WaterNotificationManager();
-
-  //   notificationManager.showWaterNotificationDaily(
-  //       hour: time[0],
-  //       minute: time[1],
-  //       id: id,
-  //       //username can be replaced with the actual name of the user
-  //       title: "Hey (username)!",
-  //       body: "You've to take ${water.ml}");
-  // }
 }
