@@ -12,14 +12,8 @@ class WaterReminder {
   DateTime dateTime;
 
   @HiveField(2)
-  List<int> firstTime;
-
-  @HiveField(3)
   String id;
 
   WaterReminder(
-      {@required this.ml,
-      @required this.firstTime,
-      @required this.id,
-      @required this.dateTime});
+      {@required this.ml, @required this.id, @required this.dateTime});
 }

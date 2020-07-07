@@ -16,22 +16,19 @@ class WaterReminderAdapter extends TypeAdapter<WaterReminder> {
     return WaterReminder(
       ml: fields[0] as int,
       dateTime: fields[1] as DateTime,
-      firstTime: (fields[2] as List)?.cast<int>(),
-      id: fields[3] as String,
+      id: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, WaterReminder obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.ml)
       ..writeByte(1)
       ..write(obj.dateTime)
       ..writeByte(2)
-      ..write(obj.firstTime)
-      ..writeByte(3)
       ..write(obj.id);
   }
 
