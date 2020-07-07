@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/appointmentData.dart';
+import 'package:MedBuzz/core/notifications/appointment_notification_manager.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/widget/appBar.dart';
 import 'package:MedBuzz/ui/widget/scrollable_calendar.dart';
@@ -18,21 +19,22 @@ class ScheduleAppointmentScreen extends StatelessWidget {
   final ItemScrollController _scrollController = ItemScrollController();
   //Table calendar object class
   final TextEditingController _typeOfAppointmentController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
   final ScheduleAppointmentModel appointmentSchedule =
-  ScheduleAppointmentModel();
+      ScheduleAppointmentModel();
+  final notificationManager = AppointmentNotificationManager();
 
   ScheduleAppointmentScreen({Key key, this.payload}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var appointmentReminder =
-    Provider.of<ScheduleAppointmentModel>(context, listen: true);
+        Provider.of<ScheduleAppointmentModel>(context, listen: true);
 
     var appointmentReminderDB =
-    Provider.of<AppointmentData>(context, listen: true);
+        Provider.of<AppointmentData>(context, listen: true);
 
     appointmentReminderDB.getAppointments();
 
@@ -67,17 +69,17 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                   items: monthValues
                       .map(
                         (month) => DropdownMenuItem(
-                      child: Container(
-                        child: Text(
-                          month.month,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColorDark),
+                          child: Container(
+                            child: Text(
+                              month.month,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark),
+                            ),
+                          ),
+                          value: month.month,
                         ),
-                      ),
-                      value: month.month,
-                    ),
-                  )
+                      )
                       .toList(),
                   onChanged: (val) =>
                       appointmentReminder.updateSelectedMonth(val),
@@ -112,7 +114,7 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                         ),
                         alignment: Alignment.center,
                         margin:
-                        EdgeInsets.only(left: Config.xMargin(context, 2)),
+                            EdgeInsets.only(left: Config.xMargin(context, 2)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -222,7 +224,6 @@ class ScheduleAppointmentScreen extends StatelessWidget {
               SizedBox(
                 height: Config.yMargin(context, 2),
               ),
-
               Container(
                 alignment: Alignment.bottomCenter,
                 margin: EdgeInsets.only(
@@ -234,7 +235,7 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                   width: width * 3,
                   child: RaisedButton(
                     padding: EdgeInsets.symmetric(
-                      // horizontal: Config.xMargin(context, 10),
+                        // horizontal: Config.xMargin(context, 10),
                         vertical: Config.yMargin(context, 2)),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(width * 0.03)),
@@ -247,26 +248,36 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                       ),
                     ),
                     // When this button is pressed, it saves the appointment to the DB
-                    onPressed:
-                    appointmentReminder.selectedMonth != null &&
-                        appointmentReminder.selectedDay != null &&
-                        appointmentReminder.selectedTime != null &&
-                        appointmentReminder.typeOfAppointment != null &&
-                        appointmentReminder.note != null
-                        ?
-                        () {
-                      //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
-                      appointmentReminderDB.addAppointment(
-                          appointmentReminder.createSchedule()
-                      );
-                      print(appointmentReminderDB);
-                      Navigator.of(context).pushNamed(RouteNames.scheduledAppointmentsPage);
-                    }
+                    onPressed: appointmentReminder.selectedMonth != null &&
+                            appointmentReminder.selectedDay != null &&
+                            appointmentReminder.selectedTime != null &&
+                            appointmentReminder.typeOfAppointment != null &&
+                            appointmentReminder.note != null
+                        ? () {
+                            if (appointmentReminder.selectedDay ==
+                                    DateTime.now().day &&
+                                appointmentReminder.selectedMonth ==
+                                    DateTime.now().month) {
+                              notificationManager
+                                  .showAppointmentNotificationDaily(
+                                id: appointmentReminder.selectedDay,
+                                time: model.getDateTime(),
+                                title: "Hey (username)!",
+                                body: 'It is time for your '
+                                    '${model.typeOfAppointment}',
+                              );
+
+                              //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
+                              appointmentReminderDB.addAppointment(
+                                  appointmentReminder.createSchedule());
+                              print(appointmentReminderDB);
+                              Navigator.of(context).pushNamed(
+                                  RouteNames.scheduledAppointmentsPage);
+                            }
+                          }
                         : null,
                   ),
-
                 ),
-
               )
             ],
           ),
