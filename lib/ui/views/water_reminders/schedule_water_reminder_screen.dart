@@ -1,5 +1,3 @@
-import 'package:MedBuzz/core/models/water_reminder_model/water_reminder.dart';
-import 'package:MedBuzz/core/notifications/water_notification_manager.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_model.dart';
 import 'package:MedBuzz/ui/widget/time_wheel.dart';
@@ -9,40 +7,22 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../core/constants/route_names.dart';
 import '../../../core/database/waterReminderData.dart';
+import '../../../core/notifications/water_notification_manager.dart';
 
-class ScheduleWaterReminderScreen extends StatefulWidget {
-  const ScheduleWaterReminderScreen({Key key, this.payload}) : super(key: key);
-
-  final String payload;
+class ScheduleWaterReminderScreen extends StatelessWidget {
   //values of water measures - stored as int in case of any need to calculate
   static const routeName = 'schedule-water-reminder';
-
-  @override
-  _ScheduleWaterReminderScreenState createState() =>
-      _ScheduleWaterReminderScreenState();
-}
-
-class _ScheduleWaterReminderScreenState
-    extends State<ScheduleWaterReminderScreen> {
   final ItemScrollController _scrollController = ItemScrollController();
-  final waterNotificationManager = WaterNotificationManager();
-
-  String newIndex = DateTime.now().toString();
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, () {
-      Provider.of<WaterReminderData>(context).getWaterReminders();
-    });
-  }
+  ScheduleWaterReminderScreen();
 
   @override
   Widget build(BuildContext context) {
-    // * var waterModel = Provider.of<WaterReminderData>(context);
     var waterReminder =
         Provider.of<ScheduleWaterReminderViewModel>(context, listen: true);
     var waterReminderDB = Provider.of<WaterReminderData>(context, listen: true);
     waterReminderDB.getWaterReminders();
+    WaterNotificationManager waterNotificationManager =
+        WaterNotificationManager();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       waterReminder.updateAvailableReminders(waterReminderDB.waterReminders);
     });
@@ -231,7 +211,6 @@ class _ScheduleWaterReminderScreenState
                               waterReminder.selectedDay != null &&
                               waterReminder.selectedTime != null
                           ? () async {
-                             
                               if (waterReminder.selectedDay ==
                                       DateTime.now().day &&
                                   waterReminder.selectedMonth ==
@@ -243,12 +222,9 @@ class _ScheduleWaterReminderScreenState
                                     waterReminder.getDateTime());
                               }
                               //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
-                              await waterReminderDB.addWaterReminder(
+                              waterReminderDB.addWaterReminder(
                                   waterReminder.createSchedule());
-                              // setNotification(water, water.firstTime);
-
-                              Navigator.of(context)
-                                  .pushNamed(RouteNames.allRemindersScreen);
+                              Navigator.of(context).pop();
                             }
                           : null,
                       child: Text(
@@ -265,6 +241,4 @@ class _ScheduleWaterReminderScreenState
           ),
         ));
   }
-
-
 }

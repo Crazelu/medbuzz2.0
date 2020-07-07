@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'dart:math';
 
 import '../models/water_reminder_model/water_reminder.dart';
 
 class WaterReminderData extends ChangeNotifier {
   static const String _boxName = "waterReminderBox";
-
-  int ml;
-  TimeOfDay firstTime = TimeOfDay.now();
-  DateTime dateTime = DateTime.now();
-
-  bool isEditing = false;
 
   List<WaterReminder> _waterReminders = [];
   List<WaterReminder> _sortedReminders = [];
@@ -20,16 +13,6 @@ class WaterReminderData extends ChangeNotifier {
   List<WaterReminder> get sortedReminders => _sortedReminders;
 
   WaterReminder _activeWaterReminder;
-
-  void updateFirstTime(TimeOfDay selectedTime) {
-    this.firstTime = selectedTime;
-    notifyListeners();
-  }
-
-  void updateDateTime(DateTime selectedDate) {
-    this.dateTime = selectedDate;
-    notifyListeners();
-  }
 
   void getWaterReminders() async {
     var box = await Hive.openBox<WaterReminder>(_boxName);
@@ -43,7 +26,7 @@ class WaterReminderData extends ChangeNotifier {
     return _waterReminders[index];
   }
 
-  Future<void> addWaterReminder(WaterReminder waterReminder) async {
+  void addWaterReminder(WaterReminder waterReminder) async {
     var box = await Hive.openBox<WaterReminder>(_boxName);
 
     await box.put(waterReminder.id, waterReminder);
@@ -71,10 +54,10 @@ class WaterReminderData extends ChangeNotifier {
   }
 
   void editWaterReminder(
-      {WaterReminder waterReminder, int waterReminderKey}) async {
+      {WaterReminder waterReminder, String waterReminderKey}) async {
     var box = await Hive.openBox<WaterReminder>(_boxName);
 
-    await box.putAt(waterReminderKey, waterReminder);
+    await box.put(waterReminderKey, waterReminder);
 
     _waterReminders = box.values.toList();
     box.close();
@@ -98,5 +81,29 @@ class WaterReminderData extends ChangeNotifier {
 
   int get waterRemindersCount {
     return _waterReminders.length;
+  }
+
+  int get totalLevel {
+    if (_waterReminders.isEmpty) {
+      return 0;
+    }
+    return _waterReminders
+        .map((e) => e.ml)
+        .reduce((value, element) => value + element);
+  }
+
+  int get currentLevel {
+    var taken = _waterReminders.where((element) => element.isTaken == true);
+    if (taken.isEmpty) {
+      return 0;
+    }
+    return taken.map((e) => e.ml).reduce((value, element) => value + element);
+
+    // return val;
+  }
+
+  double get progress {
+    var value = currentLevel / totalLevel;
+    return value.isNaN ? 0.0 : value;
   }
 }
