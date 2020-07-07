@@ -1,5 +1,3 @@
-//import 'dart:js';
-
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
