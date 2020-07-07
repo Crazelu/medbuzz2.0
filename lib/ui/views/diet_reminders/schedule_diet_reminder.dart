@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/diet_reminderDB.dart';
 import 'package:MedBuzz/core/models/diet_reminder/diet_reminder.dart';
 import 'package:MedBuzz/core/notifications/diet_notification_manager.dart';
@@ -10,6 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleDietReminderScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(body: AddDietReminderScreen());
+}
+
+class AddDietReminderScreen extends StatelessWidget {
   //this variable will determine if this screen will be for
   //adding or editing diet reminders
   final bool isEdit;
@@ -22,7 +28,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
   final FocusNode mealNameFocusNode = FocusNode();
   final FocusNode mealDescFocusNode = FocusNode();
 
-  ScheduleDietReminderScreen({Key key, this.isEdit = false}) : super(key: key);
+  AddDietReminderScreen({Key key, this.isEdit = false}) : super(key: key);
   void unFocus() {
     if (mealNameFocusNode.hasFocus && mealDescFocusNode.hasFocus) {
       mealNameFocusNode.unfocus();
@@ -139,7 +145,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                             _title(context, 'Select meal category'),
                             _verticalSpace(context),
                             Container(
-                                height: height * .13,
+                                height: height * .15,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     physics: BouncingScrollPhysics(),
@@ -157,6 +163,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                                                 right:
                                                     Config.xMargin(context, 4)),
                                             child: Column(
+                                              mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
                                                 CircleAvatar(
                                                   radius: Config.xMargin(
@@ -250,26 +257,47 @@ class ScheduleDietReminderScreen extends StatelessWidget {
 
                             //Functions to save  reminder to db and schedule notification goes here
                             onPressed: () {
-                              print(model.getDateTime());
-                              if (model.selectedDay == DateTime.now().day &&
-                                  model.month == DateTime.now().month) {
-                                notificationManager.showDietNotificationOnce(
-                                    model.selectedDay,
-                                    'Its time to take your meal',
-                                    '${model.selectedFoodClasses}',
-                                    model.getDateTime());
+                              if (model
+                                      .getDateTime()
+                                      .difference(DateTime.now())
+                                      .inDays <
+                                  0) {
+                                showSnackbar(context);
+                                return;
                               }
-                              db.addDiet(DietModel(
-                                  id: DateTime.now().toString(),
-                                  dietName: mealNameController.text,
-                                  description: mealDescController.text ?? '',
-                                  startDate: model.getStartDate(),
-                                  time: [
+                              if (mealNameController.text.isEmpty) {
+                                showSnackbar(context, text: 'Enter meal name');
+                                return;
+                              }
+
+                              if (model.selectedFoodClasses.length < 1) {
+                                showSnackbar(context,
+                                    text: 'Select at least one meal category');
+                                return;
+                              } else {
+                                db.addDiet(DietModel(
+                                    id: DateTime.now().toString(),
+                                    foodClasses: model.selectedFoodClasses,
+                                    dietName: mealNameController.text,
+                                    description: mealDescController.text ?? '',
+                                    startDate: model.getStartDate(),
+                                    time: [
+                                      num.parse(
+                                          model.selectedTime.substring(0, 2)),
+                                      num.parse(
+                                          model.selectedTime.substring(3, 5))
+                                    ]));
+
+                                notificationManager.showDietNotificationOnce(
                                     num.parse(
-                                        model.selectedTime.substring(0, 2)),
-                                    num.parse(
-                                        model.selectedTime.substring(3, 5))
-                                  ]));
+                                        '${model.getStartDate().year}${model.getStartDate().month}${model.getStartDate().day}${model.selectedTime.substring(0, 2)}${model.selectedTime.substring(3, 5)}'),
+                                    'Its time to take your meal',
+                                    '${mealNameController.text}',
+                                    model.getDateTime());
+
+                                Navigator.pushReplacementNamed(
+                                    context, RouteNames.dietScheduleScreen);
+                              }
                             },
                             child: Text('Save',
                                 style: TextStyle(
@@ -283,6 +311,23 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                 )),
           ),
         ));
+  }
+
+  void showSnackbar(BuildContext context,
+      {String text: "Reminder can't be set in the past"}) {
+    SnackBar snackBar = SnackBar(
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 2),
+      content: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontSize: Config.textSize(context, 5.3),
+            color: Theme.of(context).primaryColorLight),
+      ),
+    );
+
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   Text _title(BuildContext context, String text) =>
