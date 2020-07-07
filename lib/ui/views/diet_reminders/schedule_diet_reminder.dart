@@ -1,3 +1,6 @@
+import 'package:MedBuzz/core/database/diet_reminderDB.dart';
+import 'package:MedBuzz/core/models/diet_reminder/diet_reminder.dart';
+import 'package:MedBuzz/core/notifications/diet_notification_manager.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/diet_reminders/diet_reminders_model.dart';
 import 'package:MedBuzz/ui/widget/appBar.dart';
@@ -10,6 +13,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
   //this variable will determine if this screen will be for
   //adding or editing diet reminders
   final bool isEdit;
+  final notificationManager = DietNotificationManager();
 
   final TextEditingController mealNameController = TextEditingController();
   final TextEditingController mealDescController = TextEditingController();
@@ -32,6 +36,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var db = Provider.of<DietReminderDB>(context);
     var model = Provider.of<DietReminderModel>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -95,13 +100,12 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                       ),
                       SizedBox(height: Config.yMargin(context, 3)),
                       Container(
-                          height: Config.yMargin(context, 23),
+                          height: Config.yMargin(context, 19),
                           child: ScrollableCalendar(
                             model: model,
                             useButtonColor: true,
                             hideDivider: true,
                           )),
-                      SizedBox(height: Config.yMargin(context, 1.8)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -244,9 +248,29 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(
                                     Config.xMargin(context, 3))),
 
-                            //Functions to save reminder to db and schedule notification goes here
-
-                            onPressed: () {},
+                            //Functions to save  reminder to db and schedule notification goes here
+                            onPressed: () {
+                              print(model.getDateTime());
+                              if (model.selectedDay == DateTime.now().day &&
+                                  model.month == DateTime.now().month) {
+                                notificationManager.showDietNotificationOnce(
+                                    model.selectedDay,
+                                    'Its time to take your meal',
+                                    '${model.selectedFoodClasses}',
+                                    model.getDateTime());
+                              }
+                              db.addDiet(DietModel(
+                                  id: DateTime.now().toString(),
+                                  dietName: mealNameController.text,
+                                  description: mealDescController.text ?? '',
+                                  startDate: model.getStartDate(),
+                                  time: [
+                                    num.parse(
+                                        model.selectedTime.substring(0, 2)),
+                                    num.parse(
+                                        model.selectedTime.substring(3, 5))
+                                  ]));
+                            },
                             child: Text('Save',
                                 style: TextStyle(
                                     fontSize: Config.textSize(context, 5),

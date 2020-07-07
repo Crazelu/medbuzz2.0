@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'dart:math';
 
 import '../models/water_reminder_model/water_reminder.dart';
 
 class WaterReminderData extends ChangeNotifier {
   static const String _boxName = "waterReminderBox";
+
+  int ml;
+  TimeOfDay firstTime = TimeOfDay.now();
+  DateTime dateTime = DateTime.now();
+
+  bool isEditing = false;
 
   List<WaterReminder> _waterReminders = [];
   List<WaterReminder> _sortedReminders = [];
@@ -13,6 +20,16 @@ class WaterReminderData extends ChangeNotifier {
   List<WaterReminder> get sortedReminders => _sortedReminders;
 
   WaterReminder _activeWaterReminder;
+
+  void updateFirstTime(TimeOfDay selectedTime) {
+    this.firstTime = selectedTime;
+    notifyListeners();
+  }
+
+  void updateDateTime(DateTime selectedDate) {
+    this.dateTime = selectedDate;
+    notifyListeners();
+  }
 
   void getWaterReminders() async {
     var box = await Hive.openBox<WaterReminder>(_boxName);
@@ -26,7 +43,7 @@ class WaterReminderData extends ChangeNotifier {
     return _waterReminders[index];
   }
 
-  void addWaterReminder(WaterReminder waterReminder) async {
+  Future<void> addWaterReminder(WaterReminder waterReminder) async {
     var box = await Hive.openBox<WaterReminder>(_boxName);
 
     await box.put(waterReminder.id, waterReminder);

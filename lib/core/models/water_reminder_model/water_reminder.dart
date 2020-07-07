@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
+
 part 'water_reminder.g.dart';
 
 @HiveType()
@@ -14,5 +15,5 @@ class WaterReminder {
   String id;
 
   WaterReminder(
-      {@required this.ml, @required this.dateTime, @required this.id});
+      {@required this.ml, @required this.id, @required this.dateTime});
 }

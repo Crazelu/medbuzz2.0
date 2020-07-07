@@ -22,13 +22,14 @@ class FitnessReminderAdapter extends TypeAdapter<FitnessReminder> {
       minsperday: fields[5] as int,
       startDate: fields[6] as DateTime,
       endDate: fields[7] as DateTime,
+      id: fields[8] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, FitnessReminder obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.index)
       ..writeByte(1)
@@ -44,9 +45,12 @@ class FitnessReminderAdapter extends TypeAdapter<FitnessReminder> {
       ..writeByte(6)
       ..write(obj.startDate)
       ..writeByte(7)
-      ..write(obj.endDate);
+      ..write(obj.endDate)
+      ..writeByte(8)
+      ..write(obj.id);
   }
 
   @override
-  int get typeId => 3;
+  // TODO: implement typeId
+  int get typeId => 2;
 }
