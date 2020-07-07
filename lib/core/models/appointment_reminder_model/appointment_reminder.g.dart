@@ -8,6 +8,8 @@ part of 'appointment_reminder.dart';
 
 class AppointmentAdapter extends TypeAdapter<Appointment> {
   @override
+  int get typeId => 2;
+  @override
   Appointment read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
@@ -34,8 +36,4 @@ class AppointmentAdapter extends TypeAdapter<Appointment> {
       ..writeByte(3)
       ..write(obj.date);
   }
-
-  @override
-  // TODO: implement typeId
-  int get typeId => 0;
 }

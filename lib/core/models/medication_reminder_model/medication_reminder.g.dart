@@ -8,6 +8,8 @@ part of 'medication_reminder.dart';
 
 class MedicationReminderAdapter extends TypeAdapter<MedicationReminder> {
   @override
+  int get typeId => 4;
+  @override
   MedicationReminder read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
@@ -55,8 +57,4 @@ class MedicationReminderAdapter extends TypeAdapter<MedicationReminder> {
       ..writeByte(10)
       ..write(obj.id);
   }
-
-  @override
-
-  int get typeId => 4;
 }
