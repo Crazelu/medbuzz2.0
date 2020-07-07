@@ -230,10 +230,10 @@ class FrequencyList extends StatelessWidget {
           ),
           Text(
             index == 0
-                ? medModel.firstTime.toString()
+                ? medModel.firstTime.format(context)
                 : index == 1
-                    ? medModel.secondTime.toString()
-                    : medModel.thirdTime.toString(),
+                    ? medModel.secondTime.format(context)
+                    : medModel.thirdTime.format(context),
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontSize: Config.textSize(context, 3.6),
