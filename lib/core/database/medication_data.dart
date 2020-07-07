@@ -29,6 +29,7 @@ class MedicationData extends ChangeNotifier {
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   String drugName;
+  String id;
 
   bool isEditing = false;
 
@@ -48,6 +49,18 @@ class MedicationData extends ChangeNotifier {
     List value;
     value[0] = time.hour;
     value[1] = time.minute;
+
+    return value;
+  }
+
+  Future<void> fetch() async {
+    getMedicationReminder();
+    notifyListeners();
+  }
+
+  TimeOfDay convertTimeBack(List<int> list) {
+    TimeOfDay value = TimeOfDay(hour: list[0], minute: list[1]);
+    return value;
   }
 
   void onSelectedDrugImage(int index) {
@@ -166,6 +179,18 @@ class MedicationData extends ChangeNotifier {
     drugName = name;
     notifyListeners();
     return drugName;
+  }
+
+  String updateId(String newId) {
+    id = newId;
+    notifyListeners();
+    return id;
+  }
+
+  int updateDosage(int newDosage) {
+    dosage = newDosage;
+    notifyListeners();
+    return dosage;
   }
 
   int diffFromPresent(DateTime end) {

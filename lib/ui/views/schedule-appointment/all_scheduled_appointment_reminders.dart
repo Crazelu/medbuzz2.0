@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -491,9 +489,10 @@ Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
             onPressed: () {
               // delete action
               var currentAppointment;
-              Provider.of<AppointmentData> (context, listen: false).deleteAppointment(currentAppointment.key);
-              Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName)
-              );
+              Provider.of<AppointmentData>(context, listen: false)
+                  .deleteAppointment(currentAppointment.key);
+              Navigator.popUntil(
+                  context, ModalRoute.withName(Navigator.defaultRouteName));
               //Navigator.of(context).pop(ConfirmAction.Delete);
             },
           )

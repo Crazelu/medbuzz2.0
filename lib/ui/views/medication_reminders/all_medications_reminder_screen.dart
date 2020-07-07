@@ -1,5 +1,6 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
+import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/widget/medication_card.dart';
@@ -27,7 +28,9 @@ class _MedicationScreenState extends State<MedicationScreen> {
 //    Future.delayed(Duration.zero, () {
 //      Provider.of<MedicationData>(context).getMedicationReminder();
 //    });
-    Future.delayed(Duration.zero, () {
+    Future.delayed(Duration.zero, () async {
+      // await Provider.of<MedicationData>(context).getMedicationReminder();
+      await Provider.of<MedicationData>(context).fetch();
       print(Provider.of<MedicationData>(context).medicationReminder);
     });
   }
@@ -151,6 +154,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return MedicationCard(
+                        values: model.medicationReminder[index],
                         drugName: model.medicationReminder[index].drugName,
                         drugType: model.medicationReminder[index].drugType ==
                                 'Injection'
@@ -387,14 +391,15 @@ class MedicationCard extends StatefulWidget {
   final String time;
   final int dosage;
   final String selectedFreq;
+  MedicationReminder values;
 
-  MedicationCard({
-    this.drugName,
-    this.drugType,
-    this.time,
-    this.dosage,
-    this.selectedFreq,
-  });
+  MedicationCard(
+      {this.values,
+      this.drugName,
+      this.drugType,
+      this.time,
+      this.dosage,
+      this.selectedFreq});
 
   @override
   _MedicationCardState createState() => _MedicationCardState();
@@ -495,6 +500,25 @@ class _MedicationCardState extends State<MedicationCard> {
                         children: <Widget>[
                           FlatButton(
                             onPressed: () {
+                              print("Hello World");
+                              print(widget.values);
+
+                              var medModel =
+                                  Provider.of<MedicationData>(context);
+
+                              print(medModel
+                                  .updateDrugName(widget.values.drugName));
+                              medModel.updateId(widget.values.id);
+                              // medModel.updateFirstTime(medModel
+                              //     .convertTimeBack(widget.values.firstTime));
+                              // medModel.updateSecondTime(medModel
+                              //     .convertTimeBack(widget.values.secondTime));
+                              // medModel.updateThirdTime(medModel
+                              //     .convertTimeBack(widget.values.thirdTime));
+                              medModel.updateDosage(widget.values.dosage);
+                              medModel.updateStartDate(widget.values.startAt);
+                              medModel.updateEndDate(widget.values.endAt);
+
                               Navigator.pushNamed(
                                 context,
                                 RouteNames.medicationView,
