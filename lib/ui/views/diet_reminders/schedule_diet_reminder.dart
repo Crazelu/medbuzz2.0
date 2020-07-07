@@ -1,5 +1,6 @@
 import 'package:MedBuzz/core/database/diet_reminderDB.dart';
 import 'package:MedBuzz/core/models/diet_reminder/diet_reminder.dart';
+import 'package:MedBuzz/core/notifications/diet_notification_manager.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/diet_reminders/diet_reminders_model.dart';
 import 'package:MedBuzz/ui/widget/appBar.dart';
@@ -12,6 +13,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
   //this variable will determine if this screen will be for
   //adding or editing diet reminders
   final bool isEdit;
+  final notificationManager = DietNotificationManager();
 
   final TextEditingController mealNameController = TextEditingController();
   final TextEditingController mealDescController = TextEditingController();
@@ -246,9 +248,17 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(
                                     Config.xMargin(context, 3))),
 
-                            //Functions to save reminder to db and schedule notification goes here
-
+                            //Functions to save  reminder to db and schedule notification goes here
                             onPressed: () {
+                              print(model.getDateTime());
+                              if (model.selectedDay == DateTime.now().day &&
+                                  model.month == DateTime.now().month) {
+                                notificationManager.showDietNotificationOnce(
+                                    model.selectedDay,
+                                    'Its time to take your meal',
+                                    '${model.selectedFoodClasses}',
+                                    model.getDateTime());
+                              }
                               db.addDiet(DietModel(
                                   id: DateTime.now().toString(),
                                   dietName: mealNameController.text,

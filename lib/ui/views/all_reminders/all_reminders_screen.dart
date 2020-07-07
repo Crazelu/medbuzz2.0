@@ -1,4 +1,5 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/database/appointmentData.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_view_model.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
@@ -19,10 +20,15 @@ class AllRemindersScreen extends StatelessWidget {
     var allReminders =
         Provider.of<AllRemindersViewModel>(context, listen: true);
     var waterReminderDB = Provider.of<WaterReminderData>(context, listen: true);
+    var appointmentReminderDB =
+        Provider.of<AppointmentData>(context, listen: true);
+    appointmentReminderDB.getAppointments();
     waterReminderDB.getWaterReminders();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       allReminders
           .updateAvailableWaterReminders(waterReminderDB.waterReminders);
+      allReminders.updateAvailableAppointmentReminders(
+          appointmentReminderDB.appointment);
     });
 
     double height = MediaQuery.of(context).size.height;
@@ -215,7 +221,7 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  MedicationCard(),
+                  MedicationCard(height: height, width: width),
                 ],
               ),
             ),
@@ -267,7 +273,18 @@ class AllRemindersScreen extends StatelessWidget {
                   ),
                   SizedBox(height: height * 0.02),
                   Text('08:00AM'),
-                  AppointmentCard(width: width, height: height),
+                  SizedBox(height: height * 0.02),
+                  Visibility(
+                      visible: allReminders.appointmentsBasedOnDateTime.isEmpty,
+                      child: Container(
+                        child: Text('No Appointments for this date'),
+                      )),
+                  for (var appointment
+                      in allReminders.appointmentsBasedOnDateTime)
+                    AppointmentCard(
+                      height: height,
+                      width: width,
+                    )
                 ],
               ),
             ),
