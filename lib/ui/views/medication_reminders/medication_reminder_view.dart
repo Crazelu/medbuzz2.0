@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 class MedicationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var medModeller = Provider.of<MedicationData>(context);
-    final medicationInfo = medModeller.getMedicationReminder();
+    var medModel = Provider.of<MedicationData>(context);
+
     //Set Widget to use Provider
     return Consumer<MedicationData>(
       builder: (context, medModel, child) {
@@ -42,7 +42,7 @@ class MedicationView extends StatelessWidget {
                               );
                           showSnackBar(context);
                           Future.delayed(Duration(seconds: 1)).then((value) {
-                            medModeller.deleteSchedule(key);
+                            medModel.deleteSchedule(key);
                             Navigator.of(context).pop(true);
                           });
                         },
@@ -65,7 +65,7 @@ class MedicationView extends StatelessWidget {
                         Container(
                           width: Config.xMargin(context, 44),
                           child: Text(
-                            'Chloroquine Injection',
+                            '${medModel.drugName}',
                             style: TextStyle(
                               color: Theme.of(context).primaryColorDark,
                               fontSize: Config.textSize(context, 5.3),
@@ -76,7 +76,19 @@ class MedicationView extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(
                               right: Config.xMargin(context, 5)),
-                          child: Image.asset('images/injection.png'),
+                          child: Image.asset(medModel.selectedIndex == 0
+                              ? medModel.images[0]
+                              : medModel.selectedIndex == 1
+                                  ? medModel.images[1]
+                                  : medModel.selectedIndex == 2
+                                      ? medModel.images[2]
+                                      : medModel.selectedIndex == 3
+                                          ? medModel.images[3]
+                                          : medModel.selectedIndex == 4
+                                              ? medModel.images[4]
+                                              : medModel.selectedIndex == 5
+                                                  ? medModel.images[5]
+                                                  : medModel.images[6]),
                         ),
                       ],
                     ),
@@ -112,58 +124,23 @@ class MedicationView extends StatelessWidget {
                           ),
                           SizedBox(height: Config.yMargin(context, 10)),
                           Text(
-                            'Frequency',
+                            'Dosage',
                             style: TextStyle(
                               color: Theme.of(context).primaryColorDark,
                               fontSize: Config.textSize(context, 4.5),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: Config.yMargin(context, 1)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Once Daily',
-                                      style: TextStyle(
-                                        fontSize: Config.textSize(context, 4),
-                                      ),
-                                    ),
-                                    Text(
-                                      '8:00AM',
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: Config.textSize(context, 3.6),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Once Daily',
-                                      style: TextStyle(
-                                        fontSize: Config.textSize(context, 4),
-                                      ),
-                                    ),
-                                    Text(
-                                      '8:00AM',
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: Config.textSize(context, 3.6),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
+                          Container(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: medModel.selectedFreq == 'Once'
+                                  ? 1
+                                  : medModel.selectedFreq == 'Twice' ? 2 : 3,
+                              itemBuilder: (context, index) {
+                                return FrequencyList(
+                                    context: context, index: index);
+                              },
                             ),
                           ),
                           SizedBox(height: Config.yMargin(context, 10)),
@@ -227,6 +204,43 @@ class MedicationView extends StatelessWidget {
           ]),
         );
       },
+    );
+  }
+}
+
+class FrequencyList extends StatelessWidget {
+  final int index;
+  final BuildContext context;
+
+  FrequencyList({this.context, this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    var medModel = Provider.of<MedicationData>(context);
+    return Container(
+      // margin: EdgeInsets.all(15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '${medModel.dosage} Once Daily',
+            style: TextStyle(
+              fontSize: Config.textSize(context, 4),
+            ),
+          ),
+          Text(
+            index == 0
+                ? medModel.firstTime.format(context)
+                : index == 1
+                    ? medModel.secondTime.format(context)
+                    : medModel.thirdTime.format(context),
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: Config.textSize(context, 3.6),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
