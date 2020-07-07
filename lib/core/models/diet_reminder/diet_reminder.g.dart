@@ -14,17 +14,17 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return DietModel(
-      dietName: fields[0] as String,
-      time: (fields[1] as List)?.cast<int>(),
-      startDate: fields[2] as DateTime,
-      secondDietName: fields[3] as String,
-      thirdDietName: fields[4] as String,
-      secondTime: (fields[5] as List)?.cast<int>(),
-      thirdTime: (fields[6] as List)?.cast<int>(),
-      endDate: fields[7] as DateTime,
-      id: fields[8] as String,
-      description: fields[9] as String,
-    );
+        dietName: fields[0] as String,
+        time: (fields[1] as List)?.cast<int>(),
+        startDate: fields[2] as DateTime,
+        secondDietName: fields[3] as String,
+        thirdDietName: fields[4] as String,
+        secondTime: (fields[5] as List)?.cast<int>(),
+        thirdTime: (fields[6] as List)?.cast<int>(),
+        endDate: fields[7] as DateTime,
+        id: fields[8] as String,
+        description: fields[9] as String,
+        foodClasses: (fields[10] as List)?.cast<String>());
   }
 
   @override
@@ -50,10 +50,12 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
       ..writeByte(8)
       ..write(obj.id)
       ..writeByte(9)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(10)
+      ..write(obj.foodClasses);
   }
 
   @override
   // TODO: implement typeId
-  int get typeId =>1;
+  int get typeId => 1;
 }

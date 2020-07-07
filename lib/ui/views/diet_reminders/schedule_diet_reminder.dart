@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/diet_reminderDB.dart';
 import 'package:MedBuzz/core/models/diet_reminder/diet_reminder.dart';
 import 'package:MedBuzz/core/notifications/diet_notification_manager.dart';
@@ -139,7 +140,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                             _title(context, 'Select meal category'),
                             _verticalSpace(context),
                             Container(
-                                height: height * .13,
+                                height: height * .15,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     physics: BouncingScrollPhysics(),
@@ -157,6 +158,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                                                 right:
                                                     Config.xMargin(context, 4)),
                                             child: Column(
+                                              mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
                                                 CircleAvatar(
                                                   radius: Config.xMargin(
@@ -261,6 +263,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                               }
                               db.addDiet(DietModel(
                                   id: DateTime.now().toString(),
+                                  foodClasses: model.selectedFoodClasses,
                                   dietName: mealNameController.text,
                                   description: mealDescController.text ?? '',
                                   startDate: model.getStartDate(),
@@ -270,6 +273,9 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                                     num.parse(
                                         model.selectedTime.substring(3, 5))
                                   ]));
+
+                              Navigator.pushReplacementNamed(
+                                  context, RouteNames.dietScheduleScreen);
                             },
                             child: Text('Save',
                                 style: TextStyle(

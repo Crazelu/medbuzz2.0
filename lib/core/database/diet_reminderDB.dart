@@ -12,19 +12,14 @@ class DietReminderDB extends ChangeNotifier {
 
   List<DietModel> _diet = [];
 
-  // DietModel Object
-  DietModel _dietModel;
+  List<DietModel> get diets => _diet;
 
   // get all diets
 
   void getAlldiets() async {
     var box = await Hive.openBox(_boxname);
-    var all = box.values.toList();
-    for (var i in all) {
-      _diet.add(i);
-      print(i.dietName);
-    }
-
+    _diet = box.values.toList();
+    print(_diet.length);
     notifyListeners();
   }
 
@@ -43,7 +38,7 @@ class DietReminderDB extends ChangeNotifier {
 
     _diet = box.values.toList();
     box.close();
-
+    getAlldiets();
     notifyListeners();
   }
 
@@ -54,7 +49,7 @@ class DietReminderDB extends ChangeNotifier {
     _diet = box.values.toList();
     box.delete(key);
     box.close();
-
+    getAlldiets();
     notifyListeners();
   }
 
@@ -67,6 +62,7 @@ class DietReminderDB extends ChangeNotifier {
 
     _diet = box.values.toList();
     box.close();
+    getAlldiets();
     notifyListeners();
   }
 
