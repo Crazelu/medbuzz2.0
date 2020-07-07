@@ -1,4 +1,3 @@
-
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +24,19 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
   String day = 'Thurs';
   var items = ['hi', 'hello', 'good', 'new', 'hi', 'now'];
   dynamic reminderMessage = 'Make sure to make lots of friends.';
+
   @override
   Widget build(BuildContext context) {
+    var appointmentReminders =
+        Provider.of<AppointmentViewModel>(context, listen: true);
+
+    var appointmentReminderDB =
+        Provider.of<AppointmentData>(context, listen: true);
+    appointmentReminderDB.getAppointments();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      appointmentReminders.updateAvailableAppointmentReminders(
+          appointmentReminderDB.appointment);
+    });
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return DefaultTabController(
@@ -90,45 +100,45 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
           },
           child: TabBarView(
             children: [
-              ListView.builder(
-                // Let the ListView know how many items it needs to build.
-                itemCount: items.length,
-                // Provide a builder function. This is where the magic happens.
-                // Convert each item into a widget based on the type of item it is.
-                itemBuilder: (context, index) {
-                  // final item = items[index];
-
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 12),
-                    child: Container(
-
-                      child: AppointmentCard(
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                        visible: appointmentReminders
+                            .appointmentsBasedOnDateTime.isEmpty,
+                        child: Container(
+                          child: Center(
+                              child: Text('No Appointments for this date')),
+                        )),
+                    for (var appointment
+                        in appointmentReminders.appointmentsBasedOnDateTime)
+                      AppointmentCard(
                         height: height,
                         width: width,
-                      ),
-                    ),
-                  );
-                },
+                      )
+                  ],
+                ),
               ),
-              ListView.builder(
-                // Let the ListView know how many items it needs to build.
-                itemCount: items.length,
-                // Provide a builder function. This is where the magic happens.
-                // Convert each item into a widget based on the type of item it is.
-                itemBuilder: (context, index) {
-//                final item = items[index];
-
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 12),
-                    child: Container(
-
-                      child: AppointmentCard(
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                        visible: appointmentReminders
+                            .appointmentsBasedOnDateTime.isEmpty,
+                        child: Container(
+                          child: Center(
+                              child: Text('No Appointments for this date')),
+                        )),
+                    for (var appointment
+                        in appointmentReminders.appointmentsBasedOnDateTime)
+                      AppointmentCard(
                         height: height,
                         width: width,
-                      ),
-                    ),
-                  );
-                },
+                      )
+                  ],
+                ),
               ),
             ],
           ),
@@ -179,9 +189,10 @@ Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
             onPressed: () {
               // delete action
               var currentAppointment;
-              Provider.of<AppointmentData> (context, listen: false).deleteAppointment(currentAppointment.key);
-              Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName)
-              );
+              Provider.of<AppointmentData>(context, listen: false)
+                  .deleteAppointment(currentAppointment.key);
+              Navigator.popUntil(
+                  context, ModalRoute.withName(Navigator.defaultRouteName));
               //Navigator.of(context).pop(ConfirmAction.Delete);
             },
           )

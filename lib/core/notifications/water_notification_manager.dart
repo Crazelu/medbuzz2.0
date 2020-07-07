@@ -4,6 +4,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:MedBuzz/main.dart';
 import 'package:MedBuzz/ui/views/water_reminders/water_reminders_view.dart';
 
+import '../../ui/views/water_reminders/water_reminders_view.dart';
+
 class WaterNotificationManager {
   var flutterLocalNotificationsPlugin;
 
@@ -29,9 +31,17 @@ class WaterNotificationManager {
   }
 
   void showWaterNotificationDaily(
-      int id, String title, String body, int hour, int minute) async {
+      {int id, String title, String body, int hour, int minute}) async {
     var time = new Time(hour, minute, 0);
     await flutterLocalNotificationsPlugin.showDailyAtTime(
+        id, title, body, time, getPlatformChannelSpecfics(id));
+    print(
+        'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
+  }
+
+  void showDietNotificationOnce(
+      int id, String title, String body, DateTime time) async {
+    await flutterLocalNotificationsPlugin.schedule(
         id, title, body, time, getPlatformChannelSpecfics(id));
     print(
         'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
@@ -62,7 +72,7 @@ class WaterNotificationManager {
     await Navigator.push(
       MyApp.navigatorKey.currentState.context,
       MaterialPageRoute(
-          builder: (context) => WaterScheduleView(payload: payload)),
+          builder: (context) => WaterScheduleViewScreen(payload: payload)),
     );
   }
 
