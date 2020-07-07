@@ -30,6 +30,8 @@ class DietModel {
 
   @HiveField(9)
   final String description;
+  @HiveField(10)
+  final List<String> foodClasses;
 
   DietModel(
       {@required this.dietName,
@@ -41,5 +43,6 @@ class DietModel {
       this.thirdTime,
       this.endDate,
       this.id,
-      this.description});
+      this.description,
+      this.foodClasses});
 }
