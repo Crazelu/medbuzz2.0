@@ -29,7 +29,7 @@ class AppointmentNotificationManager {
   }
 
   void showAppointmentNotificationDaily(
-      int id, String title, String body, int hour, int minute) async {
+      {int id, String title, String body, int hour, int minute}) async {
     var time = new Time(hour, minute, 0);
     await flutterLocalNotificationsPlugin.showDailyAtTime(
         id, title, body, time, getPlatformChannelSpecfics(id));
