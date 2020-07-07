@@ -231,22 +231,14 @@ class _ScheduleWaterReminderScreenState
                               waterReminder.selectedDay != null &&
                               waterReminder.selectedTime != null
                           ? () async {
-                              // WaterReminder water = WaterReminder(
-                              //   dateTime: waterModel.dateTime,
-                              //   ml: waterModel.ml,
-                              //   firstTime: [
-                              //     waterModel.firstTime.hour,
-                              //     waterModel.firstTime.minute
-                              //   ],
-                              //   id: DateTime.now().toString(),
-                              // );
+                             
                               if (waterReminder.selectedDay ==
                                       DateTime.now().day &&
                                   waterReminder.selectedMonth ==
                                       DateTime.now().month) {
                                 waterNotificationManager.showDietNotificationOnce(
                                     waterReminder.selectedDay,
-                                    'Its\' s time to take some waters',
+                                    'Its\' s time to take some Waters',
                                     'Take ${waterReminder.selectedMl} ml of Water ',
                                     waterReminder.getDateTime());
                               }
@@ -274,22 +266,5 @@ class _ScheduleWaterReminderScreenState
         ));
   }
 
-  //Function to set notification
-  // void setNotification(WaterReminder water, List<int> time) {
-  //   //notification id has to be unique so using the the id provided in the model and the time supplied
-  //   // should work just fine
-  //   DateTime date = DateTime.parse(water.id);
-  //   int id =
-  //       num.parse('${date.year}${date.month}${date.day}${time[0]}${time[1]}');
 
-  //   WaterNotificationManager notificationManager = WaterNotificationManager();
-
-  //   notificationManager.showWaterNotificationDaily(
-  //       hour: time[0],
-  //       minute: time[1],
-  //       id: id,
-  //       //username can be replaced with the actual name of the user
-  //       title: "Hey (username)!",
-  //       body: "You've to take ${water.ml}");
-  // }
 }
