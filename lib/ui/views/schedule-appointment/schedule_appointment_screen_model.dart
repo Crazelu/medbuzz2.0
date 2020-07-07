@@ -5,8 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 
-
-class MonthCount{
+class MonthCount {
   String month;
 
   MonthCount({@required this.month});
@@ -78,36 +77,39 @@ class ScheduleAppointmentModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  DateTime getDateTime() {
+    String month = _selectedMonth.toString().length < 2
+        ? '0$_selectedMonth'
+        : '$_selectedMonth';
+    String weekday =
+        _selectedDay.toString().length < 2 ? '0$_selectedDay' : '$_selectedDay';
+    return DateTime.parse(
+        '${_today.year}-$month-$weekday ${_selectedTime.substring(0, 2)}:${selectedTime.substring(3, 5)}');
+  }
+
+//
   Appointment createSchedule() {
     var dayValue =
-    selectedDay
-        .toString()
-        .length < 2 ? '0$selectedDay' : '$selectedDay';
-    var monthValue = selectedMonth
-        .toString()
-        .length < 2
+        selectedDay.toString().length < 2 ? '0$selectedDay' : '$selectedDay';
+    var monthValue = selectedMonth.toString().length < 2
         ? '0$selectedMonth'
         : '$selectedMonth';
 
     var selectedDateTime = "${_today.year}-$monthValue-$dayValue";
 
-    var appointmentType = typeOfAppointment
-        .toString()
-        .length < 1 ? 'empty $typeOfAppointment' : '$typeOfAppointment';
+    var appointmentType = typeOfAppointment.toString().length < 1
+        ? 'empty $typeOfAppointment'
+        : '$typeOfAppointment';
 
-    var noteValue = note
-        .toString()
-        .length < 1 ? 'empty $note' : '$note';
+    var noteValue = note.toString().length < 1 ? 'empty $note' : '$note';
 
     Appointment newAppointment = Appointment(
         date: DateTime.parse(selectedDateTime),
         appointmentType: _typeOfAppointment,
         note: _note,
-      dateTime: _selectedTime
-    );
+        dateTime: _selectedTime);
     return newAppointment;
   }
-
 
   void updateSelectedDay(int dayIndex) {
     _selectedDay = dayIndex + 1;
@@ -146,14 +148,10 @@ class ScheduleAppointmentModel extends ChangeNotifier {
     index++;
     int year = _today.year;
     //check for single digit months e.g. 1,2,3 to format to 01,02,03 strings
-    String month = _selectedMonth
-        .toString()
-        .length < 2
+    String month = _selectedMonth.toString().length < 2
         ? '0$_selectedMonth'
         : '$_selectedMonth';
-    String weekday = index
-        .toString()
-        .length < 2 ? '0$index' : '$index';
+    String weekday = index.toString().length < 2 ? '0$index' : '$index';
     //formats date to format of 2020-06-20 i.e. YYYY-MM-DD
     String val = DateFormat.E().format(
       DateTime.parse('$year' + '-' + '$month' + '-' + '$weekday'),
@@ -168,13 +166,8 @@ class ScheduleAppointmentModel extends ChangeNotifier {
 
   Color getButtonColor(BuildContext context, index) {
     return isActive(index)
-        ? Theme
-        .of(context)
-        .primaryColor
-        : Theme
-        .of(context)
-        .primaryColorDark
-        .withOpacity(0.05);
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).primaryColorDark.withOpacity(0.05);
   }
 
   TextStyle calendarTextStyle(BuildContext context, index) {
@@ -191,7 +184,6 @@ class ScheduleAppointmentModel extends ChangeNotifier {
       fontSize: Config.textSize(context, 5),
       fontWeight: FontWeight.normal,
     );
-
 
     // int get userSelectedDay => selectedDay;
     // setSelectedDay(int userSelectedDay) => selectedDay = userSelectedDay;

@@ -248,7 +248,7 @@ class ScheduleDietReminderScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(
                                     Config.xMargin(context, 3))),
 
-                            //Functions to save reminder to db and schedule notification goes here
+                            //Functions to save  reminder to db and schedule notification goes here
                             onPressed: () {
                               print(model.getDateTime());
                               if (model.selectedDay == DateTime.now().day &&
