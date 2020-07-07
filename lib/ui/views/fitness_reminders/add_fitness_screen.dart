@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -8,10 +7,8 @@ import 'package:MedBuzz/core/models/fitness_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:provider/provider.dart';
 import 'package:MedBuzz/core/database/fitness_reminder.dart';
-import '../../../core/models/fitness_reminder.dart';
-import '../../../core/models/fitness_reminder_model/fitness_reminder.dart';
-import '../../navigation/app_navigation/app_transition.dart';
-import '../../size_config/config.dart';
+import 'package:MedBuzz/core/models/fitness_reminder_model/fitness_reminder.dart';
+import 'package:MedBuzz/ui/navigation/app_navigation/app_transition.dart';
 import 'all_fitness_reminders_screen.dart';
 
 class FitnessDescriptionScreen extends StatelessWidget {
