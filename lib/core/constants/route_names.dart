@@ -100,6 +100,7 @@ class RouteNames {
     RouteNames.medicationScreen: (context) => MedicationScreen(),
     RouteNames.dietScheduleScreen: (context) => DietScheduleScreen(),
     RouteNames.singleWater: (context) => SingleWater(),
-    RouteNames.deleteDialog: (context) => DeleteDialog(),
+
+    // RouteNames.deleteDialog: (context) => DeleteDialog(),
   };
 }
