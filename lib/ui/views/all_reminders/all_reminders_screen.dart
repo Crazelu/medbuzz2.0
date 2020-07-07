@@ -1,15 +1,14 @@
-import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/appointmentData.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_view_model.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
 import 'package:MedBuzz/ui/widget/medication_card.dart';
-import 'package:MedBuzz/ui/widget/water_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../core/database/waterReminderData.dart';
+import '../../widget/water_reminder_card.dart';
 
 class AllRemindersScreen extends StatelessWidget {
   final ItemScrollController _scrollController = ItemScrollController();
@@ -17,11 +16,9 @@ class AllRemindersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var allReminders =
-        Provider.of<AllRemindersViewModel>(context, listen: true);
-    var waterReminderDB = Provider.of<WaterReminderData>(context, listen: true);
-    var appointmentReminderDB =
-        Provider.of<AppointmentData>(context, listen: true);
+    var allReminders = Provider.of<AllRemindersViewModel>(context);
+    var waterReminderDB = Provider.of<WaterReminderData>(context);
+    var appointmentReminderDB = Provider.of<AppointmentData>(context);
     appointmentReminderDB.getAppointments();
     waterReminderDB.getWaterReminders();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -249,7 +246,7 @@ class AllRemindersScreen extends StatelessWidget {
                       )),
                   for (var waterReminder
                       in allReminders.waterRemindersBasedOnDateTime)
-                    WaterCard(
+                    WaterReminderCard(
                         height: height,
                         width: width,
                         waterReminder: waterReminder)
