@@ -6,6 +6,8 @@ import 'dart:math';
 
 class MedicationData extends ChangeNotifier {
   static const String _boxName = "medicationReminderBox";
+  final String add = "Add Medication";
+  final String edit = "Edit Medication";
 
   final List drugTypes = [
     'Injection',
@@ -41,6 +43,12 @@ class MedicationData extends ChangeNotifier {
   ];
 
   List<MedicationReminder> medicationReminder = [];
+
+  List<int> convertTime(TimeOfDay time) {
+    List value;
+    value[0] = time.hour;
+    value[1] = time.minute;
+  }
 
   void onSelectedDrugImage(int index) {
     selectedIndex = index;

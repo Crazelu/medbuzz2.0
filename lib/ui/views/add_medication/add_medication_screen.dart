@@ -17,10 +17,10 @@ class AddMedicationScreen extends StatefulWidget {
 
 class _AddMedicationScreenState extends State<AddMedicationScreen> {
   TextEditingController textEditingController = TextEditingController();
+  //var medModel = Provider.of<MedicationData>(context);
 
   FocusNode _focusNode = FocusNode();
   String newIndex = DateTime.now().toString();
-  String appBarTitle = 'Add Medication';
 
   @override
   void initState() {
@@ -33,6 +33,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   @override
   Widget build(BuildContext context) {
     var medModel = Provider.of<MedicationData>(context);
+    String appBarTitle = medModel.isEditing ? medModel.edit : medModel.add;
 
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +86,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                         color: Theme.of(context).primaryColorDark,
                         fontSize: Config.xMargin(context, 5.5)),
                     decoration: InputDecoration(
-                      hintText: 'Metronidazole',
+                      hintText: '${medModel.drugName}',
                       hintStyle: TextStyle(
                         color: Colors.black38,
                         fontSize: Config.xMargin(context, 5),
@@ -156,7 +157,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                     builder: (FormFieldState<String> state) {
                       return InputDecorator(
                         decoration: InputDecoration(
-                          hintText: 'Once',
+                          hintText: '${medModel.frequency}',
                           hintStyle: TextStyle(
                             color: Colors.black38,
                             fontSize: Config.xMargin(context, 5),
@@ -360,8 +361,29 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                 medModel.startDate,
                                 medModel.endDate
                               ]);
+                              break;
                             // work here on your editing schedule code
-//                            case 'Edit Schedule':
+                            case 'Edit Schedule':
+                              MedicationReminder newReminder =
+                                  MedicationReminder(
+                                      drugName: medModel.drugName,
+                                      drugType:
+                                          medModel.selectedIndex.toString(),
+                                      frequency: medModel.selectedFreq,
+                                      dosage: medModel.dosage,
+                                      firstTime: medModel
+                                          .convertTime(medModel.firstTime),
+                                      secondTime: medModel
+                                          .convertTime(medModel.secondTime),
+                                      thirdTime: medModel
+                                          .convertTime(medModel.thirdTime),
+                                      startAt: medModel.startDate,
+                                      endAt: medModel.endDate,
+                                      id: medModel.id);
+
+                              //Put newReminder in database
+                              medModel.editSchedule(medication: newReminder);
+                              break;
                           }
                           Navigator.popAndPushNamed(
                               context, RouteNames.medicationScreen);
@@ -519,7 +541,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
               onTap: () async {
                 final TimeOfDay selectedTime = await showTimePicker(
                   context: context,
-                  initialTime: TimeOfDay.now(),
+                  initialTime: medModel.firstTime,
                 );
                 if (selectedTime != null) {
                   medModel.updateFirstTime(selectedTime);

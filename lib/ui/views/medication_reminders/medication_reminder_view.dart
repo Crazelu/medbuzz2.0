@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 class MedicationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var medModeller = Provider.of<MedicationData>(context);
-    final medicationInfo = medModeller.getMedicationReminder();
+    var medModel = Provider.of<MedicationData>(context);
+
     //Set Widget to use Provider
     return Consumer<MedicationData>(
       builder: (context, medModel, child) {
@@ -42,7 +42,7 @@ class MedicationView extends StatelessWidget {
                               );
                           showSnackBar(context);
                           Future.delayed(Duration(seconds: 1)).then((value) {
-                            medModeller.deleteSchedule(key);
+                            medModel.deleteSchedule(key);
                             Navigator.of(context).pop(true);
                           });
                         },
