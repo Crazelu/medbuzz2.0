@@ -41,248 +41,233 @@ class ScheduleDietReminderScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        //Extracted appBar to widgets folder
-        appBar: appBar(
-            context: context,
-            title: isEdit ? 'Edit your diet' : 'Add diet',
-            actions: isEdit ? [_deleteButton(context)] : null),
-        body: GestureDetector(
-          onTap: () {
-            unFocus();
-          },
-          child: Container(
-            color: Theme.of(context).backgroundColor,
-            child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Container(
-                  color: Theme.of(context).backgroundColor,
-                  width: width,
-                  padding: EdgeInsets.fromLTRB(
-                      Config.xMargin(context, 5),
-                      Config.yMargin(context, 1),
-                      Config.xMargin(context, 5),
-                      Config.yMargin(context, 5)),
-                  child: Column(
+      backgroundColor: Theme.of(context).backgroundColor,
+      //Extracted appBar to widgets folder
+      appBar: appBar(
+          context: context,
+          title: isEdit ? 'Edit your diet' : 'Add diet',
+          actions: isEdit ? [_deleteButton(context)] : null),
+      body: GestureDetector(
+        onTap: () {
+          unFocus();
+        },
+        child: Container(
+          color: Theme.of(context).backgroundColor,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Container(
+              color: Theme.of(context).backgroundColor,
+              width: width,
+              padding: EdgeInsets.fromLTRB(
+                  Config.xMargin(context, 5),
+                  Config.yMargin(context, 1),
+                  Config.xMargin(context, 5),
+                  Config.yMargin(context, 5)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                        isExpanded: false,
+                        icon: Icon(Icons.expand_more),
+                        // here sets the value to the selected month and if null, it defaults to the present date month from DateTime.now()
+                        value: model.currentMonth,
+                        hint: Text('Month',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: Config.textSize(context, 4.8),
+                                color: Theme.of(context).hintColor)),
+                        items: model.months
+                            .map((month) => DropdownMenuItem(
+                                  child: Container(
+                                    child: Text(
+                                      month,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize:
+                                              Config.textSize(context, 4.8),
+                                          color: Theme.of(context).hintColor),
+                                    ),
+                                  ),
+                                  value: month,
+                                ))
+                            .toList(),
+                        onChanged: (val) {
+                          model.updateSelectedMonth(val);
+                          unFocus();
+                        }),
+                  ),
+                  SizedBox(height: Config.yMargin(context, 3)),
+                  Container(
+                      height: Config.yMargin(context, 19),
+                      child: ScrollableCalendar(
+                        model: model,
+                        useButtonColor: true,
+                        hideDivider: true,
+                      )),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            isExpanded: false,
-                            icon: Icon(Icons.expand_more),
-                            // here sets the value to the selected month and if null, it defaults to the present date month from DateTime.now()
-                            value: model.currentMonth,
-                            hint: Text('Month',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: Config.textSize(context, 4.8),
-                                    color: Theme.of(context).hintColor)),
-                            items: model.months
-                                .map((month) => DropdownMenuItem(
-                                      child: Container(
-                                        child: Text(
-                                          month,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize:
-                                                  Config.textSize(context, 4.8),
-                                              color:
-                                                  Theme.of(context).hintColor),
-                                        ),
-                                      ),
-                                      value: month,
-                                    ))
-                                .toList(),
-                            onChanged: (val) {
-                              model.updateSelectedMonth(val);
-                              unFocus();
-                            }),
-                      ),
-                      SizedBox(height: Config.yMargin(context, 3)),
-                      Container(
-                          height: Config.yMargin(context, 19),
-                          child: ScrollableCalendar(
-                            model: model,
-                            useButtonColor: true,
-                            hideDivider: true,
-                          )),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('Time',
-                              style: TextStyle(
-                                  fontSize: Config.textSize(context, 4.8),
-                                  color: Theme.of(context).hintColor))
-                        ],
-                      ),
-                      SizedBox(height: Config.yMargin(context, 2.5)),
-                      TimeWheel(
-                        updateTimeChanged: (val) {
-                          //
-                          //this unfocuses the text fields when the time wheel is being interacted with
-                          unFocus();
-                          //
-                          model.updateSelectedTime(val);
-                        },
-                      ),
-                      SizedBox(height: Config.yMargin(context, 5)),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            _title(context, 'Meal Name'),
-                            _verticalSpace(context),
-                            _textField(context, mealNameFocusNode, 1, null,
-                                'Fish and Chips', mealNameController),
-                            SizedBox(height: Config.yMargin(context, 3.5)),
-                            _title(context, 'Select meal category'),
-                            _verticalSpace(context),
-                            Container(
-                                height: height * .13,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    physics: BouncingScrollPhysics(),
-                                    itemCount: model.foodClass.length,
-                                    itemBuilder: (context, index) {
-                                      var foodClass = model.foodClass[index];
-                                      return InkWell(
-                                          onTap: () {
-                                            unFocus();
-                                            model.updatesSelectedFoodClasses(
-                                                foodClass.name);
-                                          },
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                                right:
-                                                    Config.xMargin(context, 4)),
-                                            child: Column(
-                                              children: <Widget>[
-                                                CircleAvatar(
-                                                  radius: Config.xMargin(
-                                                      context, 7.88),
-                                                  backgroundColor: model
-                                                          .selectedFoodClasses
-                                                          .contains(
-                                                              foodClass.name)
-                                                      ? Theme.of(context)
-                                                          .primaryColorLight
-                                                      : Theme.of(context)
-                                                          .buttonColor,
-                                                  child: Stack(
-                                                    fit: StackFit.loose,
-                                                    children: <Widget>[
-                                                      Positioned(
-                                                        top: model
-                                                                .selectedFoodClasses
-                                                                .contains(
-                                                                    foodClass
-                                                                        .name)
-                                                            ? 0
-                                                            : Config.xMargin(
-                                                                context, 3.88),
-                                                        left: model
-                                                                .selectedFoodClasses
-                                                                .contains(
-                                                                    foodClass
-                                                                        .name)
-                                                            ? 0
-                                                            : Config.xMargin(
-                                                                context, 3.88),
-                                                        child: Image.asset(
-                                                            foodClass.image,
-                                                            height:
-                                                                Config.yMargin(
-                                                                    context,
-                                                                    3.5),
-                                                            width:
-                                                                Config.yMargin(
-                                                                    context,
-                                                                    3.5)),
-                                                      ),
-                                                      model.selectedFoodClasses
-                                                              .contains(
-                                                                  foodClass
-                                                                      .name)
-                                                          ? Image.asset(
-                                                              'images/check.png',
-                                                              height: Config
-                                                                  .yMargin(
-                                                                      context,
-                                                                      3.5),
-                                                              width: Config
-                                                                  .yMargin(
-                                                                      context,
-                                                                      3.5))
-                                                          : Container(),
-                                                    ],
-                                                  ),
-                                                ),
-                                                _verticalSpace(context),
-                                                Text(foodClass.name,
-                                                    style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .hintColor,
-                                                        fontSize:
-                                                            Config.textSize(
-                                                                context, 3.74)))
-                                              ],
-                                            ),
-                                          ));
-                                    })),
-                            SizedBox(height: Config.yMargin(context, 3.5)),
-                            _title(context, 'Meal Description'),
-                            _verticalSpace(context),
-                            _textField(context, mealDescFocusNode, 6, 100,
-                                'Optional description...', mealDescController),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: Config.yMargin(context, 5)),
-                      Container(
-                        width: width,
-                        height: Config.yMargin(context, 8),
-                        child: FlatButton(
-                            color: Theme.of(context).primaryColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    Config.xMargin(context, 3))),
-
-                            //Functions to save  reminder to db and schedule notification goes here
-                            onPressed: () {
-                              print(model.getDateTime());
-                              if (model.selectedDay == DateTime.now().day &&
-                                  model.month == DateTime.now().month) {
-                                notificationManager.showDietNotificationOnce(
-                                    model.selectedDay,
-                                    'Its time to take your meal',
-                                    '${model.selectedFoodClasses}',
-                                    model.getDateTime());
-                              }
-                              db.addDiet(DietModel(
-                                  id: DateTime.now().toString(),
-                                  dietName: mealNameController.text,
-                                  description: mealDescController.text ?? '',
-                                  startDate: model.getStartDate(),
-                                  time: [
-                                    num.parse(
-                                        model.selectedTime.substring(0, 2)),
-                                    num.parse(
-                                        model.selectedTime.substring(3, 5))
-                                  ]));
-                            },
-                            child: Text('Save',
-                                style: TextStyle(
-                                    fontSize: Config.textSize(context, 5),
-                                    fontWeight: FontWeight.w500,
-                                    color:
-                                        Theme.of(context).primaryColorLight))),
-                      )
+                      Text('Time',
+                          style: TextStyle(
+                              fontSize: Config.textSize(context, 4.8),
+                              color: Theme.of(context).hintColor))
                     ],
                   ),
-                )),
+                  SizedBox(height: Config.yMargin(context, 2.5)),
+                  TimeWheel(
+                    updateTimeChanged: (val) {
+                      //
+                      //this unfocuses the text fields when the time wheel is being interacted with
+                      unFocus();
+                      //
+                      model.updateSelectedTime(val);
+                    },
+                  ),
+                  SizedBox(height: Config.yMargin(context, 5)),
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        _title(context, 'Meal Name'),
+                        _verticalSpace(context),
+                        _textField(context, mealNameFocusNode, 1, null,
+                            'Fish and Chips', mealNameController),
+                        SizedBox(height: Config.yMargin(context, 3.5)),
+                        _title(context, 'Select meal category'),
+                        _verticalSpace(context),
+                        Container(
+                            height: height * .13,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: model.foodClass.length,
+                                itemBuilder: (context, index) {
+                                  var foodClass = model.foodClass[index];
+                                  return InkWell(
+                                      onTap: () {
+                                        unFocus();
+                                        model.updatesSelectedFoodClasses(
+                                            foodClass.name);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            right: Config.xMargin(context, 4)),
+                                        child: Column(
+                                          children: <Widget>[
+                                            CircleAvatar(
+                                              radius:
+                                                  Config.xMargin(context, 7.88),
+                                              backgroundColor: model
+                                                      .selectedFoodClasses
+                                                      .contains(foodClass.name)
+                                                  ? Theme.of(context)
+                                                      .primaryColorLight
+                                                  : Theme.of(context)
+                                                      .buttonColor,
+                                              child: Stack(
+                                                fit: StackFit.loose,
+                                                children: <Widget>[
+                                                  Positioned(
+                                                    top: model
+                                                            .selectedFoodClasses
+                                                            .contains(
+                                                                foodClass.name)
+                                                        ? 0
+                                                        : Config.xMargin(
+                                                            context, 3.88),
+                                                    left: model
+                                                            .selectedFoodClasses
+                                                            .contains(
+                                                                foodClass.name)
+                                                        ? 0
+                                                        : Config.xMargin(
+                                                            context, 3.88),
+                                                    child: Image.asset(
+                                                        foodClass.image,
+                                                        height: Config.yMargin(
+                                                            context, 3.5),
+                                                        width: Config.yMargin(
+                                                            context, 3.5)),
+                                                  ),
+                                                  model.selectedFoodClasses
+                                                          .contains(
+                                                              foodClass.name)
+                                                      ? Image.asset(
+                                                          'images/check.png',
+                                                          height:
+                                                              Config.yMargin(
+                                                                  context, 3.5),
+                                                          width: Config.yMargin(
+                                                              context, 3.5))
+                                                      : Container(),
+                                                ],
+                                              ),
+                                            ),
+                                            _verticalSpace(context),
+                                            Text(foodClass.name,
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .hintColor,
+                                                    fontSize: Config.textSize(
+                                                        context, 3.74)))
+                                          ],
+                                        ),
+                                      ));
+                                })),
+                        SizedBox(height: Config.yMargin(context, 3.5)),
+                        _title(context, 'Meal Description'),
+                        _verticalSpace(context),
+                        _textField(context, mealDescFocusNode, 6, 100,
+                            'Optional description...', mealDescController),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: Config.yMargin(context, 5)),
+                  Container(
+                    width: width,
+                    height: Config.yMargin(context, 8),
+                    child: FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                Config.xMargin(context, 3))),
+
+                        //Functions to save  reminder to db and schedule notification goes here
+                        onPressed: () {
+                          print(model.getDateTime());
+                          if (model.selectedDay == DateTime.now().day &&
+                              model.month == DateTime.now().month) {
+                            notificationManager.showDietNotificationOnce(
+                                model.selectedDay,
+                                'Its time to take your meal',
+                                '${model.selectedFoodClasses}',
+                                model.getDateTime());
+                          }
+                          db.addDiet(DietModel(
+                              id: DateTime.now().toString(),
+                              dietName: mealNameController.text,
+                              description: mealDescController.text ?? '',
+                              startDate: model.getStartDate(),
+                              time: [
+                                num.parse(model.selectedTime.substring(0, 2)),
+                                num.parse(model.selectedTime.substring(3, 5))
+                              ]));
+                        },
+                        child: Text('Save',
+                            style: TextStyle(
+                                fontSize: Config.textSize(context, 5),
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).primaryColorLight))),
+                  )
+                ],
+              ),
+            ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Text _title(BuildContext context, String text) =>
@@ -297,20 +282,20 @@ class ScheduleDietReminderScreen extends StatelessWidget {
         maxLines: maxLines,
         focusNode: focusNode,
         decoration: InputDecoration(
-            hintText: hint ?? '',
-            hintStyle: TextStyle(color: Theme.of(context).hintColor),
-            enabledBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(Config.xMargin(context, 3.2)),
-                borderSide: BorderSide(
-                    color: Theme.of(context).primaryColorDark,
-                    style: BorderStyle.solid)),
-            focusedBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(Config.xMargin(context, 3.2)),
-                borderSide: BorderSide(
-                    color: Theme.of(context).primaryColorDark,
-                    style: BorderStyle.solid))),
+          hintText: hint ?? '',
+          hintStyle: TextStyle(color: Theme.of(context).hintColor),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(Config.xMargin(context, 3.2)),
+              borderSide: BorderSide(
+                  color: Theme.of(context).primaryColorDark,
+                  style: BorderStyle.solid)),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(Config.xMargin(context, 3.2)),
+            borderSide: BorderSide(
+                color: Theme.of(context).primaryColorDark,
+                style: BorderStyle.solid),
+          ),
+        ),
       );
 
   SizedBox _verticalSpace(BuildContext context) => SizedBox(
@@ -323,25 +308,28 @@ class ScheduleDietReminderScreen extends StatelessWidget {
       fontSize: Config.xMargin(context, 5.55));
 
   FlatButton _deleteButton(BuildContext context) => FlatButton(
-      splashColor: Colors.redAccent,
-      color: Theme.of(context).backgroundColor,
-      onPressed: () {},
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Icon(
-            Icons.delete,
-            color: Colors.red,
-            size: Config.xMargin(context, 4.95),
-          ),
-          Text('Delete',
+        splashColor: Colors.redAccent,
+        color: Theme.of(context).backgroundColor,
+        onPressed: () {},
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Icon(
+              Icons.delete,
+              color: Colors.red,
+              size: Config.xMargin(context, 4.95),
+            ),
+            Text(
+              'Delete',
               style: TextStyle(
                 color: Colors.red,
                 fontSize: Config.textSize(context, 4.95),
-              ))
-        ],
-      ));
+              ),
+            )
+          ],
+        ),
+      );
 }
 
 // ///Custom FoodCard widget to keep things modular
