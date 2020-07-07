@@ -1,4 +1,6 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/database/appointmentData.dart';
+import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_view_model.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
@@ -237,7 +239,7 @@ class AllRemindersScreen extends StatelessWidget {
                     MedicationCard(
                       height: height,
                       width: width,
-                      medicationReminder: medicationReminder,
+                      values: medicationReminder,
                       drugName: medicationDB.drugName,
                       drugType:
                           medicationDB.drugTypes[medicationDB.selectedIndex],
