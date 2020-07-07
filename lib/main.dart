@@ -20,7 +20,6 @@ void main() async {
   Hive.registerAdapter(WaterReminderAdapter());
   Hive.registerAdapter(MedicationReminderAdapter());
   Hive.registerAdapter(AppointmentAdapter());
-
   Hive.registerAdapter(DietModelAdapter());
   Hive.registerAdapter(FitnessReminderAdapter());
   await Hive.openBox('onboarding');
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
-        initialRoute: RouteNames.scheduleWaterReminderScreen,
+        initialRoute: RouteNames.onboarding,
         //Routes now need to be named in the RoutesName class and returned from the generatedRoute function
         //in the RouteGenerator class
         //This update handles page transitions
