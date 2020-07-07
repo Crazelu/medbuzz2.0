@@ -24,16 +24,16 @@ class _DietScheduleScreenState extends State<DietScheduleScreen>
     _tabController = new TabController(vsync: this, length: 2);
   }
 
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey();
+  // final GlobalKey<AnimatedListState> _listKey = GlobalKey();
   ScrollController controller = ScrollController();
   // List<Widget> _dietReminder = [];
-  Widget _buildItem(DietModel diet, Animation animation) {
-    return SizeTransition(
-      sizeFactor: animation,
-      child: SingleChildScrollView(
-          controller: controller, child: DietReminderCard(diet: diet)),
-    );
-  }
+  // Widget _buildItem(DietModel diet, Animation animation) {
+  //   return SizeTransition(
+  //     sizeFactor: animation,
+  //     child: SingleChildScrollView(
+  //         controller: controller, child: DietReminderCard(diet: diet)),
+  //   );
+  // }
 
   // void _insertNewDiet() {
   //   Widget newDiet = DietReminderCard();
@@ -66,7 +66,6 @@ class _DietScheduleScreenState extends State<DietScheduleScreen>
 
     var db = Provider.of<DietReminderDB>(context);
     var model = Provider.of<DietReminderModel>(context);
-    print(db.diets.length);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
@@ -129,18 +128,41 @@ class _DietScheduleScreenState extends State<DietScheduleScreen>
         child: TabBarView(
           controller: _tabController,
           children: <Widget>[
-            AnimatedList(
-              key: _listKey,
-              initialItemCount: db.getdietcount(),
-              itemBuilder: (context, index, animation) {
-                return _buildItem(db.diets[index], animation);
+            ListView.builder(
+              itemCount: db.upcomingDiets.length,
+              itemBuilder: (context, index) {
+                var diets = db.upcomingDiets;
+                var item = diets[index];
+                return diets.length > 1
+                    ? DietReminderCard(diet: item)
+                    : Container(
+                        child: Center(
+                          child: Text(
+                              'No diet reminder.\nClick the button to add one',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: Config.xMargin(context, 5.55))),
+                        ),
+                      );
               },
             ),
-            Container(
-              child: Center(
-                child: Text('NO PAST REMINDER'),
-              ),
-            )
+            ListView.builder(
+              itemCount: db.pastDiets.length,
+              itemBuilder: (context, index) {
+                var diets = db.pastDiets;
+                var item = diets[index];
+                return diets.length > 1
+                    ? DietReminderCard(diet: item)
+                    : Container(
+                        child: Center(
+                          child: Text('NO PAST REMINDER',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: Config.xMargin(context, 5.55))),
+                        ),
+                      );
+              },
+            ),
           ],
         ),
       ),
@@ -180,6 +202,7 @@ class DietReminderCard extends StatelessWidget {
   const DietReminderCard({Key key, this.diet}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print(diet.foodClasses);
     var model = Provider.of<DietReminderModel>(context);
     return Padding(
       padding: EdgeInsets.only(
@@ -246,7 +269,8 @@ class DietReminderCard extends StatelessWidget {
                         height: Config.xMargin(context, 7),
                       ),
                       Text(
-                        model.foodClassesFromDietModel(diet.foodClasses),
+                        diet.dietName,
+                        // model.foodClassesFromDietModel(diet.foodClasses ?? []),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(

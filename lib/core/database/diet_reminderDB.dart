@@ -12,21 +12,33 @@ class DietReminderDB extends ChangeNotifier {
 
   List<DietModel> _diet = [];
 
-  List<DietModel> get diets => _diet;
+  List<DietModel> get pastDiets => this._pastDiets;
+  List<DietModel> get upcomingDiets => this._upcomingDiets;
+
+  List<DietModel> _pastDiets = [];
+  List<DietModel> _upcomingDiets = [];
 
   // get all diets
 
   void getAlldiets() async {
-    var box = await Hive.openBox(_boxname);
-    _diet = box.values.toList();
-    print(_diet.length);
+    var box = await Hive.openBox<DietModel>(_boxname);
+    this._diet = box.values.toList();
+    print('number of diet reminders: ${this._diet.length}');
+    //this logic is still faulty somehow
+    for (var i in _diet) {
+      if (i.startDate.difference(DateTime.now()).inDays < 0) {
+        _pastDiets.add(i);
+      } else {
+        _upcomingDiets.add(i);
+      }
+    }
     notifyListeners();
   }
 
   // get a specific diet by it's index
 
   DietModel getDiet(index) {
-    return _diet[index];
+    return this._diet[index];
   }
 
   // add a  diet
@@ -36,9 +48,9 @@ class DietReminderDB extends ChangeNotifier {
 
     await box.put(diet.id, diet);
 
-    _diet = box.values.toList();
+    this._diet = box.values.toList();
+    print('here ${this._diet}');
     box.close();
-    getAlldiets();
     notifyListeners();
   }
 
@@ -46,7 +58,7 @@ class DietReminderDB extends ChangeNotifier {
   void deleteDiet(key) async {
     var box = await Hive.openBox<DietModel>(_boxname);
 
-    _diet = box.values.toList();
+    this._diet = box.values.toList();
     box.delete(key);
     box.close();
     getAlldiets();
@@ -60,13 +72,13 @@ class DietReminderDB extends ChangeNotifier {
 
     box.put(diet.id, diet);
 
-    _diet = box.values.toList();
+    this._diet = box.values.toList();
     box.close();
     getAlldiets();
     notifyListeners();
   }
 
   int getdietcount() {
-    return _diet.length;
+    return this._diet.length;
   }
 }

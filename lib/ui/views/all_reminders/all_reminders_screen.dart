@@ -17,11 +17,9 @@ class AllRemindersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var allReminders =
-        Provider.of<AllRemindersViewModel>(context, listen: true);
-    var waterReminderDB = Provider.of<WaterReminderData>(context, listen: true);
-    var appointmentReminderDB =
-        Provider.of<AppointmentData>(context, listen: true);
+    var allReminders = Provider.of<AllRemindersViewModel>(context);
+    var waterReminderDB = Provider.of<WaterReminderData>(context);
+    var appointmentReminderDB = Provider.of<AppointmentData>(context);
     appointmentReminderDB.getAppointments();
     waterReminderDB.getWaterReminders();
     WidgetsBinding.instance.addPostFrameCallback((_) {

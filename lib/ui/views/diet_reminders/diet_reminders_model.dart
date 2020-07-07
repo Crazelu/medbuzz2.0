@@ -30,9 +30,15 @@ class DietReminderModel extends ChangeNotifier {
 
   int get month => _month;
 
+  DateTime getSelectedDate() =>
+      DateTime.parse('${__today.year}-$_month-$_selectedDay');
+
   //this function is used on the AllDietReminders screen to convert the foodclasses
   //retrieved from the diet model from list to string
   String foodClassesFromDietModel(List<String> list) {
+    if (list.length == 1) {
+      return list[0];
+    }
     String str = '';
     for (var i in list) {
       if (i == list[list.length - 1]) {
