@@ -8,8 +8,6 @@ part of 'water_reminder.dart';
 
 class WaterReminderAdapter extends TypeAdapter<WaterReminder> {
   @override
-  int get typeId => 5;
-  @override
   WaterReminder read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
@@ -33,4 +31,8 @@ class WaterReminderAdapter extends TypeAdapter<WaterReminder> {
       ..writeByte(2)
       ..write(obj.id);
   }
+
+  @override
+  // TODO: implement typeId
+  int get typeId => 5;
 }

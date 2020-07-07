@@ -28,11 +28,21 @@ class DietReminderModel extends ChangeNotifier {
   int get currentDay => _currentDay;
   List<String> get selectedFoodClasses => _selectedFoodClasses;
 
+  int get month => _month;
+
   DateTime getStartDate() {
     String month = _month.toString().length < 2 ? '0$_month' : '$_month';
     String weekday =
         _selectedDay.toString().length < 2 ? '0$_selectedDay' : '$_selectedDay';
     return DateTime.parse('${__today.year}-$month-$weekday');
+  }
+
+  DateTime getDateTime() {
+    String month = _month.toString().length < 2 ? '0$_month' : '$_month';
+    String weekday =
+        _selectedDay.toString().length < 2 ? '0$_selectedDay' : '$_selectedDay';
+    return DateTime.parse(
+        '${__today.year}-$month-$weekday ${_selectedTime.substring(0, 2)}:${selectedTime.substring(3, 5)}');
   }
 
   bool isActive(index) {
@@ -173,6 +183,7 @@ class DietReminderModel extends ChangeNotifier {
     this._selectedTime = time;
     print(time);
     print(time);
+    notifyListeners();
   }
 
   void _getCurrentMonth() {

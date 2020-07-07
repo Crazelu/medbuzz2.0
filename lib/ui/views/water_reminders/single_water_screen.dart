@@ -1,30 +1,22 @@
 import 'package:MedBuzz/core/models/water_reminder_model/water_reminder.dart';
-import 'package:MedBuzz/ui/notifications/water_notification_manager.dart';
+
+import 'package:MedBuzz/core/notifications/water_notification_manager.dart';
+
 import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
+
 import 'package:MedBuzz/ui/navigation/app_navigation/app_transition.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/route_names.dart';
 import '../../../core/database/waterReminderData.dart';
 
-class SingleWater extends StatefulWidget {
+class SingleWater extends StatelessWidget {
   SingleWater({this.water});
 
   final WaterReminder water;
-
-  @override
-  _SingleWaterState createState() => _SingleWaterState();
-}
-
-class _SingleWaterState extends State<SingleWater> {
-  WaterReminder waterReminder;
-  WaterNotificationManager waterNotificationManager =
-      WaterNotificationManager();
-
-  Navigation navigation = Navigation();
 
   final db = WaterReminderData();
 
@@ -56,9 +48,14 @@ class _SingleWaterState extends State<SingleWater> {
                     child: FlatButton.icon(
                         onPressed: () {
                           showDialog(
-                            context: context,
-                            child: DeleteDialog(),
-                          );
+                              context: context,
+                              child: DeleteDialog() //show Confirmation dialog
+                              );
+                          showSnackBar(context);
+                          Future.delayed(Duration(seconds: 1)).then((value) {
+                            db.deleteWaterReminder(water.id);
+                            Navigator.of(context).pop(true);
+                          });
                         },
                         icon: Icon(
                           Icons.delete,
