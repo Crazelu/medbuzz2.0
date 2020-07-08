@@ -22,6 +22,7 @@ class MedicationData extends ChangeNotifier {
   final List<String> frequency = ['Once', 'Twice', 'Thrice'];
   var selectedFreq = 'Once';
   int selectedIndex = 0;
+  String selectedDrugType = 'images/injection.png';
   int dosage = 1;
   TimeOfDay firstTime = TimeOfDay.now();
   TimeOfDay secondTime;
@@ -53,7 +54,24 @@ class MedicationData extends ChangeNotifier {
     return value;
   }
 
+  String updateSelectedDrugType(String drugType) {
+    this.selectedDrugType = drugType == images[0]
+        ? images[0]
+        : drugType == images[1]
+            ? images[1]
+            : drugType == images[2]
+                ? images[2]
+                : drugType == images[3]
+                    ? images[3]
+                    : drugType == images[4]
+                        ? images[4]
+                        : drugType == images[5] ? images[5] : images[6];
+
+    return selectedDrugType;
+  }
+
   bool resetModelFields() {
+    this.selectedDrugType = 'images/injection.png';
     this.selectedFreq = 'Once';
     this.selectedIndex = 0;
     this.dosage = 1;
@@ -63,7 +81,7 @@ class MedicationData extends ChangeNotifier {
     this.startDate = DateTime.now();
     this.endDate = DateTime.now();
     this.drugName = null;
-    String id = null;
+    this.id = null;
     return true;
   }
 
