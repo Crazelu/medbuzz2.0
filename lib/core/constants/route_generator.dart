@@ -32,6 +32,8 @@ import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../ui/views/fitness_reminders/add_fitness_screen.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -69,7 +71,7 @@ class RouteGenerator {
         return CustomSlideTransition(child: FitnessSchedulesScreen());
         break;
       case RouteNames.fitnessDescriptionScreen:
-        return CustomSlideTransition(child: FitnessDescriptionScreen());
+        return CustomSlideTransition(child: FitnessEditScreen());
         break;
       case RouteNames.scheduleAppointmentScreen:
         return CustomSlideTransition(child: ScheduleAppointmentScreen());

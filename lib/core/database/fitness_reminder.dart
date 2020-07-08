@@ -20,9 +20,9 @@ class FitnessReminderCRUD extends ChangeNotifier {
     return fitnessReminder[index];
   }
 
-  void addReminder(int index, FitnessReminder reminder) async {
+  void addReminder(FitnessReminder reminder) async {
     var box = Hive.box<FitnessReminder>(_boxName);
-    await box.put(index, reminder);
+    await box.put(reminder.id, reminder);
     this.fitnessReminder = box.values.toList();
     box.close();
     notifyListeners();

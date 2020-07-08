@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../core/constants/route_names.dart';
+
 class FitnessSchedulesScreen extends StatefulWidget {
   FitnessSchedulesScreen({this.payload});
   final String payload;
@@ -61,7 +63,10 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
               backgroundColor: Theme.of(context).buttonColor,
               splashColor: Theme.of(context).buttonColor.withOpacity(.9),
               //Navigate to fitness reminder creation screen
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.pushNamed(
+                    context, RouteNames.fitnessDescriptionScreen);
+              }),
         ),
       ),
       appBar: AppBar(

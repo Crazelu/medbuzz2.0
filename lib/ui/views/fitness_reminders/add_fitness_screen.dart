@@ -1,32 +1,37 @@
- import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/core/models/fitness_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:provider/provider.dart';
+import '../../../core/database/fitness_reminder.dart';
+import '../../../core/database/fitness_reminder.dart';
 import '../../../core/models/fitness_reminder.dart';
+import '../../../core/models/fitness_reminder_model/fitness_reminder.dart';
+import '../../../core/notifications/fitness_notification_manager.dart';
+import '../../../core/notifications/fitness_notification_manager.dart';
 import '../../navigation/app_navigation/app_transition.dart';
 import '../../size_config/config.dart';
 import 'all_fitness_reminders_screen.dart';
 
-class FitnessDescriptionScreen extends StatelessWidget {
-  final FitnessModel;
+class FitnessEditScreen extends StatelessWidget {
+  final FitnessModel fitnessModel;
 
-  const FitnessDescriptionScreen({Key key, this.FitnessModel})
-      : super(key: key);
+  const FitnessEditScreen({Key key, this.fitnessModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: add_fitness());
+    return Scaffold(body: AddFitness());
   }
 }
 
-class add_fitness extends StatefulWidget {
-  FitnessModel fitnessModel;
+class AddFitness extends StatefulWidget {
+  // final FitnessModel fitnessModel;
   @override
-  __fitnesssDescriptionState createState() => __fitnesssDescriptionState();
+  __AddFitnessState createState() => __AddFitnessState();
 }
 
-class __fitnesssDescriptionState extends State<add_fitness> {
+class __AddFitnessState extends State<AddFitness> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -66,6 +71,9 @@ class __fitnesssDescriptionState extends State<add_fitness> {
 
   @override
   Widget build(BuildContext context) {
+    var fitnessDB = Provider.of<FitnessReminderCRUD>(context);
+    FitnessNotificationManager fitnessNotificationManager =
+        FitnessNotificationManager();
     MaterialLocalizations localizations = MaterialLocalizations.of(context);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -418,6 +426,30 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                             } else {
 //                                 navigation.pushFrom(
 //                                     context, );
+                              var newReminder = FitnessReminder(
+                                  id: DateTime.now().toString(),
+                                  activityTime: [
+                                    activityTime.hour,
+                                    activityTime.minute
+                                  ],
+                                  endDate: endDate,
+                                  startDate: startDate,
+                                  index: index,
+                                  name: nameController.text,
+                                  minsperday: minDaily,
+                                  fitnessfreq: _selectedFreq,
+                                  fitnesstype:
+                                      activityType[selectedFitnessType]);
+                              fitnessDB.addReminder(newReminder);
+                              fitnessNotificationManager
+                                  .showFitnessNotificationDaily(
+                                newReminder.index,
+                                newReminder.name,
+                                newReminder.name,
+                                newReminder.activityTime[0],
+                                newReminder.activityTime[1],
+                              );
+                              Navigator.of(context).pop();
                             }
                           } else {
                             showSnackBar(context);

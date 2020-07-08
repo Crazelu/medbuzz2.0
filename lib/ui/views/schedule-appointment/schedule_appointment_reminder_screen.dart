@@ -248,15 +248,15 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                       ),
                     ),
                     // When this button is pressed, it saves the appointment to the DB
-                    onPressed:
-                        () {
-                      //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
-                      appointmentReminderDB.addAppointment(
-                          appointmentReminder.createSchedule()
-                      );
-                      print(appointmentReminderDB);
-                      Navigator.of(context).pushNamed(RouteNames.scheduledAppointmentsPage);
-                    }
+                    // onPressed:
+                    //     () {
+                    //   //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
+                    //   appointmentReminderDB.addAppointment(
+                    //       appointmentReminder.createSchedule()
+                    //   );
+                    //   print(appointmentReminderDB);
+                    //   Navigator.of(context).pushNamed(RouteNames.scheduledAppointmentsPage);
+                    // }
                     onPressed: appointmentReminder.selectedMonth != null &&
                             appointmentReminder.selectedDay != null &&
                             appointmentReminder.selectedTime != null &&
