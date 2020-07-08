@@ -57,7 +57,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
               ),
         ),
         backgroundColor: Theme.of(context).primaryColorLight,
-        elevation: 1.0,
+        elevation: 0,
       ),
       body: Container(
         color: Theme.of(context).primaryColorLight,
