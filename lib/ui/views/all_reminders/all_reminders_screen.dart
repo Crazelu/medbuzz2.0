@@ -301,6 +301,7 @@ class AllRemindersScreen extends StatelessWidget {
                     AppointmentCard(
                       height: height,
                       width: width,
+                      appointment: appointment,
                     )
                 ],
               ),

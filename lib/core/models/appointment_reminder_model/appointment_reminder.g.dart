@@ -16,7 +16,7 @@ class AppointmentAdapter extends TypeAdapter<Appointment> {
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Appointment(
-      dateTime: fields[0] as TimeOfDay,
+      dateTime: fields[0] as String,
       appointmentType: fields[1] as String,
       note: fields[2] as String,
       date: fields[3] as DateTime,
