@@ -167,8 +167,6 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  Text('08:00AM'),
-                  SizedBox(height: height * 0.02),
                   Container(
                     width: width,
                     child: GestureDetector(
@@ -266,7 +264,7 @@ class AllRemindersScreen extends StatelessWidget {
                       visible:
                           allReminders.waterRemindersBasedOnDateTime.isEmpty,
                       child: Container(
-                        child: Text('No water reminders for this date'),
+                        child: Text('No Water Reminder Set for this Date'),
                       )),
                   for (var waterReminder
                       in allReminders.waterRemindersBasedOnDateTime)
@@ -293,12 +291,10 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  Text('08:00AM'),
-                  SizedBox(height: height * 0.02),
                   Visibility(
                       visible: allReminders.appointmentsBasedOnDateTime.isEmpty,
                       child: Container(
-                        child: Text('No Appointments for this date'),
+                        child: Text('No Appointment Set for this Date'),
                       )),
                   for (var appointment
                       in allReminders.appointmentsBasedOnDateTime)
@@ -324,8 +320,6 @@ class AllRemindersScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: height * 0.02),
-                  Text('10:00AM'),
                   SizedBox(height: height * 0.02),
                   Container(
                     padding: EdgeInsets.symmetric(
