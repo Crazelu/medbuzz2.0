@@ -40,7 +40,7 @@ class RouteNames {
   static const String home = 'home';
   static const String login = 'login';
   static const String forgotPasswordSubmit = 'forgotPasswordSubmit';
-  static const String profile = 'profile';
+  // static const String profile = 'profile'; //Commented out for testing purposes
   static const String onboarding = 'onboarding';
   static const String signup = 'signup';
   static const String drugDescription = 'drugDescription';
@@ -72,7 +72,7 @@ class RouteNames {
     RouteNames.home: (context) => HomeScreen(),
     RouteNames.login: (context) => LoginPage(),
     RouteNames.forgotPasswordSubmit: (context) => ForgotPasswordSubmit(),
-    RouteNames.profile: (context) => ProfilePage(),
+    // RouteNames.profile: (context) => ProfilePage(),  //Commented out for testing purposes
     RouteNames.onboarding: (context) => Onboard(),
     RouteNames.homePage: (context) => HomePage(),
     RouteNames.signup: (context) => Signup(),

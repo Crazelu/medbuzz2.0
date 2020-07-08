@@ -389,7 +389,7 @@ class _HomePageState extends State<HomePage> {
                   ]),
                 ),
                 AllRemindersScreen(),
-                ProfilePage(),
+                // ProfilePage(), //Rempved fpr presentation purposes
               ]),
         ),
         floatingActionButton: model.currentIndex != 0
@@ -510,6 +510,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
         //Crazelu extracted BottomNavigationBar widget to Widgets folder
+
         bottomNavigationBar: isPressed == true
             ? null
             : BubbledNavigationBar(
@@ -555,21 +556,22 @@ class _HomePageState extends State<HomePage> {
                           fontSize: Config.textSize(context, 3.5)),
                     ),
                   ),
-                  BubbledNavigationBarItem(
-                    icon: Icon(CupertinoIcons.profile_circled,
-                        size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).hintColor),
-                    activeIcon: Icon(CupertinoIcons.profile_circled,
-                        size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).primaryColor),
-                    title: Text(
-                      'Profile',
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColorDark,
-                          fontWeight: FontWeight.w500,
-                          fontSize: Config.textSize(context, 3.5)),
-                    ),
-                  ),
+                  // //Commented out for presentation Purposes
+                  // BubbledNavigationBarItem(
+                  //   icon: Icon(CupertinoIcons.profile_circled,
+                  //       size: Config.xMargin(context, 8.33),
+                  //       color: Theme.of(context).hintColor),
+                  //   activeIcon: Icon(CupertinoIcons.profile_circled,
+                  //       size: Config.xMargin(context, 8.33),
+                  //       color: Theme.of(context).primaryColor),
+                  //   title: Text(
+                  //     'Profile',
+                  //     style: TextStyle(
+                  //         color: Theme.of(context).primaryColorDark,
+                  //         fontWeight: FontWeight.w500,
+                  //         fontSize: Config.textSize(context, 3.5)),
+                  //   ),
+                  // ),
                 ],
               ));
   }

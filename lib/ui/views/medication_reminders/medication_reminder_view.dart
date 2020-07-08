@@ -10,6 +10,11 @@ class MedicationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var medModel = Provider.of<MedicationData>(context);
+    int no_of_days = medModel.endDate.day - medModel.startDate.day;
+    int current_day = medModel.endDate.day - DateTime.now().day - 1;
+    String days_left = no_of_days == 0
+        ? 'Today is the last day!'
+        : '$current_day day(s) left out of $no_of_days days';
 
     //Set Widget to use Provider
     return Consumer<MedicationData>(
@@ -104,7 +109,10 @@ class MedicationView extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: Config.yMargin(context, 1.0)),
                             child: Text(
-                              'Take a shot at st.charles hospital daily and remember to eat before leaving the house',
+                              medModel.description == null ||
+                                      medModel.description == ""
+                                  ? 'No Description'
+                                  : '${medModel.description}',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColorDark,
                                 fontSize: Config.textSize(context, 4),
@@ -135,7 +143,7 @@ class MedicationView extends StatelessWidget {
                           ),
                           SizedBox(height: Config.yMargin(context, 10)),
                           Text(
-                            'Length',
+                            'Days Left',
                             style: TextStyle(
                               color: Theme.of(context).primaryColorDark,
                               fontSize: Config.textSize(context, 4.5),
@@ -146,7 +154,7 @@ class MedicationView extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: Config.yMargin(context, 1.0)),
                             child: Text(
-                              '4 days left out of 30 days',
+                              days_left,
                               style: TextStyle(
                                 color: Theme.of(context).primaryColorDark,
                                 fontSize: Config.textSize(context, 4),

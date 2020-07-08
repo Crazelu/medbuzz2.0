@@ -31,6 +31,7 @@ class MedicationData extends ChangeNotifier {
   DateTime endDate = DateTime.now();
   String drugName;
   String id;
+  String description = "Enter Anything Here";
 
   bool isEditing = false;
 
@@ -52,6 +53,12 @@ class MedicationData extends ChangeNotifier {
     value[1] = time.minute;
 
     return value;
+  }
+
+  String updateDescription(String value) {
+    this.description = value;
+    notifyListeners();
+    return description;
   }
 
   String updateSelectedDrugType(String drugType) {
@@ -82,6 +89,7 @@ class MedicationData extends ChangeNotifier {
     this.endDate = DateTime.now();
     this.drugName = null;
     this.id = null;
+    this.description = null;
     return true;
   }
 
