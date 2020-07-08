@@ -17,6 +17,7 @@ class FitnessSchedulesModel extends ChangeNotifier {
   int _month = __today.month;
   String _selectedMonth = _months[__month - 1];
   dynamic _selectedTime;
+  String name;
   int _selectedDay = DateTime.now().day;
   DateTime _today = DateTime.now();
   int _daysInMonth = DateUtil().daysInMonth(__month, __today.year);

@@ -5,27 +5,27 @@ import '../models/fitness_reminder_model/fitness_reminder.dart';
 
 class FitnessReminderCRUD extends ChangeNotifier {
   static const String _boxName = "fitnessReminderBox";
-  List<FitnessReminder> fitnessReminder = [];
+  List<FitnessReminder> _fitnessReminder = [];
+  List<FitnessReminder> get fitnessReminder => _fitnessReminder;
 
   int get reminderLength {
-    return this.fitnessReminder.length;
+    return _fitnessReminder.length;
   }
 
-  void getReminders() async { 
-
+  void getReminders() async {
     var box = await Hive.openBox<FitnessReminder>(_boxName);
-    fitnessReminder = box.values.toList();
+    _fitnessReminder = box.values.toList();
     notifyListeners();
   }
 
   getOneReminder(index) {
-    return fitnessReminder[index];
+    return _fitnessReminder[index];
   }
 
-  void addReminder(String index, FitnessReminder reminder) async {
-    var box = await Hive.openBox<FitnessReminder>(_boxName);
-    box.put(index, reminder);
-    this.fitnessReminder = box.values.toList();
+  void addReminder(FitnessReminder reminder) async {
+    var box = Hive.box<FitnessReminder>(_boxName);
+    await box.put(reminder.id, reminder);
+    _fitnessReminder = box.values.toList();
     box.close();
     notifyListeners();
   }
@@ -34,7 +34,7 @@ class FitnessReminderCRUD extends ChangeNotifier {
     int key = reminder.index;
     var box = Hive.box<FitnessReminder>(_boxName);
     await box.putAt(key, reminder);
-    this.fitnessReminder = box.values.toList();
+    _fitnessReminder = box.values.toList();
     box.close();
     notifyListeners();
   }
@@ -42,13 +42,10 @@ class FitnessReminderCRUD extends ChangeNotifier {
   void deleteReminder(key) async {
     var box = await Hive.openBox<FitnessReminder>(_boxName);
 
-    
-
-    this.fitnessReminder = box.values.toList();
+    _fitnessReminder = box.values.toList();
     box.delete(key);
-     box.close();
+    box.close();
 
     notifyListeners();
-      
   }
 }

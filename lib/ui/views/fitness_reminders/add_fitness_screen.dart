@@ -6,16 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:MedBuzz/core/models/fitness_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:provider/provider.dart';
-import 'package:MedBuzz/core/database/fitness_reminder.dart';
-import 'package:MedBuzz/core/models/fitness_reminder_model/fitness_reminder.dart';
-import 'package:MedBuzz/ui/navigation/app_navigation/app_transition.dart';
+import '../../../core/database/fitness_reminder.dart';
+import '../../../core/database/fitness_reminder.dart';
+import '../../../core/models/fitness_reminder.dart';
+import '../../../core/models/fitness_reminder_model/fitness_reminder.dart';
+import '../../../core/notifications/fitness_notification_manager.dart';
+import '../../../core/notifications/fitness_notification_manager.dart';
+import '../../navigation/app_navigation/app_transition.dart';
+import '../../size_config/config.dart';
 import 'all_fitness_reminders_screen.dart';
 
-class FitnessDescriptionScreen extends StatelessWidget {
-  final fitnessModel;
+class FitnessEditScreen extends StatelessWidget {
+  final FitnessModel fitnessModel;
 
-  const FitnessDescriptionScreen({Key key, this.fitnessModel})
-      : super(key: key);
+  const FitnessEditScreen({Key key, this.fitnessModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: AddFitness());
@@ -23,8 +27,7 @@ class FitnessDescriptionScreen extends StatelessWidget {
 }
 
 class AddFitness extends StatefulWidget {
-  final FitnessModel fitnessModel;
-  AddFitness({this.fitnessModel});
+  // final FitnessModel fitnessModel;
   @override
   __AddFitnessState createState() => __AddFitnessState();
 }
@@ -70,6 +73,9 @@ class __AddFitnessState extends State<AddFitness> {
 
   @override
   Widget build(BuildContext context) {
+    var fitnessDB = Provider.of<FitnessReminderCRUD>(context);
+    FitnessNotificationManager fitnessNotificationManager =
+        FitnessNotificationManager();
     MaterialLocalizations localizations = MaterialLocalizations.of(context);
     var model = Provider.of<FitnessReminderCRUD>(context);
     return Scaffold(
@@ -422,22 +428,25 @@ class __AddFitnessState extends State<AddFitness> {
                                   text:
                                       "Start date should be different from end date");
                             } else {
-                              model.addReminder(
-                                  id,
-                                  FitnessReminder(
-                                      id: id,
-                                      name: nameController.text,
-                                      fitnesstype:
-                                          selectedFitnessType.toString(),
-                                      fitnessfreq: _selectedFreq,
-                                      activityTime: [
-                                        selectedTime.hour,
-                                        selectedTime.minute
-                                      ],
-                                      minsperday: minDaily,
-                                      startDate: startDate,
-                                      endDate: endDate));
-
+//                                 navigation.pushFrom(
+//                                     context, );
+                              var newReminder = FitnessReminder(
+                                  id: DateTime.now().toString(),
+                                  activityTime: [
+                                    activityTime.hour,
+                                    activityTime.minute
+                                  ],
+                                  endDate: endDate,
+                                  startDate: startDate,
+                                  index: index,
+                                  name: nameController.text,
+                                  minsperday: minDaily,
+                                  fitnessfreq: _selectedFreq,
+                                  fitnesstype:
+                                      activityType[selectedFitnessType]);
+                              fitnessDB.addReminder(newReminder);
+                              fitnessNotificationManager
+                                  .showFitnessNotificationDaily(newReminder);
                               _successDialog();
                               Future.delayed(Duration(seconds: 2), () {
                                 Navigator.pushNamed(
