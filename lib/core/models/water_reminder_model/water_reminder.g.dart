@@ -39,8 +39,4 @@ class WaterReminderAdapter extends TypeAdapter<WaterReminder> {
       ..writeByte(4)
       ..write(obj.isSkipped);
   }
-
-
-  @override
-  int get typeId => 3;
 }

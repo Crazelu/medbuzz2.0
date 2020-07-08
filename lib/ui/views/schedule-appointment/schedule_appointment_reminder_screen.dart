@@ -34,7 +34,6 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
   final ScheduleAppointmentModel appointmentSchedule =
       ScheduleAppointmentModel();
 
-  final notificationManager = AppointmentNotificationManager();
   ScheduleAppointmentModel appointmentModel = ScheduleAppointmentModel();
 
   String _updateMonth;
@@ -54,6 +53,8 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
         Provider.of<AppointmentData>(context, listen: true);
 
     appointmentReminderDB.getAppointments();
+    AppointmentNotificationManager notificationManager =
+        AppointmentNotificationManager();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       appointmentReminder.updateAvailableAppointmentReminder(
@@ -100,6 +101,7 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                         .toList(),
                     onChanged: (val) {
                       appointmentReminder.updateSelectedMonth(val);
+
                       setState(() {
                         _updateMonth = val;
                       });
@@ -120,6 +122,7 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                     return GestureDetector(
                       onTap: () {
                         appointmentReminder.updateSelectedDay(index);
+
                         _scrollController.scrollTo(
                           index: index,
                           duration: Duration(seconds: 1),
@@ -173,7 +176,7 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                   Container(
                     child: TimeWheel(
                       updateTimeChanged: (value) =>
-                          appointmentSchedule.updateSelectedTime(value),
+                          appointmentReminder.updateSelectedTime(value),
                     ),
                   ),
                   SizedBox(
@@ -256,7 +259,7 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                   child: RaisedButton(
                     color: appointmentReminder.selectedMonth != null &&
                             appointmentReminder.selectedDay != null &&
-                            appointmentReminder.selectedTime != null &&
+                            // appointmentReminder.selectedTime != null &&
                             appointmentReminder.typeOfAppointment != null &&
                             appointmentReminder.note != null
                         ? Theme.of(context).primaryColor
@@ -277,7 +280,7 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                     // When this button is pressed, it saves the appointment to the DB
                     onPressed: appointmentReminder.selectedMonth != null &&
                             appointmentReminder.selectedDay != null &&
-                            appointmentReminder.selectedTime != null &&
+                            // appointmentReminder.selectedTime != null &&
                             appointmentReminder.typeOfAppointment != null &&
                             appointmentReminder.note != null
                         ? () async {
@@ -285,22 +288,16 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                                     DateTime.now().day &&
                                 appointmentReminder.selectedMonth ==
                                     DateTime.now().month) {
-                              notificationManager
-                                  .showAppointmentNotificationDaily(
-                                id: appointmentReminder.selectedDay,
-                                time: model.getDateTime(),
-                                title: "Hey (username)!",
-                                body: 'It is time for your '
-                                    '${model.typeOfAppointment}',
-                              );
-
-                              //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-D
+                              notificationManager.showAppointmentNotificationOnce(
+                                  appointmentReminder.selectedDay,
+                                  'Hey, you\' got somewhere to go',
+                                  ' ${appointmentReminder.typeOfAppointment} ',
+                                  appointmentReminder.getDateTime());
                             }
                             appointmentReminderDB.addAppointment(
                                 appointmentReminder.createSchedule());
-                            print(appointmentReminderDB);
-                            Navigator.of(context).pushNamed(
-                                RouteNames.scheduledAppointmentsPage);
+                            Navigator.of(context).pop();
+                            //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-D
                           }
                         : null,
                   ),
@@ -317,7 +314,7 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
 class DateAndDay extends StatefulWidget {
   DateAndDay({this.colour, @required this.day, @required this.date});
 
-  Color colour;
+  final Color colour;
   final String day;
   final String date;
 

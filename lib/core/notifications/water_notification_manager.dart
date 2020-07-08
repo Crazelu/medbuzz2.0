@@ -39,7 +39,7 @@ class WaterNotificationManager {
         'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
   }
 
-  void showDietNotificationOnce(
+  void showWaterNotificationOnce(
       int id, String title, String body, DateTime time) async {
     await flutterLocalNotificationsPlugin.schedule(
         id, title, body, time, getPlatformChannelSpecfics(id));
