@@ -6,10 +6,12 @@ import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminde
 import 'package:MedBuzz/core/models/appointment_reminder_model/appointment_reminder.dart';
 import 'package:MedBuzz/core/providers/providers.dart';
 import 'package:MedBuzz/ui/app_theme/app_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:device_preview/device_preview.dart';
 
 import 'core/models/water_reminder_model/water_reminder.dart';
 
@@ -23,7 +25,12 @@ void main() async {
   Hive.registerAdapter(DietModelAdapter());
   Hive.registerAdapter(FitnessReminderAdapter());
   await Hive.openBox('onboarding');
-  runApp(MyApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +41,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: providers,
       child: MaterialApp(
+        builder: DevicePreview.appBuilder, // <--- Add the builder
         debugShowCheckedModeBanner: false,
         title: 'MedBuzz',
         theme: appThemeLight,
