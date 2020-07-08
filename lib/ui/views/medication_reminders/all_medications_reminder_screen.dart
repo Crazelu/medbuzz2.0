@@ -3,7 +3,6 @@ import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
-import 'package:MedBuzz/ui/widget/medication_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -58,6 +57,10 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 splashColor: Theme.of(context).buttonColor.withOpacity(.9),
                 //Navigate to fitness reminder creation screen
                 onPressed: () {
+                  final medModel = Provider.of<MedicationData>(context);
+
+                  //Clear the fields in model
+                  medModel.resetModelFields();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -366,8 +369,7 @@ class _MedicationCardState extends State<MedicationCard> {
                               var medModel =
                                   Provider.of<MedicationData>(context);
 
-                              print(medModel
-                                  .updateDrugName(widget.values.drugName));
+                              print(medModel.updateDrugName(widget.drugName));
                               print("id = " +
                                   medModel.updateId(widget.values.id));
                               print(
@@ -395,6 +397,8 @@ class _MedicationCardState extends State<MedicationCard> {
                                 print(medModel.updateThirdTime(medModel
                                     .convertTimeBack(widget.values.thirdTime)));
                               }
+
+                              print('-------------------------------');
 
                               Navigator.pushNamed(
                                 context,

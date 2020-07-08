@@ -53,6 +53,20 @@ class MedicationData extends ChangeNotifier {
     return value;
   }
 
+  bool resetModelFields() {
+    this.selectedFreq = 'Once';
+    this.selectedIndex = 0;
+    this.dosage = 1;
+    this.firstTime = TimeOfDay.now();
+    this.secondTime = null;
+    this.thirdTime = null;
+    this.startDate = DateTime.now();
+    this.endDate = DateTime.now();
+    this.drugName = null;
+    String id = null;
+    return true;
+  }
+
   Future<void> fetch() async {
     getMedicationReminder();
     notifyListeners();

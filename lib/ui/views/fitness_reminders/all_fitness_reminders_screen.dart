@@ -1,4 +1,5 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/database/fitness_reminder.dart';
 import 'package:MedBuzz/core/notifications/fitness_notification_manager.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/fitness_reminders/all_fitness_reminders_model.dart';
@@ -45,6 +46,7 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
     });
 
     var model = Provider.of<FitnessSchedulesModel>(context);
+    var fitnessDB = Provider.of<FitnessReminderCRUD>(context);
     //MediaQueries for responsiveness
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -130,7 +132,11 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
                         fontSize: Config.textSize(context, 6)),
                   ),
                 ),
-                FitnessCard()
+                ...fitnessDB.fitnessReminder.map((e) => FitnessCard()).toList()
+                // FitnessCard(),
+                // FitnessCard(),
+                // FitnessCard(),
+                // FitnessCard(),
               ],
             )),
       ),
