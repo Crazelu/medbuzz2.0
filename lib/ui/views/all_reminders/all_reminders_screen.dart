@@ -161,8 +161,6 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  Text('08:00AM'),
-                  SizedBox(height: height * 0.02),
                   Container(
                     width: width,
                     child: GestureDetector(
@@ -269,12 +267,10 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  Text('08:00AM'),
-                  SizedBox(height: height * 0.02),
                   Visibility(
                       visible: allReminders.appointmentsBasedOnDateTime.isEmpty,
                       child: Container(
-                        child: Text('No Appointments for this date'),
+                        child: Text('No appointments for this date'),
                       )),
                   for (var appointment
                       in allReminders.appointmentsBasedOnDateTime)

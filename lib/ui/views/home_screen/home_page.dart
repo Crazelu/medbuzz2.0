@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 6.66),
                                       fontWeight: FontWeight.w600,
-                                      color: color = Color(0xff333333),
+                                      color: Theme.of(context).primaryColor,
                                     ),
                                   ),
                                 ],
@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize:
-                                                Config.textSize(context, 3.3),
+                                                Config.textSize(context, 3.5),
                                             color: Theme.of(context)
                                                 .primaryColorDark
                                                 .withOpacity(0.5)),
@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                                         '3500',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: Config.xMargin(context, 5),
+                                          fontSize: Config.textSize(context, 5),
                                           color: Theme.of(context)
                                               .primaryColorDark,
                                         ),
@@ -228,7 +228,8 @@ class _HomePageState extends State<HomePage> {
                                       Text(
                                         'calories today',
                                         style: TextStyle(
-                                            fontSize: 12.0,
+                                            fontSize:
+                                                Config.textSize(context, 3.5),
                                             color: color = Theme.of(context)
                                                 .primaryColorDark
                                                 .withOpacity(0.5)),
@@ -258,7 +259,7 @@ class _HomePageState extends State<HomePage> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600,
                                               fontSize:
-                                                  Config.textSize(context, 3.3),
+                                                  Config.textSize(context, 3.5),
                                               color: color = Theme.of(context)
                                                   .primaryColorDark
                                                   .withOpacity(0.5)),
@@ -270,7 +271,8 @@ class _HomePageState extends State<HomePage> {
                                           '7500',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 18.0,
+                                            fontSize:
+                                                Config.textSize(context, 5),
                                             color: Theme.of(context)
                                                 .primaryColorDark,
                                           ),
@@ -281,7 +283,8 @@ class _HomePageState extends State<HomePage> {
                                         Text(
                                           'steps today',
                                           style: TextStyle(
-                                              fontSize: 12.0,
+                                              fontSize:
+                                                  Config.textSize(context, 3.5),
                                               color: color = Theme.of(context)
                                                   .primaryColorDark
                                                   .withOpacity(0.5)),
