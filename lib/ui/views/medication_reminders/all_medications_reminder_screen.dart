@@ -3,7 +3,6 @@ import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
-import 'package:MedBuzz/ui/widget/medication_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
