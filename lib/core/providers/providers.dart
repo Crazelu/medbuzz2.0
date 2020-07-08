@@ -14,6 +14,8 @@ import 'package:MedBuzz/ui/views/water_reminders/schedule_water_reminder_model.d
 import 'package:MedBuzz/core/database/appointmentData.dart';
 import 'package:provider/provider.dart';
 
+import '../database/fitness_reminder.dart';
+
 //Add your view models in this widget
 
 final providers = <SingleChildCloneableWidget>[

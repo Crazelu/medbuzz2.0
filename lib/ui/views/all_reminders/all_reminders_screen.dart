@@ -1,8 +1,9 @@
 import 'package:MedBuzz/core/database/appointmentData.dart';
+import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_view_model.dart';
+import 'package:MedBuzz/ui/views/medication_reminders/all_medications_reminder_screen.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
-import 'package:MedBuzz/ui/widget/medication_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -21,9 +22,14 @@ class AllRemindersScreen extends StatelessWidget {
     var appointmentReminderDB = Provider.of<AppointmentData>(context);
     appointmentReminderDB.getAppointments();
     waterReminderDB.getWaterReminders();
+    var medicationDB = Provider.of<MedicationData>(context);
+    medicationDB.getMedicationReminder();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       allReminders
           .updateAvailableWaterReminders(waterReminderDB.waterReminders);
+
+      allReminders
+          .updateAvailableMedicationReminders(medicationDB.medicationReminder);
       allReminders.updateAvailableAppointmentReminders(
           appointmentReminderDB.appointment);
     });
@@ -161,8 +167,6 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  Text('08:00AM'),
-                  SizedBox(height: height * 0.02),
                   Container(
                     width: width,
                     child: GestureDetector(
@@ -218,7 +222,25 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  MedicationCard(height: height, width: width),
+                  Visibility(
+                    visible:
+                        allReminders.medicationReminderBasedOnDateTime.isEmpty,
+                    child: Container(
+                      child: Text('No Medication Reminder Set for this Date'),
+                    ),
+                  ),
+                  for (var medicationReminder
+                      in allReminders.medicationReminderBasedOnDateTime)
+                    MedicationCard(
+                      height: height,
+                      width: width,
+                      values: medicationReminder,
+                      drugName: medicationDB.drugName,
+                      drugType:
+                          medicationDB.drugTypes[medicationDB.selectedIndex],
+                      dosage: medicationDB.dosage,
+                      selectedFreq: medicationDB.selectedFreq,
+                    )
                 ],
               ),
             ),
@@ -242,7 +264,7 @@ class AllRemindersScreen extends StatelessWidget {
                       visible:
                           allReminders.waterRemindersBasedOnDateTime.isEmpty,
                       child: Container(
-                        child: Text('No water reminders for this date'),
+                        child: Text('No Water Reminder Set for this Date'),
                       )),
                   for (var waterReminder
                       in allReminders.waterRemindersBasedOnDateTime)
@@ -269,12 +291,10 @@ class AllRemindersScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.02),
-                  Text('08:00AM'),
-                  SizedBox(height: height * 0.02),
                   Visibility(
                       visible: allReminders.appointmentsBasedOnDateTime.isEmpty,
                       child: Container(
-                        child: Text('No Appointments for this date'),
+                        child: Text('No Appointment Set for this Date'),
                       )),
                   for (var appointment
                       in allReminders.appointmentsBasedOnDateTime)
@@ -300,8 +320,6 @@ class AllRemindersScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: height * 0.02),
-                  Text('10:00AM'),
                   SizedBox(height: height * 0.02),
                   Container(
                     padding: EdgeInsets.symmetric(

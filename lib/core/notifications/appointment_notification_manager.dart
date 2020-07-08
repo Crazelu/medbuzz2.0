@@ -36,6 +36,14 @@ class AppointmentNotificationManager {
         'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
   }
 
+  void showAppointmentNotificationOnce(
+      int id, String title, String body, DateTime time) async {
+    await flutterLocalNotificationsPlugin.schedule(
+        id, title, body, time, getPlatformChannelSpecfics(id));
+    print(
+        'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
+  }
+
   getPlatformChannelSpecfics(int id) {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         '$id', 'your channel name', 'your channel description',

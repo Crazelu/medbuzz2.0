@@ -32,12 +32,14 @@ class MedicationReminder {
   @HiveField(8)
   DateTime endAt;
 
-//this is useless
   @HiveField(9)
   String index;
 
   @HiveField(10)
   String id;
+
+  @HiveField(11)
+  String description;
 
   MedicationReminder(
       {this.drugName,
@@ -50,5 +52,6 @@ class MedicationReminder {
       this.startAt,
       this.endAt,
       this.index,
-      this.id});
+      this.id,
+      this.description});
 }

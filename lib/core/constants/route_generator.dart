@@ -32,6 +32,7 @@ import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../ui/views/fitness_reminders/add_fitness_screen.dart';
 import '../../ui/navigation/page_transition/page_transition.dart';
 
 class RouteGenerator {
@@ -52,9 +53,9 @@ class RouteGenerator {
       case RouteNames.forgotPasswordSubmit:
         return CustomSlideTransition(child: ForgotPasswordSubmit());
         break;
-      case RouteNames.profile:
-        return CustomSlideTransition(child: ProfilePage());
-        break;
+      // case RouteNames.profile:
+      //   return CustomSlideTransition(child: ProfilePage());
+      //   break; //Commented out for presentation purposes
       case RouteNames.onboarding:
         return CustomSlideTransition(child: Onboard());
         break;
@@ -71,7 +72,7 @@ class RouteGenerator {
         return CustomSlideTransition(child: FitnessSchedulesScreen());
         break;
       case RouteNames.fitnessDescriptionScreen:
-        return CustomSlideTransition(child: FitnessDescriptionScreen());
+        return CustomSlideTransition(child: FitnessEditScreen());
         break;
       case RouteNames.scheduleAppointmentScreen:
         return CustomSlideTransition(child: ScheduleAppointmentScreen());

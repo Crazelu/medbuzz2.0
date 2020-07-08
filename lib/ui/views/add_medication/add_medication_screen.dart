@@ -17,17 +17,20 @@ class AddMedicationScreen extends StatefulWidget {
 
 class _AddMedicationScreenState extends State<AddMedicationScreen> {
   TextEditingController textEditingController = TextEditingController();
+  TextEditingController descriptionTextController = TextEditingController();
   //var medModel = Provider.of<MedicationData>(context);
 
   FocusNode _focusNode = FocusNode();
   String newIndex = DateTime.now().toString();
-  bool _changed = false;
+  bool _changed_name = false;
+  bool _changed_description = false;
 
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      // Provider.of<MedicationData>(context).getMedicationReminder();
+      //Get updated data from database
+      Provider.of<MedicationData>(context).getMedicationReminder();
     });
   }
 
@@ -35,9 +38,13 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   Widget build(BuildContext context) {
     var medModel = Provider.of<MedicationData>(context);
     String appBarTitle = medModel.isEditing ? medModel.edit : medModel.add;
-    if (medModel.isEditing && _changed == false) {
+    if (medModel.isEditing && _changed_name == false) {
       textEditingController.text = medModel.drugName;
-      _changed = true;
+      _changed_name = true;
+    }
+    if (medModel.isEditing && _changed_description == false) {
+      descriptionTextController.text = medModel.description;
+      _changed_description = true;
     }
 
     return Scaffold(
@@ -82,7 +89,6 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: Config.yMargin(context, 1.5)),
-//                  drugTextField(),
                   TextField(
                     controller: textEditingController,
                     focusNode: _focusNode,
@@ -92,6 +98,42 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                         fontSize: Config.xMargin(context, 5.5)),
                     decoration: InputDecoration(
                       hintText: 'Aspirin',
+                      hintStyle: TextStyle(
+                        color: Colors.black38,
+                        fontSize: Config.xMargin(context, 5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Config.xMargin(context, 5))),
+                        borderSide: BorderSide(
+                            color: Theme.of(context).primaryColorDark),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Config.xMargin(context, 5))),
+                        borderSide: BorderSide(
+                            color: Theme.of(context).primaryColorDark),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: Config.yMargin(context, 2.5)),
+                  Text(
+                    'Description',
+                    style: TextStyle(
+                        fontSize: Config.textSize(context, 5),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  //Description Text Input
+                  SizedBox(height: Config.yMargin(context, 1.5)),
+                  TextField(
+                    maxLines: null,
+                    controller: descriptionTextController,
+                    cursorColor: Theme.of(context).primaryColorDark,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColorDark,
+                        fontSize: Config.xMargin(context, 5.5)),
+                    decoration: InputDecoration(
+                      hintText: 'Enter Description here',
                       hintStyle: TextStyle(
                         color: Colors.black38,
                         fontSize: Config.xMargin(context, 5),
@@ -285,6 +327,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                         if (textEditingController.text.isNotEmpty) {
                           switch (appBarTitle) {
                             case 'Add Medication':
+                              print(medModel.updateDescription(
+                                  descriptionTextController.text));
                               //Add Medication? create new MedicationReminder with new ID
                               MedicationReminder med = MedicationReminder(
                                   id: DateTime.now().toString(),
@@ -311,7 +355,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                       : [],
                                   frequency: medModel.selectedFreq,
                                   startAt: medModel.startDate,
-                                  endAt: medModel.endDate);
+                                  endAt: medModel.endDate,
+                                  description: medModel.description);
 
                               await medModel.addMedicationReminder(med);
                               switch (medModel.selectedFreq) {
@@ -329,47 +374,101 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                   break;
                               }
 
-                              print([
-                                medModel.drugName,
-                                medModel.drugTypes[medModel.selectedIndex],
-                                medModel.selectedFreq,
-                                medModel.dosage,
-                                medModel.firstTime,
-                                medModel.secondTime,
-                                medModel.selectedIndex,
-                                medModel.startDate,
-                                medModel.endDate
-                              ]);
                               break;
                             // work here on your editing schedule code
-                            case 'Edit Schedule':
-                              medModel
-                                  .updateDrugName(textEditingController.text);
+                            case 'Edit Medication':
+                              print(medModel
+                                  .updateDrugName(textEditingController.text));
+                              print(medModel.updateDescription(
+                                  descriptionTextController.text));
+
+                              print(medModel.drugTypes[medModel.selectedIndex]);
+
+                              print(medModel.dosage);
+                              print([
+                                medModel.firstTime.hour,
+                                medModel.firstTime.minute
+                              ]);
+                              print(medModel.secondTime != null
+                                  ? [
+                                      medModel.secondTime.hour,
+                                      medModel.secondTime.minute
+                                    ]
+                                  : 'second Time: null');
+
+                              print(medModel.thirdTime != null
+                                  ? [
+                                      medModel.thirdTime.hour,
+                                      medModel.thirdTime.minute
+                                    ]
+                                  : "ThirdTime: null");
+                              print(medModel.selectedFreq);
+                              print(medModel.startDate);
+                              print(medModel.endDate);
 
                               MedicationReminder newReminder =
                                   MedicationReminder(
                                       drugName: medModel.drugName,
-                                      drugType:
-                                          medModel.selectedIndex.toString(),
-                                      frequency: medModel.selectedFreq,
+                                      id: medModel.id,
+                                      drugType: medModel
+                                          .drugTypes[medModel.selectedIndex],
                                       dosage: medModel.dosage,
-                                      firstTime: medModel
-                                          .convertTime(medModel.firstTime),
-                                      secondTime: medModel
-                                          .convertTime(medModel.secondTime),
-                                      thirdTime: medModel
-                                          .convertTime(medModel.thirdTime),
+                                      firstTime: [
+                                        medModel.firstTime.hour,
+                                        medModel.firstTime.minute
+                                      ],
+                                      secondTime: medModel.secondTime != null
+                                          ? [
+                                              medModel.secondTime.hour,
+                                              medModel.secondTime.minute
+                                            ]
+                                          : [],
+                                      thirdTime: medModel.thirdTime != null
+                                          ? [
+                                              medModel.thirdTime.hour,
+                                              medModel.thirdTime.minute
+                                            ]
+                                          : [],
+                                      frequency: medModel.selectedFreq,
                                       startAt: medModel.startDate,
                                       endAt: medModel.endDate,
-                                      id: medModel.id);
-                              print(medModel.drugName);
+                                      index: medModel.selectedIndex.toString(),
+                                      description: medModel.description);
+
                               //Put newReminder in database
                               await medModel.editSchedule(
                                   medication: newReminder);
+
+                              print("Saving editted schedule");
+
+                              //Enable Notifications
+                              switch (medModel.selectedFreq) {
+                                case 'Once':
+                                  setNotification(
+                                      newReminder, newReminder.firstTime);
+                                  break;
+                                case 'Twice':
+                                  setNotification(
+                                      newReminder, newReminder.firstTime);
+                                  setNotification(
+                                      newReminder, newReminder.secondTime);
+                                  break;
+                                case 'Thrice':
+                                  setNotification(
+                                      newReminder, newReminder.firstTime);
+                                  setNotification(
+                                      newReminder, newReminder.secondTime);
+                                  setNotification(
+                                      newReminder, newReminder.thirdTime);
+                                  break;
+                              }
+
                               break;
                           }
                           Navigator.popAndPushNamed(
                               context, RouteNames.medicationScreen);
+                        } else {
+                          //TODO display SnackBar to notify that name is empty
                         }
                       },
                       child: Container(
@@ -482,8 +581,12 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
   Widget buildImageContainer(int index) {
     var medModel = Provider.of<MedicationData>(context);
+
     return GestureDetector(
-      onTap: () => medModel.onSelectedDrugImage(index),
+      onTap: () {
+        medModel.onSelectedDrugImage(index);
+        print(medModel.selectedIndex);
+      },
       child: Container(
         padding: EdgeInsets.all(Config.xMargin(context, 1.5)),
         margin: EdgeInsets.only(right: Config.xMargin(context, 3)),

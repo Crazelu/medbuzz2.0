@@ -3,7 +3,6 @@ import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
-import 'package:MedBuzz/ui/widget/medication_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -58,6 +57,10 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 splashColor: Theme.of(context).buttonColor.withOpacity(.9),
                 //Navigate to fitness reminder creation screen
                 onPressed: () {
+                  final medModel = Provider.of<MedicationData>(context);
+
+                  //Clear the fields in model
+                  medModel.resetModelFields();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -142,8 +145,10 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 //Here the already saved reminders will be loaded dynamically
 
                 Container(
+                  margin: EdgeInsets.only(bottom: Config.yMargin(context, 2)),
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
+                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return MedicationCard(
@@ -153,20 +158,24 @@ class _MedicationScreenState extends State<MedicationScreen> {
                                 'Injection'
                             ? "images/injection.png"
                             : model.medicationReminder[index].drugType ==
-                                    'Drops'
-                                ? "images/drops.png"
+                                    'Tablets'
+                                ? "images/tablets.png"
                                 : model.medicationReminder[index].drugType ==
-                                        'Pills'
-                                    ? "images/pills.png"
+                                        'Drops'
+                                    ? "images/drops.png"
                                     : model.medicationReminder[index]
                                                 .drugType ==
-                                            'Ointment'
-                                        ? "images/ointment.png"
+                                            'Pills'
+                                        ? "images/pills.png"
                                         : model.medicationReminder[index]
                                                     .drugType ==
-                                                'Syrup'
-                                            ? "images/syrup.png"
-                                            : "images/inhaler.png",
+                                                'Ointment'
+                                            ? "images/ointment.png"
+                                            : model.medicationReminder[index]
+                                                        .drugType ==
+                                                    'Syrup'
+                                                ? "images/syrup.png"
+                                                : "images/inhaler.png",
                         time: model.medicationReminder[index].firstTime
                             .toString(),
                         dosage: model.medicationReminder[index].dosage,
@@ -237,18 +246,22 @@ class CustomDateButton extends StatelessWidget {
 }
 
 class MedicationCard extends StatefulWidget {
+  final double height;
+  final double width;
   final String drugName;
   final String drugType;
   final String time;
   final int dosage;
   final String selectedFreq;
-  MedicationReminder values;
+  final MedicationReminder values;
 
   MedicationCard(
       {this.values,
       this.drugName,
       this.drugType,
       this.time,
+      this.height,
+      this.width,
       this.dosage,
       this.selectedFreq});
 
@@ -357,9 +370,10 @@ class _MedicationCardState extends State<MedicationCard> {
                             onPressed: () {
                               var medModel =
                                   Provider.of<MedicationData>(context);
-
+                              print('----All Medication Reminder info ------');
                               print(medModel
-                                  .updateDrugName(widget.values.drugName));
+                                  .updateSelectedDrugType(widget.drugType));
+                              print(medModel.updateDrugName(widget.drugName));
                               print("id = " +
                                   medModel.updateId(widget.values.id));
                               print(
@@ -368,6 +382,8 @@ class _MedicationCardState extends State<MedicationCard> {
                               medModel.updateEndDate(widget.values.endAt);
                               print(
                                   medModel.updateFreq(widget.values.frequency));
+                              print(medModel.updateDescription(
+                                  widget.values.description));
 
                               if (medModel.selectedFreq == 'Once') {
                                 print(medModel.updateFirstTime(medModel
@@ -387,6 +403,9 @@ class _MedicationCardState extends State<MedicationCard> {
                                 print(medModel.updateThirdTime(medModel
                                     .convertTimeBack(widget.values.thirdTime)));
                               }
+                              print(widget.values.index);
+
+                              print('-------------------------------');
 
                               Navigator.pushNamed(
                                 context,

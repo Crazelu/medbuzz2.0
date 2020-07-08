@@ -10,6 +10,11 @@ class MedicationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var medModel = Provider.of<MedicationData>(context);
+    int no_of_days = medModel.endDate.day - medModel.startDate.day;
+    int current_day = medModel.endDate.day - DateTime.now().day - 1;
+    String days_left = no_of_days == 0
+        ? 'Today is the last day!'
+        : '$current_day day(s) left out of $no_of_days days';
 
     //Set Widget to use Provider
     return Consumer<MedicationData>(
@@ -38,7 +43,9 @@ class MedicationView extends StatelessWidget {
                         onPressed: () async {
                           showDialog(
                               context: context,
-                              child: DeleteDialog() //show Confirmation dialog
+                              child: DeleteBox(
+                                  deletion_key:
+                                      medModel.id) //show Confirmation dialog
                               );
                           showSnackBar(context);
                           Future.delayed(Duration(seconds: 1)).then((value) {
@@ -76,19 +83,7 @@ class MedicationView extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(
                               right: Config.xMargin(context, 5)),
-                          child: Image.asset(medModel.selectedIndex == 0
-                              ? medModel.images[0]
-                              : medModel.selectedIndex == 1
-                                  ? medModel.images[1]
-                                  : medModel.selectedIndex == 2
-                                      ? medModel.images[2]
-                                      : medModel.selectedIndex == 3
-                                          ? medModel.images[3]
-                                          : medModel.selectedIndex == 4
-                                              ? medModel.images[4]
-                                              : medModel.selectedIndex == 5
-                                                  ? medModel.images[5]
-                                                  : medModel.images[6]),
+                          child: Image.asset(medModel.selectedDrugType),
                         ),
                       ],
                     ),
@@ -114,7 +109,10 @@ class MedicationView extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: Config.yMargin(context, 1.0)),
                             child: Text(
-                              'Take a shot at st.charles hospital daily and remember to eat before leaving the house',
+                              medModel.description == null ||
+                                      medModel.description == ""
+                                  ? 'No Description'
+                                  : '${medModel.description}',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColorDark,
                                 fontSize: Config.textSize(context, 4),
@@ -145,7 +143,7 @@ class MedicationView extends StatelessWidget {
                           ),
                           SizedBox(height: Config.yMargin(context, 10)),
                           Text(
-                            'Length',
+                            'Days Left',
                             style: TextStyle(
                               color: Theme.of(context).primaryColorDark,
                               fontSize: Config.textSize(context, 4.5),
@@ -156,7 +154,7 @@ class MedicationView extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: Config.yMargin(context, 1.0)),
                             child: Text(
-                              '4 days left out of 30 days',
+                              days_left,
                               style: TextStyle(
                                 color: Theme.of(context).primaryColorDark,
                                 fontSize: Config.textSize(context, 4),
@@ -240,6 +238,105 @@ class FrequencyList extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class DeleteBox extends StatelessWidget {
+  String deletion_key;
+
+  DeleteBox({this.deletion_key});
+
+  @override
+  Widget build(BuildContext context) {
+    final medModel = Provider.of<MedicationData>(context);
+
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Config.xMargin(context, 4.0)),
+      ),
+      child: Container(
+        height: Config.yMargin(context, 20),
+        width: Config.xMargin(context, 150.0),
+        //width: Config.xMargin(context, 50),
+        child: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 23.0, bottom: 20.0),
+                child: Text(
+                  'Are you sure you want to delete this?',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    height: Config.yMargin(context, 6.0),
+                    width: Config.xMargin(context, 30.0),
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      color: Theme.of(context).primaryColorLight,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(Config.xMargin(context, 2.0)),
+                        side: BorderSide(
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(.4),
+                            width: 1.5),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: Config.yMargin(context, 6.0),
+                    width: Config.xMargin(context, 30.0),
+                    child: FlatButton(
+                      onPressed: () {
+                        //Code to delete using key
+                        medModel.deleteSchedule(deletion_key);
+                        Navigator.of(context)
+                            .popAndPushNamed(RouteNames.medicationScreen);
+                      },
+                      child: Text(
+                        "Delete",
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      color: Theme.of(context).primaryColorLight,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(Config.xMargin(context, 2.0)),
+                        side: BorderSide(
+                            color: Theme.of(context).hintColor.withOpacity(.4),
+                            width: 1.5),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

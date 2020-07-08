@@ -12,21 +12,37 @@ import '../../size_config/config.dart';
 import 'package:MedBuzz/ui/widget/time_wheel.dart';
 import 'schedule_appointment_screen_model.dart';
 
-class ScheduleAppointmentScreen extends StatelessWidget {
+class ScheduleAppointmentScreen extends StatefulWidget {
   static const routeName = 'schedule-appointment-reminder';
   final String payload;
 
+  ScheduleAppointmentScreen({Key key, this.payload}) : super(key: key);
+
+  @override
+  _ScheduleAppointmentScreenState createState() =>
+      _ScheduleAppointmentScreenState();
+}
+
+class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
   final ItemScrollController _scrollController = ItemScrollController();
-  //Table calendar object class
+
   final TextEditingController _typeOfAppointmentController =
       TextEditingController();
+
   final TextEditingController _noteController = TextEditingController();
 
   final ScheduleAppointmentModel appointmentSchedule =
       ScheduleAppointmentModel();
-  final notificationManager = AppointmentNotificationManager();
 
-  ScheduleAppointmentScreen({Key key, this.payload}) : super(key: key);
+  ScheduleAppointmentModel appointmentModel = ScheduleAppointmentModel();
+
+  String _updateMonth;
+
+  @override
+  void initState() {
+    _updateMonth = appointmentModel.currentMonth;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +53,8 @@ class ScheduleAppointmentScreen extends StatelessWidget {
         Provider.of<AppointmentData>(context, listen: true);
 
     appointmentReminderDB.getAppointments();
+    AppointmentNotificationManager notificationManager =
+        AppointmentNotificationManager();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       appointmentReminder.updateAvailableAppointmentReminder(
@@ -58,32 +76,36 @@ class ScheduleAppointmentScreen extends StatelessWidget {
             children: [
               DropdownButtonHideUnderline(
                 child: DropdownButton(
-                  isExpanded: false,
-                  icon: Icon(Icons.expand_more),
-                  //set the value to the selected month and if null,  it defaults to the present date month from DateTime.now()
-                  value: appointmentReminder.currentMonth,
-                  hint: Text(
-                    'Month',
-                    textAlign: TextAlign.center,
-                  ),
-                  items: monthValues
-                      .map(
-                        (month) => DropdownMenuItem(
-                          child: Container(
-                            child: Text(
-                              month.month,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColorDark),
+                    isExpanded: false,
+                    icon: Icon(Icons.expand_more),
+                    //set the value to the selected month and if null,  it defaults to the present date month from DateTime.now()
+                    value: _updateMonth,
+                    hint: Text(
+                      'Month',
+                      textAlign: TextAlign.center,
+                    ),
+                    items: monthValues
+                        .map(
+                          (month) => DropdownMenuItem(
+                            child: Container(
+                              child: Text(
+                                month.month,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorDark),
+                              ),
                             ),
+                            value: month.month,
                           ),
-                          value: month.month,
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (val) =>
-                      appointmentReminder.updateSelectedMonth(val),
-                ),
+                        )
+                        .toList(),
+                    onChanged: (val) {
+                      appointmentReminder.updateSelectedMonth(val);
+
+                      setState(() {
+                        _updateMonth = val;
+                      });
+                    }),
               ),
               Container(
                 // height helps to stop overflowing of this widget into divider
@@ -100,6 +122,7 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         appointmentReminder.updateSelectedDay(index);
+
                         _scrollController.scrollTo(
                           index: index,
                           duration: Duration(seconds: 1),
@@ -153,7 +176,7 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                   Container(
                     child: TimeWheel(
                       updateTimeChanged: (value) =>
-                          appointmentSchedule.updateSelectedTime(value),
+                          appointmentReminder.updateSelectedTime(value),
                     ),
                   ),
                   SizedBox(
@@ -234,12 +257,19 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                 child: SizedBox(
                   width: width * 3,
                   child: RaisedButton(
+                    color: appointmentReminder.selectedMonth != null &&
+                            appointmentReminder.selectedDay != null &&
+                            // appointmentReminder.selectedTime != null &&
+                            appointmentReminder.typeOfAppointment != null &&
+                            appointmentReminder.note != null
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).primaryColor.withOpacity(0.7),
                     padding: EdgeInsets.symmetric(
                         // horizontal: Config.xMargin(context, 10),
                         vertical: Config.yMargin(context, 2)),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(width * 0.03)),
-                    color: Theme.of(context).primaryColor,
+
                     child: Text(
                       'Save',
                       style: TextStyle(
@@ -250,30 +280,24 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                     // When this button is pressed, it saves the appointment to the DB
                     onPressed: appointmentReminder.selectedMonth != null &&
                             appointmentReminder.selectedDay != null &&
-                            appointmentReminder.selectedTime != null &&
+                            // appointmentReminder.selectedTime != null &&
                             appointmentReminder.typeOfAppointment != null &&
                             appointmentReminder.note != null
-                        ? () {
+                        ? () async {
                             if (appointmentReminder.selectedDay ==
                                     DateTime.now().day &&
                                 appointmentReminder.selectedMonth ==
                                     DateTime.now().month) {
-                              notificationManager
-                                  .showAppointmentNotificationDaily(
-                                id: appointmentReminder.selectedDay,
-                                time: model.getDateTime(),
-                                title: "Hey (username)!",
-                                body: 'It is time for your '
-                                    '${model.typeOfAppointment}',
-                              );
-
-                              //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-DD
-                              appointmentReminderDB.addAppointment(
-                                  appointmentReminder.createSchedule());
-                              print(appointmentReminderDB);
-                              Navigator.of(context).pushNamed(
-                                  RouteNames.scheduledAppointmentsPage);
+                              notificationManager.showAppointmentNotificationOnce(
+                                  appointmentReminder.selectedDay,
+                                  'Hey, you\' got somewhere to go',
+                                  ' ${appointmentReminder.typeOfAppointment} ',
+                                  appointmentReminder.getDateTime());
                             }
+                            appointmentReminderDB.addAppointment(
+                                appointmentReminder.createSchedule());
+                            Navigator.of(context).pop();
+                            //here the function to save the schedule can be executed, by formatting the selected date as _today.year-selectedMonth-selectedDay i.e YYYY-MM-D
                           }
                         : null,
                   ),
@@ -290,7 +314,7 @@ class ScheduleAppointmentScreen extends StatelessWidget {
 class DateAndDay extends StatefulWidget {
   DateAndDay({this.colour, @required this.day, @required this.date});
 
-  Color colour;
+  final Color colour;
   final String day;
   final String date;
 
