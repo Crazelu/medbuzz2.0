@@ -1,11 +1,12 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
+import 'package:MedBuzz/ui/views/medication_reminders/all_medications_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
-import 'package:MedBuzz/ui/widget/medication_card.dart';
 import 'package:MedBuzz/ui/widget/progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
@@ -60,6 +61,13 @@ class _HomePageState extends State<HomePage> {
 
     var waterReminderDB = Provider.of<WaterReminderData>(context);
     waterReminderDB.getWaterReminders();
+
+    var medicationDB = Provider.of<MedicationData>(context);
+    medicationDB.getMedicationReminder();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      model.updateAvailableMedicationReminders(medicationDB.medicationReminder);
+    });
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -327,7 +335,26 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                          MedicationCard(height: height, width: width),
+                          Visibility(
+                            visible:
+                                model.medicationReminderBasedOnDateTime.isEmpty,
+                            child: Container(
+                              child: Text(
+                                  'No Medication Reminder Set for this Date'),
+                            ),
+                          ),
+                          for (var medicationReminder
+                              in model.medicationReminderBasedOnDateTime)
+                            MedicationCard(
+                              height: height,
+                              width: width,
+                              values: medicationReminder,
+                              drugName: medicationDB.drugName,
+                              drugType: medicationDB
+                                  .drugTypes[medicationDB.selectedIndex],
+                              dosage: medicationDB.dosage,
+                              selectedFreq: medicationDB.selectedFreq,
+                            ),
                           SizedBox(height: height * 0.05),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
