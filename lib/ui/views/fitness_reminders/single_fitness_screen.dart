@@ -21,7 +21,7 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        elevation: 1,
+        elevation: 0,
         backgroundColor: Theme.of(context).backgroundColor,
         leading: IconButton(
             icon: Icon(Icons.keyboard_backspace,

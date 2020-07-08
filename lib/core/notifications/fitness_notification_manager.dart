@@ -1,3 +1,5 @@
+import 'package:MedBuzz/core/models/fitness_reminder.dart';
+import 'package:MedBuzz/core/models/fitness_reminder_model/fitness_reminder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -28,13 +30,26 @@ class FitnessNotificationManager {
         onSelectNotification: onSelectNotification);
   }
 
-  void showFitnessNotificationDaily(
-      int id, String title, String body, int hour, int minute) async {
-    var time = new Time(hour, minute, 0);
+  void showFitnessNotificationDaily(FitnessReminder reminder) async {
+    var time = new Time(reminder.activityTime[0], reminder.activityTime[1], 0);
+    // if (reminder.fitnessfreq == 'Daily') {
     await flutterLocalNotificationsPlugin.showDailyAtTime(
-        id, title, body, time, getPlatformChannelSpecfics(id));
+        reminder.index,
+        reminder.name,
+        'Fitness reminder',
+        time,
+        getPlatformChannelSpecfics(reminder.index));
+    // } else if (reminder.fitnessfreq == 'Every 2 days') {
+    //   await flutterLocalNotificationsPlugin.periodicallyShow(
+    //       reminder.index,
+    //       reminder.name,
+    //       'Fitness reminder',
+    //       time,
+    //       getPlatformChannelSpecfics(reminder.index));
+    // } else if (reminder.fitnessfreq == 'Every 3 days') {
+    // } else if (reminder.fitnessfreq == 'Every 4 days') {}
     print(
-        'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
+        'Notification Succesfully Scheduled at ${time.toString()} with id of $reminder.id');
   }
 
   getPlatformChannelSpecfics(int id) {
