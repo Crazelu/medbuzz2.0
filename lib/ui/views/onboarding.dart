@@ -130,6 +130,7 @@ class _OnboardState extends State<Onboard> {
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
                         onPressed: () {
+                          box.put('status', 'true');
                           Navigator.pushReplacementNamed(context, 'signup');
                         },
                         child: Text(
@@ -153,6 +154,7 @@ class _OnboardState extends State<Onboard> {
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
                         onPressed: () {
+                          box.put('status', 'true');
                           Navigator.pushReplacementNamed(
                               context, RouteNames.login);
                         },

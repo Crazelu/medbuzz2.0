@@ -248,7 +248,6 @@ class ScheduleAppointmentScreen extends StatelessWidget {
                       ),
                     ),
                     // When this button is pressed, it saves the appointment to the DB
-
                     onPressed: appointmentReminder.selectedMonth != null &&
                             appointmentReminder.selectedDay != null &&
                             appointmentReminder.selectedTime != null &&
