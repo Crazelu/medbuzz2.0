@@ -49,8 +49,4 @@ class FitnessReminderAdapter extends TypeAdapter<FitnessReminder> {
       ..writeByte(8)
       ..write(obj.id);
   }
-
-  @override
-  // TODO: implement typeId
-  int get typeId => 3;
 }

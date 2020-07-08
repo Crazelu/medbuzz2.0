@@ -55,7 +55,4 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
       ..writeByte(10)
       ..write(obj.foodClasses);
   }
-
-  @override
-  int get typeId => 1;
 }

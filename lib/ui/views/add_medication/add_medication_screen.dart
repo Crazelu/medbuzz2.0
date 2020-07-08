@@ -17,6 +17,7 @@ class AddMedicationScreen extends StatefulWidget {
 
 class _AddMedicationScreenState extends State<AddMedicationScreen> {
   TextEditingController textEditingController = TextEditingController();
+  TextEditingController descriptionTextController = TextEditingController();
   //var medModel = Provider.of<MedicationData>(context);
 
   FocusNode _focusNode = FocusNode();
@@ -83,7 +84,42 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: Config.yMargin(context, 1.5)),
-//                  drugTextField(),
+                  TextField(
+                    controller: textEditingController,
+                    focusNode: _focusNode,
+                    cursorColor: Theme.of(context).primaryColorDark,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColorDark,
+                        fontSize: Config.xMargin(context, 5.5)),
+                    decoration: InputDecoration(
+                      hintText: 'Aspirin',
+                      hintStyle: TextStyle(
+                        color: Colors.black38,
+                        fontSize: Config.xMargin(context, 5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Config.xMargin(context, 5))),
+                        borderSide: BorderSide(
+                            color: Theme.of(context).primaryColorDark),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Config.xMargin(context, 5))),
+                        borderSide: BorderSide(
+                            color: Theme.of(context).primaryColorDark),
+                      ),
+                    ),
+                  ),
+
+                  Text(
+                    'Drug Name',
+                    style: TextStyle(
+                        fontSize: Config.textSize(context, 5),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  //Description Text Input
+                  SizedBox(height: Config.yMargin(context, 1.5)),
                   TextField(
                     controller: textEditingController,
                     focusNode: _focusNode,
