@@ -1,7 +1,7 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
-import 'package:MedBuzz/ui/notifications/drug_notification_manager.dart';
+import 'package:MedBuzz/core/notifications/drug_notification_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

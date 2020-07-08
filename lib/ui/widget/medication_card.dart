@@ -25,10 +25,6 @@ class _MedicationCardState extends State<MedicationCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(
-              "8:00 AM",
-            ),
-            SizedBox(height: widget.height * 0.02),
             Container(
                 width: widget.width,
                 padding: EdgeInsets.symmetric(

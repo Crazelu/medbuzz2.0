@@ -1,11 +1,12 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
+import 'package:MedBuzz/ui/views/medication_reminders/all_medications_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
-import 'package:MedBuzz/ui/widget/medication_card.dart';
 import 'package:MedBuzz/ui/widget/progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
@@ -61,6 +62,13 @@ class _HomePageState extends State<HomePage> {
     var waterReminderDB = Provider.of<WaterReminderData>(context);
     waterReminderDB.getWaterReminders();
 
+    var medicationDB = Provider.of<MedicationData>(context);
+    medicationDB.getMedicationReminder();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      model.updateAvailableMedicationReminders(medicationDB.medicationReminder);
+    });
+
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
@@ -107,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 6.66),
                                       fontWeight: FontWeight.w600,
-                                      color: color = Color(0xff333333),
+                                      color: Theme.of(context).primaryColor,
                                     ),
                                   ),
                                 ],
@@ -154,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                                         Row(
                                           children: [
                                             Text(
-                                              '250ml',
+                                              '${waterReminderDB.currentLevel}ml',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
                                                 fontSize:
@@ -164,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             Text(
-                                              ' of 3500ml',
+                                              ' of ${waterReminderDB.totalLevel}ml',
                                               style: TextStyle(
                                                 fontSize: Config.textSize(
                                                     context, 3.7),
@@ -181,8 +189,8 @@ class _HomePageState extends State<HomePage> {
                                 progressBarColor:
                                     Theme.of(context).primaryColor,
                                 title: 'Water Tracker',
-                                progress: 250,
-                                total: 3500,
+                                progress: waterReminderDB.currentLevel,
+                                total: waterReminderDB.totalLevel,
                                 width: width,
                                 height: height * 0.02),
                           ),
@@ -205,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize:
-                                                Config.textSize(context, 3.3),
+                                                Config.textSize(context, 3.5),
                                             color: Theme.of(context)
                                                 .primaryColorDark
                                                 .withOpacity(0.5)),
@@ -217,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                                         '3500',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: Config.xMargin(context, 5),
+                                          fontSize: Config.textSize(context, 5),
                                           color: Theme.of(context)
                                               .primaryColorDark,
                                         ),
@@ -228,7 +236,8 @@ class _HomePageState extends State<HomePage> {
                                       Text(
                                         'calories today',
                                         style: TextStyle(
-                                            fontSize: 12.0,
+                                            fontSize:
+                                                Config.textSize(context, 3.5),
                                             color: color = Theme.of(context)
                                                 .primaryColorDark
                                                 .withOpacity(0.5)),
@@ -258,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600,
                                               fontSize:
-                                                  Config.textSize(context, 3.3),
+                                                  Config.textSize(context, 3.5),
                                               color: color = Theme.of(context)
                                                   .primaryColorDark
                                                   .withOpacity(0.5)),
@@ -270,7 +279,8 @@ class _HomePageState extends State<HomePage> {
                                           '7500',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 18.0,
+                                            fontSize:
+                                                Config.textSize(context, 5),
                                             color: Theme.of(context)
                                                 .primaryColorDark,
                                           ),
@@ -281,7 +291,8 @@ class _HomePageState extends State<HomePage> {
                                         Text(
                                           'steps today',
                                           style: TextStyle(
-                                              fontSize: 12.0,
+                                              fontSize:
+                                                  Config.textSize(context, 3.5),
                                               color: color = Theme.of(context)
                                                   .primaryColorDark
                                                   .withOpacity(0.5)),
@@ -324,7 +335,26 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                          MedicationCard(height: height, width: width),
+                          Visibility(
+                            visible:
+                                model.medicationReminderBasedOnDateTime.isEmpty,
+                            child: Container(
+                              child: Text(
+                                  'No Medication Reminder Set for this Date'),
+                            ),
+                          ),
+                          for (var medicationReminder
+                              in model.medicationReminderBasedOnDateTime)
+                            MedicationCard(
+                              height: height,
+                              width: width,
+                              values: medicationReminder,
+                              drugName: medicationDB.drugName,
+                              drugType: medicationDB
+                                  .drugTypes[medicationDB.selectedIndex],
+                              dosage: medicationDB.dosage,
+                              selectedFreq: medicationDB.selectedFreq,
+                            ),
                           SizedBox(height: height * 0.05),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

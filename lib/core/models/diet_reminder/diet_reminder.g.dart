@@ -24,13 +24,14 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
       endDate: fields[7] as DateTime,
       id: fields[8] as String,
       description: fields[9] as String,
+      foodClasses: (fields[10] as List)?.cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, DietModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.dietName)
       ..writeByte(1)
@@ -50,9 +51,11 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
       ..writeByte(8)
       ..write(obj.id)
       ..writeByte(9)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(10)
+      ..write(obj.foodClasses);
   }
 
   @override
-  int get typeId => 2;
+  int get typeId => 1;
 }

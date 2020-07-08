@@ -29,6 +29,8 @@ import 'package:MedBuzz/ui/views/water_reminders/water_reminders_view.dart';
 import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 
+import '../../ui/views/fitness_reminders/add_fitness_screen.dart';
+
 class RouteNames {
   ///Custom class that holds all the named routes as constants for easy reference
 
@@ -77,8 +79,7 @@ class RouteNames {
     RouteNames.allRemindersScreen: (context) => AllRemindersScreen(),
     RouteNames.drugDescription: (context) => DrugDescription(),
     RouteNames.fitnessSchedulesScreen: (context) => FitnessSchedulesScreen(),
-    RouteNames.fitnessDescriptionScreen: (context) =>
-        FitnessDescriptionScreen(),
+    RouteNames.fitnessDescriptionScreen: (context) => FitnessEditScreen(),
     RouteNames.scheduleAppointmentScreen: (context) =>
         ScheduleAppointmentScreen(),
     RouteNames.scheduledAppointmentsPage: (context) =>
@@ -100,6 +101,7 @@ class RouteNames {
     RouteNames.medicationScreen: (context) => MedicationScreen(),
     RouteNames.dietScheduleScreen: (context) => DietScheduleScreen(),
     RouteNames.singleWater: (context) => SingleWater(),
-    RouteNames.deleteDialog: (context) => DeleteDialog(),
+
+    // RouteNames.deleteDialog: (context) => DeleteDialog(),
   };
 }

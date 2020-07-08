@@ -1,32 +1,38 @@
+import 'dart:math';
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/core/models/fitness_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:provider/provider.dart';
+import '../../../core/database/fitness_reminder.dart';
+import '../../../core/database/fitness_reminder.dart';
 import '../../../core/models/fitness_reminder.dart';
+import '../../../core/models/fitness_reminder_model/fitness_reminder.dart';
+import '../../../core/notifications/fitness_notification_manager.dart';
+import '../../../core/notifications/fitness_notification_manager.dart';
 import '../../navigation/app_navigation/app_transition.dart';
 import '../../size_config/config.dart';
 import 'all_fitness_reminders_screen.dart';
 
-class FitnessDescriptionScreen extends StatelessWidget {
-  final FitnessModel;
+class FitnessEditScreen extends StatelessWidget {
+  final FitnessModel fitnessModel;
 
-  const FitnessDescriptionScreen({Key key, this.FitnessModel})
-      : super(key: key);
+  const FitnessEditScreen({Key key, this.fitnessModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: add_fitness());
+    return Scaffold(body: AddFitness());
   }
 }
 
-class add_fitness extends StatefulWidget {
-  FitnessModel fitnessModel;
+class AddFitness extends StatefulWidget {
+  // final FitnessModel fitnessModel;
   @override
-  __fitnesssDescriptionState createState() => __fitnesssDescriptionState();
+  __AddFitnessState createState() => __AddFitnessState();
 }
 
-class __fitnesssDescriptionState extends State<add_fitness> {
+class __AddFitnessState extends State<AddFitness> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -59,20 +65,25 @@ class __fitnesssDescriptionState extends State<add_fitness> {
   TextEditingController nameController = TextEditingController();
   FocusNode focusNode = FocusNode();
   int index;
-  // int _selectedActivity =0;
+  // int _selectedActivity = 0;
   int selectedFitnessType = 0;
   int minDaily = 60;
   TimeOfDay activityTime = TimeOfDay.now();
+  String id = Random().nextInt(100).toString();
 
   @override
   Widget build(BuildContext context) {
+    var fitnessDB = Provider.of<FitnessReminderCRUD>(context);
+    FitnessNotificationManager fitnessNotificationManager =
+        FitnessNotificationManager();
     MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    var model = Provider.of<FitnessReminderCRUD>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
-        title: Text('Edit Fitness',
+        title: Text('Add Fitness Reminder',
             style: TextStyle(
               color: Theme.of(context).primaryColorDark,
             )),
@@ -84,7 +95,8 @@ class __fitnesssDescriptionState extends State<add_fitness> {
           ),
           onPressed: () {
             navigation.pushFrom(context, FitnessSchedulesScreen());
-            Navigator.pushReplacementNamed(context, RouteNames.homePage);
+            Navigator.pushReplacementNamed(
+                context, RouteNames.fitnessSchedulesScreen);
           },
         ),
       ),
@@ -418,6 +430,28 @@ class __fitnesssDescriptionState extends State<add_fitness> {
                             } else {
 //                                 navigation.pushFrom(
 //                                     context, );
+                              var newReminder = FitnessReminder(
+                                  id: DateTime.now().toString(),
+                                  activityTime: [
+                                    activityTime.hour,
+                                    activityTime.minute
+                                  ],
+                                  endDate: endDate,
+                                  startDate: startDate,
+                                  index: index,
+                                  name: nameController.text,
+                                  minsperday: minDaily,
+                                  fitnessfreq: _selectedFreq,
+                                  fitnesstype:
+                                      activityType[selectedFitnessType]);
+                              fitnessDB.addReminder(newReminder);
+                              fitnessNotificationManager
+                                  .showFitnessNotificationDaily(newReminder);
+                              _successDialog();
+                              Future.delayed(Duration(seconds: 2), () {
+                                Navigator.pushNamed(
+                                    context, RouteNames.fitnessSchedulesScreen);
+                              });
                             }
                           } else {
                             showSnackBar(context);
@@ -451,9 +485,10 @@ class __fitnesssDescriptionState extends State<add_fitness> {
     );
   }
 
+  TimeOfDay selectedTime;
   Future<Null> selectTime(BuildContext context) async {
     TimeOfDay currentTime = TimeOfDay.now();
-    final TimeOfDay selectedTime = await showTimePicker(
+    selectedTime = await showTimePicker(
       context: context,
       initialTime: activityTime,
     );
@@ -521,5 +556,28 @@ class __fitnesssDescriptionState extends State<add_fitness> {
         print('$startDate');
       }
     }
+  }
+
+  void _successDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(Config.xMargin(context, 8))),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset('images/check.png'),
+              SizedBox(
+                height: Config.yMargin(context, 5),
+              ),
+              Text("Reminder Successfully added!"),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
