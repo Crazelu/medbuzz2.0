@@ -22,7 +22,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
   FocusNode _focusNode = FocusNode();
   String newIndex = DateTime.now().toString();
-  bool _changed = false;
+  bool _changed_name = false;
+  bool _changed_description = false;
 
   @override
   void initState() {
@@ -37,9 +38,13 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   Widget build(BuildContext context) {
     var medModel = Provider.of<MedicationData>(context);
     String appBarTitle = medModel.isEditing ? medModel.edit : medModel.add;
-    if (medModel.isEditing && _changed == false) {
+    if (medModel.isEditing && _changed_name == false) {
       textEditingController.text = medModel.drugName;
-      _changed = true;
+      _changed_name = true;
+    }
+    if (medModel.isEditing && _changed_description == false) {
+      descriptionTextController.text = medModel.description;
+      _changed_description = true;
     }
 
     return Scaffold(
@@ -111,9 +116,9 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                       ),
                     ),
                   ),
-
+                  SizedBox(height: Config.yMargin(context, 2.5)),
                   Text(
-                    'Drug Name',
+                    'Description',
                     style: TextStyle(
                         fontSize: Config.textSize(context, 5),
                         fontWeight: FontWeight.bold),
@@ -121,14 +126,14 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                   //Description Text Input
                   SizedBox(height: Config.yMargin(context, 1.5)),
                   TextField(
-                    controller: textEditingController,
-                    focusNode: _focusNode,
+                    maxLines: null,
+                    controller: descriptionTextController,
                     cursorColor: Theme.of(context).primaryColorDark,
                     style: TextStyle(
                         color: Theme.of(context).primaryColorDark,
                         fontSize: Config.xMargin(context, 5.5)),
                     decoration: InputDecoration(
-                      hintText: 'Aspirin',
+                      hintText: 'Enter Description here',
                       hintStyle: TextStyle(
                         color: Colors.black38,
                         fontSize: Config.xMargin(context, 5),
@@ -322,6 +327,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                         if (textEditingController.text.isNotEmpty) {
                           switch (appBarTitle) {
                             case 'Add Medication':
+                              print(medModel.updateDescription(
+                                  descriptionTextController.text));
                               //Add Medication? create new MedicationReminder with new ID
                               MedicationReminder med = MedicationReminder(
                                   id: DateTime.now().toString(),
@@ -348,7 +355,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                       : [],
                                   frequency: medModel.selectedFreq,
                                   startAt: medModel.startDate,
-                                  endAt: medModel.endDate);
+                                  endAt: medModel.endDate,
+                                  description: medModel.description);
 
                               await medModel.addMedicationReminder(med);
                               switch (medModel.selectedFreq) {
@@ -366,22 +374,13 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                   break;
                               }
 
-                              print([
-                                medModel.drugName,
-                                medModel.drugTypes[medModel.selectedIndex],
-                                medModel.selectedFreq,
-                                medModel.dosage,
-                                medModel.firstTime,
-                                medModel.secondTime,
-                                medModel.selectedIndex,
-                                medModel.startDate,
-                                medModel.endDate
-                              ]);
                               break;
                             // work here on your editing schedule code
                             case 'Edit Medication':
                               print(medModel
                                   .updateDrugName(textEditingController.text));
+                              print(medModel.updateDescription(
+                                  descriptionTextController.text));
 
                               print(medModel.drugTypes[medModel.selectedIndex]);
 
@@ -433,7 +432,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                       frequency: medModel.selectedFreq,
                                       startAt: medModel.startDate,
                                       endAt: medModel.endDate,
-                                      index: medModel.selectedIndex.toString());
+                                      index: medModel.selectedIndex.toString(),
+                                      description: medModel.description);
 
                               //Put newReminder in database
                               await medModel.editSchedule(
@@ -467,6 +467,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                           }
                           Navigator.popAndPushNamed(
                               context, RouteNames.medicationScreen);
+                        } else {
+                          //TODO display SnackBar to notify that name is empty
                         }
                       },
                       child: Container(

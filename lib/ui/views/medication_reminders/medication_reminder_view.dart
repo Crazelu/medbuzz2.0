@@ -109,7 +109,10 @@ class MedicationView extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: Config.yMargin(context, 1.0)),
                             child: Text(
-                              'Take a shot at st.charles hospital daily and remember to eat before leaving the house',
+                              medModel.description == null ||
+                                      medModel.description == ""
+                                  ? 'No Description'
+                                  : '${medModel.description}',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColorDark,
                                 fontSize: Config.textSize(context, 4),
