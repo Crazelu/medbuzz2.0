@@ -373,31 +373,31 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
                               MedicationReminder newReminder =
                                   MedicationReminder(
-                                drugName: medModel.drugName,
-                                id: medModel.id,
-                                drugType:
-                                    medModel.drugTypes[medModel.selectedIndex],
-                                dosage: medModel.dosage,
-                                firstTime: [
-                                  medModel.firstTime.hour,
-                                  medModel.firstTime.minute
-                                ],
-                                secondTime: medModel.secondTime != null
-                                    ? [
-                                        medModel.secondTime.hour,
-                                        medModel.secondTime.minute
-                                      ]
-                                    : [],
-                                thirdTime: medModel.thirdTime != null
-                                    ? [
-                                        medModel.thirdTime.hour,
-                                        medModel.thirdTime.minute
-                                      ]
-                                    : [],
-                                frequency: medModel.selectedFreq,
-                                startAt: medModel.startDate,
-                                endAt: medModel.endDate,
-                              );
+                                      drugName: medModel.drugName,
+                                      id: medModel.id,
+                                      drugType: medModel
+                                          .drugTypes[medModel.selectedIndex],
+                                      dosage: medModel.dosage,
+                                      firstTime: [
+                                        medModel.firstTime.hour,
+                                        medModel.firstTime.minute
+                                      ],
+                                      secondTime: medModel.secondTime != null
+                                          ? [
+                                              medModel.secondTime.hour,
+                                              medModel.secondTime.minute
+                                            ]
+                                          : [],
+                                      thirdTime: medModel.thirdTime != null
+                                          ? [
+                                              medModel.thirdTime.hour,
+                                              medModel.thirdTime.minute
+                                            ]
+                                          : [],
+                                      frequency: medModel.selectedFreq,
+                                      startAt: medModel.startDate,
+                                      endAt: medModel.endDate,
+                                      index: medModel.selectedIndex.toString());
 
                               //Put newReminder in database
                               await medModel.editSchedule(
@@ -543,8 +543,12 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
   Widget buildImageContainer(int index) {
     var medModel = Provider.of<MedicationData>(context);
+
     return GestureDetector(
-      onTap: () => medModel.onSelectedDrugImage(index),
+      onTap: () {
+        medModel.onSelectedDrugImage(index);
+        print(medModel.selectedIndex);
+      },
       child: Container(
         padding: EdgeInsets.all(Config.xMargin(context, 1.5)),
         margin: EdgeInsets.only(right: Config.xMargin(context, 3)),

@@ -368,7 +368,9 @@ class _MedicationCardState extends State<MedicationCard> {
                             onPressed: () {
                               var medModel =
                                   Provider.of<MedicationData>(context);
-
+                              print('----All Medication Reminder info ------');
+                              print(medModel
+                                  .updateSelectedDrugType(widget.drugType));
                               print(medModel.updateDrugName(widget.drugName));
                               print("id = " +
                                   medModel.updateId(widget.values.id));
@@ -397,6 +399,7 @@ class _MedicationCardState extends State<MedicationCard> {
                                 print(medModel.updateThirdTime(medModel
                                     .convertTimeBack(widget.values.thirdTime)));
                               }
+                              print(widget.values.index);
 
                               print('-------------------------------');
 
