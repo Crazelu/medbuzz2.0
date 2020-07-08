@@ -80,9 +80,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                 child: Text(
                   'Upcoming',
                   textScaleFactor: 0.85,
-                  style: TextStyle(
-                    fontSize: Config.textSize(context, 4)
-                  ),
+                  style: TextStyle(fontSize: Config.textSize(context, 4)),
                 ),
               ),
               Tab(
@@ -118,6 +116,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                       AppointmentCard(
                         height: height,
                         width: width,
+                        appointment: appointment,
                       )
                   ],
                 ),
@@ -138,6 +137,7 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                       AppointmentCard(
                         height: height,
                         width: width,
+                        appointment: appointment,
                       )
                   ],
                 ),

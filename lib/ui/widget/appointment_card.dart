@@ -1,10 +1,14 @@
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:flutter/material.dart';
+import 'package:MedBuzz/core/models/appointment_reminder_model/appointment_reminder.dart';
+import 'package:intl/intl.dart';
 
 class AppointmentCard extends StatelessWidget {
   final double height;
   final double width;
-  const AppointmentCard({Key key, this.height, this.width}) : super(key: key);
+  final Appointment appointment;
+  const AppointmentCard({Key key, this.height, this.width, this.appointment})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +118,9 @@ class AppointmentCard extends StatelessWidget {
                                       height: Config.yMargin(context, 1),
                                     ),
                                     Text(
-                                      '6.00 PM',
+                                      DateFormat.jm()
+                                              .format(appointment.date) ??
+                                          "${appointment.dateTime}",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize:
@@ -137,7 +143,7 @@ class AppointmentCard extends StatelessWidget {
                                       height: Config.yMargin(context, 1),
                                     ),
                                     Text(
-                                      'Dance Class',
+                                      '${appointment.appointmentType}',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize:
@@ -158,7 +164,7 @@ class AppointmentCard extends StatelessWidget {
                             ),
                             Container(
                               child: Text(
-                                'Make sure to make lots of friends',
+                                '${appointment.note}',
                                 style: TextStyle(
                                     fontSize: Config.textSize(context, 3.8)),
                               ),
