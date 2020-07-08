@@ -442,13 +442,7 @@ class __AddFitnessState extends State<AddFitness> {
                                       activityType[selectedFitnessType]);
                               fitnessDB.addReminder(newReminder);
                               fitnessNotificationManager
-                                  .showFitnessNotificationDaily(
-                                newReminder.index,
-                                newReminder.name,
-                                newReminder.name,
-                                newReminder.activityTime[0],
-                                newReminder.activityTime[1],
-                              );
+                                  .showFitnessNotificationDaily(newReminder);
                               Navigator.of(context).pop();
                             }
                           } else {
