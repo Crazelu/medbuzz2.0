@@ -58,6 +58,10 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 splashColor: Theme.of(context).buttonColor.withOpacity(.9),
                 //Navigate to fitness reminder creation screen
                 onPressed: () {
+                  final medModel = Provider.of<MedicationData>(context);
+
+                  //Clear the fields in model
+                  medModel.resetModelFields();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -358,8 +362,7 @@ class _MedicationCardState extends State<MedicationCard> {
                               var medModel =
                                   Provider.of<MedicationData>(context);
 
-                              print(medModel
-                                  .updateDrugName(widget.values.drugName));
+                              print(medModel.updateDrugName(widget.drugName));
                               print("id = " +
                                   medModel.updateId(widget.values.id));
                               print(
@@ -387,6 +390,8 @@ class _MedicationCardState extends State<MedicationCard> {
                                 print(medModel.updateThirdTime(medModel
                                     .convertTimeBack(widget.values.thirdTime)));
                               }
+
+                              print('-------------------------------');
 
                               Navigator.pushNamed(
                                 context,
