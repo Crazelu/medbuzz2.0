@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import '../models/fitness_reminder_model/fitness_reminder.dart';
+import '../models/fitness_reminder_model/fitness_reminder.dart';
 
 class FitnessReminderCRUD extends ChangeNotifier {
   static const String _boxName = "fitnessReminderBox";
@@ -38,11 +39,13 @@ class FitnessReminderCRUD extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteReminder(FitnessReminder reminder) async {
-    int key = reminder.index;
-    var box = Hive.box<FitnessReminder>(_boxName);
+  void deleteReminder(key) async {
+    var box = await Hive.openBox<FitnessReminder>(_boxName);
+
     _fitnessReminder = box.values.toList();
-    await box.delete(key);
+    box.delete(key);
     box.close();
+
+    notifyListeners();
   }
 }

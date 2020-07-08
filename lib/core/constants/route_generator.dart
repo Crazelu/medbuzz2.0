@@ -33,6 +33,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/views/fitness_reminders/add_fitness_screen.dart';
+import '../../ui/navigation/page_transition/page_transition.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -121,9 +122,9 @@ class RouteGenerator {
       case RouteNames.singleWater:
         return CustomSlideTransition(child: SingleWater());
         break;
-      case RouteNames.deleteDialog:
-        return CustomSlideTransition(child: DeleteDialog());
-        break;
+      // case RouteNames.deleteDialog:
+      //   return CustomSlideTransition(child: DeleteDialog());
+      //   break;
       default:
         return _errorRoute();
     }

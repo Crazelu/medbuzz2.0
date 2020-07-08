@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../core/constants/route_names.dart';
+import '../../../core/database/fitness_reminder.dart';
+import 'single_fitness_screen.dart';
 
 class FitnessSchedulesScreen extends StatefulWidget {
   FitnessSchedulesScreen({this.payload});
@@ -75,12 +77,7 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
         elevation: 0,
         backgroundColor: Theme.of(context).backgroundColor,
         title: Text('Fitness',
-            style: TextStyle(color: Theme.of(context).primaryColorDark)
-            // Theme.of(context)
-            //     .textTheme
-            //     .headline6
-            //     .copyWith(color: Theme.of(context).primaryColorDark),
-            ),
+            style: TextStyle(color: Theme.of(context).primaryColorDark)),
         leading: IconButton(
             icon: Icon(Icons.keyboard_backspace,
                 color: Theme.of(context).primaryColorDark),
@@ -147,6 +144,85 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
   }
 }
 
+class FitnessCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Consumer<FitnessReminderCRUD>(builder: (context, data, child) {
+      return Container(
+        width: width,
+        height: height * .80,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: data.fitnessReminder.map((e) {
+              return InkWell(
+                splashColor: Theme.of(context).backgroundColor,
+                onTap: () {
+                  //Navigate to screen with single reminder i.e the on user clicked on
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SingleFitnessScreen(
+                                data: e,
+                              )));
+                },
+                child: Column(
+                  children: <Widget>[
+                    Divider(
+                        thickness: 0.7,
+                        color:
+                            Theme.of(context).primaryColorDark.withOpacity(.4),
+                        indent: Config.xMargin(context, 0.5),
+                        endIndent: Config.xMargin(context, 2.5)),
+
+                    SizedBox(height: Config.yMargin(context, .5)),
+                    Container(
+                      width: width,
+                      height: height * .22,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Config.xMargin(context, 8)),
+                      ),
+                      child: e.fitnesstype == '0'
+                          ? image('images/cycle.png')
+                          : e.fitnesstype == '1'
+                              ? image('images/sprint.png')
+                              : image('images/swim.png'),
+                    ),
+                    SizedBox(height: Config.yMargin(context, 2)),
+                    //Type of fitness exercise goes here
+                    Text(e.name,
+                        style: TextStyle(
+                            fontSize: Config.textSize(context, 6),
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).primaryColor)),
+                    SizedBox(height: Config.yMargin(context, 1)),
+                    Text(e.minsperday.toString() + ' minutes daily',
+                        style: TextStyle(
+                            fontSize: Config.textSize(context, 4.5),
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).primaryColorDark)),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      );
+    });
+  }
+
+  image(String image) {
+    return Image(
+      image: AssetImage(image),
+      fit: BoxFit.contain,
+    );
+  }
+}
+
 // class CustomDateButton extends StatelessWidget {
 //   final DateTime date;
 
@@ -200,57 +276,3 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
 //     );
 //   }
 // }
-
-class FitnessCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Container(
-      width: width,
-      height: height * .38,
-      child: InkWell(
-        //Navigate to screen with single reminder i.e the on user clicked on
-        onTap: () {
-          Navigator.pushNamed(context, RouteNames.singleFitnessScreen);
-        },
-        splashColor: Theme.of(context).backgroundColor,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Divider(
-                  thickness: 0.7,
-                  color: Theme.of(context).primaryColorDark.withOpacity(.4),
-                  indent: Config.xMargin(context, 0.5),
-                  endIndent: Config.xMargin(context, 2.5)),
-              SizedBox(height: Config.yMargin(context, .5)),
-              Container(
-                width: width,
-                height: height * .22,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('images/sprint.png'),
-                      fit: BoxFit.cover),
-                  borderRadius:
-                      BorderRadius.circular(Config.xMargin(context, 8)),
-                ),
-              ),
-              SizedBox(height: Config.yMargin(context, 2)),
-              //Type of fitness exercise goes here
-              Text('Running',
-                  style: TextStyle(
-                      fontSize: Config.textSize(context, 6),
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).primaryColor)),
-              SizedBox(height: Config.yMargin(context, 1)),
-              Text('30 minutes daily',
-                  style: TextStyle(
-                      fontSize: Config.textSize(context, 4.5),
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context).primaryColorDark)),
-            ]),
-      ),
-    );
-  }
-}

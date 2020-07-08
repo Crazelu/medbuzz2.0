@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -64,10 +65,11 @@ class __AddFitnessState extends State<AddFitness> {
   TextEditingController nameController = TextEditingController();
   FocusNode focusNode = FocusNode();
   int index;
-  // int _selectedActivity =0;
+  // int _selectedActivity = 0;
   int selectedFitnessType = 0;
   int minDaily = 60;
   TimeOfDay activityTime = TimeOfDay.now();
+  String id = Random().nextInt(100).toString();
 
   @override
   Widget build(BuildContext context) {
@@ -75,12 +77,13 @@ class __AddFitnessState extends State<AddFitness> {
     FitnessNotificationManager fitnessNotificationManager =
         FitnessNotificationManager();
     MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    var model = Provider.of<FitnessReminderCRUD>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
-        title: Text('Edit Fitness',
+        title: Text('Add Fitness Reminder',
             style: TextStyle(
               color: Theme.of(context).primaryColorDark,
             )),
@@ -92,7 +95,8 @@ class __AddFitnessState extends State<AddFitness> {
           ),
           onPressed: () {
             navigation.pushFrom(context, FitnessSchedulesScreen());
-            Navigator.pushReplacementNamed(context, RouteNames.homePage);
+            Navigator.pushReplacementNamed(
+                context, RouteNames.fitnessSchedulesScreen);
           },
         ),
       ),
@@ -443,7 +447,11 @@ class __AddFitnessState extends State<AddFitness> {
                               fitnessDB.addReminder(newReminder);
                               fitnessNotificationManager
                                   .showFitnessNotificationDaily(newReminder);
-                              Navigator.of(context).pop();
+                              _successDialog();
+                              Future.delayed(Duration(seconds: 2), () {
+                                Navigator.pushNamed(
+                                    context, RouteNames.fitnessSchedulesScreen);
+                              });
                             }
                           } else {
                             showSnackBar(context);
@@ -477,9 +485,10 @@ class __AddFitnessState extends State<AddFitness> {
     );
   }
 
+  TimeOfDay selectedTime;
   Future<Null> selectTime(BuildContext context) async {
     TimeOfDay currentTime = TimeOfDay.now();
-    final TimeOfDay selectedTime = await showTimePicker(
+    selectedTime = await showTimePicker(
       context: context,
       initialTime: activityTime,
     );
@@ -547,5 +556,28 @@ class __AddFitnessState extends State<AddFitness> {
         print('$startDate');
       }
     }
+  }
+
+  void _successDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(Config.xMargin(context, 8))),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset('images/check.png'),
+              SizedBox(
+                height: Config.yMargin(context, 5),
+              ),
+              Text("Reminder Successfully added!"),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
