@@ -80,7 +80,9 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                 child: Text(
                   'Upcoming',
                   textScaleFactor: 0.85,
-                  style: appThemeLight.textTheme.headline5,
+                  style: TextStyle(
+                    fontSize: Config.textSize(context, 4)
+                  ),
                 ),
               ),
               Tab(
