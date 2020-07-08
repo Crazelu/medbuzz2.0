@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                                     'Good Morning,',
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 5),
-                                      color: color = Color(0xff333333),
+                                      color: color = Color(0xff2C2B2B),
                                     ),
                                   ),
                                   SizedBox(

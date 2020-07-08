@@ -41,8 +41,8 @@ class WaterReminderAdapter extends TypeAdapter<WaterReminder> {
   }
 
 
-  @override
-  int get typeId => 3;
+  //@override
+ // int get typeId => 3;
 
 
 
