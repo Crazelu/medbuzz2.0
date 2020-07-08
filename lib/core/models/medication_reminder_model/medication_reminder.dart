@@ -32,7 +32,6 @@ class MedicationReminder {
   @HiveField(8)
   DateTime endAt;
 
-//this is useless
   @HiveField(9)
   String index;
 
