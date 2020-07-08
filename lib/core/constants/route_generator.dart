@@ -53,9 +53,9 @@ class RouteGenerator {
       case RouteNames.forgotPasswordSubmit:
         return CustomSlideTransition(child: ForgotPasswordSubmit());
         break;
-      case RouteNames.profile:
-        return CustomSlideTransition(child: ProfilePage());
-        break;
+      // case RouteNames.profile:
+      //   return CustomSlideTransition(child: ProfilePage());
+      //   break; //Commented out for presentation purposes
       case RouteNames.onboarding:
         return CustomSlideTransition(child: Onboard());
         break;
