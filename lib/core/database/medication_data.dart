@@ -45,10 +45,25 @@ class MedicationData extends ChangeNotifier {
     'images/inhaler.png'
   ];
 
+  MedicationReminder getSchedule() {
+    print("first print - ${this.firstTime}");
+    MedicationReminder schedule = MedicationReminder(
+        id: this.id,
+        firstTime: convertTime(this.firstTime),
+        // secondTime:
+        //     this.secondTime != null ? convertTime(this.secondTime) : null,
+        // thirdTime: this.thirdTime != null ? convertTime(this.thirdTime) : null,
+        frequency: this.selectedFreq);
+    print(this.firstTime);
+    print("Trying to create schedule");
+
+    return schedule;
+  }
+
   List<MedicationReminder> medicationReminder = [];
 
   List<int> convertTime(TimeOfDay time) {
-    List value;
+    List<int> value = new List(2);
     value[0] = time.hour;
     value[1] = time.minute;
 

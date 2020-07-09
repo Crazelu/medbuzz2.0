@@ -85,7 +85,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
 
             //Function to navigate to previous screen or home screen (as the case maybe) goes here
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.popAndPushNamed(context, RouteNames.homePage);
             }),
       ),
       body: SingleChildScrollView(
