@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/fitness_reminder.dart';
 import 'package:MedBuzz/core/notifications/fitness_notification_manager.dart';
@@ -132,11 +134,7 @@ class _FitnessSchedulesScreenState extends State<FitnessSchedulesScreen> {
                         fontSize: Config.textSize(context, 6)),
                   ),
                 ),
-                ...fitnessDB.fitnessReminder.map((e) => FitnessCard()).toList()
-                // FitnessCard(),
-                // FitnessCard(),
-                // FitnessCard(),
-                // FitnessCard(),
+                FitnessCard()
               ],
             )),
       ),
@@ -149,6 +147,8 @@ class FitnessCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    // FitnessNotificationManager fitnessNotificationManager =
+    //     FitnessNotificationManager();
     return Consumer<FitnessReminderCRUD>(builder: (context, data, child) {
       return Container(
         width: width,
@@ -158,6 +158,28 @@ class FitnessCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: data.fitnessReminder.map((e) {
+              // getNotification() {
+              //   final now = new DateTime.now();
+              //   final time = DateTime(now.year, now.month, now.day,
+              //       e.activityTime[0], e.activityTime[1]);
+              //   if (DateTime(now.year, now.month, now.day, now.hour, now.minute)
+              //           .compareTo(time) ==
+              //       0) {
+              //     fitnessNotificationManager.showFitnessNotificationOnce(
+              //         0,
+              //         "It's time to go ${e.name}",
+              //         "For ${e.minsperday} minutes");
+              //   }
+              // }
+
+              // Timer.periodic(
+              //   Duration(seconds: 40),
+              //   (Timer timer) {
+              //     print('Available Reminders Check!');
+              //     getNotification();
+              //   },
+              // );
+
               return InkWell(
                 splashColor: Theme.of(context).backgroundColor,
                 onTap: () {

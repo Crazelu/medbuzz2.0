@@ -56,9 +56,22 @@ class WaterScheduleViewScreen extends StatelessWidget {
           ),
         ),
       ),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: Text('Water Reminders',
+            style: TextStyle(color: Theme.of(context).primaryColorDark)),
+        leading: IconButton(
+            icon: Icon(Icons.keyboard_backspace,
+                color: Theme.of(context).primaryColorDark),
+
+            //Function to navigate to previous screen or home screen (as the case maybe) goes here
+            onPressed: () {
+              Navigator.pushNamed(context, RouteNames.homePage);
+            }),
+      ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.only(top: 60),
           child: SingleChildScrollView(
             //container wrapping all the widgets
             child: Container(
@@ -82,15 +95,20 @@ class WaterScheduleViewScreen extends StatelessWidget {
                                   ? AlwaysStoppedAnimation(Colors.red)
                                   : AlwaysStoppedAnimation(
                                       Theme.of(context).primaryColor),
-                              value: waterReminderDB.progress,
+                              value: waterReminderDB.done == true
+                                  ? waterReminderDB.progress
+                                  : 0,
                               strokeWidth: width * 0.04),
                         ),
                         Container(
                           margin: EdgeInsets.only(
-                              left: Config.xMargin(context, 30),
+                              left: width <= height * .37
+                                  ? Config.xMargin(context, 27)
+                                  : width < height * .5
+                                      ? Config.xMargin(context, 32)
+                                      : Config.xMargin(context, 35),
                               top: Config.yMargin(context, 9)),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Stack(
                                 children: <Widget>[
@@ -99,7 +117,7 @@ class WaterScheduleViewScreen extends StatelessWidget {
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(
-                                        left: Config.xMargin(context, 6),
+                                        left: Config.xMargin(context, 6.5),
                                         top: Config.yMargin(context, 1)),
                                     child: Image(
                                       image: AssetImage('images/smalldrop.png'),
@@ -113,13 +131,17 @@ class WaterScheduleViewScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(
                               top: Config.yMargin(context, 19.8),
-                              left: Config.xMargin(context, 24)),
+                              left: width <= height * .37
+                                  ? Config.xMargin(context, 25)
+                                  : width < height * .5
+                                      ? Config.xMargin(context, 31)
+                                      : Config.xMargin(context, 33)),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               //Proper data will be fetched from DB
                               Text(
-                                '${waterReminderDB.currentLevel} ' + 'ml',
+                                '${waterReminderDB.totalLevel} ' + 'ml',
                                 style: TextStyle(
                                     fontSize: Config.textSize(context, 7),
                                     fontWeight: FontWeight.bold),
@@ -127,7 +149,7 @@ class WaterScheduleViewScreen extends StatelessWidget {
                               SizedBox(
                                 height: Config.yMargin(context, 0.7),
                               ),
-                              Text('of ${waterReminderDB.totalLevel} ' + 'ml',
+                              Text('of 3500 ml',
                                   style: TextStyle(
                                       fontSize: Config.textSize(context, 4.5),
                                       color: Color(0xff4F4F4F)))
