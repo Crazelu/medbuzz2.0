@@ -82,6 +82,7 @@ class _HomePageState extends State<HomePage> {
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final medModel = Provider.of<MedicationData>(context);
 
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
@@ -376,10 +377,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddMedicationScreen()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        medModel.resetModelFields();
+                        return AddMedicationScreen();
+                      }));
                     },
                   ),
                   SpeedDialChild(
