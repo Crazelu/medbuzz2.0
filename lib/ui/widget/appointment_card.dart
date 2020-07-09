@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/database/appointmentData.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:MedBuzz/core/models/appointment_reminder_model/appointment_reminder.dart';
@@ -8,11 +9,14 @@ import 'package:flutter/material.dart';
 class AppointmentCard extends StatelessWidget {
   final double height;
   final double width;
-  final ScheduleAppointmentModel model;
+
   final Appointment appointment;
-  const AppointmentCard(
-      {Key key, this.height, this.width, this.appointment, this.model})
-      : super(key: key);
+  const AppointmentCard({
+    Key key,
+    this.height,
+    this.width,
+    this.appointment,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
