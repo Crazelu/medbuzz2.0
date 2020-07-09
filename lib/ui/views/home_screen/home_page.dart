@@ -10,6 +10,7 @@ import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
 import 'package:MedBuzz/ui/views/medication_reminders/all_medications_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
+import 'package:MedBuzz/ui/widget/custom_card.dart';
 import 'package:MedBuzz/ui/widget/progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
@@ -210,99 +211,19 @@ class _HomePageState extends State<HomePage> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               GestureDetector(
-                                onTap: () => Navigator.pushNamed(
-                                    context, RouteNames.dietScheduleScreen),
-                                child: ProgressCard(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'My meals',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize:
-                                                Config.textSize(context, 3.5),
-                                            color: Theme.of(context)
-                                                .primaryColorDark
-                                                .withOpacity(0.5)),
-                                      ),
-                                      SizedBox(
-                                        height: Config.yMargin(context, 1.5),
-                                      ),
-                                      Image.asset('images/foood.png',
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                      SizedBox(
-                                        height: Config.yMargin(context, 1),
-                                      ),
-                                      Text(
-                                        'View meal reminders',
-                                        style: TextStyle(
-                                            fontSize:
-                                                Config.textSize(context, 3.5),
-                                            color: color = Theme.of(context)
-                                                .primaryColorDark
-                                                .withOpacity(0.5)),
-                                      ),
-                                    ],
-                                  ),
-                                  progress: 3500,
-                                  total: 3500,
-                                  width: width * 0.4,
-                                  height: height * 0.01,
-                                  progressBarColor:
-                                      Theme.of(context).buttonColor,
-                                ),
-                              ),
+                                  onTap: () => Navigator.pushNamed(
+                                      context, RouteNames.dietScheduleScreen),
+                                  child: CustomCard(
+                                      title: 'My meals',
+                                      subtitle: 'View meal reminders',
+                                      image: 'images/foood.png')),
                               GestureDetector(
-                                onTap: () => Navigator.pushNamed(
-                                    context, RouteNames.fitnessSchedulesScreen),
-                                child: ProgressCard(
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'My fitness',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize:
-                                                  Config.textSize(context, 3.5),
-                                              color: color = Theme.of(context)
-                                                  .primaryColorDark
-                                                  .withOpacity(0.5)),
-                                        ),
-                                        SizedBox(
-                                          height: Config.yMargin(context, 1.5),
-                                        ),
-                                        Image.asset('images/dumbell.png',
-                                            color:
-                                                Theme.of(context).primaryColor),
-                                        SizedBox(
-                                          height: Config.yMargin(context, 1),
-                                        ),
-                                        Text(
-                                          'View fitness reminders',
-                                          style: TextStyle(
-                                              fontSize:
-                                                  Config.textSize(context, 3.5),
-                                              color: color = Theme.of(context)
-                                                  .primaryColorDark
-                                                  .withOpacity(0.5)),
-                                        ),
-                                      ]),
-                                  progress: 3500,
-                                  total: 3500,
-                                  width: width * 0.4,
-                                  height: height * 0.01,
-                                  progressBarColor:
-                                      Theme.of(context).highlightColor,
-                                ),
-                              ),
+                                  onTap: () => Navigator.pushNamed(context,
+                                      RouteNames.fitnessSchedulesScreen),
+                                  child: CustomCard(
+                                      title: 'My fitness',
+                                      subtitle: 'View fitness reminders',
+                                      image: 'images/dumbell.png')),
                             ],
                           ),
                           SizedBox(height: height * 0.05),
@@ -336,6 +257,7 @@ class _HomePageState extends State<HomePage> {
                             visible:
                                 model.medicationReminderBasedOnDateTime.isEmpty,
                             child: Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                   'No Medication Reminder Set for this Date'),
                             ),
@@ -383,6 +305,7 @@ class _HomePageState extends State<HomePage> {
                               visible: model
                                   .appointmentReminderBasedOnDateTime.isEmpty,
                               child: Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text('No Appointment Set for this Date'),
                               )),
                           for (var appointment
