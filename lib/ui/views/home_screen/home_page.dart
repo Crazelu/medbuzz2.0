@@ -1,7 +1,9 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/appointmentData.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
+import 'package:MedBuzz/core/database/user_db.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
+import 'package:MedBuzz/core/models/user_model/user_model.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
@@ -69,6 +71,9 @@ class _HomePageState extends State<HomePage> {
     var appointmentDB = Provider.of<AppointmentData>(context);
     appointmentDB.getAppointments();
 
+    var userDb = Provider.of<UserCrud>(context);
+    userDb.getusers();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       model.updateAvailableMedicationReminders(medicationDB.medicationReminder);
       model.updateAvailableAppointmentReminders(appointmentDB.appointment);
@@ -116,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                                     height: Config.yMargin(context, 2),
                                   ),
                                   Text(
-                                    'Juliana',
+                                    'juliana',
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 6.66),
                                       fontWeight: FontWeight.w600,
