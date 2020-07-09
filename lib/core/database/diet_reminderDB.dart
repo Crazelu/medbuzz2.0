@@ -27,8 +27,10 @@ class DietReminderDB extends ChangeNotifier {
     //this logic is still faulty somehow
     for (var i in _diet) {
       if (i.startDate.difference(DateTime.now()).inDays < 0) {
+        _pastDiets.clear();
         _pastDiets.add(i);
       } else {
+        _upcomingDiets.clear();
         _upcomingDiets.add(i);
       }
     }

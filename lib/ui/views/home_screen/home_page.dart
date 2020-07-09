@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Meal',
+                                        'My meals',
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize:
@@ -226,20 +226,14 @@ class _HomePageState extends State<HomePage> {
                                       SizedBox(
                                         height: Config.yMargin(context, 1.5),
                                       ),
-                                      Text(
-                                        '3500',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: Config.textSize(context, 5),
-                                          color: Theme.of(context)
-                                              .primaryColorDark,
-                                        ),
-                                      ),
+                                      Image.asset('images/foood.png',
+                                          color:
+                                              Theme.of(context).primaryColor),
                                       SizedBox(
                                         height: Config.yMargin(context, 1),
                                       ),
                                       Text(
-                                        'calories today',
+                                        'View meal reminders',
                                         style: TextStyle(
                                             fontSize:
                                                 Config.textSize(context, 3.5),
@@ -249,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ],
                                   ),
-                                  progress: 2500,
+                                  progress: 3500,
                                   total: 3500,
                                   width: width * 0.4,
                                   height: height * 0.01,
@@ -268,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Steps',
+                                          'My fitness',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600,
                                               fontSize:
@@ -280,21 +274,14 @@ class _HomePageState extends State<HomePage> {
                                         SizedBox(
                                           height: Config.yMargin(context, 1.5),
                                         ),
-                                        Text(
-                                          '7500',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize:
-                                                Config.textSize(context, 5),
-                                            color: Theme.of(context)
-                                                .primaryColorDark,
-                                          ),
-                                        ),
+                                        Image.asset('images/dumbell.png',
+                                            color:
+                                                Theme.of(context).primaryColor),
                                         SizedBox(
                                           height: Config.yMargin(context, 1),
                                         ),
                                         Text(
-                                          'steps today',
+                                          'View fitness reminders',
                                           style: TextStyle(
                                               fontSize:
                                                   Config.textSize(context, 3.5),
@@ -303,7 +290,7 @@ class _HomePageState extends State<HomePage> {
                                                   .withOpacity(0.5)),
                                         ),
                                       ]),
-                                  progress: 1500,
+                                  progress: 3500,
                                   total: 3500,
                                   width: width * 0.4,
                                   height: height * 0.01,
