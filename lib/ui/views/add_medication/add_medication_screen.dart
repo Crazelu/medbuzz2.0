@@ -615,7 +615,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
     return GestureDetector(
       onTap: () {
-        // medModel.onSelectedDrugImage(index);
+        medModel.onSelectedDrugImage(index);
         print(medModel.updateSelectedIndex(index));
       },
       child: Container(

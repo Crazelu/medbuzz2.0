@@ -59,12 +59,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 onPressed: () {
                   final medModel = Provider.of<MedicationData>(context);
 
-                  //Clear the fields in model
-                  medModel.resetModelFields();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddMedicationScreen()));
+                  medModel.newMedicine(context);
                 }),
           ),
         ),
@@ -371,9 +366,10 @@ class _MedicationCardState extends State<MedicationCard> {
                               var medModel =
                                   Provider.of<MedicationData>(context);
                               print('----All Medication Reminder info ------');
+                              print(medModel.updateSelectedDrugType(
+                                  widget.values.drugType));
                               print(medModel
-                                  .updateSelectedDrugType(widget.drugType));
-                              print(medModel.updateDrugName(widget.drugName));
+                                  .updateDrugName(widget.values.drugName));
                               print("id = " +
                                   medModel.updateId(widget.values.id));
                               print(

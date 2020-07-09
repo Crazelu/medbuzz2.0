@@ -377,11 +377,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        medModel.resetModelFields();
-                        return AddMedicationScreen();
-                      }));
+                      medModel.newMedicine(context);
                     },
                   ),
                   SpeedDialChild(
