@@ -10,12 +10,14 @@ class AppointmentCard extends StatelessWidget {
   final double height;
   final double width;
 
+  final ScheduleAppointmentModel model;
   final Appointment appointment;
   const AppointmentCard({
     Key key,
     this.height,
     this.width,
     this.appointment,
+    this.model,
   }) : super(key: key);
 
   @override
