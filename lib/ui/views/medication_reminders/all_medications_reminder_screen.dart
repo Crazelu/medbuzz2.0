@@ -320,7 +320,7 @@ class _MedicationCardState extends State<MedicationCard> {
                     Row(
                       children: <Widget>[
                         Image.asset(
-                          widget.drugType,
+                          'images/${widget.drugType}.png',
 //                            color: Theme.of(context).primaryColorLight,
                           width: width * 0.2,
                           height: height * 0.1,
