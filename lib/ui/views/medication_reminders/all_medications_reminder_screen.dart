@@ -85,7 +85,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
 
             //Function to navigate to previous screen or home screen (as the case maybe) goes here
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.popAndPushNamed(context, RouteNames.homePage);
             }),
       ),
       body: SingleChildScrollView(
@@ -320,7 +320,7 @@ class _MedicationCardState extends State<MedicationCard> {
                     Row(
                       children: <Widget>[
                         Image.asset(
-                          'images/${widget.drugType}.png',
+                          medModel.images[int.parse(widget.values.index)],
 //                            color: Theme.of(context).primaryColorLight,
                           width: width * 0.2,
                           height: height * 0.1,
@@ -403,7 +403,8 @@ class _MedicationCardState extends State<MedicationCard> {
                                 print(medModel.updateThirdTime(medModel
                                     .convertTimeBack(widget.values.thirdTime)));
                               }
-                              print(widget.values.index);
+                              print(medModel.updateSelectedIndex(
+                                  int.parse(widget.values.index)));
 
                               print('-------------------------------');
 
