@@ -145,6 +145,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 //Here the already saved reminders will be loaded dynamically
 
                 Container(
+                  margin: EdgeInsets.only(bottom: Config.yMargin(context, 2)),
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     physics: NeverScrollableScrollPhysics(),
@@ -381,6 +382,8 @@ class _MedicationCardState extends State<MedicationCard> {
                               medModel.updateEndDate(widget.values.endAt);
                               print(
                                   medModel.updateFreq(widget.values.frequency));
+                              print(medModel.updateDescription(
+                                  widget.values.description));
 
                               if (medModel.selectedFreq == 'Once') {
                                 print(medModel.updateFirstTime(medModel

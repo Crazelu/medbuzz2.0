@@ -32,7 +32,7 @@ class ScheduleAppointmentModel extends ChangeNotifier {
   DateTime _today = DateTime.now();
   int _selectedDay;
   int _selectedMonth;
-  dynamic _selectedTime;
+  var _selectedTime;
   String _typeOfAppointment;
   String _note;
   List<Appointment> _availableAppointments = [];
@@ -78,13 +78,14 @@ class ScheduleAppointmentModel extends ChangeNotifier {
   }
 
   DateTime getDateTime() {
+    print(_selectedTime.toString());
     String month = _selectedMonth.toString().length < 2
         ? '0$_selectedMonth'
         : '$_selectedMonth';
     String weekday =
         _selectedDay.toString().length < 2 ? '0$_selectedDay' : '$_selectedDay';
     return DateTime.parse(
-        '${_today.year}-$month-$weekday ${_selectedTime.substring(0, 2)}:${selectedTime.substring(3, 5)}');
+        '${_today.year}-$month-$weekday ${_selectedTime.substring(0, 2)}:${_selectedTime.substring(3, 5)}');
   }
 
 //
@@ -118,7 +119,7 @@ class ScheduleAppointmentModel extends ChangeNotifier {
 
   void updateSelectedTime(dynamic time) {
     _selectedTime = time;
-    // notifyListeners();
+    //notifyListeners();
   }
 
   void updateAvailableAppointmentReminder(appointmentReminder) {
