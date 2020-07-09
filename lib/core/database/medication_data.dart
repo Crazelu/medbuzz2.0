@@ -1,3 +1,4 @@
+import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
@@ -60,6 +61,13 @@ class MedicationData extends ChangeNotifier {
     return schedule;
   }
 
+  void newMedicine(BuildContext context) {
+    //Clear the fields in model
+    resetModelFields();
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => AddMedicationScreen()));
+  }
+
   List<MedicationReminder> medicationReminder = [];
 
   List<int> convertTime(TimeOfDay time) {
@@ -105,6 +113,7 @@ class MedicationData extends ChangeNotifier {
     this.drugName = null;
     this.id = null;
     this.description = null;
+    this.isEditing = false;
     return true;
   }
 
