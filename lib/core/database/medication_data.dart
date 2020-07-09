@@ -105,6 +105,7 @@ class MedicationData extends ChangeNotifier {
     this.drugName = null;
     this.id = null;
     this.description = null;
+    this.isEditing = false;
     return true;
   }
 
