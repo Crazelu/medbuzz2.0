@@ -1,13 +1,16 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/appointmentData.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
+import 'package:MedBuzz/core/database/user_db.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
+import 'package:MedBuzz/core/models/user_model/user_model.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
 import 'package:MedBuzz/ui/views/medication_reminders/all_medications_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
+import 'package:MedBuzz/ui/widget/custom_card.dart';
 import 'package:MedBuzz/ui/widget/progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
@@ -69,6 +72,9 @@ class _HomePageState extends State<HomePage> {
     var appointmentDB = Provider.of<AppointmentData>(context);
     appointmentDB.getAppointments();
 
+    var userDb = Provider.of<UserCrud>(context);
+    userDb.getusers();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       model.updateAvailableMedicationReminders(medicationDB.medicationReminder);
       model.updateAvailableAppointmentReminders(appointmentDB.appointment);
@@ -116,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                                     height: Config.yMargin(context, 2),
                                   ),
                                   Text(
-                                    'Juliana',
+                                    'juliana',
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 6.66),
                                       fontWeight: FontWeight.w600,
@@ -205,112 +211,19 @@ class _HomePageState extends State<HomePage> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               GestureDetector(
-                                onTap: () => Navigator.pushNamed(
-                                    context, RouteNames.dietScheduleScreen),
-                                child: ProgressCard(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Meal',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize:
-                                                Config.textSize(context, 3.5),
-                                            color: Theme.of(context)
-                                                .primaryColorDark
-                                                .withOpacity(0.5)),
-                                      ),
-                                      SizedBox(
-                                        height: Config.yMargin(context, 1.5),
-                                      ),
-                                      Text(
-                                        '3500',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: Config.textSize(context, 5),
-                                          color: Theme.of(context)
-                                              .primaryColorDark,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: Config.yMargin(context, 1),
-                                      ),
-                                      Text(
-                                        'calories today',
-                                        style: TextStyle(
-                                            fontSize:
-                                                Config.textSize(context, 3.5),
-                                            color: color = Theme.of(context)
-                                                .primaryColorDark
-                                                .withOpacity(0.5)),
-                                      ),
-                                    ],
-                                  ),
-                                  progress: 2500,
-                                  total: 3500,
-                                  width: width * 0.4,
-                                  height: height * 0.01,
-                                  progressBarColor:
-                                      Theme.of(context).buttonColor,
-                                ),
-                              ),
+                                  onTap: () => Navigator.pushNamed(
+                                      context, RouteNames.dietScheduleScreen),
+                                  child: CustomCard(
+                                      title: 'My meals',
+                                      subtitle: 'View meal reminders',
+                                      image: 'images/foood.png')),
                               GestureDetector(
-                                onTap: () => Navigator.pushNamed(
-                                    context, RouteNames.fitnessSchedulesScreen),
-                                child: ProgressCard(
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Steps',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize:
-                                                  Config.textSize(context, 3.5),
-                                              color: color = Theme.of(context)
-                                                  .primaryColorDark
-                                                  .withOpacity(0.5)),
-                                        ),
-                                        SizedBox(
-                                          height: Config.yMargin(context, 1.5),
-                                        ),
-                                        Text(
-                                          '7500',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize:
-                                                Config.textSize(context, 5),
-                                            color: Theme.of(context)
-                                                .primaryColorDark,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: Config.yMargin(context, 1),
-                                        ),
-                                        Text(
-                                          'steps today',
-                                          style: TextStyle(
-                                              fontSize:
-                                                  Config.textSize(context, 3.5),
-                                              color: color = Theme.of(context)
-                                                  .primaryColorDark
-                                                  .withOpacity(0.5)),
-                                        ),
-                                      ]),
-                                  progress: 1500,
-                                  total: 3500,
-                                  width: width * 0.4,
-                                  height: height * 0.01,
-                                  progressBarColor:
-                                      Theme.of(context).highlightColor,
-                                ),
-                              ),
+                                  onTap: () => Navigator.pushNamed(context,
+                                      RouteNames.fitnessSchedulesScreen),
+                                  child: CustomCard(
+                                      title: 'My fitness',
+                                      subtitle: 'View fitness reminders',
+                                      image: 'images/dumbell.png')),
                             ],
                           ),
                           SizedBox(height: height * 0.05),
@@ -344,6 +257,7 @@ class _HomePageState extends State<HomePage> {
                             visible:
                                 model.medicationReminderBasedOnDateTime.isEmpty,
                             child: Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                   'No Medication Reminder Set for this Date'),
                             ),
@@ -391,6 +305,7 @@ class _HomePageState extends State<HomePage> {
                               visible: model
                                   .appointmentReminderBasedOnDateTime.isEmpty,
                               child: Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text('No Appointment Set for this Date'),
                               )),
                           for (var appointment

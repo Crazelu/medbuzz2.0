@@ -21,6 +21,7 @@ class AllRemindersScreen extends StatelessWidget {
     var waterReminderDB = Provider.of<WaterReminderData>(context);
     var appointmentReminderDB = Provider.of<AppointmentData>(context);
     appointmentReminderDB.getAppointments();
+
     waterReminderDB.getWaterReminders();
     var medicationDB = Provider.of<MedicationData>(context);
     medicationDB.getMedicationReminder();

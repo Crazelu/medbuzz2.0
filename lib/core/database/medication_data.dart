@@ -10,13 +10,13 @@ class MedicationData extends ChangeNotifier {
   final String edit = "Edit Medication";
 
   final List drugTypes = [
-    'Injection',
-    'Tablets',
-    'Drops',
-    'Pills',
-    'Ointment',
-    'Syrup',
-    'Inhaler'
+    'injection',
+    'tablets',
+    'drops',
+    'pills',
+    'ointment',
+    'syrup',
+    'inhaler'
   ];
 
   final List<String> frequency = ['Once', 'Twice', 'Thrice'];

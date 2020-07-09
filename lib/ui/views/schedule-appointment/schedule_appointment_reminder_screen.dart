@@ -282,6 +282,10 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                             appointmentReminder.typeOfAppointment != null &&
                             appointmentReminder.note != null
                         ? () async {
+                            appointmentReminder
+                                .setSelectedNote(_noteController.text);
+                            appointmentReminder.setSelectedTypeOfAppointment(
+                                _typeOfAppointmentController.text);
                             if (appointmentReminder.selectedDay ==
                                     DateTime.now().day &&
                                 appointmentReminder.selectedMonth ==

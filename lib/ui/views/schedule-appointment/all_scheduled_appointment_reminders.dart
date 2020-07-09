@@ -105,14 +105,13 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                        visible: appointmentReminders
-                            .appointmentsBasedOnDateTime.isEmpty,
+                        visible: appointmentReminders.allAppointments.isEmpty,
                         child: Container(
                           child: Center(
                               child: Text('No Appointments for this date')),
                         )),
                     for (var appointment
-                        in appointmentReminders.appointmentsBasedOnDateTime)
+                        in appointmentReminders.allAppointments)
                       AppointmentCard(
                         height: height,
                         width: width,
@@ -126,14 +125,12 @@ class _ScheduledAppointmentsPageState extends State<ScheduledAppointmentsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                        visible: appointmentReminders
-                            .appointmentsBasedOnDateTime.isEmpty,
+                        visible: appointmentReminders.pastApointments.isEmpty,
                         child: Container(
-                          child: Center(
-                              child: Text('No Appointments for this date')),
+                          child: Center(child: Text('No Past Appointments')),
                         )),
                     for (var appointment
-                        in appointmentReminders.appointmentsBasedOnDateTime)
+                        in appointmentReminders.pastApointments)
                       AppointmentCard(
                         height: height,
                         width: width,
