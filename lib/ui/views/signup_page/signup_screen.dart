@@ -27,7 +27,7 @@ class _SignupState extends State<Signup> {
   }
 
   Widget _getForm(BuildContext context) {
-    var userDb = Provider.of<UserCrud>(context);
+    var userDb = Provider.of<UserCrud>(context, listen: true);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

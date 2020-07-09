@@ -175,9 +175,8 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                   ),
                   Container(
                     child: TimeWheel(
-                      updateTimeChanged: (value) =>
-                          appointmentReminder.updateSelectedTime(value),
-                    ),
+                        updateTimeChanged: (value) =>
+                            appointmentReminder.updateSelectedTime(value)),
                   ),
                   SizedBox(
                     height: Config.yMargin(context, 3.5),
@@ -269,7 +268,6 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                         vertical: Config.yMargin(context, 2)),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(width * 0.03)),
-
                     child: Text(
                       'Save',
                       style: TextStyle(
@@ -280,10 +278,14 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                     // When this button is pressed, it saves the appointment to the DB
                     onPressed: appointmentReminder.selectedMonth != null &&
                             appointmentReminder.selectedDay != null &&
-                            // appointmentReminder.selectedTime != null &&
+                            appointmentReminder.selectedTime != null &&
                             appointmentReminder.typeOfAppointment != null &&
                             appointmentReminder.note != null
                         ? () async {
+                            appointmentReminder
+                                .setSelectedNote(_noteController.text);
+                            appointmentReminder.setSelectedTypeOfAppointment(
+                                _typeOfAppointmentController.text);
                             if (appointmentReminder.selectedDay ==
                                     DateTime.now().day &&
                                 appointmentReminder.selectedMonth ==

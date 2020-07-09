@@ -8,13 +8,15 @@ part of 'appointment_reminder.dart';
 
 class AppointmentAdapter extends TypeAdapter<Appointment> {
   @override
+  int get typeId => 0;
+  @override
   Appointment read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Appointment(
-      dateTime: fields[0] as TimeOfDay,
+      dateTime: fields[0] as String,
       appointmentType: fields[1] as String,
       note: fields[2] as String,
       date: fields[3] as DateTime,
@@ -34,8 +36,4 @@ class AppointmentAdapter extends TypeAdapter<Appointment> {
       ..writeByte(3)
       ..write(obj.date);
   }
-
-  @override
-  // TODO: implement typeId
-  int get typeId => throw UnimplementedError();
 }

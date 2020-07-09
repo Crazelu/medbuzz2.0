@@ -8,6 +8,8 @@ part of 'user_model.dart';
 
 class UserAdapter extends TypeAdapter<User> {
   @override
+  int get typeId => 7;
+  @override
   User read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
@@ -28,8 +30,4 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(1)
       ..write(obj.id);
   }
-
-  @override
-  // TODO: implement typeId
-  int get typeId => throw UnimplementedError();
 }

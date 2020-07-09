@@ -134,7 +134,7 @@ class _OnboardState extends State<Onboard> {
                             Navigator.pushReplacementNamed(context, 'signup');
                           },
                           child: Text(
-                            "Sign Up",
+                            "Next",
                             style: TextStyle(
                                 color: Theme.of(context).primaryColorLight,
                                 fontWeight: FontWeight.bold),
