@@ -1,4 +1,5 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/database/appointmentData.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
@@ -65,8 +66,12 @@ class _HomePageState extends State<HomePage> {
     var medicationDB = Provider.of<MedicationData>(context);
     medicationDB.getMedicationReminder();
 
+    var appointmentDB = Provider.of<AppointmentData>(context);
+    appointmentDB.getAppointments();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       model.updateAvailableMedicationReminders(medicationDB.medicationReminder);
+      model.updateAvailableAppointmentReminders(appointmentDB.appointment);
     });
 
     double height = MediaQuery.of(context).size.height;
@@ -382,7 +387,19 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                          AppointmentCard(height: height, width: width),
+                          Visibility(
+                              visible: model
+                                  .appointmentReminderBasedOnDateTime.isEmpty,
+                              child: Container(
+                                child: Text('No Appointment Set for this Date'),
+                              )),
+                          for (var appointment
+                              in model.appointmentReminderBasedOnDateTime)
+                            AppointmentCard(
+                              height: height,
+                              width: width,
+                              appointment: appointment,
+                            )
                         ],
                       ),
                     ),

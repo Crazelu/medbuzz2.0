@@ -1,13 +1,22 @@
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:MedBuzz/core/models/appointment_reminder_model/appointment_reminder.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:MedBuzz/ui/views/schedule-appointment/schedule_appointment_screen_model.dart';
 import 'package:flutter/material.dart';
 
 class AppointmentCard extends StatelessWidget {
   final double height;
   final double width;
-  const AppointmentCard({Key key, this.height, this.width}) : super(key: key);
+  final ScheduleAppointmentModel model;
+  final Appointment appointment;
+  const AppointmentCard(
+      {Key key, this.height, this.width, this.appointment, this.model})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting();
     return Container(
       child: Column(
         children: <Widget>[
@@ -59,7 +68,7 @@ class AppointmentCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'July',
+                          DateFormat.MMMM().format(appointment.date),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: Config.textSize(context, 3),
@@ -67,14 +76,14 @@ class AppointmentCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '12',
+                          '${appointment.date.day}',
                           style: TextStyle(
                             fontSize: Config.textSize(context, 7),
                             color: Theme.of(context).highlightColor,
                           ),
                         ),
                         Text(
-                          'Thurs',
+                          DateFormat.E().format(appointment.date),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: Config.textSize(context, 3),
@@ -114,7 +123,7 @@ class AppointmentCard extends StatelessWidget {
                                       height: Config.yMargin(context, 1),
                                     ),
                                     Text(
-                                      '6.00 PM',
+                                      appointment.dateTime.substring(0, 5),
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize:
@@ -137,7 +146,7 @@ class AppointmentCard extends StatelessWidget {
                                       height: Config.yMargin(context, 1),
                                     ),
                                     Text(
-                                      'Dance Class',
+                                      appointment.appointmentType,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize:
@@ -158,7 +167,7 @@ class AppointmentCard extends StatelessWidget {
                             ),
                             Container(
                               child: Text(
-                                'Make sure to make lots of friends',
+                                appointment.note,
                                 style: TextStyle(
                                     fontSize: Config.textSize(context, 3.8)),
                               ),
