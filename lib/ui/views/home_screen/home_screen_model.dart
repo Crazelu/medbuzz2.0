@@ -1,3 +1,4 @@
+import 'package:MedBuzz/core/models/appointment_reminder_model/appointment_reminder.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_view_model.dart';
@@ -10,6 +11,7 @@ class HomeScreenModel extends ChangeNotifier {
   int get initialIndex => _initialIndex;
 
   List<MedicationReminder> _availableMedicationReminders = [];
+  List<Appointment> _availableAppointmentReminders = [];
 
   DateTime _today = DateTime.now();
   int _selectedMonth;
@@ -36,9 +38,21 @@ class HomeScreenModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateAvailableAppointmentReminders(
+      List<Appointment> appointmentReminders) {
+    _availableAppointmentReminders = appointmentReminders;
+    notifyListeners();
+  }
+
   List<MedicationReminder> get medicationReminderBasedOnDateTime {
     return _availableMedicationReminders
         .where((medication) => selectedDateTime.day == medication.startAt.day)
+        .toList();
+  }
+
+  List<Appointment> get appointmentReminderBasedOnDateTime {
+    return _availableAppointmentReminders
+        .where((appointment) => selectedDateTime.day == appointment.date.day)
         .toList();
   }
 }

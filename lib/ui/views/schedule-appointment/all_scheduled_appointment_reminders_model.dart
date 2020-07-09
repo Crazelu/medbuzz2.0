@@ -44,9 +44,19 @@ class AppointmentViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Appointment> get allAppointments {
+    return _allAvailableAppoitments;
+  }
+
   List<Appointment> get appointmentsBasedOnDateTime {
     return _allAvailableAppoitments
         .where((appointment) => selectedDateTime.day == appointment.date.day)
+        .toList();
+  }
+
+  List<Appointment> get pastApointments {
+    return _allAvailableAppoitments
+        .where((appointment) => selectedDateTime.day > appointment.date.day)
         .toList();
   }
 }
