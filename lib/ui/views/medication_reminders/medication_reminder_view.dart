@@ -85,7 +85,8 @@ class MedicationView extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(
                               right: Config.xMargin(context, 5)),
-                          child: Image.asset(medModel.selectedDrugType),
+                          child: Image.asset(
+                              medModel.images[medModel.selectedIndex]),
                         ),
                       ],
                     ),

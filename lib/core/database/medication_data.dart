@@ -224,9 +224,10 @@ class MedicationData extends ChangeNotifier {
     return selectedFreq;
   }
 
-  void updateSelectedIndex(int index) {
+  int updateSelectedIndex(int index) {
     this.selectedIndex = index;
     notifyListeners();
+    return this.selectedIndex;
   }
 
   void increaseDosage() {
@@ -304,7 +305,7 @@ class MedicationData extends ChangeNotifier {
     var medicationReminderBox =
         await Hive.openBox<MedicationReminder>(_boxName);
 
-    await medicationReminderBox.put(medication.id, medication);
+    await medicationReminderBox.put(medication.id.toString(), medication);
 
     medicationReminder = medicationReminderBox.values.toList();
     medicationReminderBox.close();

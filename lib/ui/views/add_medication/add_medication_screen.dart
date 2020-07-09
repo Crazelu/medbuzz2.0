@@ -356,7 +356,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                   frequency: medModel.selectedFreq,
                                   startAt: medModel.startDate,
                                   endAt: medModel.endDate,
-                                  description: medModel.description);
+                                  description: medModel.description,
+                                  index: medModel.selectedIndex.toString());
 
                               await medModel.addMedicationReminder(med);
                               switch (medModel.selectedFreq) {
@@ -614,8 +615,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
     return GestureDetector(
       onTap: () {
-        medModel.onSelectedDrugImage(index);
-        print(medModel.selectedIndex);
+        // medModel.onSelectedDrugImage(index);
+        print(medModel.updateSelectedIndex(index));
       },
       child: Container(
         padding: EdgeInsets.all(Config.xMargin(context, 1.5)),
