@@ -30,26 +30,21 @@ class FitnessNotificationManager {
         onSelectNotification: onSelectNotification);
   }
 
-  void showFitnessNotificationDaily(FitnessReminder reminder) async {
-    var time = new Time(reminder.activityTime[0], reminder.activityTime[1], 0);
-    // if (reminder.fitnessfreq == 'Daily') {
+  void showFitnessNotificationDaily(
+      {int id, String title, String body, int hour, int minute}) async {
+    var time = new Time(hour, minute, 0);
     await flutterLocalNotificationsPlugin.showDailyAtTime(
-        reminder.index,
-        reminder.name,
-        'Fitness reminder',
-        time,
-        getPlatformChannelSpecfics(reminder.index));
-    // } else if (reminder.fitnessfreq == 'Every 2 days') {
-    //   await flutterLocalNotificationsPlugin.periodicallyShow(
-    //       reminder.index,
-    //       reminder.name,
-    //       'Fitness reminder',
-    //       time,
-    //       getPlatformChannelSpecfics(reminder.index));
-    // } else if (reminder.fitnessfreq == 'Every 3 days') {
-    // } else if (reminder.fitnessfreq == 'Every 4 days') {}
+        id, title, body, time, getPlatformChannelSpecfics(id));
     print(
-        'Notification Succesfully Scheduled at ${time.toString()} with id of $reminder.id');
+        'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
+  }
+
+  void showFitnessNotificationOnce(
+      int id, String title, String body, DateTime time) async {
+    await flutterLocalNotificationsPlugin.schedule(
+        id, title, body, time, getPlatformChannelSpecfics(id));
+    print(
+        'Notification Succesfully Scheduled at ${time.toString()} with id of $id');
   }
 
   getPlatformChannelSpecfics(int id) {
@@ -57,7 +52,7 @@ class FitnessNotificationManager {
         '$id', 'your channel name', 'your channel description',
         importance: Importance.Max,
         priority: Priority.High,
-        ticker: 'Fitness Reminder');
+        ticker: 'ticker');
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);

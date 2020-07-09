@@ -217,7 +217,7 @@ class ScheduleWaterReminderScreen extends StatelessWidget {
                                       DateTime.now().month) {
                                 waterNotificationManager.showWaterNotificationOnce(
                                     waterReminder.selectedDay,
-                                    'Its\' s time to take some Waters',
+                                    'It\' s time to take some Waters',
                                     'Take ${waterReminder.selectedMl} ml of Water ',
                                     waterReminder.getDateTime());
                               }

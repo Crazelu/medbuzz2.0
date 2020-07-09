@@ -1,8 +1,9 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
 import 'package:MedBuzz/core/database/medication_data.dart';
+import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
+import 'package:MedBuzz/core/notifications/drug_notification_manager.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:MedBuzz/ui/views/water_reminders/single_water_screen.dart';
-import 'package:MedBuzz/ui/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,8 +45,9 @@ class MedicationView extends StatelessWidget {
                           showDialog(
                               context: context,
                               child: DeleteBox(
-                                  deletion_key:
-                                      medModel.id) //show Confirmation dialog
+                                  deletion_key: medModel.id,
+                                  newReminder: medModel
+                                      .getSchedule()) //show Confirmation dialog
                               );
                           showSnackBar(context);
                           Future.delayed(Duration(seconds: 1)).then((value) {
@@ -83,7 +85,8 @@ class MedicationView extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(
                               right: Config.xMargin(context, 5)),
-                          child: Image.asset(medModel.selectedDrugType),
+                          child: Image.asset(
+                              medModel.images[medModel.selectedIndex]),
                         ),
                       ],
                     ),
@@ -204,6 +207,8 @@ class MedicationView extends StatelessWidget {
       },
     );
   }
+
+  DrugNotificationManager() {}
 }
 
 class FrequencyList extends StatelessWidget {
@@ -245,8 +250,9 @@ class FrequencyList extends StatelessWidget {
 
 class DeleteBox extends StatelessWidget {
   String deletion_key;
+  MedicationReminder newReminder;
 
-  DeleteBox({this.deletion_key});
+  DeleteBox({this.deletion_key, this.newReminder});
 
   @override
   Widget build(BuildContext context) {
@@ -311,6 +317,28 @@ class DeleteBox extends StatelessWidget {
                       onPressed: () {
                         //Code to delete using key
                         medModel.deleteSchedule(deletion_key);
+
+                        //Code to delete notification
+                        switch (newReminder.frequency) {
+                          case 'Once':
+                            deleteNotification(
+                                newReminder, newReminder.firstTime);
+                            break;
+                          case 'Twice':
+                            deleteNotification(
+                                newReminder, newReminder.firstTime);
+                            deleteNotification(
+                                newReminder, newReminder.secondTime);
+                            break;
+                          case 'Thrice':
+                            deleteNotification(
+                                newReminder, newReminder.firstTime);
+                            deleteNotification(
+                                newReminder, newReminder.secondTime);
+                            deleteNotification(
+                                newReminder, newReminder.thirdTime);
+                            break;
+                        }
                         Navigator.of(context)
                             .popAndPushNamed(RouteNames.medicationScreen);
                       },
@@ -340,4 +368,14 @@ class DeleteBox extends StatelessWidget {
       ),
     );
   }
+}
+
+void deleteNotification(MedicationReminder med, List<int> time) {
+  DateTime date = DateTime.parse(med.id);
+  int id =
+      num.parse('${date.year}${date.month}${date.day}${time[0]}${time[1]}');
+
+  DrugNotificationManager notificationManager = DrugNotificationManager();
+  notificationManager.removeReminder(id);
+  print("Deleted Notification of id $id");
 }

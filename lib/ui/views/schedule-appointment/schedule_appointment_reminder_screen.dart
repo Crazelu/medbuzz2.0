@@ -290,11 +290,12 @@ class _ScheduleAppointmentScreenState extends State<ScheduleAppointmentScreen> {
                                     DateTime.now().day &&
                                 appointmentReminder.selectedMonth ==
                                     DateTime.now().month) {
-                              notificationManager.showAppointmentNotificationOnce(
-                                  appointmentReminder.selectedDay,
-                                  'Hey, you\' got somewhere to go',
-                                  ' ${appointmentReminder.typeOfAppointment} ',
-                                  appointmentReminder.getDateTime());
+                              notificationManager
+                                  .showAppointmentNotificationOnce(
+                                      appointmentReminder.selectedDay,
+                                      'Hey, you\' got somewhere to go',
+                                      ' ${_typeOfAppointmentController.text} ',
+                                      appointmentReminder.getDateTime());
                             }
                             appointmentReminderDB.addAppointment(
                                 appointmentReminder.createSchedule());

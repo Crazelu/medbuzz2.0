@@ -13,7 +13,8 @@ class WaterReminderData extends ChangeNotifier {
   List<WaterReminder> get sortedReminders => _sortedReminders;
 
   WaterReminder _activeWaterReminder;
-
+bool done = false;
+bool skip = false;
   void getWaterReminders() async {
     var box = await Hive.openBox<WaterReminder>(_boxName);
 
@@ -107,3 +108,14 @@ class WaterReminderData extends ChangeNotifier {
     return value.isNaN ? 0.0 : value;
   }
 }
+//  return currentLevel <= 100
+//         ? 0
+//         : currentLevel <= 500
+//             ? 0.2
+//             : currentLevel < 1500
+//                 ? 0.3
+//                 : currentLevel == 1500
+//                     ? 0.5
+//                     : currentLevel <= 2000
+//                         ? 0.6
+//                         : currentLevel < 3000 ? 0.8 : 1;
