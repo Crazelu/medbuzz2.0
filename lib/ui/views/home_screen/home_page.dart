@@ -572,7 +572,7 @@ class _HomePageState extends State<HomePage> {
                   //         fontSize: Config.textSize(context, 3.5)),
                   //   ),
                   // ),
-                ],
+                ], 
               ));
   }
 }
