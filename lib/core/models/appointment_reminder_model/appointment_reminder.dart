@@ -6,7 +6,7 @@ part 'appointment_reminder.g.dart';
 @HiveType()
 class Appointment {
   @HiveField(0)
-  final TimeOfDay dateTime;
+  final String dateTime;
   @HiveField(1)
   final String appointmentType;
   @HiveField(2)
@@ -14,10 +14,9 @@ class Appointment {
   @HiveField(3)
   final DateTime date;
 
-  Appointment({
-      this.dateTime,
-    @required this.appointmentType,
-    this.note,
-    @required this.date
-  });
+  Appointment(
+      {this.dateTime,
+      @required this.appointmentType,
+      this.note,
+      @required this.date});
 }

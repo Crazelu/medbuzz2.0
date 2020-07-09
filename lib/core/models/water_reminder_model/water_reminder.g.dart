@@ -17,8 +17,8 @@ class WaterReminderAdapter extends TypeAdapter<WaterReminder> {
     };
     return WaterReminder(
       ml: fields[0] as int,
-      id: fields[2] as String,
       dateTime: fields[1] as DateTime,
+      id: fields[2] as String,
       isTaken: fields[3] as bool,
       isSkipped: fields[4] as bool,
     );
