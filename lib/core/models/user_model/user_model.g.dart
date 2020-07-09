@@ -1,38 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'appointment_reminder.dart';
+part of 'user_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AppointmentAdapter extends TypeAdapter<Appointment> {
+class UserAdapter extends TypeAdapter<User> {
   @override
-  Appointment read(BinaryReader reader) {
+  User read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Appointment(
-      dateTime: fields[0] as TimeOfDay,
-      appointmentType: fields[1] as String,
-      note: fields[2] as String,
-      date: fields[3] as DateTime,
+    return User(
+      name: fields[0] as String,
+      id: fields[1] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Appointment obj) {
+  void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(4)
-      ..writeByte(0)
-      ..write(obj.dateTime)
-      ..writeByte(1)
-      ..write(obj.appointmentType)
       ..writeByte(2)
-      ..write(obj.note)
-      ..writeByte(3)
-      ..write(obj.date);
+      ..writeByte(0)
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.id);
   }
 
   @override

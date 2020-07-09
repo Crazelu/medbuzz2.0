@@ -57,5 +57,6 @@ class DietModelAdapter extends TypeAdapter<DietModel> {
   }
 
   @override
-  int get typeId => 1;
+  // TODO: implement typeId
+  int get typeId => throw UnimplementedError();
 }

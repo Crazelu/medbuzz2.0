@@ -112,60 +112,61 @@ class _OnboardState extends State<Onboard> {
             ),
             Positioned(
               bottom: Config.yMargin(context, 8.7),
-              left: Config.xMargin(context, 14),
+              left: Config.xMargin(context, 37),
               child: Container(
-                child: Flex(
-                  direction: Axis.horizontal,
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   //     crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      height: Config.yMargin(context, 6),
-                      width: Config.xMargin(context, 27),
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: FlatButton(
-                        onPressed: () {
-                          box.put('status', 'true');
-                          Navigator.pushReplacementNamed(context, 'signup');
-                        },
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColorLight,
-                              fontWeight: FontWeight.bold),
+                    Center(
+                      child: Container(
+                        height: Config.yMargin(context, 6),
+                        width: Config.xMargin(context, 27),
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            border: Border.all(
+                                color: Theme.of(context).primaryColor),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: FlatButton(
+                          onPressed: () {
+                            box.put('status', 'true');
+                            Navigator.pushReplacementNamed(context, 'signup');
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: Config.xMargin(context, 17),
-                    ),
-                    Container(
-                      height: Config.yMargin(context, 6),
-                      width: Config.xMargin(context, 27),
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColorLight,
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: FlatButton(
-                        onPressed: () {
-                          box.put('status', 'true');
-                          Navigator.pushReplacementNamed(
-                              context, RouteNames.login);
-                        },
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
+                    // SizedBox(
+                    //   width: Config.xMargin(context, 17),
+                    // ),
+                    // Container(
+                    //   height: Config.yMargin(context, 6),
+                    //   width: Config.xMargin(context, 27),
+                    //   decoration: BoxDecoration(
+                    //       color: Theme.of(context).primaryColorLight,
+                    //       border:
+                    //           Border.all(color: Theme.of(context).primaryColor),
+                    //       borderRadius: BorderRadius.circular(10)),
+                    //   child: FlatButton(
+                    //     onPressed: () {
+                    //       box.put('status', 'true');
+                    //       Navigator.pushReplacementNamed(
+                    //           context, RouteNames.login);
+                    //     },
+                    //     child: Text(
+                    //       "Login",
+                    //       style: TextStyle(
+                    //           color: Theme.of(context).primaryColor,
+                    //           fontWeight: FontWeight.bold),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
