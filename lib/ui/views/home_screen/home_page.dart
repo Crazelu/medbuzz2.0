@@ -4,6 +4,7 @@ import 'package:MedBuzz/core/database/medication_data.dart';
 import 'package:MedBuzz/core/database/user_db.dart';
 import 'package:MedBuzz/core/database/waterReminderData.dart';
 import 'package:MedBuzz/core/models/user_model/user_model.dart';
+import 'package:MedBuzz/ui/bottom_bar_navigation_pattern/bottom_bar_navigation_pattern.dart';
 import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:MedBuzz/ui/views/all_reminders/all_reminders_screen.dart';
 import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                                     model.greeting(),
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 5),
-                                      color: color = Color(0xff333333),
+                                      color: color = Color(0xff2C2B2B),
                                     ),
                                   ),
                                   SizedBox(
@@ -441,68 +442,71 @@ class _HomePageState extends State<HomePage> {
               ),
         //Crazelu extracted BottomNavigationBar widget to Widgets folder
 
-        bottomNavigationBar: isPressed == true
-            ? null
-            : BubbledNavigationBar(
-                controller: _menuPositionController,
-                initialIndex: 0,
-                defaultBubbleColor:
-                    Theme.of(context).primaryColor.withOpacity(.2),
-                backgroundColor: Theme.of(context).backgroundColor,
-                onTap: (index) {
-                  model.updateCurrentIndex(index);
-                  _pageController.animateToPage(index,
-                      duration: Duration(milliseconds: 150),
-                      curve: Curves.easeInOutQuad);
-                },
-                items: <BubbledNavigationBarItem>[
-                  BubbledNavigationBarItem(
-                    icon: Icon(CupertinoIcons.home,
-                        size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).hintColor),
-                    activeIcon: Icon(CupertinoIcons.home,
-                        size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).primaryColor),
-                    title: Text(
-                      'Home',
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColorDark,
-                          fontWeight: FontWeight.w500,
-                          fontSize: Config.textSize(context, 3.5)),
-                    ),
-                  ),
-                  BubbledNavigationBarItem(
-                    icon: Icon(CupertinoIcons.bell,
-                        size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).hintColor),
-                    activeIcon: Icon(CupertinoIcons.bell,
-                        size: Config.xMargin(context, 8.33),
-                        color: Theme.of(context).primaryColor),
-                    title: Text(
-                      'Reminders',
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColorDark,
-                          fontWeight: FontWeight.w500,
-                          fontSize: Config.textSize(context, 3.5)),
-                    ),
-                  ),
-                  // //Commented out for presentation Purposes
-                  // BubbledNavigationBarItem(
-                  //   icon: Icon(CupertinoIcons.profile_circled,
-                  //       size: Config.xMargin(context, 8.33),
-                  //       color: Theme.of(context).hintColor),
-                  //   activeIcon: Icon(CupertinoIcons.profile_circled,
-                  //       size: Config.xMargin(context, 8.33),
-                  //       color: Theme.of(context).primaryColor),
-                  //   title: Text(
-                  //     'Profile',
-                  //     style: TextStyle(
-                  //         color: Theme.of(context).primaryColorDark,
-                  //         fontWeight: FontWeight.w500,
-                  //         fontSize: Config.textSize(context, 3.5)),
-                  //   ),
-                  // ),
-                ],
-              ));
+        bottomNavigationBar: BottomBarNavigationPatternHome(),
+
+//        bottomNavigationBar: isPressed == true
+//            ? null
+//            : BubbledNavigationBar(
+//                controller: _menuPositionController,
+//                initialIndex: 0,
+//                defaultBubbleColor:
+//                    Theme.of(context).primaryColor.withOpacity(.2),
+//                backgroundColor: Theme.of(context).backgroundColor,
+//                onTap: (index) {
+//                  model.updateCurrentIndex(index);
+//                  _pageController.animateToPage(index,
+//                      duration: Duration(milliseconds: 150),
+//                      curve: Curves.easeInOutQuad);
+//                },
+//                items: <BubbledNavigationBarItem>[
+//                  BubbledNavigationBarItem(
+//                    icon: Icon(CupertinoIcons.home,
+//                        size: Config.xMargin(context, 8.33),
+//                        color: Theme.of(context).hintColor),
+//                    activeIcon: Icon(CupertinoIcons.home,
+//                        size: Config.xMargin(context, 8.33),
+//                        color: Theme.of(context).primaryColor),
+//                    title: Text(
+//                      'Home',
+//                      style: TextStyle(
+//                          color: Theme.of(context).primaryColorDark,
+//                          fontWeight: FontWeight.w500,
+//                          fontSize: Config.textSize(context, 3.5)),
+//                    ),
+//                  ),
+//                  BubbledNavigationBarItem(
+//                    icon: Icon(CupertinoIcons.bell,
+//                        size: Config.xMargin(context, 8.33),
+//                        color: Theme.of(context).hintColor),
+//                    activeIcon: Icon(CupertinoIcons.bell,
+//                        size: Config.xMargin(context, 8.33),
+//                        color: Theme.of(context).primaryColor),
+//                    title: Text(
+//                      'Reminders',
+//                      style: TextStyle(
+//                          color: Theme.of(context).primaryColorDark,
+//                          fontWeight: FontWeight.w500,
+//                          fontSize: Config.textSize(context, 3.5)),
+//                    ),
+//                  ),
+//                  // //Commented out for presentation Purposes
+//                  // BubbledNavigationBarItem(
+//                  //   icon: Icon(CupertinoIcons.profile_circled,
+//                  //       size: Config.xMargin(context, 8.33),
+//                  //       color: Theme.of(context).hintColor),
+//                  //   activeIcon: Icon(CupertinoIcons.profile_circled,
+//                  //       size: Config.xMargin(context, 8.33),
+//                  //       color: Theme.of(context).primaryColor),
+//                  //   title: Text(
+//                  //     'Profile',
+//                  //     style: TextStyle(
+//                  //         color: Theme.of(context).primaryColorDark,
+//                  //         fontWeight: FontWeight.w500,
+//                  //         fontSize: Config.textSize(context, 3.5)),
+//                  //   ),
+//                  // ),
+//                ],
+//              )
+              );
   }
 }
