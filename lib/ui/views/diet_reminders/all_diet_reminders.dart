@@ -63,7 +63,8 @@ class _DietScheduleScreenState extends State<DietScheduleScreen>
         Provider.of<DietReminderModel>(context).updateVisibility(false);
       }
     });
-
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     var db = Provider.of<DietReminderDB>(context);
     var model = Provider.of<DietReminderModel>(context);
     return Scaffold(
@@ -136,6 +137,9 @@ class _DietScheduleScreenState extends State<DietScheduleScreen>
                 return diets.length > 1
                     ? DietReminderCard(diet: item)
                     : Container(
+                        height: height,
+                        width: width,
+                        alignment: Alignment.center,
                         child: Center(
                           child: Text(
                               'No diet reminder.\nClick the button to add one',
@@ -154,6 +158,9 @@ class _DietScheduleScreenState extends State<DietScheduleScreen>
                 return diets.length > 1
                     ? DietReminderCard(diet: item)
                     : Container(
+                        height: height,
+                        width: width,
+                        alignment: Alignment.center,
                         child: Center(
                           child: Text('NO PAST REMINDER',
                               textAlign: TextAlign.center,
@@ -177,7 +184,7 @@ class _DietScheduleScreenState extends State<DietScheduleScreen>
               child: Icon(
                 Icons.add,
                 color: Theme.of(context).primaryColorLight,
-                size: Config.xMargin(context, 7),
+                size: Config.xMargin(context, 5),
               ),
               backgroundColor: Theme.of(context).primaryColor,
               splashColor: Theme.of(context).primaryColor.withOpacity(.9),
@@ -215,7 +222,7 @@ class DietReminderCard extends StatelessWidget {
           Center(
             child: Container(
               padding: EdgeInsets.all(Config.xMargin(context, 2.22)),
-              height: Config.yMargin(context, 18.75),
+              height: Config.yMargin(context, 24.3),
               width: Config.xMargin(context, 105.55),
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColorLight,

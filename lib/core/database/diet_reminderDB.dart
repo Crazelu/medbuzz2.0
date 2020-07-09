@@ -25,12 +25,12 @@ class DietReminderDB extends ChangeNotifier {
     this._diet = box.values.toList();
     print('number of diet reminders: ${this._diet.length}');
     //this logic is still faulty somehow
+    _pastDiets.clear();
+    _upcomingDiets.clear();
     for (var i in _diet) {
       if (i.startDate.difference(DateTime.now()).inDays < 0) {
-        _pastDiets.clear();
         _pastDiets.add(i);
       } else {
-        _upcomingDiets.clear();
         _upcomingDiets.add(i);
       }
     }

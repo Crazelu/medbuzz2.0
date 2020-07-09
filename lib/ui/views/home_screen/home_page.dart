@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
       keepPage: false,
     );
     _pageController.addListener(handlePageChange);
+
     super.initState();
   }
 
@@ -61,6 +62,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var userDb = Provider.of<UserCrud>(context);
+
     var model = Provider.of<HomeScreenModel>(context);
 
     var waterReminderDB = Provider.of<WaterReminderData>(context);
@@ -71,9 +74,6 @@ class _HomePageState extends State<HomePage> {
 
     var appointmentDB = Provider.of<AppointmentData>(context);
     appointmentDB.getAppointments();
-
-    var userDb = Provider.of<UserCrud>(context);
-    userDb.getusers();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       model.updateAvailableMedicationReminders(medicationDB.medicationReminder);
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                                     height: Config.yMargin(context, 2),
                                   ),
                                   Text(
-                                    'juliana',
+                                    userDb.user.name ?? '',
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 6.66),
                                       fontWeight: FontWeight.w600,

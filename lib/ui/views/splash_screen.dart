@@ -1,8 +1,10 @@
 import 'dart:async';
 //import 'package:MedBuzz/ui/views/Home.dart';
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/database/user_db.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/constants/route_names.dart';
 
@@ -19,6 +21,7 @@ class StartState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    Provider.of<UserCrud>(context, listen: false).getuser();
     startTimer();
   }
 

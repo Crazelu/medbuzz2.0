@@ -12,7 +12,7 @@ class Onboard extends StatefulWidget {
 }
 
 class _OnboardState extends State<Onboard> {
-  var box = Hive.box('onboarding');
+  
   PageController _controller;
   int currentIndex = 0;
   @override
@@ -32,29 +32,6 @@ class _OnboardState extends State<Onboard> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Theme.of(context).primaryColorLight,
-        actions: <Widget>[
-          Container(
-            padding: const EdgeInsetsDirectional.only(top: 30),
-            child: FlatButton(
-              onPressed: () {
-                box.put('status', 'true');
-                Navigator.pushReplacementNamed(context, RouteNames.signup);
-              }, //navigate to the sign up page
-              child: Text(
-                "Skip",
-                style: TextStyle(
-                    color: Theme.of(context).primaryColorDark,
-                    fontSize: Config.textSize(context, 4.5),
-                    fontWeight: FontWeight.normal),
-              ),
-              color: Colors.transparent,
-            ),
-          ),
-        ],
-      ),
       body: Container(
         height: height,
         width: width,
@@ -130,7 +107,6 @@ class _OnboardState extends State<Onboard> {
                             borderRadius: BorderRadius.circular(10)),
                         child: FlatButton(
                           onPressed: () {
-                            box.put('status', 'true');
                             Navigator.pushReplacementNamed(context, 'signup');
                           },
                           child: Text(
@@ -195,6 +171,7 @@ class FirstScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    var box = Hive.box('onboarding');
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorLight,
       body: Padding(
@@ -206,6 +183,26 @@ class FirstScreen extends StatelessWidget {
           width: width,
           child: Column(
             children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      
+                      Navigator.pushReplacementNamed(
+                          context, RouteNames.signup);
+                    }, //navigate to the sign up page
+                    child: Text(
+                      "Skip",
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: Config.textSize(context, 4.5),
+                          fontWeight: FontWeight.normal),
+                    ),
+                    color: Colors.transparent,
+                  ),
+                ],
+              ),
               Container(
                 height: height * .4,
                 width: width,
