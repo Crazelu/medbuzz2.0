@@ -3,17 +3,11 @@ import 'package:MedBuzz/core/database/user_db.dart';
 import 'package:MedBuzz/core/models/user_model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
-class Signup extends StatefulWidget {
-  User usermodel;
-  Signup({this.usermodel});
-  @override
-  _SignupState createState() => _SignupState();
-}
-
-class _SignupState extends State<Signup> {
-  TextEditingController nameController = TextEditingController();
+class Signup extends StatelessWidget {
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +21,11 @@ class _SignupState extends State<Signup> {
   }
 
   Widget _getForm(BuildContext context) {
+    var box = Hive.box('onboarding');
     var userDb = Provider.of<UserCrud>(context, listen: true);
-
+    double width = MediaQuery.of(context).size.width;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -38,7 +34,7 @@ class _SignupState extends State<Signup> {
         ),
         Padding(
           padding: EdgeInsets.only(left: Config.xMargin(context, 5.3)),
-          child: Text('What Do I  \nCall You',
+          child: Text('What Do I  \nCall You?',
               style: TextStyle(
                 fontSize: Config.yMargin(context, 4.12),
               )),
@@ -57,33 +53,14 @@ class _SignupState extends State<Signup> {
               left: Config.xMargin(context, 5.3),
               right: Config.xMargin(context, 6)),
           child: Container(
-            width: double.infinity,
-            decoration: ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(width: 1.0, style: BorderStyle.solid),
-                borderRadius: BorderRadius.all((Radius.circular(5.0))),
-              ),
-            ),
+            width: width,
             child: TextFormField(
-              controller: nameController,
-              cursorColor: Theme.of(context).primaryColorDark,
-              style: TextStyle(
-                  color: Theme.of(context).primaryColorDark,
-                  fontSize: Config.xMargin(context, 5.5)),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(
-                  left: Config.yMargin(context, 1.0),
-                ),
-                hintText: 'Input name',
-                hintStyle: TextStyle(
-                    fontSize: Config.xMargin(context, 5),
-                    color: Theme.of(context).hintColor),
-                focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Theme.of(context).primaryColorDark)),
-//
-              ),
-            ),
+                controller: nameController,
+                cursorColor: Theme.of(context).primaryColorDark,
+                style: TextStyle(
+                    color: Theme.of(context).primaryColorDark,
+                    fontSize: Config.xMargin(context, 5.5)),
+                decoration: InputDecoration.collapsed(hintText: 'Your name')),
           ),
         ),
         InkWell(
@@ -93,6 +70,7 @@ class _SignupState extends State<Signup> {
               var newuser = User(
                   id: DateTime.now().toString(), name: nameController.text);
               userDb.adduser(newuser);
+              box.put('status', 'true');
               Future.delayed(Duration(seconds: 2), () {
                 Navigator.pushReplacementNamed(context, RouteNames.homePage);
               });

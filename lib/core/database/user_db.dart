@@ -5,26 +5,20 @@ import 'package:hive/hive.dart';
 class UserCrud extends ChangeNotifier {
   static const String _boxName = "userBoxName";
 
-  List<User> _user = [];
-  void getusers() async {
+  User _user;
+  User get user => _user;
+
+  void getuser() async {
     var box = await Hive.openBox<User>(_boxName);
-
-    _user = box.values.toList();
-
+    _user = box.get('userName');
+    box.close();
     notifyListeners();
-  }
-
-  User getuser(index) {
-    return _user[index];
   }
 
   void adduser(User user) async {
     var box = await Hive.openBox<User>(_boxName);
 
-    await box.put(user.id, user);
-
-    _user = box.values.toList();
-
+    await box.put('userName', user);
     box.close();
 
     notifyListeners();

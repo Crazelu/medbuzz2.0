@@ -1,3 +1,4 @@
+import 'package:MedBuzz/ui/views/add_medication/add_medication_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/core/models/medication_reminder_model/medication_reminder.dart';
@@ -45,10 +46,32 @@ class MedicationData extends ChangeNotifier {
     'images/inhaler.png'
   ];
 
+  MedicationReminder getSchedule() {
+    print("first print - ${this.firstTime}");
+    MedicationReminder schedule = MedicationReminder(
+        id: this.id,
+        firstTime: convertTime(this.firstTime),
+        // secondTime:
+        //     this.secondTime != null ? convertTime(this.secondTime) : null,
+        // thirdTime: this.thirdTime != null ? convertTime(this.thirdTime) : null,
+        frequency: this.selectedFreq);
+    print(this.firstTime);
+    print("Trying to create schedule");
+
+    return schedule;
+  }
+
+  void newMedicine(BuildContext context) {
+    //Clear the fields in model
+    resetModelFields();
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => AddMedicationScreen()));
+  }
+
   List<MedicationReminder> medicationReminder = [];
 
   List<int> convertTime(TimeOfDay time) {
-    List value;
+    List<int> value = new List(2);
     value[0] = time.hour;
     value[1] = time.minute;
 
@@ -90,6 +113,7 @@ class MedicationData extends ChangeNotifier {
     this.drugName = null;
     this.id = null;
     this.description = null;
+    this.isEditing = false;
     return true;
   }
 
@@ -209,9 +233,10 @@ class MedicationData extends ChangeNotifier {
     return selectedFreq;
   }
 
-  void updateSelectedIndex(int index) {
+  int updateSelectedIndex(int index) {
     this.selectedIndex = index;
     notifyListeners();
+    return this.selectedIndex;
   }
 
   void increaseDosage() {
@@ -289,7 +314,7 @@ class MedicationData extends ChangeNotifier {
     var medicationReminderBox =
         await Hive.openBox<MedicationReminder>(_boxName);
 
-    await medicationReminderBox.put(medication.id, medication);
+    await medicationReminderBox.put(medication.id.toString(), medication);
 
     medicationReminder = medicationReminderBox.values.toList();
     medicationReminderBox.close();

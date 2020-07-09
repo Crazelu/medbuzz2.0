@@ -52,7 +52,7 @@ class WaterNotificationManager {
         '$id', 'your channel name', 'your channel description',
         importance: Importance.Max,
         priority: Priority.High,
-        ticker: 'Fitness Reminder');
+        ticker: 'ticker');
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);

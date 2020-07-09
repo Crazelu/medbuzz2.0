@@ -11,6 +11,7 @@ import 'package:MedBuzz/ui/views/home_screen/home_screen_model.dart';
 import 'package:MedBuzz/ui/views/medication_reminders/all_medications_reminder_screen.dart';
 import 'package:MedBuzz/ui/views/profile_page.dart';
 import 'package:MedBuzz/ui/widget/appointment_card.dart';
+import 'package:MedBuzz/ui/widget/custom_card.dart';
 import 'package:MedBuzz/ui/widget/progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
       keepPage: false,
     );
     _pageController.addListener(handlePageChange);
+
     super.initState();
   }
 
@@ -61,6 +63,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var userDb = Provider.of<UserCrud>(context);
+
     var model = Provider.of<HomeScreenModel>(context);
 
     var waterReminderDB = Provider.of<WaterReminderData>(context);
@@ -72,9 +76,6 @@ class _HomePageState extends State<HomePage> {
     var appointmentDB = Provider.of<AppointmentData>(context);
     appointmentDB.getAppointments();
 
-    var userDb = Provider.of<UserCrud>(context);
-    userDb.getusers();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       model.updateAvailableMedicationReminders(medicationDB.medicationReminder);
       model.updateAvailableAppointmentReminders(appointmentDB.appointment);
@@ -82,6 +83,7 @@ class _HomePageState extends State<HomePage> {
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final medModel = Provider.of<MedicationData>(context);
 
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
@@ -112,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Good Morning,',
+                                    model.greeting(),
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 5),
                                       color: color = Color(0xff2C2B2B),
@@ -122,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                                     height: Config.yMargin(context, 2),
                                   ),
                                   Text(
-                                    'juliana',
+                                    userDb.user.name ?? '',
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 6.66),
                                       fontWeight: FontWeight.w600,
@@ -211,112 +213,19 @@ class _HomePageState extends State<HomePage> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               GestureDetector(
-                                onTap: () => Navigator.pushNamed(
-                                    context, RouteNames.dietScheduleScreen),
-                                child: ProgressCard(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Meal',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize:
-                                                Config.textSize(context, 3.5),
-                                            color: Theme.of(context)
-                                                .primaryColorDark
-                                                .withOpacity(0.5)),
-                                      ),
-                                      SizedBox(
-                                        height: Config.yMargin(context, 1.5),
-                                      ),
-                                      Text(
-                                        '3500',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: Config.textSize(context, 5),
-                                          color: Theme.of(context)
-                                              .primaryColorDark,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: Config.yMargin(context, 1),
-                                      ),
-                                      Text(
-                                        'calories today',
-                                        style: TextStyle(
-                                            fontSize:
-                                                Config.textSize(context, 3.5),
-                                            color: color = Theme.of(context)
-                                                .primaryColorDark
-                                                .withOpacity(0.5)),
-                                      ),
-                                    ],
-                                  ),
-                                  progress: 2500,
-                                  total: 3500,
-                                  width: width * 0.4,
-                                  height: height * 0.01,
-                                  progressBarColor:
-                                      Theme.of(context).buttonColor,
-                                ),
-                              ),
+                                  onTap: () => Navigator.pushNamed(
+                                      context, RouteNames.dietScheduleScreen),
+                                  child: CustomCard(
+                                      title: 'My meals',
+                                      subtitle: 'View meal reminders',
+                                      image: 'images/foood.png')),
                               GestureDetector(
-                                onTap: () => Navigator.pushNamed(
-                                    context, RouteNames.fitnessSchedulesScreen),
-                                child: ProgressCard(
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Steps',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize:
-                                                  Config.textSize(context, 3.5),
-                                              color: color = Theme.of(context)
-                                                  .primaryColorDark
-                                                  .withOpacity(0.5)),
-                                        ),
-                                        SizedBox(
-                                          height: Config.yMargin(context, 1.5),
-                                        ),
-                                        Text(
-                                          '7500',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize:
-                                                Config.textSize(context, 5),
-                                            color: Theme.of(context)
-                                                .primaryColorDark,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: Config.yMargin(context, 1),
-                                        ),
-                                        Text(
-                                          'steps today',
-                                          style: TextStyle(
-                                              fontSize:
-                                                  Config.textSize(context, 3.5),
-                                              color: color = Theme.of(context)
-                                                  .primaryColorDark
-                                                  .withOpacity(0.5)),
-                                        ),
-                                      ]),
-                                  progress: 1500,
-                                  total: 3500,
-                                  width: width * 0.4,
-                                  height: height * 0.01,
-                                  progressBarColor:
-                                      Theme.of(context).highlightColor,
-                                ),
-                              ),
+                                  onTap: () => Navigator.pushNamed(context,
+                                      RouteNames.fitnessSchedulesScreen),
+                                  child: CustomCard(
+                                      title: 'My fitness',
+                                      subtitle: 'View fitness reminders',
+                                      image: 'images/dumbell.png')),
                             ],
                           ),
                           SizedBox(height: height * 0.05),
@@ -350,6 +259,7 @@ class _HomePageState extends State<HomePage> {
                             visible:
                                 model.medicationReminderBasedOnDateTime.isEmpty,
                             child: Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                   'No Medication Reminder Set for this Date'),
                             ),
@@ -397,6 +307,7 @@ class _HomePageState extends State<HomePage> {
                               visible: model
                                   .appointmentReminderBasedOnDateTime.isEmpty,
                               child: Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text('No Appointment Set for this Date'),
                               )),
                           for (var appointment
@@ -467,10 +378,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddMedicationScreen()));
+                      medModel.newMedicine(context);
                     },
                   ),
                   SpeedDialChild(

@@ -1,4 +1,5 @@
 import 'package:MedBuzz/core/constants/route_names.dart';
+import 'package:MedBuzz/core/notifications/fitness_notification_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:MedBuzz/ui/size_config/config.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,8 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
   @override
   Widget build(BuildContext context) {
     var model = Provider.of<FitnessReminderCRUD>(context);
+    FitnessNotificationManager fitnessNotificationManager =
+        FitnessNotificationManager();
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
@@ -77,6 +80,8 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                 onPressed: () {
                   print(widget.data.id);
                   model.deleteReminder(widget.data.id);
+                  fitnessNotificationManager
+                      .removeReminder(int.parse(widget.data.id));
                   showDialog(
                     context: context,
                     child: DeleteDialog(),
@@ -134,7 +139,9 @@ class _SingleFitnessScreenState extends State<SingleFitnessScreen> {
                     ),
                   ),
                   Text(
-                    '8:00AM',
+                    widget.data.activityTime[0].toString() +
+                        ':' +
+                        widget.data.activityTime[1].toString(),
                     style: TextStyle(
                       fontFamily: 'Segoe',
                       color: Theme.of(context).primaryColor,
