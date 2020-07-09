@@ -106,8 +106,8 @@ class ScheduleAppointmentModel extends ChangeNotifier {
 
     Appointment newAppointment = Appointment(
         date: DateTime.parse(selectedDateTime),
-        appointmentType: _typeOfAppointment,
-        note: _note,
+        appointmentType: appointmentType,
+        note: noteValue,
         dateTime: _selectedTime);
     return newAppointment;
   }
