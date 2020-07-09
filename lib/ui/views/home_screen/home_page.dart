@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Good Morning,',
+                                    model.greeting(),
                                     style: TextStyle(
                                       fontSize: Config.xMargin(context, 5),
                                       color: color = Color(0xff333333),
