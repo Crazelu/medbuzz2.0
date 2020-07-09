@@ -356,7 +356,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                   frequency: medModel.selectedFreq,
                                   startAt: medModel.startDate,
                                   endAt: medModel.endDate,
-                                  description: medModel.description);
+                                  description: medModel.description,
+                                  index: medModel.selectedIndex.toString());
 
                               await medModel.addMedicationReminder(med);
                               switch (medModel.selectedFreq) {
@@ -440,8 +441,29 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                                   medication: newReminder);
 
                               print("Saving editted schedule");
+                              //Delete previous Notifications
+                              switch (newReminder.frequency) {
+                                case 'Once':
+                                  deleteNotification(
+                                      newReminder, newReminder.firstTime);
+                                  break;
+                                case 'Twice':
+                                  deleteNotification(
+                                      newReminder, newReminder.firstTime);
+                                  deleteNotification(
+                                      newReminder, newReminder.secondTime);
+                                  break;
+                                case 'Thrice':
+                                  deleteNotification(
+                                      newReminder, newReminder.firstTime);
+                                  deleteNotification(
+                                      newReminder, newReminder.secondTime);
+                                  deleteNotification(
+                                      newReminder, newReminder.thirdTime);
+                                  break;
+                              }
 
-                              //Enable Notifications
+                              //create new Notifications
                               switch (medModel.selectedFreq) {
                                 case 'Once':
                                   setNotification(
@@ -519,6 +541,15 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
             "It's time to take ${med.dosage} ${med.drugType} of ${med.drugName}");
   }
 
+  void deleteNotification(MedicationReminder med, List<int> time) {
+    DateTime date = DateTime.parse(med.id);
+    int id =
+        num.parse('${date.year}${date.month}${date.day}${time[0]}${time[1]}');
+
+    var notificationManager = DrugNotificationManager();
+    notificationManager.removeReminder(id);
+  }
+
   Widget titleAdd() {
     return Text(
       'Add Medication',
@@ -585,7 +616,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     return GestureDetector(
       onTap: () {
         medModel.onSelectedDrugImage(index);
-        print(medModel.selectedIndex);
+        print(medModel.updateSelectedIndex(index));
       },
       child: Container(
         padding: EdgeInsets.all(Config.xMargin(context, 1.5)),

@@ -69,7 +69,7 @@ class __AddFitnessState extends State<AddFitness> {
   int selectedFitnessType = 0;
   int minDaily = 60;
   TimeOfDay activityTime = TimeOfDay.now();
-  String id = Random().nextInt(100).toString();
+  int id = Random().nextInt(100);
 
   @override
   Widget build(BuildContext context) {
@@ -431,7 +431,7 @@ class __AddFitnessState extends State<AddFitness> {
 //                                 navigation.pushFrom(
 //                                     context, );
                               var newReminder = FitnessReminder(
-                                  id: DateTime.now().toString(),
+                                  id: id.toString(),
                                   activityTime: [
                                     activityTime.hour,
                                     activityTime.minute
@@ -442,11 +442,15 @@ class __AddFitnessState extends State<AddFitness> {
                                   name: nameController.text,
                                   minsperday: minDaily,
                                   fitnessfreq: _selectedFreq,
-                                  fitnesstype:
-                                      activityType[selectedFitnessType]);
+                                  fitnesstype: selectedFitnessType.toString());
                               fitnessDB.addReminder(newReminder);
                               fitnessNotificationManager
-                                  .showFitnessNotificationDaily(newReminder);
+                                  .showFitnessNotificationOnce(
+                                      id,
+                                      "It's time to go ${nameController.text}",
+                                      "For $minDaily minutes",
+                                      getDateTime());
+                              print(id);
                               _successDialog();
                               Future.delayed(Duration(seconds: 2), () {
                                 Navigator.pushNamed(
@@ -485,10 +489,15 @@ class __AddFitnessState extends State<AddFitness> {
     );
   }
 
-  TimeOfDay selectedTime;
+  getDateTime() {
+    final now = new DateTime.now();
+    return DateTime(
+        now.year, now.month, now.day, activityTime.hour, activityTime.minute);
+  }
+
   Future<Null> selectTime(BuildContext context) async {
     TimeOfDay currentTime = TimeOfDay.now();
-    selectedTime = await showTimePicker(
+    TimeOfDay selectedTime = await showTimePicker(
       context: context,
       initialTime: activityTime,
     );

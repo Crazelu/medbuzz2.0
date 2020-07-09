@@ -75,6 +75,6 @@ class AppointmentNotificationManager {
 
   void removeReminder(int notificationId) {
     flutterLocalNotificationsPlugin.cancel(notificationId);
-    print('Notfication with id: $notificationId been removed successfully');
+    print('Notification with id: $notificationId been removed successfully');
   }
 }
